@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://xlrmp6t3afwe"]
+
+[ext_resource type="Script" uid="uid://h7ehwvekdkiq" path="res://src/scenes/MuLogin.gd" id="1_login"]
+
+[node name="LoginScene" type="Control" unique_id=1170537425]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_login")
+
+[node name="Background" type="ColorRect" parent="." unique_id=364121008]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.08, 0.12, 1)
+
+[node name="Title" type="Label" parent="." unique_id=1380666176]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 80.0
+offset_right = 250.0
+offset_bottom = 140.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 42
+text = "MU ONLINE GODOT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="." unique_id=1103457378]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 145.0
+offset_right = 200.0
+offset_bottom = 175.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.75, 1)
+theme_override_font_sizes/font_size = 18
+text = "Hỗ trợ WebAssembly (Browser) & Mobile"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1725134710]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -120.0
+offset_right = 200.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=936812412]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ServerLabel" type="Label" parent="Panel/VBoxContainer" unique_id=873901096]
+layout_mode = 2
+text = "Địa chỉ WebSocket Gateway:"
+
+[node name="ServerInput" type="LineEdit" parent="Panel/VBoxContainer" unique_id=957756053]
+layout_mode = 2
+text = "ws://127.0.0.1:8080"
+placeholder_text = "ws://localhost:8080"
+
+[node name="UserLabel" type="Label" parent="Panel/VBoxContainer" unique_id=1839787880]
+layout_mode = 2
+text = "Tài khoản:"
+
+[node name="UserInput" type="LineEdit" parent="Panel/VBoxContainer" unique_id=161860851]
+layout_mode = 2
+text = "test1"
+placeholder_text = "Nhập tài khoản"
+
+[node name="PassLabel" type="Label" parent="Panel/VBoxContainer" unique_id=371940559]
+layout_mode = 2
+text = "Mật khẩu:"
+
+[node name="PassInput" type="LineEdit" parent="Panel/VBoxContainer" unique_id=1803775651]
+layout_mode = 2
+text = "123456"
+placeholder_text = "Nhập mật khẩu"
+secret = true
+
+[node name="LoginButton" type="Button" parent="Panel/VBoxContainer" unique_id=1514031439]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+text = "VÀO GAME (ONLINE)"
+
+[node name="OfflineButton" type="Button" parent="Panel/VBoxContainer" unique_id=1867606416]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+text = "CHƠI NGAY (OFFLINE TEST)"
+
+[node name="StatusLabel" type="Label" parent="Panel/VBoxContainer" unique_id=1228924665]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.8, 0.3, 1)
+text = "Sẵn sàng kết nối"
+horizontal_alignment = 1

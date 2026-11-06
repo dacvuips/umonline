@@ -1,0 +1,86 @@
+BÁO CÁO KIỂM TRA DỮ LIỆU MU  (2026-11-06 16:08)
+assets: E:\MuMain\MuGodot\assets\mu
+Đã chuyển 4977 model: Effect 87, Item 528, Monster 344, NPC 104, Object10 7, Object11 16, Object12 43, Object19 36, Object2 63, Object25 59, Object3 116, Object31 89, Object32 57, Object34 83, Object35 84, Object38 111, Object39 64, Object4 43, Object40 81, Object41 39, Object42 82, Object43 84, Object47 83, Object5 41, Object52 165, Object57 91, Object58 83, Object59 21, Object63 44, Object64 61, Object65 30, Object66 32, Object67 31, Object68 40, Object69 61, Object7 42, Object70 127, Object71 127, Object72 127, Object73 97, Object74 105, Object75 18, Object78 82, Object79 22, Object8 49, Object80 54, Object81 120, Object82 119, Object9 81, Player 479, Skill 164, object55 78, object56 83
+
+[Nhân vật]
+  Player.bmd + thân mặc định 7 lớp: 36/36 có
+
+[Quái / NPC]
+  monster: 406/437 có model
+  npc: 92/102 có model
+  other: 1/1 có model
+  trap: 0/7 có model
+  (47 mục KHÔNG có model riêng trong client gốc — không phải lỗi chuyển đổi: #14 Skeleton, #15 Skeleton Archer, #16 Chief Skeleton Warrior, #34 Cursed Wizard, #55 Death King, #56 Death Bone, #100 Lance, #101 Iron Stick, #102 Fire, #103 Meteorite, #104 Trap, #105 Canon Trap ...)
+  - #68 Molt (monster) -> Data/Monster/Monster50.bmd
+
+[Đồ / vũ khí / cánh]
+  Group00_Sword: 34/34 có model
+  Group01_Axe: 9/9 có model
+  Group02_Mace: 19/19 có model
+  Group03_Spear: 12/12 có model
+  Group04_Bow: 25/25 có model
+  Group05_Staff: 30/30 có model
+  Group06_Shield: 22/22 có model
+  Group07_Helm: 61/61 có model
+  Group08_Armor: 69/69 có model
+  Group09_Pants: 69/69 có model
+  Group10_Gloves: 64/64 có model
+  Group11_Boots: 69/69 có model
+  Group12_Wing: 40/40 có model
+
+[Hiệu ứng / skill]
+  Skill: 164 model
+  Effect: 87 model
+
+[Bản đồ]
+  World1   Lorencia                 vật thể     0, model   0/0  , tile 14
+  World2   Dungeon                  vật thể  4479, model  60/60 , tile  9
+  World3   Devias                   vật thể  2237, model 105/105, tile 14
+  World4   Noria                    vật thể  9398, model  43/43 , tile  9
+  World5   Lost Tower               vật thể  5379, model  38/38 , tile 11
+  World6   Exile                    vật thể     0, model   0/0  , tile  0
+  World7   Arena                    vật thể  1488, model  39/39 , tile 12
+  World8   Atlans                   vật thể  5215, model  40/40 , tile  9
+  World9   Tarkan                   vật thể  3332, model  77/77 , tile 11
+  World10  Devil Square             vật thể   564, model   7/7  , tile  9
+  World11  Icarus                   vật thể   670, model  15/15 , tile  1
+  World12  Blood Castle             vật thể   201, model  34/34 , tile 10
+  World19  Chaos Castle             vật thể   194, model  33/33 , tile 14
+  World25  Kalima                   vật thể  2314, model  56/56 , tile 10
+  World31  Valley of Loren          vật thể  3723, model  85/85 , tile 14
+  World32  Land of Trials           vật thể  7789, model  57/57 , tile 14
+  World34  Aida                     vật thể  3752, model  74/74 , tile 14
+  World35  Crywolf                  vật thể  6642, model  76/76 , tile 14
+  World38  Kanturu Ruins            vật thể  3645, model 100/100, tile 14
+  World39  Kanturu Relics           vật thể  1988, model  59/59 , tile 11
+  World40  Kanturu Refinery         vật thể  1459, model  68/68 , tile  4
+  World41  GM Island                vật thể   662, model  32/32 , tile 12
+  World42  Balgass Barracks         vật thể  1531, model  61/61 , tile 11
+  World43  Balgass Refuge           vật thể   354, model  36/36 , tile 11
+  World47  Illusion Temple 2        vật thể  1961, model  77/77 , tile 13
+  World52  Elbeland                 vật thể  5135, model 129/129, tile 14
+  World55  Character Scene          vật thể     0, model   0/0  , tile 14
+  World56  Login Scene              vật thể     0, model   0/0  , tile 14
+  World57  Swamp of Calmness        vật thể  4173, model  84/84 , tile 11
+  World58  Raklion                  vật thể  1409, model  69/69 , tile 14
+  World59  Raklion Hatchery         vật thể   149, model  21/21 , tile 14
+  World63  Santa Village            vật thể   673, model  35/35 , tile 14
+  World64  Vulcanus                 vật thể  2289, model  61/61 , tile 11
+  World65  Duel Arena               vật thể  1345, model  30/30 , tile 12
+  World66  Doppelganger 1           vật thể   398, model  29/29 , tile 14
+  World67  Doppelganger 2           vật thể   253, model  15/15 , tile 11
+  World68  Doppelganger 3           vật thể   373, model  29/29 , tile  9
+  World69  Doppelganger 4           vật thể   430, model  36/36 , tile 14
+  World70  Imperial Guardian 1      vật thể   832, model  59/59 , tile 14
+  World71  Imperial Guardian 2      vật thể   729, model  63/63 , tile 14
+  World72  Imperial Guardian 3      vật thể   748, model  57/57 , tile 14
+  World73  Imperial Guardian 4      vật thể  1665, model  80/80 , tile 14
+  World74  Login Scene (New)        vật thể   365, model  45/45 , tile 14
+  World75  Character Scene (New)    vật thể   102, model  18/18 , tile 14
+  World78  Login Scene 2            vật thể   628, model  68/68 , tile 14
+  World79  Character Scene 2        vật thể    96, model  22/22 , tile 14
+  World80  Loren Market             vật thể   513, model  48/48 , tile 14
+  World81  Karutan 1                vật thể  2086, model 103/103, tile 14
+  World82  Karutan 2                vật thể  1720, model  83/83 , tile 14
+
+Tổng: 1 mục thiếu.

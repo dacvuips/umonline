@@ -1,0 +1,64 @@
+newmtl Material_0
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd tile_wood02.png
+
+newmtl Material_1
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd tile_ston04.png
+
+newmtl Material_2
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd c_wall04.png
+
+newmtl Material_3
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd tile_wood03.png
+
+newmtl Material_4
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd tile_house01.png
+
+newmtl Material_5
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd tile_ston01.png
+
+newmtl Material_6
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd horse_drawn_01.png
+
+newmtl Material_7
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd tile_ston06.png
+

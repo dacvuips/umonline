@@ -1,0 +1,194 @@
+[gd_scene load_steps=15 format=3 uid="uid://bfinwfbfp4msi"]
+
+[ext_resource type="Script" path="res://src/ui/InventoryWindow.gd" id="1_inv"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/mu_window_frame_standard.png" id="2_frame"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/btn_close_normal.png" id="3_close_norm"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/btn_close_pressed.png" id="4_close_press"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_item_cap.png" id="5_cap"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_item_upper.png" id="6_armor"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_item_lower.png" id="7_pants"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_item_gloves.png" id="8_gloves"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_item_boots.png" id="9_boots"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_item_weapon(L).png" id="10_wep_l"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_item_weapon(R).png" id="11_wep_r"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_item_wing.png" id="12_wing"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_item_money.png" id="13_money"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_item_box.png" id="14_box"]
+
+[node name="InventoryWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -215.0
+offset_right = -20.0
+offset_bottom = 214.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_inv")
+
+[node name="FrameBackground" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_frame")
+expand_mode = 1
+
+[node name="CloseButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 8.0
+offset_right = 184.0
+offset_bottom = 38.0
+texture_normal = ExtResource("3_close_norm")
+texture_pressed = ExtResource("4_close_press")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 160.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0.96, 0.88, 0.65, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 12
+text = "HÀNH TRANG"
+horizontal_alignment = 1
+
+[node name="EquipmentSlots" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 46.0
+offset_bottom = 218.0
+grow_horizontal = 2
+
+[node name="WingSlot" type="TextureRect" parent="EquipmentSlots"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 4.0
+offset_right = 125.0
+offset_bottom = 50.0
+texture = ExtResource("12_wing")
+expand_mode = 1
+
+[node name="HelmSlot" type="TextureRect" parent="EquipmentSlots"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 6.0
+offset_right = 118.0
+offset_bottom = 52.0
+texture = ExtResource("5_cap")
+expand_mode = 1
+
+[node name="WepLSlot" type="TextureRect" parent="EquipmentSlots"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 54.0
+offset_right = 66.0
+offset_bottom = 120.0
+texture = ExtResource("10_wep_l")
+expand_mode = 1
+
+[node name="ArmorSlot" type="TextureRect" parent="EquipmentSlots"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 54.0
+offset_right = 118.0
+offset_bottom = 120.0
+texture = ExtResource("6_armor")
+expand_mode = 1
+
+[node name="WepRSlot" type="TextureRect" parent="EquipmentSlots"]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 54.0
+offset_right = 170.0
+offset_bottom = 120.0
+texture = ExtResource("11_wep_r")
+expand_mode = 1
+
+[node name="GlovesSlot" type="TextureRect" parent="EquipmentSlots"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 122.0
+offset_right = 66.0
+offset_bottom = 168.0
+texture = ExtResource("8_gloves")
+expand_mode = 1
+
+[node name="PantsSlot" type="TextureRect" parent="EquipmentSlots"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 122.0
+offset_right = 118.0
+offset_bottom = 168.0
+texture = ExtResource("7_pants")
+expand_mode = 1
+
+[node name="BootsSlot" type="TextureRect" parent="EquipmentSlots"]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 122.0
+offset_right = 170.0
+offset_bottom = 168.0
+texture = ExtResource("9_boots")
+expand_mode = 1
+
+[node name="InventoryGrid" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 218.0
+offset_right = 179.0
+offset_bottom = 386.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 8
+
+[node name="MoneyBar" type="Control" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 388.0
+offset_right = 180.0
+offset_bottom = 414.0
+
+[node name="MoneyBg" type="TextureRect" parent="MoneyBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_money")
+expand_mode = 1
+
+[node name="ZenLabel" type="Label" parent="MoneyBar"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -9.0
+offset_right = -10.0
+offset_bottom = 9.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 11
+text = "10,000 Zen"
+horizontal_alignment = 2
+vertical_alignment = 1

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dwh6gglrdo0oy"
+path="res://.godot/imported/StoneStatue01.obj-5787608116fd8682bd381226843079ae.mesh"
+
+[deps]
+
+files=["res://.godot/imported/StoneStatue01.obj-5787608116fd8682bd381226843079ae.mesh"]
+
+source_file="res://assets/models/world1/StoneStatue01.obj"
+dest_files=["res://.godot/imported/StoneStatue01.obj-5787608116fd8682bd381226843079ae.mesh", "res://.godot/imported/StoneStatue01.obj-5787608116fd8682bd381226843079ae.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,179 @@
+[gd_scene load_steps=22 format=3 uid="uid://bumuonlinegodot01"]
+
+[ext_resource type="Script" path="res://src/world/MuLorenciaWorld.gd" id="1_lorencia_world"]
+[ext_resource type="Script" path="res://src/world/MuCamera.gd" id="2_camera"]
+[ext_resource type="Script" path="res://src/entities/MuPlayer.gd" id="3_player"]
+[ext_resource type="Script" path="res://src/ui/MuHud.gd" id="4_hud"]
+[ext_resource type="Script" path="res://src/network/MuNetworkClient.gd" id="5_network"]
+[ext_resource type="Script" path="res://src/entities/MuMonster.gd" id="6_monster"]
+[ext_resource type="PackedScene" path="res://assets/models/monsters/Monster01.glb" id="7_bull_model"]
+[ext_resource type="Script" path="res://src/ui/VirtualJoystick.gd" id="8_joystick"]
+[ext_resource type="PackedScene" path="res://assets/models/monsters/Monster14.glb" id="9_yeti_model"]
+[ext_resource type="PackedScene" path="res://src/ui/InventoryWindow.tscn" id="10_inv_scene"]
+[ext_resource type="Script" path="res://src/entities/MuNpc.gd" id="11_npc"]
+[ext_resource type="PackedScene" path="res://src/ui/ShopWindow.tscn" id="12_shop_scene"]
+[ext_resource type="Script" path="res://src/effects/MuWings.gd" id="13_wings"]
+[ext_resource type="PackedScene" path="res://src/ui/ChatWindow.tscn" id="14_chat_scene"]
+[ext_resource type="PackedScene" path="res://src/ui/CharacterStatsWindow.tscn" id="15_stats_scene"]
+[ext_resource type="PackedScene" path="res://src/ui/MuClassicHudBar.tscn" id="17_classic_hud"]
+[ext_resource type="PackedScene" path="res://src/ui/TopMapWidget.tscn" id="18_top_map"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/btn_skill_twisting.png" id="19_twisting_icon"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/btn_skill_fireball.png" id="20_fireball_icon"]
+[ext_resource type="Script" path="res://src/ui/MuMobileSkillPanel.gd" id="21_skill_panel"]
+
+[sub_resource type="Environment" id="Environment_mu"]
+background_mode = 1
+background_color = Color(0, 0, 0, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.75, 0.73, 0.7, 1.0)
+ambient_light_energy = 1.25
+tonemap_mode = 0
+tonemap_exposure = 1.22
+adjustment_enabled = true
+adjustment_brightness = 1.08
+adjustment_contrast = 1.02
+adjustment_saturation = 1.06
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 128, 50, -128)
+light_color = Color(1, 0.95, 0.88, 1)
+shadow_enabled = false
+
+[node name="MuNetworkClient" type="Node" parent="."]
+script = ExtResource("5_network")
+
+[node name="MuWorld" type="Node3D" parent="." node_paths=PackedStringArray("player_node")]
+script = ExtResource("1_lorencia_world")
+player_node = NodePath("../MuPlayer")
+
+[node name="MuPlayer" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 140.5, 0, -119.5)
+script = ExtResource("3_player")
+
+[node name="VisualRoot" type="Node3D" parent="MuPlayer"]
+
+[node name="BodyMesh" type="CSGCylinder3D" parent="MuPlayer/VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+radius = 0.4
+height = 1.8
+
+[node name="HeadIndicator" type="CSGBox3D" parent="MuPlayer/VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -0.3)
+size = Vector3(0.2, 0.2, 0.3)
+
+[node name="DragonWings" type="Node3D" parent="MuPlayer/VisualRoot"]
+script = ExtResource("13_wings")
+
+[node name="BullFighterMonster" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 130.5, 0, -128.5)
+script = ExtResource("6_monster")
+monster_name = "Bull Fighter #1"
+grid_x = 130
+grid_y = 128
+
+[node name="MonsterModel" parent="BullFighterMonster" instance=ExtResource("7_bull_model")]
+transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 0, 0, 0)
+
+[node name="BullFighterMonster2" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122.5, 0, -132.5)
+script = ExtResource("6_monster")
+monster_name = "Bull Fighter #2"
+grid_x = 122
+grid_y = 132
+
+[node name="MonsterModel" parent="BullFighterMonster2" instance=ExtResource("7_bull_model")]
+transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 0, 0, 0)
+
+[node name="EliteYetiMonster" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 135.5, 0, -135.5)
+script = ExtResource("6_monster")
+monster_id = 14
+monster_name = "Elite Yeti"
+max_hp = 250
+current_hp = 250
+grid_x = 135
+grid_y = 135
+
+[node name="MonsterModel" parent="EliteYetiMonster" instance=ExtResource("9_yeti_model")]
+transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 0, 0, 0)
+
+[node name="LumenBarmaidNpc" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 126.5, 0, -120.5)
+script = ExtResource("11_npc")
+npc_name = "Lumen the Barmaid"
+npc_title = "Quán Rượu Lorencia"
+grid_x = 126
+grid_y = 120
+
+[node name="MuCamera" type="Camera3D" parent="." node_paths=PackedStringArray("target_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 149.7, 11.5, -113.4)
+current = true
+script = ExtResource("2_camera")
+target_node = NodePath("../MuPlayer")
+
+[node name="MuHud" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_node")]
+script = ExtResource("4_hud")
+player_node = NodePath("../MuPlayer")
+
+[node name="TopMapWidget" parent="MuHud" node_paths=PackedStringArray("player") instance=ExtResource("18_top_map")]
+player = NodePath("../../MuPlayer")
+
+[node name="MuClassicHudBar" parent="MuHud" node_paths=PackedStringArray("player") instance=ExtResource("17_classic_hud")]
+player = NodePath("../../MuPlayer")
+
+[node name="MobileControls" type="Control" parent="MuHud"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VirtualJoystick" type="Control" parent="MuHud/MobileControls"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -180.0
+offset_right = 160.0
+offset_bottom = -60.0
+grow_vertical = 0
+script = ExtResource("8_joystick")
+
+[node name="MobileSkillPanel" type="Control" parent="MuHud/MobileControls"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -260.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("21_skill_panel")
+
+[node name="InventoryWindow" parent="MuHud" instance=ExtResource("10_inv_scene")]
+z_index = 10
+visible = false
+
+[node name="ShopWindow" parent="MuHud" instance=ExtResource("12_shop_scene")]
+z_index = 10
+visible = false
+
+[node name="ChatWindow" parent="MuHud" instance=ExtResource("14_chat_scene")]
+z_index = 10
+
+[node name="CharacterStatsWindow" parent="MuHud" instance=ExtResource("15_stats_scene")]
+z_index = 10
+visible = false

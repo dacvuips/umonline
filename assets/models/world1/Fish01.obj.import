@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://p4r3d73ahjtg"
+path="res://.godot/imported/Fish01.obj-2e5eb99f23746fc07d9eb439c3849752.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Fish01.obj-2e5eb99f23746fc07d9eb439c3849752.mesh"]
+
+source_file="res://assets/models/world1/Fish01.obj"
+dest_files=["res://.godot/imported/Fish01.obj-2e5eb99f23746fc07d9eb439c3849752.mesh", "res://.godot/imported/Fish01.obj-2e5eb99f23746fc07d9eb439c3849752.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

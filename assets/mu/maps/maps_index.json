@@ -1,0 +1,639 @@
+{
+ "1": {
+  "world": 1,
+  "name": "Lorencia",
+  "objects": 0,
+  "object_types": 0,
+  "object_folder": "Object1",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   128,
+   129
+  ]
+ },
+ "2": {
+  "world": 2,
+  "name": "Dungeon",
+  "objects": 4479,
+  "object_types": 60,
+  "object_folder": "Object2",
+  "tiles": 9,
+  "height24": false,
+  "spawn": [
+   126,
+   125
+  ]
+ },
+ "3": {
+  "world": 3,
+  "name": "Devias",
+  "objects": 2235,
+  "object_types": 105,
+  "object_folder": "Object3",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   170,
+   52
+  ]
+ },
+ "4": {
+  "world": 4,
+  "name": "Noria",
+  "objects": 9398,
+  "object_types": 43,
+  "object_folder": "Object4",
+  "tiles": 9,
+  "height24": false,
+  "spawn": [
+   158,
+   116
+  ]
+ },
+ "5": {
+  "world": 5,
+  "name": "Lost Tower",
+  "objects": 5379,
+  "object_types": 38,
+  "object_folder": "Object5",
+  "tiles": 11,
+  "height24": false,
+  "spawn": [
+   187,
+   83
+  ]
+ },
+ "6": {
+  "world": 6,
+  "name": "Exile",
+  "objects": 0,
+  "object_types": 0,
+  "object_folder": "",
+  "tiles": 0,
+  "height24": false,
+  "spawn": [
+   74,
+   137
+  ]
+ },
+ "7": {
+  "world": 7,
+  "name": "Arena",
+  "objects": 1488,
+  "object_types": 39,
+  "object_folder": "Object7",
+  "tiles": 12,
+  "height24": false,
+  "spawn": [
+   74,
+   137
+  ]
+ },
+ "8": {
+  "world": 8,
+  "name": "Atlans",
+  "objects": 5215,
+  "object_types": 40,
+  "object_folder": "Object8",
+  "tiles": 9,
+  "height24": false,
+  "spawn": [
+   32,
+   21
+  ]
+ },
+ "9": {
+  "world": 9,
+  "name": "Tarkan",
+  "objects": 3332,
+  "object_types": 77,
+  "object_folder": "Object9",
+  "tiles": 11,
+  "height24": false,
+  "spawn": [
+   157,
+   59
+  ]
+ },
+ "10": {
+  "world": 10,
+  "name": "Devil Square",
+  "objects": 564,
+  "object_types": 7,
+  "object_folder": "Object10",
+  "tiles": 9,
+  "height24": false,
+  "spawn": [
+   128,
+   115
+  ]
+ },
+ "11": {
+  "world": 11,
+  "name": "Icarus",
+  "objects": 670,
+  "object_types": 15,
+  "object_folder": "Object11",
+  "tiles": 1,
+  "height24": false,
+  "spawn": [
+   88,
+   88
+  ]
+ },
+ "12": {
+  "world": 12,
+  "name": "Blood Castle",
+  "objects": 201,
+  "object_types": 34,
+  "object_folder": "Object12",
+  "tiles": 10,
+  "height24": false,
+  "spawn": [
+   15,
+   14
+  ]
+ },
+ "19": {
+  "world": 19,
+  "name": "Chaos Castle",
+  "objects": 194,
+  "object_types": 33,
+  "object_folder": "Object19",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   44,
+   108
+  ]
+ },
+ "25": {
+  "world": 25,
+  "name": "Kalima",
+  "objects": 2314,
+  "object_types": 56,
+  "object_folder": "Object25",
+  "tiles": 10,
+  "height24": false,
+  "spawn": [
+   115,
+   114
+  ]
+ },
+ "31": {
+  "world": 31,
+  "name": "Valley of Loren",
+  "objects": 3723,
+  "object_types": 85,
+  "object_folder": "Object31",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   127,
+   128
+  ]
+ },
+ "32": {
+  "world": 32,
+  "name": "Land of Trials",
+  "objects": 7789,
+  "object_types": 57,
+  "object_folder": "Object32",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   130,
+   132
+  ]
+ },
+ "34": {
+  "world": 34,
+  "name": "Aida",
+  "objects": 3752,
+  "object_types": 74,
+  "object_folder": "Object34",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   83,
+   17
+  ]
+ },
+ "35": {
+  "world": 35,
+  "name": "Crywolf",
+  "objects": 6642,
+  "object_types": 76,
+  "object_folder": "Object35",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   123,
+   64
+  ]
+ },
+ "38": {
+  "world": 38,
+  "name": "Kanturu Ruins",
+  "objects": 3645,
+  "object_types": 100,
+  "object_folder": "Object38",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   80,
+   174
+  ]
+ },
+ "39": {
+  "world": 39,
+  "name": "Kanturu Relics",
+  "objects": 1988,
+  "object_types": 59,
+  "object_folder": "Object39",
+  "tiles": 11,
+  "height24": false,
+  "spawn": [
+   93,
+   107
+  ]
+ },
+ "40": {
+  "world": 40,
+  "name": "Kanturu Refinery",
+  "objects": 1459,
+  "object_types": 68,
+  "object_folder": "Object40",
+  "tiles": 4,
+  "height24": false,
+  "spawn": [
+   98,
+   117
+  ]
+ },
+ "41": {
+  "world": 41,
+  "name": "GM Island",
+  "objects": 662,
+  "object_types": 32,
+  "object_folder": "Object41",
+  "tiles": 12,
+  "height24": false,
+  "spawn": [
+   219,
+   39
+  ]
+ },
+ "42": {
+  "world": 42,
+  "name": "Balgass Barracks",
+  "objects": 1531,
+  "object_types": 61,
+  "object_folder": "Object42",
+  "tiles": 11,
+  "height24": false,
+  "spawn": [
+   38,
+   92
+  ]
+ },
+ "43": {
+  "world": 43,
+  "name": "Balgass Refuge",
+  "objects": 354,
+  "object_types": 36,
+  "object_folder": "Object43",
+  "tiles": 11,
+  "height24": true,
+  "spawn": [
+   110,
+   170
+  ]
+ },
+ "47": {
+  "world": 47,
+  "name": "Illusion Temple 2",
+  "objects": 1961,
+  "object_types": 77,
+  "object_folder": "Object47",
+  "tiles": 13,
+  "height24": false,
+  "spawn": [
+   110,
+   128
+  ]
+ },
+ "52": {
+  "world": 52,
+  "name": "Elbeland",
+  "objects": 5135,
+  "object_types": 129,
+  "object_folder": "Object52",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   48,
+   166
+  ]
+ },
+ "55": {
+  "world": 55,
+  "name": "Character Scene",
+  "objects": 0,
+  "object_types": 0,
+  "object_folder": "object55",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   131,
+   135
+  ]
+ },
+ "56": {
+  "world": 56,
+  "name": "Login Scene",
+  "objects": 0,
+  "object_types": 0,
+  "object_folder": "object56",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   107,
+   162
+  ]
+ },
+ "57": {
+  "world": 57,
+  "name": "Swamp of Calmness",
+  "objects": 4173,
+  "object_types": 84,
+  "object_folder": "Object57",
+  "tiles": 11,
+  "height24": false,
+  "spawn": [
+   128,
+   121
+  ]
+ },
+ "58": {
+  "world": 58,
+  "name": "Raklion",
+  "objects": 1409,
+  "object_types": 69,
+  "object_folder": "Object58",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   210,
+   200
+  ]
+ },
+ "59": {
+  "world": 59,
+  "name": "Raklion Hatchery",
+  "objects": 149,
+  "object_types": 21,
+  "object_folder": "Object59",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   135,
+   47
+  ]
+ },
+ "63": {
+  "world": 63,
+  "name": "Santa Village",
+  "objects": 673,
+  "object_types": 35,
+  "object_folder": "Object63",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   205,
+   46
+  ]
+ },
+ "64": {
+  "world": 64,
+  "name": "Vulcanus",
+  "objects": 2289,
+  "object_types": 61,
+  "object_folder": "Object64",
+  "tiles": 11,
+  "height24": true,
+  "spawn": [
+   128,
+   128
+  ]
+ },
+ "65": {
+  "world": 65,
+  "name": "Duel Arena",
+  "objects": 1345,
+  "object_types": 30,
+  "object_folder": "Object65",
+  "tiles": 12,
+  "height24": false,
+  "spawn": [
+   137,
+   123
+  ]
+ },
+ "66": {
+  "world": 66,
+  "name": "Doppelganger 1",
+  "objects": 398,
+  "object_types": 29,
+  "object_folder": "Object66",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   221,
+   104
+  ]
+ },
+ "67": {
+  "world": 67,
+  "name": "Doppelganger 2",
+  "objects": 253,
+  "object_types": 15,
+  "object_folder": "Object67",
+  "tiles": 11,
+  "height24": true,
+  "spawn": [
+   126,
+   126
+  ]
+ },
+ "68": {
+  "world": 68,
+  "name": "Doppelganger 3",
+  "objects": 373,
+  "object_types": 29,
+  "object_folder": "Object68",
+  "tiles": 9,
+  "height24": false,
+  "spawn": [
+   111,
+   128
+  ]
+ },
+ "69": {
+  "world": 69,
+  "name": "Doppelganger 4",
+  "objects": 430,
+  "object_types": 36,
+  "object_folder": "Object69",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   92,
+   54
+  ]
+ },
+ "70": {
+  "world": 70,
+  "name": "Imperial Guardian 1",
+  "objects": 832,
+  "object_types": 59,
+  "object_folder": "Object70",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   172,
+   98
+  ]
+ },
+ "71": {
+  "world": 71,
+  "name": "Imperial Guardian 2",
+  "objects": 729,
+  "object_types": 63,
+  "object_folder": "Object71",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   123,
+   114
+  ]
+ },
+ "72": {
+  "world": 72,
+  "name": "Imperial Guardian 3",
+  "objects": 748,
+  "object_types": 57,
+  "object_folder": "Object72",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   128,
+   180
+  ]
+ },
+ "73": {
+  "world": 73,
+  "name": "Imperial Guardian 4",
+  "objects": 1665,
+  "object_types": 80,
+  "object_folder": "Object73",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   147,
+   135
+  ]
+ },
+ "74": {
+  "world": 74,
+  "name": "Login Scene (New)",
+  "objects": 365,
+  "object_types": 45,
+  "object_folder": "Object74",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   147,
+   135
+  ]
+ },
+ "75": {
+  "world": 75,
+  "name": "Character Scene (New)",
+  "objects": 102,
+  "object_types": 18,
+  "object_folder": "Object75",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   85,
+   187
+  ]
+ },
+ "78": {
+  "world": 78,
+  "name": "Login Scene 2",
+  "objects": 628,
+  "object_types": 68,
+  "object_folder": "Object78",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   115,
+   140
+  ]
+ },
+ "79": {
+  "world": 79,
+  "name": "Character Scene 2",
+  "objects": 96,
+  "object_types": 22,
+  "object_folder": "Object79",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   224,
+   151
+  ]
+ },
+ "80": {
+  "world": 80,
+  "name": "Loren Market",
+  "objects": 513,
+  "object_types": 48,
+  "object_folder": "Object80",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   130,
+   129
+  ]
+ },
+ "81": {
+  "world": 81,
+  "name": "Karutan 1",
+  "objects": 2086,
+  "object_types": 103,
+  "object_folder": "Object81",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   128,
+   128
+  ]
+ },
+ "82": {
+  "world": 82,
+  "name": "Karutan 2",
+  "objects": 1720,
+  "object_types": 83,
+  "object_folder": "Object82",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   128,
+   128
+  ]
+ }
+}

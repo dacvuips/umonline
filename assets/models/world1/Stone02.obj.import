@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cuoy6v3s7aimp"
+path="res://.godot/imported/Stone02.obj-4c3a5a34812bd1cfc28f50a59f002a2d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Stone02.obj-4c3a5a34812bd1cfc28f50a59f002a2d.mesh"]
+
+source_file="res://assets/models/world1/Stone02.obj"
+dest_files=["res://.godot/imported/Stone02.obj-4c3a5a34812bd1cfc28f50a59f002a2d.mesh", "res://.godot/imported/Stone02.obj-4c3a5a34812bd1cfc28f50a59f002a2d.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

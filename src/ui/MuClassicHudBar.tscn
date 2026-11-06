@@ -1,0 +1,256 @@
+[gd_scene load_steps=14 format=3 uid="uid://da0gvpr887bue"]
+
+[ext_resource type="Script" path="res://src/ui/MuClassicHudBar.gd" id="1_hudbar"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/mu_actual_hud_bar.png" id="2_hud_bg"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_menu_red.png" id="3_orb_red"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_menu_blue.png" id="4_orb_blue"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_menu_SD.png" id="5_col_sd"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_menu_AG.png" id="6_col_ag"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/hud_btn_inv.png" id="7_btn_inv"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/hud_btn_char.png" id="8_btn_char"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/hud_btn_party.png" id="9_btn_party"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/hud_btn_options.png" id="10_btn_options"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/hud_btn_exit.png" id="11_btn_exit"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/skill_active_box.png" id="12_skill_box"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/btn_skill_twisting.png" id="13_skill_twisting"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exp_bg"]
+bg_color = Color(0.08, 0.08, 0.08, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exp_fill"]
+bg_color = Color(0.95, 0.82, 0.28, 1)
+
+[node name="MuClassicHudBar" type="Control"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -490.0
+offset_top = -51.0
+offset_right = 490.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+script = ExtResource("1_hudbar")
+
+[node name="BarContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="BarContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_hud_bg")
+expand_mode = 1
+
+[node name="LifeOrb" type="TextureProgressBar" parent="BarContainer"]
+layout_mode = 0
+offset_left = 236.0
+offset_top = 5.0
+offset_right = 282.0
+offset_bottom = 47.0
+value = 100.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_progress = ExtResource("3_orb_red")
+
+[node name="HpLabel" type="Label" parent="BarContainer/LifeOrb"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 11
+text = "150"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AgBar" type="TextureProgressBar" parent="BarContainer"]
+layout_mode = 0
+offset_left = 332.0
+offset_top = 8.0
+offset_right = 344.0
+offset_bottom = 44.0
+value = 100.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_progress = ExtResource("6_col_ag")
+
+[node name="SdBar" type="TextureProgressBar" parent="BarContainer"]
+layout_mode = 0
+offset_left = 676.0
+offset_top = 8.0
+offset_right = 688.0
+offset_bottom = 44.0
+value = 100.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_progress = ExtResource("5_col_sd")
+
+[node name="ManaOrb" type="TextureProgressBar" parent="BarContainer"]
+layout_mode = 0
+offset_left = 708.0
+offset_top = 5.0
+offset_right = 754.0
+offset_bottom = 47.0
+value = 100.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_progress = ExtResource("4_orb_blue")
+
+[node name="MpLabel" type="Label" parent="BarContainer/ManaOrb"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -8.0
+offset_right = 20.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 11
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExpProgressBar" type="ProgressBar" parent="BarContainer"]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 4.0
+offset_right = 610.0
+offset_bottom = 8.0
+theme_override_styles/background = SubResource("StyleBoxFlat_exp_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_exp_fill")
+value = 25.0
+show_percentage = false
+
+[node name="ActiveSkillBox" type="TextureRect" parent="BarContainer"]
+layout_mode = 0
+offset_left = 620.0
+offset_top = 5.0
+offset_right = 658.0
+offset_bottom = 47.0
+mouse_filter = 0
+texture = ExtResource("12_skill_box")
+expand_mode = 1
+
+[node name="SkillIcon" type="TextureRect" parent="BarContainer/ActiveSkillBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_skill_twisting")
+expand_mode = 1
+
+[node name="MenuButtons" type="Control" parent="BarContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="InvBtn" type="TextureButton" parent="BarContainer/MenuButtons"]
+layout_mode = 0
+offset_left = 788.0
+offset_top = 7.0
+offset_right = 822.0
+offset_bottom = 45.0
+tooltip_text = "Hành trang Túi đồ (I / V)"
+texture_normal = ExtResource("7_btn_inv")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="CharBtn" type="TextureButton" parent="BarContainer/MenuButtons"]
+layout_mode = 0
+offset_left = 826.0
+offset_top = 7.0
+offset_right = 860.0
+offset_bottom = 45.0
+tooltip_text = "Bảng Thông tin Nhân vật (C)"
+texture_normal = ExtResource("8_btn_char")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="PartyBtn" type="TextureButton" parent="BarContainer/MenuButtons"]
+layout_mode = 0
+offset_left = 864.0
+offset_top = 7.0
+offset_right = 898.0
+offset_bottom = 45.0
+tooltip_text = "Tổ đội Nhóm (P)"
+texture_normal = ExtResource("9_btn_party")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="OptionsBtn" type="TextureButton" parent="BarContainer/MenuButtons"]
+layout_mode = 0
+offset_left = 902.0
+offset_top = 7.0
+offset_right = 936.0
+offset_bottom = 45.0
+tooltip_text = "Cài đặt Tùy chọn (O)"
+texture_normal = ExtResource("10_btn_options")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="ExitBtn" type="TextureButton" parent="BarContainer/MenuButtons"]
+layout_mode = 0
+offset_left = 940.0
+offset_top = 7.0
+offset_right = 974.0
+offset_bottom = 45.0
+tooltip_text = "Thoát Game (Esc)"
+texture_normal = ExtResource("11_btn_exit")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="ZenLabel" type="Label" parent="BarContainer"]
+layout_mode = 0
+offset_left = 900.0
+offset_top = 37.0
+offset_right = 974.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 9
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1

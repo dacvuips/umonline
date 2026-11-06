@@ -1,0 +1,80 @@
+newmtl Material_0
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd TileGround03.png
+
+newmtl Material_1
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd ship01.png
+
+newmtl Material_2
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd ship03.png
+
+newmtl Material_3
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd ship04.png
+
+newmtl Material_4
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd ship07.png
+
+newmtl Material_5
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd ship05.png
+
+newmtl Material_6
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd ship07.png
+
+newmtl Material_7
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd ship06.png
+
+newmtl Material_8
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd ship06.png
+
+newmtl Material_9
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd ship05.png
+

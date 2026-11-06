@@ -1,0 +1,8547 @@
+{
+ "skills": {
+  "1": {
+   "name": "AT_SKILL_POISON",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_POISON",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SMOKE",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "pHeartBeat.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4916",
+    "WSclient.cpp:4351",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic"
+  },
+  "2": {
+   "name": "AT_SKILL_METEO",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_FIRE",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eMeteorite.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4931",
+    "WSclient.cpp:4351",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic"
+  },
+  "3": {
+   "name": "AT_SKILL_LIGHTNING",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_LASER+1",
+     "sub": 1,
+     "at": "beam",
+     "count": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 0,
+     "at": "beam",
+     "count": 7
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_LASER+1",
+     "sub": 0,
+     "at": "beam",
+     "count": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_ENERGY",
+     "sub": 0,
+     "at": "self",
+     "count": 5
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 2,
+     "at": "beam",
+     "count": 2
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 21,
+     "at": "beam",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "eThunder.wav",
+    "sEvil.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2246",
+    "WSclient.cpp:4343",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic"
+  },
+  "4": {
+   "name": "AT_SKILL_FIREBALL",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_FIRE",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eMeteorite.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4955",
+    "WSclient.cpp:4351",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic"
+  },
+  "5": {
+   "name": "AT_SKILL_FLAME",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_FLAME",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_FLAME",
+     "sub": 5,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sFlame.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4401",
+    "ZzzCharacter.cpp:4959",
+    "WSclient.cpp:4351",
+    "ClassAttack.cpp:1391"
+   ],
+   "action": "magic"
+  },
+  "6": {
+   "name": "AT_SKILL_TELEPORT",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_SPARK+1",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:4386",
+    "ClassAttack.cpp:1493"
+   ],
+   "action": "PLAYER_SKILL_HELL_BEGIN",
+   "action_index": 72
+  },
+  "7": {
+   "name": "AT_SKILL_ICE",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_ICE",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ICE_SMALL",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sIce.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4879",
+    "WSclient.cpp:4351",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic"
+  },
+  "8": {
+   "name": "AT_SKILL_STORM",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_STORM",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sTornado.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4416",
+    "ClassAttack.cpp:1367"
+   ],
+   "action": "magic"
+  },
+  "9": {
+   "name": "AT_SKILL_EVIL_SPIRIT",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPIRIT",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "sEvil.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4506",
+    "ClassAttack.cpp:1367"
+   ],
+   "action": "magic"
+  },
+  "10": {
+   "name": "AT_SKILL_HELL_FIRE",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_CIRCLE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_CIRCLE_LIGHT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sHellFire.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4345",
+    "WSclient.cpp:5274",
+    "ClassAttack.cpp:1213"
+   ],
+   "action": "PLAYER_SKILL_HELL",
+   "action_index": 154
+  },
+  "11": {
+   "name": "AT_SKILL_POWERWAVE",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_MAGIC2",
+     "sub": 0,
+     "at": "self",
+     "count": 3
+    }
+   ],
+   "sounds": [
+    "sMagic.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4968",
+    "WSclient.cpp:4351",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic"
+  },
+  "12": {
+   "name": "AT_SKILL_FLASH",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_BOSS_LASER",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sAquaFlash.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4472",
+    "WSclient.cpp:5270",
+    "ClassAttack.cpp:1376"
+   ],
+   "action": "PLAYER_SKILL_FLASH",
+   "action_index": 152
+  },
+  "13": {
+   "name": "AT_SKILL_BLAST",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_BLAST",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4478",
+    "SkillCast.cpp:525"
+   ],
+   "action": "magic"
+  },
+  "14": {
+   "name": "AT_SKILL_INFERNO",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_INFERNO",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4495",
+    "WSclient.cpp:5279",
+    "ClassAttack.cpp:1223"
+   ],
+   "action": "PLAYER_SKILL_INFERNO",
+   "action_index": 153
+  },
+  "15": {
+   "name": "Teleport Ally",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_SPARK+1",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:4386",
+    "ClassAttack.cpp:1493"
+   ],
+   "action": "PLAYER_SKILL_HELL_BEGIN",
+   "action_index": 72,
+   "base": 6
+  },
+  "16": {
+   "name": "AT_SKILL_SOUL_BARRIER",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "MODEL_SPEARSKILL",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eSoulBarrier.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4896",
+    "WSclient.cpp:4333",
+    "ClassAttack.cpp:1164"
+   ],
+   "action": "magic"
+  },
+  "17": {
+   "name": "AT_SKILL_ENERGYBALL",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SNOW1",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WOOSISTONE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_EFFECT_SAPITRES_ATTACK",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_ENERGY",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_BOSS_LASER",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_BLAST",
+     "sub": 0,
+     "at": "target",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_FIRE",
+     "sub": 6,
+     "at": "target",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_PIERCING+1",
+     "sub": 1,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 2,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_FIRE",
+     "sub": 5,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 2,
+     "at": "beam",
+     "count": 3
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_FLARE",
+     "sub": 7,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_LASER+1",
+     "sub": 0,
+     "at": "beam",
+     "count": 2
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE",
+     "sub": 0,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_BLUR+1",
+     "sub": 1,
+     "at": "beam",
+     "count": 2
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_LASER+1",
+     "sub": 1,
+     "at": "beam",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sMagic.wav",
+    "sEvil.wav",
+    "sEvil.wav",
+    "sEvil.wav",
+    "eThunder.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:5011",
+    "ZzzCharacter.cpp:2021",
+    "WSclient.cpp:4351",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic"
+  },
+  "18": {
+   "name": "AT_SKILL_BLOCKING",
+   "fx": [],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "WSclient.cpp:3675",
+    "SkillCast.cpp:224"
+   ],
+   "action": "PLAYER_DEFENSE1",
+   "action_index": 192
+  },
+  "19": {
+   "name": "AT_SKILL_FALLING_SLASH",
+   "fx": [],
+   "sounds": [
+    "sKnightSkill1.wav"
+   ],
+   "src": [
+    "WSclient.cpp:4437"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_SWORD1",
+   "action_index": 60
+  },
+  "20": {
+   "name": "AT_SKILL_LUNGE",
+   "fx": [],
+   "sounds": [
+    "sKnightSkill2.wav"
+   ],
+   "src": [
+    "WSclient.cpp:4444"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_SWORD1+1",
+   "action_index": 61
+  },
+  "21": {
+   "name": "AT_SKILL_UPPERCUT",
+   "fx": [],
+   "sounds": [
+    "sKnightSkill3.wav"
+   ],
+   "src": [
+    "WSclient.cpp:4451"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_SWORD1+2",
+   "action_index": 62
+  },
+  "22": {
+   "name": "AT_SKILL_CYCLONE",
+   "fx": [],
+   "sounds": [
+    "sKnightSkill4.wav"
+   ],
+   "src": [
+    "WSclient.cpp:4457"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_SWORD1+3",
+   "action_index": 63
+  },
+  "23": {
+   "name": "AT_SKILL_SLASH",
+   "fx": [],
+   "sounds": [
+    "sKnightSkill4.wav"
+   ],
+   "src": [
+    "WSclient.cpp:4465"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_SWORD1+4",
+   "action_index": 64
+  },
+  "24": {
+   "name": "AT_SKILL_TRIPLE_SHOT",
+   "fx": [],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:5251",
+    "SkillCast.cpp:1183"
+   ],
+   "action": "attack"
+  },
+  "26": {
+   "name": "AT_SKILL_HEALING",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4834",
+    "WSclient.cpp:4311",
+    "ClassAttack.cpp:155",
+    "SkillCast.cpp:558"
+   ],
+   "action": "magic"
+  },
+  "27": {
+   "name": "AT_SKILL_DEFENSE",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 2,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "joint",
+     "type": "MODEL_SPEARSKILL",
+     "sub": 4,
+     "at": "target",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4838",
+    "WSclient.cpp:4311",
+    "ClassAttack.cpp:155",
+    "SkillCast.cpp:558"
+   ],
+   "action": "magic"
+  },
+  "28": {
+   "name": "AT_SKILL_ATTACK",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 3,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4869",
+    "WSclient.cpp:4311",
+    "ClassAttack.cpp:155",
+    "SkillCast.cpp:558"
+   ],
+   "action": "magic"
+  },
+  "30": {
+   "name": "AT_SKILL_SUMMON",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 3,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4069",
+    "WSclient.cpp:4311",
+    "ClassAttack.cpp:111"
+   ],
+   "action": "magic"
+  },
+  "31": {
+   "name": "31",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 3,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4069",
+    "WSclient.cpp:4311",
+    "ClassAttack.cpp:111"
+   ],
+   "action": "magic"
+  },
+  "32": {
+   "name": "32",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 3,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4069",
+    "WSclient.cpp:4311",
+    "ClassAttack.cpp:111"
+   ],
+   "action": "magic"
+  },
+  "33": {
+   "name": "33",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 3,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4069",
+    "WSclient.cpp:4311",
+    "ClassAttack.cpp:111"
+   ],
+   "action": "magic"
+  },
+  "34": {
+   "name": "34",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 3,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4069",
+    "WSclient.cpp:4311",
+    "ClassAttack.cpp:111"
+   ],
+   "action": "magic"
+  },
+  "35": {
+   "name": "35",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 3,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4069",
+    "WSclient.cpp:4311",
+    "ClassAttack.cpp:111"
+   ],
+   "action": "magic"
+  },
+  "36": {
+   "name": "36",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 3,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4069",
+    "WSclient.cpp:4311",
+    "ClassAttack.cpp:111"
+   ],
+   "action": "magic"
+  },
+  "37": {
+   "name": "37",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 3,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4077",
+    "WSclient.cpp:4327",
+    "ClassAttack.cpp:119"
+   ],
+   "action": "magic"
+  },
+  "38": {
+   "name": "AT_SKILL_DECAY",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_FIRE",
+     "sub": 6,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "eBlastPoison_1.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4362",
+    "WSclient.cpp:5259",
+    "ClassAttack.cpp:1397"
+   ],
+   "action": "magic"
+  },
+  "39": {
+   "name": "AT_SKILL_ICE_STORM",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_BLIZZARD",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eSuddenIce_1.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4378",
+    "WSclient.cpp:5259",
+    "ClassAttack.cpp:1397"
+   ],
+   "action": "magic"
+  },
+  "40": {
+   "name": "AT_SKILL_NOVA",
+   "fx": [
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT",
+     "sub": 5,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_CIRCLE",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eHellFire2_2.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:3204",
+    "ZzzCharacter.cpp:4357",
+    "WSclient.cpp:4905",
+    "ClassAttack.cpp:1151",
+    "ClassAttack.cpp:1504"
+   ],
+   "action": "PLAYER_SKILL_HELL_START",
+   "action_index": 73
+  },
+  "41": {
+   "name": "AT_SKILL_TWISTING_SLASH",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_WHEEL1",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightSkill4.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4332",
+    "WSclient.cpp:5284",
+    "ClassAttack.cpp:615",
+    "SkillCast.cpp:306"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_WHEEL",
+   "action_index": 65
+  },
+  "42": {
+   "name": "AT_SKILL_RAGEFUL_BLOW",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_FURY_STRIKE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eRageBlow_1.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4081",
+    "WSclient.cpp:5340",
+    "ClassAttack.cpp:978"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_FURY_STRIKE",
+   "action_index": 66
+  },
+  "43": {
+   "name": "AT_SKILL_DEATHSTAB",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "MODEL_SPEARSKILL",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SPEAR",
+     "sub": 1,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "sKnightSkill2.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2544",
+    "WSclient.cpp:4494",
+    "WSclient.cpp:5382",
+    "SkillCast.cpp:302"
+   ],
+   "action": "PLAYER_ATTACK_DEATHSTAB",
+   "action_index": 71
+  },
+  "44": {
+   "name": "AT_SKILL_RUSH",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPARK",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE",
+     "sub": 18,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SWORD_FORCE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightSkill2.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2856",
+    "ZzzCharacter.cpp:4608",
+    "WSclient.cpp:4569",
+    "SkillCast.cpp:333"
+   ],
+   "action": "PLAYER_ATTACK_RUSH",
+   "action_index": 137
+  },
+  "45": {
+   "name": "AT_SKILL_JAVELIN",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_JAVELIN",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_JAVELIN",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_JAVELIN",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4935",
+    "WSclient.cpp:4575",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic"
+  },
+  "46": {
+   "name": "AT_SKILL_DEEPIMPACT",
+   "fx": [],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4830"
+   ]
+  },
+  "47": {
+   "name": "AT_SKILL_IMPALE",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL__SPEAR",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SPEAR",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SPEARSKILL",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eRidingSpear.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2626",
+    "WSclient.cpp:4487",
+    "WSclient.cpp:5350",
+    "SkillCast.cpp:296"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_SPEAR",
+   "action_index": 70
+  },
+  "48": {
+   "name": "AT_SKILL_SWELL_LIFE",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPIRIT",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 4,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eSwellLife.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4112",
+    "WSclient.cpp:4867",
+    "ClassAttack.cpp:971"
+   ],
+   "action": "PLAYER_SKILL_VITALITY",
+   "action_index": 67
+  },
+  "49": {
+   "name": "AT_SKILL_RIDER",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_SHOTGUN",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightSkill3.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4327",
+    "WSclient.cpp:4883",
+    "SkillCast.cpp:314"
+   ],
+   "action": "PLAYER_SKILL_RIDER_FLY",
+   "action_index": 69
+  },
+  "50": {
+   "name": "AT_SKILL_BOSS",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_INFERNO",
+     "sub": 1,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_FIRE",
+     "sub": 0,
+     "at": "self",
+     "count": 4
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPIRIT",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPIRIT",
+     "sub": 3,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_BLAST",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_STAFF_OF_DESTRUCTION",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_BOSS_LASER",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_FIRE",
+     "sub": 2,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_FIRE",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_CIRCLE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_CIRCLE_LIGHT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eMeteorite.wav",
+    "sHellFire.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:1650",
+    "ZzzCharacter.cpp:1704",
+    "ZzzCharacter.cpp:1779",
+    "ZzzCharacter.cpp:1811",
+    "ZzzCharacter.cpp:1843",
+    "ZzzCharacter.cpp:1885"
+   ]
+  },
+  "51": {
+   "name": "AT_SKILL_ICE_ARROW",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_ICE",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ICE",
+     "sub": 2,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:4546",
+    "SkillCast.cpp:570"
+   ],
+   "action": "attack"
+  },
+  "52": {
+   "name": "AT_SKILL_PENETRATION",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_GATHERING",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "ePiercing.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2684",
+    "WSclient.cpp:5265",
+    "ClassAttack.cpp:129"
+   ],
+   "action": "attack"
+  },
+  "53": {
+   "name": "AT_SKILL_IMPROVE_AG",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_HEALING",
+     "sub": 10,
+     "at": "self",
+     "count": 4
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT",
+     "sub": 2,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eSwellLife.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4265",
+    "WSclient.cpp:4810",
+    "ClassAttack.cpp:408"
+   ],
+   "action": "magic"
+  },
+  "54": {
+   "name": "AT_SKILL_BLAST_CROSSBOW4",
+   "fx": [],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:5256",
+    "SkillCast.cpp:1208"
+   ],
+   "action": "attack"
+  },
+  "55": {
+   "name": "AT_SKILL_FIRE_SLASH",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_GATHERING",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SWORD_FORCE",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SWORD_FORCE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SKULL",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightSkill3.wav",
+    "eBloodAttack.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2704",
+    "WSclient.cpp:4521",
+    "WSclient.cpp:5356",
+    "ClassAttack.cpp:641",
+    "SkillCast.cpp:306"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_WHEEL",
+   "action_index": 65
+  },
+  "56": {
+   "name": "AT_SKILL_POWER_SLASH",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_MAGIC2",
+     "sub": 2,
+     "at": "self",
+     "count": 5
+    }
+   ],
+   "sounds": [
+    "sKnightSkill3.wav",
+    "sKnightSkill4.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2741",
+    "WSclient.cpp:4480",
+    "WSclient.cpp:5378",
+    "ClassAttack.cpp:671"
+   ],
+   "action": "PLAYER_ATTACK_TWO_HAND_SWORD_TWO",
+   "action_index": 145
+  },
+  "57": {
+   "name": "AT_SKILL_SPIRAL_SLASH",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_FLARE",
+     "sub": 23,
+     "at": "self",
+     "count": 5
+    }
+   ],
+   "sounds": [
+    "sKnightSkill2.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2882",
+    "WSclient.cpp:4635"
+   ],
+   "action": "PLAYER_ATTACK_ONE_FLASH",
+   "action_index": 136
+  },
+  "58": {
+   "name": "Nova Start",
+   "fx": [
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT",
+     "sub": 5,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_CIRCLE",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eHellFire2_2.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:3204",
+    "ZzzCharacter.cpp:4357",
+    "WSclient.cpp:4905",
+    "ClassAttack.cpp:1151",
+    "ClassAttack.cpp:1504"
+   ],
+   "action": "PLAYER_SKILL_HELL_START",
+   "action_index": 73,
+   "base": 40
+  },
+  "59": {
+   "name": "AT_SKILL_COMBO",
+   "fx": [
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT",
+     "sub": 5,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_COMBO",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eCombo.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:3204",
+    "WSclient.cpp:4896"
+   ]
+  },
+  "60": {
+   "name": "AT_SKILL_FORCE",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_WAVES",
+     "sub": 1,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_PIERCING2",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sDarkSpear.wav",
+    "sKnightSkill1.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4980",
+    "WSclient.cpp:4400"
+   ],
+   "action": "PLAYER_ATTACK_STRIKE",
+   "action_index": 80
+  },
+  "61": {
+   "name": "AT_SKILL_FIREBURST",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_PIER_PART",
+     "sub": 0,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eFirebust.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4988",
+    "WSclient.cpp:4418"
+   ],
+   "action": "PLAYER_ATTACK_STRIKE",
+   "action_index": 80
+  },
+  "62": {
+   "name": "AT_SKILL_EARTHSHAKE",
+   "fx": [],
+   "sounds": [
+    "sDarkEarthQuake.wav"
+   ],
+   "src": [
+    "WSclient.cpp:5334",
+    "ClassAttack.cpp:959"
+   ],
+   "action": "PLAYER_ATTACK_DARKHORSE",
+   "action_index": 87
+  },
+  "63": {
+   "name": "AT_SKILL_PARTY_TELEPORT",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_CIRCLE",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_CIRCLE_LIGHT",
+     "sub": 3,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eSummon.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4306",
+    "WSclient.cpp:4847"
+   ],
+   "action": "PLAYER_ATTACK_TELEPORT",
+   "action_index": 81
+  },
+  "64": {
+   "name": "AT_SKILL_ADD_CRITICAL",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sDarkCritical.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4288",
+    "WSclient.cpp:4828"
+   ],
+   "action": "PLAYER_SKILL_HAND1",
+   "action_index": 146
+  },
+  "65": {
+   "name": "AT_SKILL_THUNDER_STRIKE",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_FLARE_FORCE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sDarkElecSpike.wav",
+    "sDarkEarthQuake.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4312",
+    "WSclient.cpp:5328",
+    "ClassAttack.cpp:926",
+    "ClassAttack.cpp:944"
+   ],
+   "action": "PLAYER_SKILL_FLASH",
+   "action_index": 152
+  },
+  "66": {
+   "name": "AT_SKILL_FORCE_WAVE",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_WAVES",
+     "sub": 1,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_PIERCING2",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sDarkSpear.wav",
+    "sKnightSkill1.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4980",
+    "WSclient.cpp:4400"
+   ],
+   "action": "PLAYER_ATTACK_STRIKE",
+   "action_index": 80
+  },
+  "67": {
+   "name": "AT_SKILL_STUN",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_FLASH",
+     "sub": 7,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4136",
+    "WSclient.cpp:4641",
+    "WSclient.cpp:5387",
+    "ClassAttack.cpp:1795"
+   ],
+   "action": "PLAYER_SKILL_VITALITY",
+   "action_index": 67
+  },
+  "68": {
+   "name": "AT_SKILL_REMOVAL_STUN",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_FLASH",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4143",
+    "WSclient.cpp:4665",
+    "ClassAttack.cpp:1839"
+   ],
+   "action": "PLAYER_ATTACK_REMOVAL",
+   "action_index": 139
+  },
+  "69": {
+   "name": "AT_SKILL_MANA",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPIRIT",
+     "sub": 21,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 10,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_MANA_RUNE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4161",
+    "WSclient.cpp:4752",
+    "ClassAttack.cpp:1876"
+   ],
+   "action": "PLAYER_SKILL_VITALITY",
+   "action_index": 67
+  },
+  "70": {
+   "name": "AT_SKILL_INVISIBLE",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 6,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4182",
+    "WSclient.cpp:4694",
+    "WSclient.cpp:5391",
+    "ClassAttack.cpp:1907"
+   ],
+   "action": "PLAYER_SKILL_VITALITY",
+   "action_index": 67
+  },
+  "71": {
+   "name": "AT_SKILL_REMOVAL_INVISIBLE",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_FLASH",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4199",
+    "WSclient.cpp:4726",
+    "ClassAttack.cpp:1940"
+   ],
+   "action": "PLAYER_ATTACK_REMOVAL",
+   "action_index": 139
+  },
+  "72": {
+   "name": "AT_SKILL_REMOVAL_BUFF",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "MODEL_SPEARSKILL",
+     "sub": 5,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "joint",
+     "type": "MODEL_SPEARSKILL",
+     "sub": 6,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "joint",
+     "type": "MODEL_SPEARSKILL",
+     "sub": 7,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4217",
+    "WSclient.cpp:4780",
+    "ClassAttack.cpp:1971"
+   ],
+   "action": "PLAYER_SKILL_VITALITY",
+   "action_index": 67
+  },
+  "73": {
+   "name": "AT_SKILL_DEATH_CANNON",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_FORCE",
+     "sub": 4,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4942",
+    "WSclient.cpp:4588",
+    "SkillCast.cpp:519"
+   ],
+   "action": "PLAYER_ATTACK_DEATH_CANNON",
+   "action_index": 138
+  },
+  "74": {
+   "name": "AT_SKILL_SPACE_SPLIT",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_PIER_PART",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eFirebust.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4951",
+    "WSclient.cpp:4599"
+   ],
+   "action": "PLAYER_ATTACK_STRIKE",
+   "action_index": 80
+  },
+  "75": {
+   "name": "AT_SKILL_BRAND_OF_SKILL",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_MANA_RUNE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4621",
+    "WSclient.cpp:4616"
+   ],
+   "action": "PLAYER_SKILL_HAND1",
+   "action_index": 146
+  },
+  "76": {
+   "name": "AT_SKILL_PLASMA_STORM_FENRIR",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "MODEL_FENRIR_SKILL_THUNDER",
+     "sub": 0,
+     "at": "beam",
+     "count": 2
+    },
+    {
+     "call": "joint",
+     "type": "MODEL_FENRIR_SKILL_THUNDER",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_FLARE_FORCE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "pWskill.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4528"
+   ]
+  },
+  "77": {
+   "name": "AT_SKILL_INFINITY_ARROW",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_INFINITY_ARROW",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "infinityArrow.wav"
+   ],
+   "src": [
+    "WSclient.cpp:4949",
+    "ClassAttack.cpp:274"
+   ],
+   "action": "PLAYER_RUSH1",
+   "action_index": 234
+  },
+  "78": {
+   "name": "AT_SKILL_FIRE_SCREAM",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_DARK_SCREAM",
+     "sub": 0,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_DARK_SCREAM_FIRE",
+     "sub": 0,
+     "at": "self",
+     "count": 3
+    }
+   ],
+   "sounds": [
+    "Darklord_firescream.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4421",
+    "WSclient.cpp:4917",
+    "WSclient.cpp:5309",
+    "ClassAttack.cpp:877"
+   ],
+   "action": "PLAYER_ATTACK_STRIKE",
+   "action_index": 80
+  },
+  "200": {
+   "name": "AT_SKILL_MONSTER_SUMMON",
+   "fx": [],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:4248"
+   ],
+   "action": "attack"
+  },
+  "201": {
+   "name": "AT_SKILL_MONSTER_MAGIC_DEF",
+   "fx": [],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:4300"
+   ],
+   "action": "attack"
+  },
+  "202": {
+   "name": "AT_SKILL_MONSTER_PHY_DEF",
+   "fx": [],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:4306"
+   ],
+   "action": "attack"
+  },
+  "214": {
+   "name": "AT_SKILL_ALICE_DRAINLIFE",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_DRAIN_LIFE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SE_Ch_summoner_skill07_lifedrain.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:5137",
+    "WSclient.cpp:5554",
+    "SkillCast.cpp:604",
+    "SkillCast.cpp:609"
+   ],
+   "action": "PLAYER_SKILL_DRAIN_LIFE",
+   "action_index": 168
+  },
+  "215": {
+   "name": "AT_SKILL_ALICE_CHAINLIGHTNING",
+   "fx": [],
+   "sounds": [
+    "SE_Ch_summoner_skill08_chainlightning.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:5131",
+    "WSclient.cpp:4957",
+    "SkillCast.cpp:653"
+   ],
+   "action": "PLAYER_SKILL_CHAIN_LIGHTNING",
+   "action_index": 160
+  },
+  "216": {
+   "name": "AT_SKILL_ALICE_LIGHTNINGORB",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_LIGHTNING_ORB",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SE_Ch_summoner_skill01_lightningof.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:5071",
+    "WSclient.cpp:5535",
+    "SkillCast.cpp:604",
+    "SkillCast.cpp:627"
+   ],
+   "action": "PLAYER_SKILL_LIGHTNING_ORB",
+   "action_index": 164
+  },
+  "217": {
+   "name": "AT_SKILL_ALICE_THORNS",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 11,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 12,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 2,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 2,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SE_Ch_summoner_skill02_ssonze.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:5082",
+    "WSclient.cpp:4996",
+    "ClassAttack.cpp:1586"
+   ],
+   "action": "PLAYER_SKILL_SLEEP",
+   "action_index": 156
+  },
+  "218": {
+   "name": "AT_SKILL_ALICE_BERSERKER",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 11,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "Berserker.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4638",
+    "WSclient.cpp:5006",
+    "SkillCast.cpp:702"
+   ],
+   "action": "PLAYER_SKILL_SLEEP",
+   "action_index": 156
+  },
+  "219": {
+   "name": "AT_SKILL_ALICE_SLEEP",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 11,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 12,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 2,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 2,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SE_Ch_summoner_skill03_sleep.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:5082",
+    "WSclient.cpp:4964"
+   ],
+   "action": "PLAYER_SKILL_SLEEP",
+   "action_index": 156
+  },
+  "220": {
+   "name": "AT_SKILL_ALICE_BLIND",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 11,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 12,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 2,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 2,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SE_Ch_summoner_skill04_blind.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:5082",
+    "WSclient.cpp:4988"
+   ],
+   "action": "PLAYER_SKILL_SLEEP",
+   "action_index": 156
+  },
+  "221": {
+   "name": "AT_SKILL_ALICE_WEAKNESS",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC_ZIN",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC_ZIN",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC_ZIN",
+     "sub": 2,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_CASTING_EFFECT2",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_CASTING_EFFECT22",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_CASTING_EFFECT222",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SHINY+6",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_PIN_LIGHT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SE_Ch_summoner_weakness.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4646",
+    "WSclient.cpp:5574",
+    "SkillCast.cpp:722"
+   ],
+   "action": "PLAYER_SKILL_SLEEP",
+   "action_index": 156
+  },
+  "222": {
+   "name": "AT_SKILL_ALICE_ENERVATION",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC_ZIN",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC_ZIN",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC_ZIN",
+     "sub": 2,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_CASTING_EFFECT2",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_CASTING_EFFECT22",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_CASTING_EFFECT222",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SHINY+6",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_PIN_LIGHT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SE_Ch_summoner_innovation.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4662",
+    "WSclient.cpp:5574",
+    "SkillCast.cpp:722"
+   ],
+   "action": "PLAYER_SKILL_SLEEP",
+   "action_index": 156
+  },
+  "223": {
+   "name": "AT_SKILL_SUMMON_EXPLOSION",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_SUMMON_SAHAMUTT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_EQUIP_HEAD_SAHAMUTT",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SE_Ch_summoner_skill05_explosion01.wav"
+   ],
+   "src": [
+    "SummonSystem.cpp:141",
+    "SummonSystem.cpp:429"
+   ]
+  },
+  "224": {
+   "name": "AT_SKILL_SUMMON_REQUIEM",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_SUMMON_NEIL",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_EQUIP_HEAD_NEIL",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SE_Ch_summoner_skill06_requiem01.wav"
+   ],
+   "src": [
+    "SummonSystem.cpp:162",
+    "SummonSystem.cpp:436"
+   ]
+  },
+  "225": {
+   "name": "AT_SKILL_SUMMON_POLLUTION",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_SUMMON_LAGUL",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPIRIT",
+     "sub": 24,
+     "at": "target",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "Rargle.wav"
+   ],
+   "src": [
+    "SummonSystem.cpp:179"
+   ]
+  },
+  "230": {
+   "name": "AT_SKILL_LIGHTNING_SHOCK",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_LIGHTNING_SHOCK",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "lightning_shock.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4702",
+    "WSclient.cpp:5607",
+    "ClassAttack.cpp:1639"
+   ],
+   "action": "PLAYER_SKILL_LIGHTNING_SHOCK",
+   "action_index": 185
+  },
+  "232": {
+   "name": "AT_SKILL_STRIKE_OF_DESTRUCTION",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_BLOW_OF_DESTRUCTION",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "BLOW_OF_DESTRUCTION.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4091",
+    "WSclient.cpp:5346",
+    "ClassAttack.cpp:1006"
+   ],
+   "action": "PLAYER_SKILL_BLOW_OF_DESTRUCTION",
+   "action_index": 176
+  },
+  "233": {
+   "name": "AT_SKILL_EXPANSION_OF_WIZARDRY",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SWELL_OF_MAGICPOWER",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SwellofMagicPower.wav"
+   ],
+   "src": [
+    "WSclient.cpp:5017"
+   ],
+   "action": "PLAYER_SKILL_SWELL_OF_MP",
+   "action_index": 177
+  },
+  "234": {
+   "name": "AT_SKILL_RECOVER",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_IMPACT",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_FLARE",
+     "sub": 47,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMON",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_TWLIGHT",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_TWLIGHT",
+     "sub": 1,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_TWLIGHT",
+     "sub": 2,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_FLARE",
+     "sub": 3,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "recover.wav"
+   ],
+   "src": [
+    "WSclient.cpp:4251",
+    "WSclient.cpp:5499",
+    "ClassAttack.cpp:299",
+    "SkillCast.cpp:558"
+   ],
+   "action": "PLAYER_RECOVER_SKILL",
+   "action_index": 252
+  },
+  "235": {
+   "name": "AT_SKILL_MULTI_SHOT",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_MULTI_SHOT3",
+     "sub": 0,
+     "at": "self",
+     "count": 4
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_MULTI_SHOT1",
+     "sub": 0,
+     "at": "self",
+     "count": 6
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_MULTI_SHOT2",
+     "sub": 0,
+     "at": "self",
+     "count": 4
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_BLADE_SKILL",
+     "sub": 1,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "multi_shot.wav"
+   ],
+   "src": [
+    "WSclient.cpp:5448",
+    "ClassAttack.cpp:324"
+   ]
+  },
+  "236": {
+   "name": "AT_SKILL_FLAME_STRIKE",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_EFFECT_FLAME_STRIKE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "flame_strike.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4676",
+    "WSclient.cpp:5600",
+    "ClassAttack.cpp:797"
+   ],
+   "action": "PLAYER_SKILL_FLAMESTRIKE",
+   "action_index": 184
+  },
+  "237": {
+   "name": "AT_SKILL_GIGANTIC_STORM",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "gigantic_storm.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4683",
+    "WSclient.cpp:5603",
+    "ClassAttack.cpp:827"
+   ],
+   "action": "PLAYER_SKILL_GIGANTICSTORM",
+   "action_index": 183
+  },
+  "238": {
+   "name": "AT_SKILL_CHAOTIC_DISEIER",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_SHINY+6",
+     "sub": 3,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_2LINE_GHOST",
+     "sub": 0,
+     "at": "self",
+     "count": 3
+    }
+   ],
+   "sounds": [
+    "caotic.wav"
+   ],
+   "src": [
+    "WSclient.cpp:5038",
+    "WSclient.cpp:5398",
+    "ClassAttack.cpp:709"
+   ],
+   "action": "PLAYER_ATTACK_STRIKE",
+   "action_index": 80
+  },
+  "260": {
+   "name": "AT_SKILL_KILLING_BLOW",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_WOLF_HEAD_EFFECT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SBUMB",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "MonkSystem.cpp:473",
+    "MonkSystem.cpp:1244"
+   ],
+   "action": "PLAYER_SKILL_THRUST",
+   "action_index": 253
+  },
+  "261": {
+   "name": "AT_SKILL_BEAST_UPPERCUT",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_DOWN_ATTACK_DUMMY_R",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "MonkSystem.cpp:478",
+    "MonkSystem.cpp:1261"
+   ],
+   "action": "PLAYER_SKILL_STAMP",
+   "action_index": 254
+  },
+  "262": {
+   "name": "AT_SKILL_CHAIN_DRIVE",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_SWORDEFF",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "MonkSystem.cpp:483",
+    "MonkSystem.cpp:1274"
+   ],
+   "action": "PLAYER_SKILL_GIANTSWING",
+   "action_index": 255
+  },
+  "263": {
+   "name": "AT_SKILL_DARKSIDE",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_EVENT_CLOUD",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC",
+     "sub": 14,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "MonkSystem.cpp:487",
+    "MonkSystem.cpp:1436"
+   ],
+   "action": "PLAYER_SKILL_DARKSIDE_READY",
+   "action_index": 256
+  },
+  "264": {
+   "name": "AT_SKILL_DRAGON_ROAR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_VOLCANO_OF_MONK",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_TARGETMON_EFFECT",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LAVA",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_BLOW_OF_DESTRUCTION",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:5197",
+    "MonkSystem.cpp:491",
+    "MonkSystem.cpp:1417"
+   ],
+   "action": "PLAYER_SKILL_DRAGONLORE",
+   "action_index": 259
+  },
+  "265": {
+   "name": "AT_SKILL_DRAGON_KICK",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_DRAGON_KICK_DUMMY",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_MULTI_SHOT3",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_MULTI_SHOT1",
+     "sub": 0,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_MULTI_SHOT2",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "MonkSystem.cpp:495",
+    "MonkSystem.cpp:1369"
+   ],
+   "action": "PLAYER_SKILL_DRAGONKICK",
+   "action_index": 258
+  },
+  "266": {
+   "name": "AT_SKILL_ATT_UP_OURFORCES",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SWORD_EFFECT_MONO",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE_GROUND01",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_EVENT_CLOUD",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC",
+     "sub": 13,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:5109",
+    "SkillCast.cpp:913",
+    "MonkSystem.cpp:1282"
+   ],
+   "action": "PLAYER_SKILL_ATT_UP_OURFORCES",
+   "action_index": 261
+  },
+  "267": {
+   "name": "AT_SKILL_HP_UP_OURFORCES",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SWORD_EFFECT_MONO",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE_GROUND01",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_EVENT_CLOUD",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE",
+     "sub": 4,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC",
+     "sub": 13,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:5109",
+    "SkillCast.cpp:913",
+    "MonkSystem.cpp:1311"
+   ],
+   "action": "PLAYER_SKILL_ATT_UP_OURFORCES",
+   "action_index": 261
+  },
+  "268": {
+   "name": "AT_SKILL_DEF_UP_OURFORCES",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SWORD_EFFECT_MONO",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE_GROUND01",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_EVENT_CLOUD",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE",
+     "sub": 5,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC",
+     "sub": 13,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:5109",
+    "SkillCast.cpp:913",
+    "MonkSystem.cpp:1339"
+   ],
+   "action": "PLAYER_SKILL_ATT_UP_OURFORCES",
+   "action_index": 261
+  },
+  "269": {
+   "name": "AT_SKILL_OCCUPY",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPARK",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE",
+     "sub": 18,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SWORD_FORCE",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_MULTI_SHOT3",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_MULTI_SHOT1",
+     "sub": 0,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_MULTI_SHOT2",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "sKnightSkill2.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2856",
+    "ZzzCharacter.cpp:4612",
+    "ZzzCharacter.cpp:2875",
+    "WSclient.cpp:5190",
+    "MonkSystem.cpp:1459"
+   ],
+   "action": "PLAYER_ATTACK_RUSH",
+   "action_index": 137
+  },
+  "270": {
+   "name": "AT_SKILL_PHOENIX_SHOT",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_PHOENIX_SHOT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "MonkSystem.cpp:1489"
+   ]
+  },
+  "326": {
+   "name": "AT_SKILL_CYCLONE_STR",
+   "fx": [],
+   "sounds": [
+    "sKnightSkill4.wav"
+   ],
+   "src": [
+    "WSclient.cpp:4457"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_SWORD1+3",
+   "action_index": 63,
+   "base": 22
+  },
+  "327": {
+   "name": "AT_SKILL_SLASH_STR",
+   "fx": [],
+   "sounds": [
+    "sKnightSkill4.wav"
+   ],
+   "src": [
+    "WSclient.cpp:4465"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_SWORD1+4",
+   "action_index": 64,
+   "base": 23
+  },
+  "328": {
+   "name": "AT_SKILL_FALLING_SLASH_STR",
+   "fx": [],
+   "sounds": [
+    "sKnightSkill1.wav"
+   ],
+   "src": [
+    "WSclient.cpp:4437"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_SWORD1",
+   "action_index": 60,
+   "base": 19
+  },
+  "329": {
+   "name": "AT_SKILL_LUNGE_STR",
+   "fx": [],
+   "sounds": [
+    "sKnightSkill2.wav"
+   ],
+   "src": [
+    "WSclient.cpp:4444"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_SWORD1+1",
+   "action_index": 61,
+   "base": 20
+  },
+  "330": {
+   "name": "AT_SKILL_TWISTING_SLASH_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_WHEEL1",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightSkill4.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4332",
+    "WSclient.cpp:5284",
+    "ClassAttack.cpp:615",
+    "SkillCast.cpp:306"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_WHEEL",
+   "action_index": 65
+  },
+  "331": {
+   "name": "AT_SKILL_RAGEFUL_BLOW_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_FURY_STRIKE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eRageBlow_1.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4081",
+    "WSclient.cpp:5340",
+    "ClassAttack.cpp:978"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_FURY_STRIKE",
+   "action_index": 66
+  },
+  "332": {
+   "name": "AT_SKILL_TWISTING_SLASH_MASTERY",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_WHEEL1",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightSkill4.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4332",
+    "WSclient.cpp:5284",
+    "ClassAttack.cpp:615",
+    "SkillCast.cpp:306"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_WHEEL",
+   "action_index": 65
+  },
+  "333": {
+   "name": "AT_SKILL_RAGEFUL_BLOW_MASTERY",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_FURY_STRIKE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eRageBlow_1.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4081",
+    "WSclient.cpp:5340",
+    "ClassAttack.cpp:978"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_FURY_STRIKE",
+   "action_index": 66
+  },
+  "336": {
+   "name": "AT_SKILL_DEATHSTAB_STR",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "MODEL_SPEARSKILL",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SPEAR",
+     "sub": 1,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "sKnightSkill2.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2544",
+    "WSclient.cpp:4494",
+    "WSclient.cpp:5382",
+    "SkillCast.cpp:302"
+   ],
+   "action": "PLAYER_ATTACK_DEATHSTAB",
+   "action_index": 71
+  },
+  "337": {
+   "name": "AT_SKILL_STRIKE_OF_DESTRUCTION_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_BLOW_OF_DESTRUCTION",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "BLOW_OF_DESTRUCTION.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4091",
+    "WSclient.cpp:5346",
+    "ClassAttack.cpp:1006"
+   ],
+   "action": "PLAYER_SKILL_BLOW_OF_DESTRUCTION",
+   "action_index": 176
+  },
+  "356": {
+   "name": "AT_SKILL_SWELL_LIFE_STR",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPIRIT",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 4,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eSwellLife.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4112",
+    "WSclient.cpp:4867",
+    "ClassAttack.cpp:971"
+   ],
+   "action": "PLAYER_SKILL_VITALITY",
+   "action_index": 67
+  },
+  "360": {
+   "name": "AT_SKILL_SWELL_LIFE_PROFICIENCY",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPIRIT",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 4,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eSwellLife.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4112",
+    "WSclient.cpp:4867",
+    "ClassAttack.cpp:971"
+   ],
+   "action": "PLAYER_SKILL_VITALITY",
+   "action_index": 67
+  },
+  "378": {
+   "name": "AT_SKILL_FLAME_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_FLAME",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_FLAME",
+     "sub": 5,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sFlame.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4401",
+    "ZzzCharacter.cpp:4959",
+    "WSclient.cpp:4351",
+    "ClassAttack.cpp:1391"
+   ],
+   "action": "magic"
+  },
+  "379": {
+   "name": "AT_SKILL_LIGHTNING_STR",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_LASER+1",
+     "sub": 1,
+     "at": "beam",
+     "count": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 0,
+     "at": "beam",
+     "count": 7
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_LASER+1",
+     "sub": 0,
+     "at": "beam",
+     "count": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_ENERGY",
+     "sub": 0,
+     "at": "self",
+     "count": 5
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 2,
+     "at": "beam",
+     "count": 2
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 21,
+     "at": "beam",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "eThunder.wav",
+    "sEvil.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2246",
+    "WSclient.cpp:4343",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic"
+  },
+  "380": {
+   "name": "AT_SKILL_EXPANSION_OF_WIZARDRY_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SWELL_OF_MAGICPOWER",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SwellofMagicPower.wav"
+   ],
+   "src": [
+    "WSclient.cpp:5017"
+   ],
+   "action": "PLAYER_SKILL_SWELL_OF_MP",
+   "action_index": 177
+  },
+  "381": {
+   "name": "AT_SKILL_INFERNO_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_INFERNO",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4495",
+    "WSclient.cpp:5279",
+    "ClassAttack.cpp:1223"
+   ],
+   "action": "PLAYER_SKILL_INFERNO",
+   "action_index": 153
+  },
+  "382": {
+   "name": "AT_SKILL_BLAST_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_BLAST",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4478",
+    "SkillCast.cpp:525"
+   ],
+   "action": "magic"
+  },
+  "383": {
+   "name": "AT_SKILL_EXPANSION_OF_WIZARDRY_MASTERY",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SWELL_OF_MAGICPOWER",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SwellofMagicPower.wav"
+   ],
+   "src": [
+    "WSclient.cpp:5017"
+   ],
+   "action": "PLAYER_SKILL_SWELL_OF_MP",
+   "action_index": 177
+  },
+  "384": {
+   "name": "AT_SKILL_POISON_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_POISON",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SMOKE",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "pHeartBeat.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4916",
+    "WSclient.cpp:4351",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic"
+  },
+  "385": {
+   "name": "AT_SKILL_EVIL_SPIRIT_STR",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPIRIT",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "sEvil.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4506",
+    "ClassAttack.cpp:1367"
+   ],
+   "action": "magic"
+  },
+  "387": {
+   "name": "AT_SKILL_DECAY_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_FIRE",
+     "sub": 6,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "eBlastPoison_1.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4362",
+    "WSclient.cpp:5259",
+    "ClassAttack.cpp:1397"
+   ],
+   "action": "magic"
+  },
+  "388": {
+   "name": "AT_SKILL_HELL_FIRE_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_CIRCLE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_CIRCLE_LIGHT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sHellFire.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4345",
+    "WSclient.cpp:5274",
+    "ClassAttack.cpp:1213"
+   ],
+   "action": "PLAYER_SKILL_HELL",
+   "action_index": 154
+  },
+  "389": {
+   "name": "AT_SKILL_ICE_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_ICE",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ICE_SMALL",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sIce.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4879",
+    "WSclient.cpp:4351",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic"
+  },
+  "403": {
+   "name": "AT_SKILL_SOUL_BARRIER_STR",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "MODEL_SPEARSKILL",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eSoulBarrier.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4896",
+    "WSclient.cpp:4333",
+    "ClassAttack.cpp:1164"
+   ],
+   "action": "magic"
+  },
+  "404": {
+   "name": "AT_SKILL_SOUL_BARRIER_PROFICIENCY",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "MODEL_SPEARSKILL",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eSoulBarrier.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4896",
+    "WSclient.cpp:4333",
+    "ClassAttack.cpp:1164"
+   ],
+   "action": "magic"
+  },
+  "413": {
+   "name": "AT_SKILL_HEALING_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4834",
+    "WSclient.cpp:4311",
+    "ClassAttack.cpp:155",
+    "SkillCast.cpp:558"
+   ],
+   "action": "magic"
+  },
+  "414": {
+   "name": "AT_SKILL_TRIPLE_SHOT_STR",
+   "fx": [],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:5251",
+    "SkillCast.cpp:1183"
+   ],
+   "action": "attack",
+   "base": 24
+  },
+  "416": {
+   "name": "AT_SKILL_PENETRATION_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_GATHERING",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "ePiercing.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2684",
+    "WSclient.cpp:5265",
+    "ClassAttack.cpp:129"
+   ],
+   "action": "attack"
+  },
+  "417": {
+   "name": "AT_SKILL_DEFENSE_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 2,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "joint",
+     "type": "MODEL_SPEARSKILL",
+     "sub": 4,
+     "at": "target",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4838",
+    "WSclient.cpp:4311",
+    "ClassAttack.cpp:155",
+    "SkillCast.cpp:558"
+   ],
+   "action": "magic"
+  },
+  "418": {
+   "name": "AT_SKILL_TRIPLE_SHOT_MASTERY",
+   "fx": [],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:5251",
+    "SkillCast.cpp:1183"
+   ],
+   "action": "attack",
+   "base": 414
+  },
+  "420": {
+   "name": "AT_SKILL_ATTACK_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 3,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4869",
+    "WSclient.cpp:4311",
+    "ClassAttack.cpp:155",
+    "SkillCast.cpp:558"
+   ],
+   "action": "magic"
+  },
+  "422": {
+   "name": "AT_SKILL_ATTACK_MASTERY",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 3,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4869",
+    "WSclient.cpp:4311",
+    "ClassAttack.cpp:155"
+   ],
+   "action": "magic"
+  },
+  "423": {
+   "name": "AT_SKILL_DEFENSE_MASTERY",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 2,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "joint",
+     "type": "MODEL_SPEARSKILL",
+     "sub": 4,
+     "at": "target",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "sKnightDefense.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4838",
+    "WSclient.cpp:4311",
+    "ClassAttack.cpp:155",
+    "SkillCast.cpp:558"
+   ],
+   "action": "magic"
+  },
+  "424": {
+   "name": "AT_SKILL_ICE_ARROW_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_ICE",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ICE",
+     "sub": 2,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:4546",
+    "SkillCast.cpp:570"
+   ],
+   "action": "attack"
+  },
+  "441": {
+   "name": "AT_SKILL_INFINITY_ARROW_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_INFINITY_ARROW",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "infinityArrow.wav"
+   ],
+   "src": [
+    "WSclient.cpp:4949",
+    "ClassAttack.cpp:274"
+   ],
+   "action": "PLAYER_RUSH1",
+   "action_index": 234
+  },
+  "454": {
+   "name": "AT_SKILL_ALICE_SLEEP_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 11,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 12,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 2,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 2,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SE_Ch_summoner_skill03_sleep.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:5082",
+    "WSclient.cpp:4964"
+   ],
+   "action": "PLAYER_SKILL_SLEEP",
+   "action_index": 156
+  },
+  "455": {
+   "name": "AT_SKILL_ALICE_CHAINLIGHTNING_STR",
+   "fx": [],
+   "sounds": [
+    "SE_Ch_summoner_skill08_chainlightning.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:5131",
+    "WSclient.cpp:4957",
+    "SkillCast.cpp:653"
+   ],
+   "action": "PLAYER_SKILL_CHAIN_LIGHTNING",
+   "action_index": 160,
+   "base": 215
+  },
+  "456": {
+   "name": "AT_SKILL_LIGHTNING_SHOCK_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_LIGHTNING_SHOCK",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "lightning_shock.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4702",
+    "WSclient.cpp:5607",
+    "ClassAttack.cpp:1639"
+   ],
+   "action": "PLAYER_SKILL_LIGHTNING_SHOCK",
+   "action_index": 185
+  },
+  "458": {
+   "name": "AT_SKILL_ALICE_DRAINLIFE_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_DRAIN_LIFE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SE_Ch_summoner_skill07_lifedrain.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:5137",
+    "WSclient.cpp:5554",
+    "SkillCast.cpp:604",
+    "SkillCast.cpp:609"
+   ],
+   "action": "PLAYER_SKILL_DRAIN_LIFE",
+   "action_index": 168
+  },
+  "469": {
+   "name": "AT_SKILL_ALICE_BERSERKER_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 11,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "Berserker.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4638",
+    "WSclient.cpp:5006",
+    "SkillCast.cpp:702"
+   ],
+   "action": "PLAYER_SKILL_SLEEP",
+   "action_index": 156
+  },
+  "479": {
+   "name": "AT_SKILL_CYCLONE_STR_MG",
+   "fx": [],
+   "sounds": [
+    "sKnightSkill4.wav"
+   ],
+   "src": [
+    "WSclient.cpp:4457"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_SWORD1+3",
+   "action_index": 63,
+   "base": 22
+  },
+  "480": {
+   "name": "AT_SKILL_LIGHTNING_STR_MG",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_LASER+1",
+     "sub": 1,
+     "at": "beam",
+     "count": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 0,
+     "at": "beam",
+     "count": 7
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_LASER+1",
+     "sub": 0,
+     "at": "beam",
+     "count": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_ENERGY",
+     "sub": 0,
+     "at": "self",
+     "count": 5
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 2,
+     "at": "beam",
+     "count": 2
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 21,
+     "at": "beam",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "eThunder.wav",
+    "sEvil.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2246",
+    "WSclient.cpp:4343",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic"
+  },
+  "481": {
+   "name": "AT_SKILL_TWISTING_SLASH_STR_MG",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_WHEEL1",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightSkill4.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4332",
+    "WSclient.cpp:5284",
+    "ClassAttack.cpp:615",
+    "SkillCast.cpp:306"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_WHEEL",
+   "action_index": 65
+  },
+  "482": {
+   "name": "AT_SKILL_POWER_SLASH_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_MAGIC2",
+     "sub": 2,
+     "at": "self",
+     "count": 5
+    }
+   ],
+   "sounds": [
+    "sKnightSkill3.wav",
+    "sKnightSkill4.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2741",
+    "WSclient.cpp:4480",
+    "WSclient.cpp:5378",
+    "ClassAttack.cpp:671"
+   ],
+   "action": "PLAYER_ATTACK_TWO_HAND_SWORD_TWO",
+   "action_index": 145
+  },
+  "483": {
+   "name": "AT_SKILL_FLAME_STR_MG",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_FLAME",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_FLAME",
+     "sub": 5,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sFlame.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4401",
+    "ZzzCharacter.cpp:4959",
+    "WSclient.cpp:4351",
+    "ClassAttack.cpp:1391"
+   ],
+   "action": "magic"
+  },
+  "484": {
+   "name": "AT_SKILL_BLAST_STR_MG",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_BLAST",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4478",
+    "SkillCast.cpp:525"
+   ],
+   "action": "magic"
+  },
+  "486": {
+   "name": "AT_SKILL_INFERNO_STR_MG",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_INFERNO",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "ZzzCharacter.cpp:4495",
+    "WSclient.cpp:5279",
+    "ClassAttack.cpp:1223"
+   ],
+   "action": "PLAYER_SKILL_INFERNO",
+   "action_index": 153
+  },
+  "487": {
+   "name": "AT_SKILL_EVIL_SPIRIT_STR_MG",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPIRIT",
+     "sub": 0,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "sEvil.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4506",
+    "ClassAttack.cpp:1367"
+   ],
+   "action": "magic"
+  },
+  "489": {
+   "name": "AT_SKILL_ICE_STR_MG",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_ICE",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ICE_SMALL",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sIce.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4879",
+    "WSclient.cpp:4351",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic"
+  },
+  "490": {
+   "name": "AT_SKILL_FIRE_SLASH_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_GATHERING",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SWORD_FORCE",
+     "sub": 1,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SWORD_FORCE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SKULL",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightSkill3.wav",
+    "eBloodAttack.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2704",
+    "ZzzCharacter.cpp:2724",
+    "WSclient.cpp:4521",
+    "WSclient.cpp:5356",
+    "ClassAttack.cpp:641",
+    "SkillCast.cpp:306"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_WHEEL",
+   "action_index": 65
+  },
+  "508": {
+   "name": "AT_SKILL_FIREBURST_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_PIER_PART",
+     "sub": 0,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eFirebust.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4988",
+    "WSclient.cpp:4418"
+   ],
+   "action": "PLAYER_ATTACK_STRIKE",
+   "action_index": 80
+  },
+  "509": {
+   "name": "AT_SKILL_FORCE_WAVE_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_WAVES",
+     "sub": 1,
+     "at": "self",
+     "count": 2
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_PIERCING2",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sDarkSpear.wav",
+    "sKnightSkill1.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4980",
+    "WSclient.cpp:4400"
+   ],
+   "action": "PLAYER_ATTACK_STRIKE",
+   "action_index": 80
+  },
+  "511": {
+   "name": "AT_SKILL_ADD_CRITICAL_STR1",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sDarkCritical.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4288"
+   ]
+  },
+  "512": {
+   "name": "AT_SKILL_EARTHSHAKE_STR",
+   "fx": [],
+   "sounds": [
+    "sDarkEarthQuake.wav"
+   ],
+   "src": [
+    "WSclient.cpp:5334",
+    "ClassAttack.cpp:959"
+   ],
+   "action": "PLAYER_ATTACK_DARKHORSE",
+   "action_index": 87,
+   "base": 62
+  },
+  "514": {
+   "name": "AT_SKILL_FIREBURST_MASTERY",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_PIER_PART",
+     "sub": 0,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eFirebust.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4988",
+    "WSclient.cpp:4418"
+   ],
+   "action": "PLAYER_ATTACK_STRIKE",
+   "action_index": 80
+  },
+  "515": {
+   "name": "AT_SKILL_ADD_CRITICAL_STR2",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sDarkCritical.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4288"
+   ]
+  },
+  "516": {
+   "name": "AT_SKILL_EARTHSHAKE_MASTERY",
+   "fx": [],
+   "sounds": [
+    "sDarkEarthQuake.wav"
+   ],
+   "src": [
+    "WSclient.cpp:5334",
+    "ClassAttack.cpp:959"
+   ],
+   "action": "PLAYER_ATTACK_DARKHORSE",
+   "action_index": 87,
+   "base": 512
+  },
+  "517": {
+   "name": "AT_SKILL_ADD_CRITICAL_STR3",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_DARKLORD_SKILL",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sDarkCritical.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4288"
+   ]
+  },
+  "518": {
+   "name": "AT_SKILL_FIRE_SCREAM_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_DARK_SCREAM",
+     "sub": 0,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_DARK_SCREAM_FIRE",
+     "sub": 0,
+     "at": "self",
+     "count": 3
+    }
+   ],
+   "sounds": [
+    "Darklord_firescream.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4421",
+    "WSclient.cpp:4917",
+    "WSclient.cpp:5309",
+    "ClassAttack.cpp:877"
+   ],
+   "action": "PLAYER_ATTACK_STRIKE",
+   "action_index": 80
+  },
+  "551": {
+   "name": "AT_SKILL_KILLING_BLOW_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_WOLF_HEAD_EFFECT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SBUMB",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "MonkSystem.cpp:473",
+    "MonkSystem.cpp:1244"
+   ],
+   "action": "PLAYER_SKILL_THRUST",
+   "action_index": 253
+  },
+  "552": {
+   "name": "AT_SKILL_BEAST_UPPERCUT_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_DOWN_ATTACK_DUMMY_R",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "MonkSystem.cpp:478",
+    "MonkSystem.cpp:1261"
+   ],
+   "action": "PLAYER_SKILL_STAMP",
+   "action_index": 254
+  },
+  "554": {
+   "name": "AT_SKILL_KILLING_BLOW_MASTERY",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_WOLF_HEAD_EFFECT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SBUMB",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "MonkSystem.cpp:473",
+    "MonkSystem.cpp:1244"
+   ],
+   "action": "PLAYER_SKILL_THRUST",
+   "action_index": 253
+  },
+  "555": {
+   "name": "AT_SKILL_BEAST_UPPERCUT_MASTERY",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_DOWN_ATTACK_DUMMY_R",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "MonkSystem.cpp:478",
+    "MonkSystem.cpp:1261"
+   ],
+   "action": "PLAYER_SKILL_STAMP",
+   "action_index": 254
+  },
+  "558": {
+   "name": "AT_SKILL_CHAIN_DRIVE_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_SWORDEFF",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "MonkSystem.cpp:483",
+    "MonkSystem.cpp:1274"
+   ],
+   "action": "PLAYER_SKILL_GIANTSWING",
+   "action_index": 255
+  },
+  "559": {
+   "name": "AT_SKILL_DARKSIDE_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_EVENT_CLOUD",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC",
+     "sub": 14,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "MonkSystem.cpp:487",
+    "MonkSystem.cpp:1436"
+   ],
+   "action": "PLAYER_SKILL_DARKSIDE_READY",
+   "action_index": 256
+  },
+  "560": {
+   "name": "AT_SKILL_DRAGON_ROAR_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_VOLCANO_OF_MONK",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_TARGETMON_EFFECT",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LAVA",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_BLOW_OF_DESTRUCTION",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:5197",
+    "MonkSystem.cpp:491",
+    "MonkSystem.cpp:1417"
+   ],
+   "action": "PLAYER_SKILL_DRAGONLORE",
+   "action_index": 259
+  },
+  "569": {
+   "name": "AT_SKILL_DEF_UP_OURFORCES_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SWORD_EFFECT_MONO",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE_GROUND01",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_EVENT_CLOUD",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE",
+     "sub": 5,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC",
+     "sub": 13,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:5109",
+    "SkillCast.cpp:913",
+    "MonkSystem.cpp:1339"
+   ],
+   "action": "PLAYER_SKILL_ATT_UP_OURFORCES",
+   "action_index": 261
+  },
+  "572": {
+   "name": "AT_SKILL_DEF_UP_OURFORCES_MASTERY",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SWORD_EFFECT_MONO",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE_GROUND01",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_EVENT_CLOUD",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE",
+     "sub": 5,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC",
+     "sub": 13,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:5109",
+    "SkillCast.cpp:913",
+    "MonkSystem.cpp:1339"
+   ],
+   "action": "PLAYER_SKILL_ATT_UP_OURFORCES",
+   "action_index": 261
+  },
+  "573": {
+   "name": "AT_SKILL_HP_UP_OURFORCES_STR",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SWORD_EFFECT_MONO",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE_GROUND01",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_EVENT_CLOUD",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE",
+     "sub": 4,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC",
+     "sub": 13,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [],
+   "src": [
+    "WSclient.cpp:5109",
+    "SkillCast.cpp:913",
+    "MonkSystem.cpp:1311"
+   ],
+   "action": "PLAYER_SKILL_ATT_UP_OURFORCES",
+   "action_index": 261
+  },
+  "470": {
+   "name": "Berserker Proficiency",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 11,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "Berserker.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4638",
+    "WSclient.cpp:5006",
+    "SkillCast.cpp:702"
+   ],
+   "action": "PLAYER_SKILL_SLEEP",
+   "action_index": 156,
+   "base": 218
+  },
+  "363": {
+   "name": "Swell Life Mastery",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPIRIT",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 4,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT",
+     "sub": 1,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eSwellLife.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4112",
+    "WSclient.cpp:4867",
+    "ClassAttack.cpp:971"
+   ],
+   "action": "PLAYER_SKILL_VITALITY",
+   "action_index": 67,
+   "base": 48
+  },
+  "339": {
+   "name": "Death Stab Proficiency",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "MODEL_SPEARSKILL",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SPEAR",
+     "sub": 1,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "sKnightSkill2.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2544",
+    "WSclient.cpp:4494",
+    "WSclient.cpp:5382",
+    "SkillCast.cpp:302"
+   ],
+   "action": "PLAYER_ATTACK_DEATHSTAB",
+   "action_index": 71,
+   "base": 43
+  },
+  "340": {
+   "name": "Strikeof Destr Prof",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_BLOW_OF_DESTRUCTION",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "BLOW_OF_DESTRUCTION.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4091",
+    "WSclient.cpp:5346",
+    "ClassAttack.cpp:1006"
+   ],
+   "action": "PLAYER_SKILL_BLOW_OF_DESTRUCTION",
+   "action_index": 176,
+   "base": 337
+  },
+  "342": {
+   "name": "Death Stab Mastery",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "MODEL_SPEARSKILL",
+     "sub": 2,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SPEAR",
+     "sub": 1,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "sKnightSkill2.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2544",
+    "WSclient.cpp:4494",
+    "WSclient.cpp:5382",
+    "SkillCast.cpp:302"
+   ],
+   "action": "PLAYER_ATTACK_DEATHSTAB",
+   "action_index": 71,
+   "base": 43
+  },
+  "343": {
+   "name": "Strikeof Destr Mast",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_BLOW_OF_DESTRUCTION",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "BLOW_OF_DESTRUCTION.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4091",
+    "WSclient.cpp:5346",
+    "ClassAttack.cpp:1006"
+   ],
+   "action": "PLAYER_SKILL_BLOW_OF_DESTRUCTION",
+   "action_index": 176,
+   "base": 337
+  },
+  "390": {
+   "name": "Meteor Strengthener",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_FIRE",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eMeteorite.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4931",
+    "WSclient.cpp:4351",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic",
+   "base": 2
+  },
+  "391": {
+   "name": "Ice Storm Strengthener",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_BLIZZARD",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eSuddenIce_1.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4378",
+    "WSclient.cpp:5259",
+    "ClassAttack.cpp:1397"
+   ],
+   "action": "magic",
+   "base": 39
+  },
+  "392": {
+   "name": "Nova Strengthener",
+   "fx": [
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT",
+     "sub": 5,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_CIRCLE",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eHellFire2_2.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:3204",
+    "ZzzCharacter.cpp:4357",
+    "WSclient.cpp:4905",
+    "ClassAttack.cpp:1151",
+    "ClassAttack.cpp:1504"
+   ],
+   "action": "PLAYER_SKILL_HELL_START",
+   "action_index": 73,
+   "base": 40
+  },
+  "393": {
+   "name": "Ice Storm Mastery",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_BLIZZARD",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eSuddenIce_1.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4378",
+    "WSclient.cpp:5259",
+    "ClassAttack.cpp:1397"
+   ],
+   "action": "magic",
+   "base": 39
+  },
+  "394": {
+   "name": "Meteor Mastery",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_FIRE",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eMeteorite.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4931",
+    "WSclient.cpp:4351",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic",
+   "base": 2
+  },
+  "395": {
+   "name": "Nova Cast Strengthener",
+   "fx": [
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT",
+     "sub": 5,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_CIRCLE",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eHellFire2_2.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:3204",
+    "ZzzCharacter.cpp:4357",
+    "WSclient.cpp:4905",
+    "ClassAttack.cpp:1151",
+    "ClassAttack.cpp:1504"
+   ],
+   "action": "PLAYER_SKILL_HELL_START",
+   "action_index": 73,
+   "base": 40
+  },
+  "406": {
+   "name": "Soul Barrier Mastery",
+   "fx": [
+    {
+     "call": "joint",
+     "type": "MODEL_SPEARSKILL",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "eSoulBarrier.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4896",
+    "WSclient.cpp:4333",
+    "ClassAttack.cpp:1164"
+   ],
+   "action": "magic",
+   "base": 16
+  },
+  "411": {
+   "name": "Multi Shot Streng",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_MULTI_SHOT3",
+     "sub": 0,
+     "at": "self",
+     "count": 4
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_MULTI_SHOT1",
+     "sub": 0,
+     "at": "self",
+     "count": 6
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_MULTI_SHOT2",
+     "sub": 0,
+     "at": "self",
+     "count": 4
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_BLADE_SKILL",
+     "sub": 1,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "multi_shot.wav"
+   ],
+   "src": [
+    "WSclient.cpp:5448",
+    "ClassAttack.cpp:324"
+   ],
+   "base": 235
+  },
+  "431": {
+   "name": "Multi Shot Mastery",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_MULTI_SHOT3",
+     "sub": 0,
+     "at": "self",
+     "count": 4
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_MULTI_SHOT1",
+     "sub": 0,
+     "at": "self",
+     "count": 6
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_MULTI_SHOT2",
+     "sub": 0,
+     "at": "self",
+     "count": 4
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_BLADE_SKILL",
+     "sub": 1,
+     "at": "self",
+     "count": 2
+    }
+   ],
+   "sounds": [
+    "multi_shot.wav"
+   ],
+   "src": [
+    "WSclient.cpp:5448",
+    "ClassAttack.cpp:324"
+   ],
+   "base": 235
+  },
+  "459": {
+   "name": "Weakness Strengthener",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC_ZIN",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC_ZIN",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC_ZIN",
+     "sub": 2,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_CASTING_EFFECT2",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_CASTING_EFFECT22",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_CASTING_EFFECT222",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SHINY+6",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_PIN_LIGHT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SE_Ch_summoner_weakness.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4646",
+    "WSclient.cpp:5574",
+    "SkillCast.cpp:722"
+   ],
+   "action": "PLAYER_SKILL_SLEEP",
+   "action_index": 156,
+   "base": 221
+  },
+  "460": {
+   "name": "Innovation Strengthener",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC_ZIN",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC_ZIN",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC_ZIN",
+     "sub": 2,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_CASTING_EFFECT2",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_CASTING_EFFECT22",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_CASTING_EFFECT222",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SHINY+6",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_PIN_LIGHT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SE_Ch_summoner_innovation.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4662",
+    "WSclient.cpp:5574",
+    "SkillCast.cpp:722"
+   ],
+   "action": "PLAYER_SKILL_SLEEP",
+   "action_index": 156,
+   "base": 222
+  },
+  "462": {
+   "name": "Drain Life Mastery",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_DRAIN_LIFE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "SE_Ch_summoner_skill07_lifedrain.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:5137",
+    "WSclient.cpp:5554",
+    "SkillCast.cpp:604",
+    "SkillCast.cpp:609"
+   ],
+   "action": "PLAYER_SKILL_DRAIN_LIFE",
+   "action_index": 168,
+   "base": 214
+  },
+  "472": {
+   "name": "Berserker Mastery",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 11,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ALICE_BUFFSKILL_EFFECT2",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "Berserker.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4638",
+    "WSclient.cpp:5006",
+    "SkillCast.cpp:702"
+   ],
+   "action": "PLAYER_SKILL_SLEEP",
+   "action_index": 156,
+   "base": 218
+  },
+  "491": {
+   "name": "Ice Mastery Duel Master",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_ICE",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_ICE_SMALL",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sIce.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4879",
+    "WSclient.cpp:4351",
+    "SkillCast.cpp:502"
+   ],
+   "action": "magic",
+   "base": 7
+  },
+  "492": {
+   "name": "Flame Strike Strengthen",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_EFFECT_FLAME_STRIKE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "flame_strike.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4676",
+    "WSclient.cpp:5600",
+    "ClassAttack.cpp:797"
+   ],
+   "action": "PLAYER_SKILL_FLAMESTRIKE",
+   "action_index": 184,
+   "base": 236
+  },
+  "493": {
+   "name": "Fire Slash Mastery",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_GATHERING",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SWORD_FORCE",
+     "sub": 1,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SWORD_FORCE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_SKULL",
+     "sub": 0,
+     "at": "target",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sKnightSkill3.wav",
+    "eBloodAttack.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:2704",
+    "WSclient.cpp:4521",
+    "WSclient.cpp:5356",
+    "ClassAttack.cpp:641",
+    "SkillCast.cpp:306"
+   ],
+   "action": "PLAYER_ATTACK_SKILL_WHEEL",
+   "action_index": 65,
+   "base": 55
+  },
+  "494": {
+   "name": "Flame Strike Mastery",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_EFFECT_FLAME_STRIKE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "flame_strike.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4676",
+    "WSclient.cpp:5600",
+    "ClassAttack.cpp:797"
+   ],
+   "action": "PLAYER_SKILL_FLAMESTRIKE",
+   "action_index": 184,
+   "base": 236
+  },
+  "496": {
+   "name": "Gigantic Storm Str",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "gigantic_storm.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4683",
+    "WSclient.cpp:5603",
+    "ClassAttack.cpp:827"
+   ],
+   "action": "PLAYER_SKILL_GIGANTICSTORM",
+   "action_index": 183,
+   "base": 237
+  },
+  "519": {
+   "name": "Electric Spark Streng",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_FLARE_FORCE",
+     "sub": 0,
+     "at": "self",
+     "count": 1
+    }
+   ],
+   "sounds": [
+    "sDarkElecSpike.wav",
+    "sDarkEarthQuake.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4312",
+    "WSclient.cpp:5328",
+    "ClassAttack.cpp:926",
+    "ClassAttack.cpp:944"
+   ],
+   "action": "PLAYER_SKILL_FLASH",
+   "action_index": 152,
+   "base": 65
+  },
+  "520": {
+   "name": "Fire Scream Mastery",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "MODEL_DARK_SCREAM",
+     "sub": 0,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_DARK_SCREAM_FIRE",
+     "sub": 0,
+     "at": "self",
+     "count": 3
+    }
+   ],
+   "sounds": [
+    "Darklord_firescream.wav"
+   ],
+   "src": [
+    "ZzzCharacter.cpp:4421",
+    "WSclient.cpp:4917",
+    "WSclient.cpp:5309",
+    "ClassAttack.cpp:877"
+   ],
+   "action": "PLAYER_ATTACK_STRIKE",
+   "action_index": 80,
+   "base": 78
+  },
+  "523": {
+   "name": "Chaotic Diseier Str",
+   "fx": [
+    {
+     "call": "effect",
+     "type": "BITMAP_SHINY+6",
+     "sub": 3,
+     "at": "self",
+     "count": 3
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_2LINE_GHOST",
+     "sub": 0,
+     "at": "self",
+     "count": 3
+    }
+   ],
+   "sounds": [
+    "caotic.wav"
+   ],
+   "src": [
+    "WSclient.cpp:5038",
+    "WSclient.cpp:5398",
+    "ClassAttack.cpp:709"
+   ],
+   "action": "PLAYER_ATTACK_STRIKE",
+   "action_index": 80,
+   "base": 238
+  }
+ },
+ "types": {
+  "effect:MODEL_POISON": {
+   "call": "effect",
+   "glb": "Skill/Poison01",
+   "motion": "static"
+  },
+  "particle:BITMAP_SMOKE": {
+   "call": "particle",
+   "life": 16.0,
+   "tex": "smoke01",
+   "motion": "static"
+  },
+  "effect:MODEL_FIRE": {
+   "call": "effect",
+   "life": 40.0,
+   "scale": 0.3,
+   "glb": "Skill/Fire01",
+   "motion": "forward"
+  },
+  "joint:BITMAP_JOINT_LASER+1": {
+   "call": "joint",
+   "tex": "JointLaser02",
+   "motion": "static"
+  },
+  "particle:BITMAP_FIRE": {
+   "call": "particle",
+   "life": 24.0,
+   "tex": "Fire01",
+   "motion": "static"
+  },
+  "joint:BITMAP_JOINT_THUNDER": {
+   "call": "joint",
+   "life": 2.0,
+   "velocity": 50.0,
+   "tex": "JointThunder01",
+   "motion": "homing",
+   "children": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 33
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 16
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 11
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SMOKE",
+     "sub": 54
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_CHROME_ENERGY2",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT",
+     "sub": 5
+    }
+   ]
+  },
+  "effect:BITMAP_MAGIC+1": {
+   "call": "effect",
+   "life": 20.0,
+   "scale": 0.1,
+   "tex": "Magic_Ground2",
+   "motion": "static"
+  },
+  "effect:BITMAP_CHROME_ENERGY2": {
+   "call": "effect",
+   "tex": "energy02",
+   "motion": "static"
+  },
+  "particle:BITMAP_LIGHT": {
+   "call": "particle",
+   "life": 40.0,
+   "scale": 2.0,
+   "tex": "flare01",
+   "motion": "static"
+  },
+  "particle:BITMAP_ENERGY": {
+   "call": "particle",
+   "life": 10.0,
+   "scale": 0.3,
+   "tex": "Thunder01",
+   "motion": "static"
+  },
+  "effect:BITMAP_FLAME": {
+   "call": "effect",
+   "life": 40.0,
+   "scale": 0.01,
+   "tex": "Flame01",
+   "motion": "forward",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_FLAME",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE+3",
+     "sub": 13
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLAME",
+     "sub": 6
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_TRUE_FIRE",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SMOKE",
+     "sub": 21
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLAME",
+     "sub": 12
+    }
+   ]
+  },
+  "particle:BITMAP_FLAME": {
+   "call": "particle",
+   "life": 20.0,
+   "tex": "Flame01",
+   "motion": "static",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_FLAME",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE+3",
+     "sub": 13
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLAME",
+     "sub": 6
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_TRUE_FIRE",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SMOKE",
+     "sub": 21
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLAME",
+     "sub": 12
+    }
+   ]
+  },
+  "particle:BITMAP_FIRE+3": {
+   "call": "particle",
+   "life": 24.0,
+   "tex": "Fire05",
+   "motion": "static"
+  },
+  "particle:BITMAP_TRUE_FIRE": {
+   "call": "particle",
+   "life": 15.0,
+   "tex": "fantaF",
+   "motion": "static"
+  },
+  "effect:BITMAP_SPARK+1": {
+   "call": "effect",
+   "tex": "Spark03",
+   "motion": "static"
+  },
+  "effect:MODEL_ICE": {
+   "call": "effect",
+   "life": 50.0,
+   "velocity": 1.0,
+   "scale": 0.8,
+   "glb": "Skill/Ice01",
+   "motion": "forward"
+  },
+  "effect:MODEL_ICE_SMALL": {
+   "call": "effect",
+   "glb": "Skill/Ice02",
+   "motion": "forward"
+  },
+  "effect:MODEL_STORM": {
+   "call": "effect",
+   "life": 59.0,
+   "scale": 1.0,
+   "glb": "Skill/Storm01",
+   "motion": "forward"
+  },
+  "joint:BITMAP_JOINT_SPIRIT": {
+   "call": "joint",
+   "life": 49.0,
+   "velocity": 70.0,
+   "tex": "JointSpirit01",
+   "motion": "homing"
+  },
+  "effect:MODEL_CIRCLE": {
+   "call": "effect",
+   "life": 45.0,
+   "scale": 1.0,
+   "glb": "Skill/Circle01",
+   "motion": "static"
+  },
+  "effect:MODEL_CIRCLE_LIGHT": {
+   "call": "effect",
+   "glb": "Skill/Circle02",
+   "motion": "static"
+  },
+  "effect:MODEL_MAGIC2": {
+   "call": "effect",
+   "life": 20.0,
+   "glb": "Skill/Magic02",
+   "motion": "forward"
+  },
+  "effect:BITMAP_BOSS_LASER": {
+   "call": "effect",
+   "life": 20.0,
+   "motion": "static"
+  },
+  "effect:MODEL_SKILL_BLAST": {
+   "call": "effect",
+   "life": 30.0,
+   "glb": "Skill/Blast01",
+   "motion": "forward",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_SHINY+4",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_EXPLOTION",
+     "sub": 0
+    }
+   ]
+  },
+  "particle:BITMAP_SHINY+4": {
+   "call": "particle",
+   "life": 20.0,
+   "tex": "ring",
+   "motion": "static"
+  },
+  "particle:BITMAP_EXPLOTION": {
+   "call": "particle",
+   "life": 20.0,
+   "tex": "Explotion01",
+   "motion": "static"
+  },
+  "effect:MODEL_SKILL_INFERNO": {
+   "call": "effect",
+   "life": 15.0,
+   "velocity": 0.5,
+   "scale": 0.9,
+   "glb": "Skill/Inferno01",
+   "motion": "follow"
+  },
+  "joint:MODEL_SPEARSKILL": {
+   "call": "joint",
+   "life": 999999.0,
+   "glb": "Skill/RidingSpear01",
+   "motion": "homing"
+  },
+  "effect:MODEL_SNOW1": {
+   "call": "effect",
+   "life": 20.0,
+   "scale": 1.2,
+   "motion": "forward"
+  },
+  "effect:MODEL_WOOSISTONE": {
+   "call": "effect",
+   "life": 20.0,
+   "scale": 1.0,
+   "glb": "Skill/woositone",
+   "motion": "forward"
+  },
+  "effect:MODEL_EFFECT_SAPITRES_ATTACK": {
+   "call": "effect",
+   "life": 20.0,
+   "motion": "static",
+   "children": [
+    {
+     "call": "effect",
+     "type": "MODEL_EFFECT_SAPITRES_ATTACK_1",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:MODEL_EFFECT_SAPITRES_ATTACK_1": {
+   "call": "effect",
+   "life": 17.0,
+   "scale": 1.1,
+   "glb": "Effect/Sapiatttres",
+   "motion": "follow"
+  },
+  "effect:BITMAP_ENERGY": {
+   "call": "effect",
+   "tex": "Thunder01",
+   "motion": "static"
+  },
+  "effect:MODEL_PIERCING+1": {
+   "call": "effect",
+   "life": 30.0,
+   "velocity": 1.0,
+   "scale": 0.8,
+   "motion": "forward"
+  },
+  "joint:BITMAP_FLARE": {
+   "call": "joint",
+   "life": 100.0,
+   "velocity": 40.0,
+   "scale": 10.0,
+   "tex": "Flare",
+   "motion": "static",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE",
+     "sub": 11
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE_BLUE",
+     "sub": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT",
+     "sub": 5
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_FLARE_BLUE",
+     "sub": 14
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_FLARE_BLUE",
+     "sub": 15
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 0
+    }
+   ]
+  },
+  "particle:BITMAP_FLARE": {
+   "call": "particle",
+   "life": 60.0,
+   "tex": "Flare",
+   "motion": "static",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE",
+     "sub": 11
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE_BLUE",
+     "sub": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT",
+     "sub": 5
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_FLARE_BLUE",
+     "sub": 14
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_FLARE_BLUE",
+     "sub": 15
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 0
+    }
+   ]
+  },
+  "particle:BITMAP_FLARE_BLUE": {
+   "call": "particle",
+   "life": 30.0,
+   "tex": "flareBlue",
+   "motion": "static"
+  },
+  "joint:BITMAP_FLARE_BLUE": {
+   "call": "joint",
+   "life": 100.0,
+   "velocity": 40.0,
+   "scale": 10.0,
+   "tex": "flareBlue",
+   "motion": "static"
+  },
+  "joint:BITMAP_BLUR+1": {
+   "call": "joint",
+   "life": 2.0,
+   "velocity": 40.0,
+   "scale": 60.0,
+   "tex": "motion_blur",
+   "motion": "static"
+  },
+  "effect:MODEL_BLIZZARD": {
+   "call": "effect",
+   "life": 20.0,
+   "velocity": 0.0,
+   "scale": 0.5,
+   "bmd": "Skill/Blizzard",
+   "motion": "forward",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_SMOKE",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_ENERGY",
+     "sub": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE+2",
+     "sub": 7
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_SHINY+1",
+     "sub": 0
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_LIGHT",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SMOKE",
+     "sub": 11
+    }
+   ]
+  },
+  "particle:BITMAP_FIRE+2": {
+   "call": "particle",
+   "life": 24.0,
+   "tex": "Fire03",
+   "motion": "static"
+  },
+  "sprite:BITMAP_SHINY+1": {
+   "call": "sprite",
+   "life": 14.0,
+   "tex": "Shiny02",
+   "motion": "static"
+  },
+  "sprite:BITMAP_LIGHT": {
+   "call": "sprite",
+   "life": 40.0,
+   "scale": 2.0,
+   "tex": "flare01",
+   "motion": "static"
+  },
+  "effect:MODEL_SKILL_WHEEL1": {
+   "call": "effect",
+   "life": 5.0,
+   "motion": "static",
+   "children": [
+    {
+     "call": "effect",
+     "type": "MODEL_SKILL_WHEEL2",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:MODEL_SKILL_WHEEL2": {
+   "call": "effect",
+   "life": 25.0,
+   "motion": "follow",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_SMOKE",
+     "sub": 3
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_WATERFALL_5",
+     "sub": 3
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPARK",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SPARK",
+     "sub": 0
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_LIGHT",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:MODEL_SKILL_FURY_STRIKE": {
+   "call": "effect",
+   "life": 20.0,
+   "motion": "follow",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_EXPLOTION",
+     "sub": 0
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPARK",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SPARK",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WAVE",
+     "sub": 0
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 3
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_SHINY+1",
+     "sub": 0
+    }
+   ]
+  },
+  "joint:BITMAP_JOINT_SPARK": {
+   "call": "joint",
+   "velocity": 30.0,
+   "scale": 2.0,
+   "tex": "Spark01",
+   "motion": "static"
+  },
+  "particle:BITMAP_SPARK": {
+   "call": "particle",
+   "tex": "Spark02",
+   "motion": "static"
+  },
+  "effect:MODEL_WAVE": {
+   "call": "effect",
+   "glb": "Skill/flashing",
+   "motion": "static"
+  },
+  "effect:MODEL_SPEAR": {
+   "call": "effect",
+   "motion": "static"
+  },
+  "effect:MODEL_SWORD_FORCE": {
+   "call": "effect",
+   "glb": "Skill/SwordForce",
+   "motion": "forward",
+   "children": [
+    {
+     "call": "effect",
+     "type": "MODEL_SWORD_FORCE",
+     "sub": 3
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SWORD_FORCE",
+     "sub": 1
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_SPARK",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE",
+     "sub": 18
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE",
+     "sub": 2
+    }
+   ]
+  },
+  "effect:MODEL_SKILL_JAVELIN": {
+   "call": "effect",
+   "life": 35.0,
+   "velocity": 10.0,
+   "scale": 1.2,
+   "glb": "Skill/Javelin",
+   "motion": "homing",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_POUNDING_BALL",
+     "sub": 1
+    }
+   ]
+  },
+  "particle:BITMAP_POUNDING_BALL": {
+   "call": "particle",
+   "life": 24.0,
+   "tex": "PoundingBall",
+   "motion": "static"
+  },
+  "effect:MODEL__SPEAR": {
+   "call": "effect",
+   "motion": "forward",
+   "children": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_HEALING",
+     "sub": 6
+    }
+   ]
+  },
+  "joint:BITMAP_JOINT_HEALING": {
+   "call": "joint",
+   "life": 12.0,
+   "velocity": 0.0,
+   "tex": "JointEnergy01",
+   "motion": "homing"
+  },
+  "effect:MODEL_SPEARSKILL": {
+   "call": "effect",
+   "life": 20.0,
+   "scale": 1.5,
+   "glb": "Skill/RidingSpear01",
+   "motion": "forward"
+  },
+  "effect:BITMAP_LIGHT": {
+   "call": "effect",
+   "life": 400.0,
+   "velocity": 0.0,
+   "scale": 3.0,
+   "tex": "flare01",
+   "motion": "forward"
+  },
+  "effect:BITMAP_SHOTGUN": {
+   "call": "effect",
+   "life": 10.0,
+   "velocity": 1.0,
+   "motion": "forward",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE+2",
+     "sub": 10
+    }
+   ]
+  },
+  "effect:MODEL_STAFF_OF_DESTRUCTION": {
+   "call": "effect",
+   "motion": "static"
+  },
+  "effect:BITMAP_GATHERING": {
+   "call": "effect",
+   "life": 10.0,
+   "motion": "forward",
+   "children": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 3
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SPARK+1",
+     "sub": 2
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_SHINY+1",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SPARK+1",
+     "sub": 26
+    }
+   ]
+  },
+  "particle:BITMAP_SPARK+1": {
+   "call": "particle",
+   "life": 15.0,
+   "tex": "Spark03",
+   "motion": "static"
+  },
+  "effect:BITMAP_SWORD_FORCE": {
+   "call": "effect",
+   "life": 30.0,
+   "motion": "static",
+   "children": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_FORCE",
+     "sub": 10
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_FORCE",
+     "sub": 0
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_FORCE",
+     "sub": 8
+    }
+   ]
+  },
+  "joint:BITMAP_JOINT_FORCE": {
+   "call": "joint",
+   "life": 20.0,
+   "velocity": 0.0,
+   "tex": "motion_blur_r2",
+   "motion": "homing",
+   "children": [
+    {
+     "call": "joint",
+     "type": "BITMAP_FLASH",
+     "sub": 5
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER+1",
+     "sub": 6
+    }
+   ]
+  },
+  "effect:BITMAP_SKULL": {
+   "call": "effect",
+   "tex": "Skull",
+   "motion": "follow",
+   "children": [
+    {
+     "call": "sprite",
+     "type": "BITMAP_SKULL",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT",
+     "sub": 5
+    }
+   ]
+  },
+  "sprite:BITMAP_SKULL": {
+   "call": "sprite",
+   "tex": "Skull",
+   "motion": "static",
+   "children": [
+    {
+     "call": "sprite",
+     "type": "BITMAP_SKULL",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT",
+     "sub": 5
+    }
+   ]
+  },
+  "effect:MODEL_COMBO": {
+   "call": "effect",
+   "life": 20.0,
+   "glb": "Skill/combo",
+   "motion": "static"
+  },
+  "effect:MODEL_WAVES": {
+   "call": "effect",
+   "life": 20.0,
+   "scale": 0.1,
+   "bmd": "Skill/m_Waves",
+   "motion": "static"
+  },
+  "effect:MODEL_PIERCING2": {
+   "call": "effect",
+   "glb": "Skill/m_Piercing",
+   "motion": "forward",
+   "children": [
+    {
+     "call": "effect",
+     "type": "MODEL_WAVES",
+     "sub": 2
+    }
+   ]
+  },
+  "effect:MODEL_PIER_PART": {
+   "call": "effect",
+   "life": 20.0,
+   "velocity": 10.0,
+   "scale": 1.2,
+   "glb": "Skill/PierPart",
+   "motion": "homing",
+   "children": [
+    {
+     "call": "effect",
+     "type": "MODEL_PIER_PART",
+     "sub": 1
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_FORCE",
+     "sub": 2
+    }
+   ]
+  },
+  "effect:MODEL_DARKLORD_SKILL": {
+   "call": "effect",
+   "life": 10.0,
+   "velocity": 0.1,
+   "scale": 0.2,
+   "glb": "Skill/DarkLordSkill",
+   "motion": "forward"
+  },
+  "effect:BITMAP_FLARE_FORCE": {
+   "call": "effect",
+   "life": 0.0,
+   "tex": "NSkill",
+   "motion": "static"
+  },
+  "joint:BITMAP_FLASH": {
+   "call": "joint",
+   "life": 40.0,
+   "velocity": 70.0,
+   "tex": "Flashing",
+   "motion": "static"
+  },
+  "effect:MODEL_MANA_RUNE": {
+   "call": "effect",
+   "glb": "Skill/ManaRune",
+   "motion": "static",
+   "children": [
+    {
+     "call": "effect",
+     "type": "MODEL_MANA_RUNE",
+     "sub": 1
+    }
+   ]
+  },
+  "joint:MODEL_FENRIR_SKILL_THUNDER": {
+   "call": "joint",
+   "life": 20.0,
+   "velocity": 50.0,
+   "motion": "static"
+  },
+  "joint:BITMAP_FLARE_FORCE": {
+   "call": "joint",
+   "life": 20.0,
+   "velocity": -3.0,
+   "tex": "NSkill",
+   "motion": "homing"
+  },
+  "effect:MODEL_INFINITY_ARROW": {
+   "call": "effect",
+   "life": 40.0,
+   "scale": 1.0,
+   "glb": "Skill/arrowsre01",
+   "motion": "follow"
+  },
+  "effect:MODEL_DARK_SCREAM": {
+   "call": "effect",
+   "life": 30.0,
+   "velocity": 1.0,
+   "scale": 1.8,
+   "glb": "Skill/darkfirescrem02",
+   "motion": "forward"
+  },
+  "effect:MODEL_DARK_SCREAM_FIRE": {
+   "call": "effect",
+   "life": 30.0,
+   "velocity": 1.0,
+   "scale": 1.8,
+   "glb": "Skill/darkfirescrem01",
+   "motion": "forward",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_FLAME",
+     "sub": 8
+    }
+   ]
+  },
+  "effect:MODEL_ALICE_DRAIN_LIFE": {
+   "call": "effect",
+   "motion": "static",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT+2",
+     "sub": 7
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT+2",
+     "sub": 7
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_DRAIN_LIFE_GHOST",
+     "sub": 0
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_ENERGY",
+     "sub": 45
+    }
+   ]
+  },
+  "particle:BITMAP_LIGHT+2": {
+   "call": "particle",
+   "life": 16.0,
+   "tex": "cra_04",
+   "motion": "static"
+  },
+  "joint:BITMAP_DRAIN_LIFE_GHOST": {
+   "call": "joint",
+   "tex": "gostmark01",
+   "motion": "homing"
+  },
+  "joint:BITMAP_JOINT_ENERGY": {
+   "call": "joint",
+   "life": 120.0,
+   "velocity": 3.0,
+   "tex": "JointLaser01",
+   "motion": "static"
+  },
+  "effect:MODEL_LIGHTNING_ORB": {
+   "call": "effect",
+   "motion": "static"
+  },
+  "effect:MODEL_ALICE_BUFFSKILL_EFFECT": {
+   "call": "effect",
+   "glb": "Effect/elshildring",
+   "motion": "follow",
+   "children": [
+    {
+     "call": "sprite",
+     "type": "BITMAP_LIGHT",
+     "sub": 0
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_SHINY+5",
+     "sub": 0
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_HEALING",
+     "sub": 15
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_HEALING",
+     "sub": 16
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT+2",
+     "sub": 6
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_TWINTAIL_WATER",
+     "sub": 2
+    }
+   ]
+  },
+  "sprite:BITMAP_SHINY+5": {
+   "call": "sprite",
+   "tex": "shiny04",
+   "motion": "static"
+  },
+  "particle:BITMAP_TWINTAIL_WATER": {
+   "call": "particle",
+   "life": 50.0,
+   "tex": "water",
+   "motion": "static"
+  },
+  "effect:MODEL_ALICE_BUFFSKILL_EFFECT2": {
+   "call": "effect",
+   "glb": "Effect/elshildring2",
+   "motion": "static"
+  },
+  "effect:BITMAP_MAGIC_ZIN": {
+   "call": "effect",
+   "tex": "mzine_typer2",
+   "motion": "static"
+  },
+  "effect:MODEL_SUMMONER_CASTING_EFFECT2": {
+   "call": "effect",
+   "glb": "Effect/Suhwanzin2",
+   "motion": "static"
+  },
+  "effect:MODEL_SUMMONER_CASTING_EFFECT22": {
+   "call": "effect",
+   "glb": "Effect/Suhwanzin22",
+   "motion": "static"
+  },
+  "effect:MODEL_SUMMONER_CASTING_EFFECT222": {
+   "call": "effect",
+   "glb": "Effect/Suhwanzin222",
+   "motion": "static"
+  },
+  "effect:BITMAP_SHINY+6": {
+   "call": "effect",
+   "life": 100.0,
+   "tex": "shiny05",
+   "motion": "follow"
+  },
+  "effect:BITMAP_PIN_LIGHT": {
+   "call": "effect",
+   "life": 40.0,
+   "tex": "pin_lights",
+   "motion": "follow",
+   "children": [
+    {
+     "call": "sprite",
+     "type": "BITMAP_PIN_LIGHT",
+     "sub": 0
+    }
+   ]
+  },
+  "sprite:BITMAP_PIN_LIGHT": {
+   "call": "sprite",
+   "life": 30.0,
+   "tex": "pin_lights",
+   "motion": "static",
+   "children": [
+    {
+     "call": "sprite",
+     "type": "BITMAP_PIN_LIGHT",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:MODEL_SUMMONER_SUMMON_SAHAMUTT": {
+   "call": "effect",
+   "glb": "Skill/summon_sahamutt",
+   "motion": "forward",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_CURSEDLICH",
+     "sub": 2
+    }
+   ]
+  },
+  "particle:BITMAP_FIRE_CURSEDLICH": {
+   "call": "particle",
+   "tex": "firehik02",
+   "motion": "static",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_CURSEDLICH",
+     "sub": 3
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK1",
+     "sub": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_CURSEDLICH",
+     "sub": 5
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK3",
+     "sub": 1
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_LIGHT",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK1",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:MODEL_SUMMONER_EQUIP_HEAD_SAHAMUTT": {
+   "call": "effect",
+   "life": 100.0,
+   "scale": 0.8,
+   "glb": "Skill/sahatail",
+   "motion": "forward",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_CURSEDLICH",
+     "sub": 1
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_FIRE_CURSEDLICH",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:BITMAP_FIRE_CURSEDLICH": {
+   "call": "effect",
+   "tex": "firehik02",
+   "motion": "static",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_CURSEDLICH",
+     "sub": 3
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK1",
+     "sub": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_CURSEDLICH",
+     "sub": 5
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK3",
+     "sub": 1
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_LIGHT",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK1",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:MODEL_SUMMONER_SUMMON_NEIL": {
+   "call": "effect",
+   "glb": "Skill/summon_neil",
+   "motion": "forward",
+   "children": [
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_SUMMON_NEIL_NIFE1",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_SUMMON_NEIL_NIFE2",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_SUMMON_NEIL_NIFE3",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_SUMMON_NEIL_GROUND1",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_SUMMON_NEIL_GROUND2",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SUMMONER_SUMMON_NEIL_GROUND3",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:MODEL_SUMMONER_SUMMON_NEIL_NIFE1": {
+   "call": "effect",
+   "glb": "Skill/nelleff_nife01",
+   "motion": "static"
+  },
+  "effect:MODEL_SUMMONER_SUMMON_NEIL_NIFE2": {
+   "call": "effect",
+   "glb": "Skill/nelleff_nife02",
+   "motion": "static"
+  },
+  "effect:MODEL_SUMMONER_SUMMON_NEIL_NIFE3": {
+   "call": "effect",
+   "glb": "Skill/nelleff_nife03",
+   "motion": "static"
+  },
+  "effect:MODEL_SUMMONER_SUMMON_NEIL_GROUND1": {
+   "call": "effect",
+   "glb": "Skill/nell_nifegrund01",
+   "motion": "static"
+  },
+  "effect:MODEL_SUMMONER_SUMMON_NEIL_GROUND2": {
+   "call": "effect",
+   "glb": "Skill/nell_nifegrund02",
+   "motion": "static"
+  },
+  "effect:MODEL_SUMMONER_SUMMON_NEIL_GROUND3": {
+   "call": "effect",
+   "glb": "Skill/nell_nifegrund03",
+   "motion": "static"
+  },
+  "effect:MODEL_SUMMONER_EQUIP_HEAD_NEIL": {
+   "call": "effect",
+   "life": 100.0,
+   "scale": 0.8,
+   "glb": "Skill/nillsohwanz",
+   "motion": "forward",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT+2",
+     "sub": 3
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT+2",
+     "sub": 5
+    }
+   ]
+  },
+  "effect:MODEL_SUMMONER_SUMMON_LAGUL": {
+   "call": "effect",
+   "life": 160.0,
+   "velocity": 0.5,
+   "scale": 1.0,
+   "glb": "Skill/summon_lagul",
+   "motion": "forward",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_SMOKE",
+     "sub": 57
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_CLOUD",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_TWINTAIL_WATER",
+     "sub": 1
+    }
+   ]
+  },
+  "effect:BITMAP_CLOUD": {
+   "call": "effect",
+   "life": 60.0,
+   "tex": "clouds",
+   "motion": "static"
+  },
+  "effect:MODEL_LIGHTNING_SHOCK": {
+   "call": "effect",
+   "life": 20.0,
+   "velocity": 0.0,
+   "motion": "follow",
+   "children": [
+    {
+     "call": "sprite",
+     "type": "BITMAP_SHINY+1",
+     "sub": 0
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_MAGIC",
+     "sub": 0
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_PIN_LIGHT",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_MAGIC",
+     "sub": 0
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_LIGHT",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_LIGHTNING_SHOCK",
+     "sub": 1
+    }
+   ]
+  },
+  "sprite:BITMAP_MAGIC": {
+   "call": "sprite",
+   "life": 10.0,
+   "tex": "Magic_Ground1",
+   "motion": "static",
+   "children": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC",
+     "sub": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE",
+     "sub": 10
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE",
+     "sub": 12
+    }
+   ]
+  },
+  "particle:BITMAP_MAGIC": {
+   "call": "particle",
+   "life": 10.0,
+   "tex": "Magic_Ground1",
+   "motion": "static",
+   "children": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC",
+     "sub": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE",
+     "sub": 10
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE",
+     "sub": 12
+    }
+   ]
+  },
+  "effect:MODEL_BLOW_OF_DESTRUCTION": {
+   "call": "effect",
+   "life": 40.0,
+   "scale": 5.0,
+   "motion": "forward",
+   "children": [
+    {
+     "call": "effect",
+     "type": "MODEL_NIGHTWATER_01",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_KNIGHT_PLANCRACK_A",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_KNIGHT_PLANCRACK_B",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SMOKE",
+     "sub": 55
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_RAKLION_BOSS_CRACKEFFECT",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_DRAGON_LOWER_DUMMY",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:MODEL_NIGHTWATER_01": {
+   "call": "effect",
+   "life": 25.0,
+   "glb": "Effect/nightwater01",
+   "motion": "static"
+  },
+  "effect:MODEL_KNIGHT_PLANCRACK_A": {
+   "call": "effect",
+   "life": 25.0,
+   "glb": "Effect/knight_plancrack_a",
+   "motion": "static"
+  },
+  "effect:MODEL_KNIGHT_PLANCRACK_B": {
+   "call": "effect",
+   "glb": "Effect/knight_plancrack_b",
+   "motion": "static"
+  },
+  "effect:MODEL_RAKLION_BOSS_CRACKEFFECT": {
+   "call": "effect",
+   "life": 40.0,
+   "glb": "Effect/knight_plancrack_grand",
+   "motion": "static"
+  },
+  "effect:MODEL_DRAGON_LOWER_DUMMY": {
+   "call": "effect",
+   "life": 300.0,
+   "velocity": 0.3,
+   "glb": "Effect/knight_plancrack_dragon",
+   "motion": "forward",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_SPARK",
+     "sub": 12
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_LIGHT_RED",
+     "sub": 1
+    }
+   ]
+  },
+  "effect:MODEL_SWELL_OF_MAGICPOWER": {
+   "call": "effect",
+   "glb": "Effect/magic_powerup",
+   "motion": "follow"
+  },
+  "effect:BITMAP_IMPACT": {
+   "call": "effect",
+   "tex": "Impack03",
+   "motion": "follow",
+   "children": [
+    {
+     "call": "sprite",
+     "type": "BITMAP_IMPACT",
+     "sub": 0
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_SHINY+1",
+     "sub": 0
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_ORORA",
+     "sub": 0
+    }
+   ]
+  },
+  "sprite:BITMAP_IMPACT": {
+   "call": "sprite",
+   "tex": "Impack03",
+   "motion": "static",
+   "children": [
+    {
+     "call": "sprite",
+     "type": "BITMAP_IMPACT",
+     "sub": 0
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_SHINY+1",
+     "sub": 0
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_ORORA",
+     "sub": 0
+    }
+   ]
+  },
+  "sprite:BITMAP_ORORA": {
+   "call": "sprite",
+   "life": 100.0,
+   "scale": 0.2,
+   "tex": "hikorora",
+   "motion": "static"
+  },
+  "effect:MODEL_SUMMON": {
+   "call": "effect",
+   "life": 60.0,
+   "scale": 0.7,
+   "bmd": "SKill/nightmaresum",
+   "motion": "static"
+  },
+  "effect:BITMAP_TWLIGHT": {
+   "call": "effect",
+   "tex": "twlighthik01",
+   "motion": "follow"
+  },
+  "effect:BITMAP_FLARE": {
+   "call": "effect",
+   "tex": "Flare",
+   "motion": "static",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE",
+     "sub": 11
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE_BLUE",
+     "sub": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT",
+     "sub": 5
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_FLARE_BLUE",
+     "sub": 14
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_FLARE_BLUE",
+     "sub": 15
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:MODEL_MULTI_SHOT3": {
+   "call": "effect",
+   "life": 30.0,
+   "velocity": 1.0,
+   "scale": 1.8,
+   "glb": "Effect/multishot03",
+   "motion": "forward"
+  },
+  "effect:MODEL_MULTI_SHOT1": {
+   "call": "effect",
+   "life": 30.0,
+   "velocity": 1.0,
+   "scale": 1.8,
+   "glb": "Effect/multishot01",
+   "motion": "forward"
+  },
+  "effect:MODEL_MULTI_SHOT2": {
+   "call": "effect",
+   "life": 30.0,
+   "velocity": 1.0,
+   "scale": 1.8,
+   "glb": "Effect/multishot02",
+   "motion": "forward"
+  },
+  "effect:MODEL_BLADE_SKILL": {
+   "call": "effect",
+   "glb": "Effect/bladetonedo",
+   "motion": "follow",
+   "children": [
+    {
+     "call": "sprite",
+     "type": "BITMAP_SHINY+1",
+     "sub": 0
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_SPARK+1",
+     "sub": 1
+    }
+   ]
+  },
+  "joint:BITMAP_SPARK+1": {
+   "call": "joint",
+   "life": 100.0,
+   "scale": 10.0,
+   "tex": "Spark03",
+   "motion": "homing"
+  },
+  "effect:MODEL_EFFECT_FLAME_STRIKE": {
+   "call": "effect",
+   "life": 35.0,
+   "glb": "Effect/FlameStrike",
+   "motion": "follow"
+  },
+  "effect:BITMAP_JOINT_THUNDER": {
+   "call": "effect",
+   "tex": "JointThunder01",
+   "motion": "follow",
+   "children": [
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 33
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 16
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC+1",
+     "sub": 11
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SMOKE",
+     "sub": 54
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_CHROME_ENERGY2",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT",
+     "sub": 5
+    }
+   ]
+  },
+  "joint:BITMAP_2LINE_GHOST": {
+   "call": "joint",
+   "life": 67.0,
+   "velocity": 40.0,
+   "tex": "2line_gost",
+   "motion": "homing"
+  },
+  "effect:MODEL_WOLF_HEAD_EFFECT": {
+   "call": "effect",
+   "life": 10.0,
+   "velocity": 0.1,
+   "scale": 1.0,
+   "glb": "Effect/wolf_head_effect",
+   "motion": "follow",
+   "children": [
+    {
+     "call": "joint",
+     "type": "BITMAP_PIN_LIGHT",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WOLF_HEAD_EFFECT",
+     "sub": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WOLF_HEAD_EFFECT",
+     "sub": 2
+    }
+   ]
+  },
+  "joint:BITMAP_PIN_LIGHT": {
+   "call": "joint",
+   "tex": "pin_lights",
+   "motion": "static",
+   "children": [
+    {
+     "call": "sprite",
+     "type": "BITMAP_PIN_LIGHT",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:BITMAP_SBUMB": {
+   "call": "effect",
+   "life": 20.0,
+   "tex": "sbumb",
+   "motion": "static",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_SBUMB",
+     "sub": 0
+    }
+   ]
+  },
+  "particle:BITMAP_SBUMB": {
+   "call": "particle",
+   "life": 4.0,
+   "tex": "sbumb",
+   "motion": "static",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_SBUMB",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:MODEL_DOWN_ATTACK_DUMMY_R": {
+   "call": "effect",
+   "life": 100.0,
+   "glb": "Effect/down_left_punch",
+   "motion": "follow",
+   "children": [
+    {
+     "call": "effect",
+     "type": "MODEL_DOWN_ATTACK_DUMMY_L",
+     "sub": 0
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_FORCEPILLAR",
+     "sub": 1
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_FLARE",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:MODEL_DOWN_ATTACK_DUMMY_L": {
+   "call": "effect",
+   "life": 100.0,
+   "glb": "Effect/down_right_punch",
+   "motion": "follow",
+   "children": [
+    {
+     "call": "joint",
+     "type": "BITMAP_FORCEPILLAR",
+     "sub": 0
+    },
+    {
+     "call": "sprite",
+     "type": "BITMAP_FLARE",
+     "sub": 0
+    }
+   ]
+  },
+  "joint:BITMAP_FORCEPILLAR": {
+   "call": "joint",
+   "life": 7.0,
+   "tex": "force_Pillar",
+   "motion": "static"
+  },
+  "sprite:BITMAP_FLARE": {
+   "call": "sprite",
+   "life": 60.0,
+   "tex": "Flare",
+   "motion": "static",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE",
+     "sub": 11
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE_BLUE",
+     "sub": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHT",
+     "sub": 5
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_FLARE_BLUE",
+     "sub": 14
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_FLARE_BLUE",
+     "sub": 15
+    },
+    {
+     "call": "joint",
+     "type": "BITMAP_JOINT_THUNDER",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:BITMAP_SWORDEFF": {
+   "call": "effect",
+   "tex": "!SwordEff",
+   "motion": "static",
+   "children": [
+    {
+     "call": "joint",
+     "type": "BITMAP_SWORDEFF",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE01",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WOLF_HEAD_EFFECT2",
+     "sub": 3
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_DAMAGE1",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE02",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WOLF_HEAD_EFFECT2",
+     "sub": 5
+    }
+   ]
+  },
+  "joint:BITMAP_SWORDEFF": {
+   "call": "joint",
+   "life": 10.0,
+   "tex": "!SwordEff",
+   "motion": "static",
+   "children": [
+    {
+     "call": "joint",
+     "type": "BITMAP_SWORDEFF",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE01",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WOLF_HEAD_EFFECT2",
+     "sub": 3
+    },
+    {
+     "call": "effect",
+     "type": "BITMAP_DAMAGE1",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE02",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WOLF_HEAD_EFFECT2",
+     "sub": 5
+    }
+   ]
+  },
+  "effect:MODEL_SHOCKWAVE01": {
+   "call": "effect",
+   "life": 5.0,
+   "velocity": 0.3,
+   "glb": "Effect/shockwave01",
+   "motion": "forward"
+  },
+  "effect:MODEL_WOLF_HEAD_EFFECT2": {
+   "call": "effect",
+   "life": 4.0,
+   "velocity": 0.1,
+   "scale": 1.0,
+   "glb": "Effect/wolf_head_effect2",
+   "motion": "follow",
+   "children": [
+    {
+     "call": "effect",
+     "type": "MODEL_WOLF_HEAD_EFFECT2",
+     "sub": 4
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_WOLF_HEAD_EFFECT2",
+     "sub": 6
+    }
+   ]
+  },
+  "effect:BITMAP_DAMAGE1": {
+   "call": "effect",
+   "life": 20.0,
+   "tex": "Damage1",
+   "motion": "static",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_DAMAGE1",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:MODEL_SHOCKWAVE02": {
+   "call": "effect",
+   "life": 14.0,
+   "glb": "Effect/shockwave02",
+   "motion": "follow"
+  },
+  "effect:BITMAP_EVENT_CLOUD": {
+   "call": "effect",
+   "tex": "clouds2",
+   "motion": "static"
+  },
+  "effect:BITMAP_MAGIC": {
+   "call": "effect",
+   "life": 20.0,
+   "scale": 0.5,
+   "tex": "Magic_Ground1",
+   "motion": "static",
+   "children": [
+    {
+     "call": "effect",
+     "type": "BITMAP_MAGIC",
+     "sub": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE",
+     "sub": 10
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FLARE",
+     "sub": 12
+    }
+   ]
+  },
+  "effect:MODEL_WINDFOCE": {
+   "call": "effect",
+   "glb": "Effect/wind_foce",
+   "motion": "follow",
+   "children": [
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE",
+     "sub": 3
+    }
+   ]
+  },
+  "effect:MODEL_VOLCANO_OF_MONK": {
+   "call": "effect",
+   "life": 100.0,
+   "velocity": 0.6,
+   "glb": "Effect/volcano_of_monk",
+   "motion": "forward",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK1",
+     "sub": 6
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_CURSEDLICH",
+     "sub": 9
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK3",
+     "sub": 6
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_VOLCANO_STONE",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE_GROUND01",
+     "sub": 2
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_VOLCANO_OF_MONK",
+     "sub": 1
+    }
+   ]
+  },
+  "particle:BITMAP_FIRE_HIK1": {
+   "call": "particle",
+   "life": 8.0,
+   "tex": "firehik01",
+   "motion": "static"
+  },
+  "particle:BITMAP_FIRE_HIK3": {
+   "call": "particle",
+   "life": 8.0,
+   "tex": "firehik03",
+   "motion": "static"
+  },
+  "effect:MODEL_VOLCANO_STONE": {
+   "call": "effect",
+   "glb": "Effect/volcano_stone",
+   "motion": "forward",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK1",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_CURSEDLICH",
+     "sub": 4
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK3",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:MODEL_SHOCKWAVE_GROUND01": {
+   "call": "effect",
+   "glb": "Effect/shockwave_ground01",
+   "motion": "static"
+  },
+  "effect:MODEL_TARGETMON_EFFECT": {
+   "call": "effect",
+   "motion": "follow",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK1",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_CURSEDLICH",
+     "sub": 4
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK3",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:BITMAP_LAVA": {
+   "call": "effect",
+   "life": 999.0,
+   "tex": "Lava",
+   "motion": "follow",
+   "children": [
+    {
+     "call": "joint",
+     "type": "BITMAP_LAVA",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE01",
+     "sub": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE_GROUND01",
+     "sub": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK1",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_CURSEDLICH",
+     "sub": 4
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK3",
+     "sub": 0
+    }
+   ]
+  },
+  "joint:BITMAP_LAVA": {
+   "call": "joint",
+   "life": 10.0,
+   "tex": "Lava",
+   "motion": "static",
+   "children": [
+    {
+     "call": "joint",
+     "type": "BITMAP_LAVA",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE01",
+     "sub": 1
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE_GROUND01",
+     "sub": 1
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK1",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_CURSEDLICH",
+     "sub": 4
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_FIRE_HIK3",
+     "sub": 0
+    }
+   ]
+  },
+  "effect:MODEL_DRAGON_KICK_DUMMY": {
+   "call": "effect",
+   "life": 200.0,
+   "glb": "Effect/dragon_kick_dummy",
+   "motion": "follow",
+   "children": [
+    {
+     "call": "joint",
+     "type": "BITMAP_GROUND_WIND",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_ENERGY",
+     "sub": 7
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_LIGHTNING_MEGA1",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SPARK+1",
+     "sub": 3
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SPARK+1",
+     "sub": 8
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SPARK",
+     "sub": 13
+    }
+   ]
+  },
+  "joint:BITMAP_GROUND_WIND": {
+   "call": "joint",
+   "life": 10.0,
+   "tex": "ground_wind",
+   "motion": "static"
+  },
+  "particle:BITMAP_LIGHTNING_MEGA1": {
+   "call": "particle",
+   "life": 5.0,
+   "tex": "lighting_mega01",
+   "motion": "static"
+  },
+  "effect:BITMAP_LIGHT_RED": {
+   "call": "effect",
+   "life": 9999.0,
+   "velocity": 0.0,
+   "scale": 1.5,
+   "tex": "flare01_red",
+   "motion": "follow",
+   "children": [
+    {
+     "call": "effect",
+     "type": "MODEL_WINDFOCE_MIRROR",
+     "sub": 0
+    },
+    {
+     "call": "particle",
+     "type": "BITMAP_SMOKELINE1",
+     "sub": 5
+    }
+   ]
+  },
+  "effect:MODEL_WINDFOCE_MIRROR": {
+   "call": "effect",
+   "glb": "Effect/wind_foce_mirror",
+   "motion": "follow"
+  },
+  "particle:BITMAP_SMOKELINE1": {
+   "call": "particle",
+   "life": 25.0,
+   "tex": "smokelines01",
+   "motion": "static"
+  },
+  "effect:BITMAP_SWORD_EFFECT_MONO": {
+   "call": "effect",
+   "tex": "SwordEff_mono",
+   "motion": "static",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_SWORD_EFFECT_MONO",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE01",
+     "sub": 2
+    }
+   ]
+  },
+  "particle:BITMAP_SWORD_EFFECT_MONO": {
+   "call": "particle",
+   "life": 20.0,
+   "tex": "SwordEff_mono",
+   "motion": "static",
+   "children": [
+    {
+     "call": "particle",
+     "type": "BITMAP_SWORD_EFFECT_MONO",
+     "sub": 0
+    },
+    {
+     "call": "effect",
+     "type": "MODEL_SHOCKWAVE01",
+     "sub": 2
+    }
+   ]
+  },
+  "effect:MODEL_PHOENIX_SHOT": {
+   "call": "effect",
+   "glb": "Effect/phoenix_shot_effect",
+   "motion": "static"
+  }
+ },
+ "bitmaps": {
+  "BITMAP_JACK_1": "jack04",
+  "BITMAP_JACK_2": "jack05",
+  "BITMAP_MONSTER_SKIN+2": "dkthreebody_r",
+  "BITMAP_BUGBEAR_R": "Bugbear_R",
+  "BITMAP_PKMON01": "pk_mon02_fire",
+  "BITMAP_PKMON02": "pk_mon03_red",
+  "BITMAP_PKMON03": "pk_mon02_green",
+  "BITMAP_PKMON04": "pk_mon03_green",
+  "BITMAP_PKMON05": "lavagiantAa_e",
+  "BITMAP_PKMON06": "lavagiantBa_e",
+  "BITMAP_LAVAGIANT_FOOTPRINT_R": "eff_magma_red",
+  "BITMAP_LAVAGIANT_FOOTPRINT_V": "eff_magma_violet",
+  "BITMAP_RAYMOND_SWORD": "raymond_sword_R",
+  "BITMAP_AG_ADDITION_EFFECT": "mist01",
+  "BITMAP_FLOWER01": "flower1",
+  "BITMAP_FLOWER01+1": "flower2",
+  "BITMAP_FLOWER01+2": "flower3",
+  "BITMAP_SBUMB": "sbumb",
+  "BITMAP_FORCEPILLAR": "force_Pillar",
+  "BITMAP_SWORDEFF": "!SwordEff",
+  "BITMAP_DAMAGE1": "Damage1",
+  "BITMAP_GROUND_WIND": "ground_wind",
+  "BITMAP_KWAVE2": "Kwave2",
+  "BITMAP_DAMAGE2": "Damage2",
+  "BITMAP_VOLCANO_CORE": "volcano_core",
+  "BITMAP_GROUND_SMOKE": "ground_smoke",
+  "BITMAP_KNIGHTST_BLUE": "knightSt_blue",
+  "BITMAP_EXT_LOG_IN+2": "Impack03",
+  "BITMAP_FIRE": "Fire01",
+  "BITMAP_FIRE+1": "Fire02",
+  "BITMAP_FIRE+2": "Fire03",
+  "BITMAP_POUNDING_BALL": "PoundingBall",
+  "BITMAP_ADV_SMOKE": "fi01",
+  "BITMAP_ADV_SMOKE+1": "fi02",
+  "BITMAP_TRUE_FIRE": "fantaF",
+  "BITMAP_TRUE_BLUE": "fantaB",
+  "BITMAP_JOINT_SPIRIT2": "JointSpirit02",
+  "BITMAP_PIERCING": "Piercing",
+  "BITMAP_MAGIC_EMBLEM": "Magic_b",
+  "BITMAP_SHOCK_WAVE": "ShockWave",
+  "BITMAP_FLAME": "Flame01",
+  "BITMAP_LIGHT": "flare01",
+  "BITMAP_MAGIC": "Magic_Ground1",
+  "BITMAP_MAGIC+1": "Magic_Ground2",
+  "BITMAP_MAGIC+2": "Magic_Circle1",
+  "BITMAP_OUR_INFLUENCE_GROUND": "guild_ring01",
+  "BITMAP_ENEMY_INFLUENCE_GROUND": "enemy_ring02",
+  "BITMAP_SPARK": "Spark02",
+  "BITMAP_SPARK+1": "Spark03",
+  "BITMAP_SMOKE": "smoke01",
+  "BITMAP_SMOKE+1": "smoke02",
+  "BITMAP_SMOKE+4": "smoke05",
+  "BITMAP_BLOOD": "blood01",
+  "BITMAP_BLOOD+1": "blood",
+  "BITMAP_EXPLOTION": "Explotion01",
+  "BITMAP_TWLIGHT": "twlighthik01",
+  "BITMAP_2LINE_GHOST": "2line_gost",
+  "BITMAP_DAMAGE_01_MONO": "damage01mono",
+  "BITMAP_SWORD_EFFECT_MONO": "SwordEff_mono",
+  "BITMAP_FLAMESTANI": "flamestani",
+  "BITMAP_SPARK+2": "Spark",
+  "BITMAP_FIRE_CURSEDLICH": "firehik02",
+  "BITMAP_SUMMON_IMPACT": "empact01",
+  "BITMAP_SUMMON_SAHAMUTT_EXPLOSION": "loungexflow",
+  "BITMAP_DRAIN_LIFE_GHOST": "gostmark01",
+  "BITMAP_MAGIC_ZIN": "mzine_typer2",
+  "BITMAP_SHINY+6": "shiny05",
+  "BITMAP_ORORA": "hikorora",
+  "BITMAP_LIGHT_MARKS": "lightmarks",
+  "BITMAP_TARGET_POSITION_EFFECT1": "cursorpin01",
+  "BITMAP_TARGET_POSITION_EFFECT2": "cursorpin02",
+  "BITMAP_SMOKELINE1": "smokelines01",
+  "BITMAP_SMOKELINE2": "smokelines02",
+  "BITMAP_SMOKELINE3": "smokelines03",
+  "BITMAP_LIGHTNING_MEGA1": "lighting_mega01",
+  "BITMAP_LIGHTNING_MEGA2": "lighting_mega02",
+  "BITMAP_LIGHTNING_MEGA3": "lighting_mega03",
+  "BITMAP_FIRE_HIK1": "firehik01",
+  "BITMAP_FIRE_HIK3": "firehik03",
+  "BITMAP_FIRE_HIK1_MONO": "firehik_mono01",
+  "BITMAP_FIRE_HIK2_MONO": "firehik_mono02",
+  "BITMAP_FIRE_HIK3_MONO": "firehik_mono03",
+  "BITMAP_RAKLION_CLOUDS": "clouds3",
+  "BITMAP_GM_HAIR_1": "younghtest1",
+  "BITMAP_GM_HAIR_3": "younghtest3",
+  "BITMAP_GM_AURORA": "gmmzine",
+  "BITMAP_EXPLOTION_MONO": "explotion01mono",
+  "BITMAP_CLUD64": "Clud64",
+  "BITMAP_CLOUD": "clouds",
+  "BITMAP_BLUE_BLUR": "SwordEff",
+  "BITMAP_IMPACT": "Impack03",
+  "BITMAP_SCOLPION_TAIL": "ScolTail",
+  "BITMAP_FIRE_SNUFF": "FireSnuff",
+  "BITMAP_SPOT_WATER": "coll",
+  "BITMAP_DS_EFFECT": "BowE",
+  "BITMAP_DS_SHOCK": "Shockwave",
+  "BITMAP_EXPLOTION+1": "DinoE",
+  "BITMAP_SHINY": "Shiny01",
+  "BITMAP_SHINY+1": "Shiny02",
+  "BITMAP_SHINY+2": "Shiny03",
+  "BITMAP_SHINY+3": "eye01",
+  "BITMAP_SHINY+4": "ring",
+  "BITMAP_SHINY+5": "shiny04",
+  "BITMAP_CHROME": "Chrome01",
+  "BITMAP_BLUR": "blur01",
+  "BITMAP_CHROME+1": "bab2",
+  "BITMAP_BLUR+1": "motion_blur",
+  "BITMAP_BLUR+2": "motion_blur_r",
+  "BITMAP_BLUR+3": "motion_mono",
+  "BITMAP_BLUR+6": "motion_blur_r3",
+  "BITMAP_BLUR+7": "gra",
+  "BITMAP_BLUR+8": "spinmark01",
+  "BITMAP_BLUR+9": "flamestani",
+  "BITMAP_BLUR+10": "sword_blur",
+  "BITMAP_BLUR+11": "joint_sword_red",
+  "BITMAP_BLUR+12": "motion_blur_r2",
+  "BITMAP_BLUR+13": "motion_blur_r3",
+  "BITMAP_BLUR2": "blur02",
+  "BITMAP_LIGHTNING+1": "lightning2",
+  "BITMAP_ENERGY": "Thunder01",
+  "BITMAP_JOINT_SPARK": "Spark01",
+  "BITMAP_JOINT_THUNDER": "JointThunder01",
+  "BITMAP_JOINT_SPIRIT": "JointSpirit01",
+  "BITMAP_JOINT_ENERGY": "JointLaser01",
+  "BITMAP_JOINT_HEALING": "JointEnergy01",
+  "BITMAP_JOINT_LASER+1": "JointLaser02",
+  "BITMAP_SKULL": "Skull",
+  "BITMAP_JOINT_FORCE": "motion_blur_r2",
+  "BITMAP_FIRECRACKER": "Fire04",
+  "BITMAP_FLARE": "Flare",
+  "BITMAP_CHROME2": "Chrome02",
+  "BITMAP_CHROME3": "Chrome03",
+  "BITMAP_CHROME6": "Chrome06",
+  "BITMAP_CHROME7": "Chrome07",
+  "BITMAP_CHROME_ENERGY": "energy01",
+  "BITMAP_CHROME_ENERGY2": "energy02",
+  "BITMAP_FIRECRACKER0001": "firecracker0001",
+  "BITMAP_FIRECRACKER0002": "firecracker0002",
+  "BITMAP_FIRECRACKER0003": "firecracker0003",
+  "BITMAP_FIRECRACKER0004": "firecracker0004",
+  "BITMAP_FIRECRACKER0005": "firecracker0005",
+  "BITMAP_FIRECRACKER0006": "firecracker0006",
+  "BITMAP_FIRECRACKER0007": "firecracker0007",
+  "BITMAP_LUCKY_SEAL_EFFECT": "bujuckline",
+  "BITMAP_FLARE_BLUE": "flareBlue",
+  "BITMAP_FLARE_FORCE": "NSkill",
+  "BITMAP_FLARE+1": "Flare02",
+  "BITMAP_PINK_WAVE": "pinkWave",
+  "BITMAP_FLARE_RED": "flareRed",
+  "BITMAP_FIRE+3": "Fire05",
+  "BITMAP_HOLE": "Hole",
+  "BITMAP_WATERFALL_1": "WATERFALL1",
+  "BITMAP_WATERFALL_2": "WATERFALL2",
+  "BITMAP_WATERFALL_3": "WATERFALL3",
+  "BITMAP_WATERFALL_4": "WATERFALL4",
+  "BITMAP_WATERFALL_5": "WATERFALL5",
+  "BITMAP_FLASH": "Flashing",
+  "BITMAP_CRATER": "Cratered",
+  "BITMAP_FORMATION_MARK": "FormationMark",
+  "BITMAP_PLUS": "Plus",
+  "BITMAP_FENRIR_THUNDER": "eff_lighting",
+  "BITMAP_FENRIR_FOOT_THUNDER1": "eff_lightinga01",
+  "BITMAP_FENRIR_FOOT_THUNDER2": "eff_lightinga02",
+  "BITMAP_FENRIR_FOOT_THUNDER3": "eff_lightinga03",
+  "BITMAP_FENRIR_FOOT_THUNDER4": "eff_lightinga04",
+  "BITMAP_FENRIR_FOOT_THUNDER5": "eff_lightinga05",
+  "BITMAP_INFERNO": "Inferno",
+  "BITMAP_LAVA": "Lava",
+  "BITMAP_TWINTAIL_WATER": "water",
+  "BITMAP_LIGHT+2": "cra_04",
+  "BITMAP_LIGHT+3": "Impack01",
+  "BITMAP_EVENT_CLOUD": "clouds2",
+  "BITMAP_PIN_LIGHT": "pin_lights",
+  "BITMAP_LIGHTMARKS": "lightmarks",
+  "BITMAP_LIGHTMARKS_FOREIGN": "lightmarks",
+  "BITMAP_CHERRYBLOSSOM_EVENT_PETAL": "sakuras01",
+  "BITMAP_CHERRYBLOSSOM_EVENT_FLOWER": "sakuras02",
+  "BITMAP_CURSEDTEMPLE_ALLIED_PHYSICSCLOTH": "unitedsoldier_wing",
+  "BITMAP_CURSEDTEMPLE_ILLUSION_PHYSICSCLOTH": "illusionistcloth",
+  "BITMAP_CURSEDTEMPLE_EFFECT_MASKER": "masker",
+  "BITMAP_CURSEDTEMPLE_EFFECT_WIND": "wind01",
+  "BITMAP_LIGHT_RED": "flare01_red",
+  "BITMAP_GRA": "gra",
+  "BITMAP_RING_OF_GRADATION": "ring_of_gradation"
+ }
+}

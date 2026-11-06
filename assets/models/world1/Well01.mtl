@@ -1,0 +1,32 @@
+newmtl Material_0
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd tub.png
+
+newmtl Material_1
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd horse_drawn_01.png
+
+newmtl Material_2
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd well.png
+
+newmtl Material_3
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd jar_01.png
+

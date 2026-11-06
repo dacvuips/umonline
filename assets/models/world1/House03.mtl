@@ -1,0 +1,40 @@
+newmtl Material_0
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd tile_ston05.png
+
+newmtl Material_1
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd tile_ston04.png
+
+newmtl Material_2
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd tile_ston06.png
+
+newmtl Material_3
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd tile_ston07.png
+
+newmtl Material_4
+Kd 1.0 1.0 1.0
+Ka 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+d 1.0
+illum 1
+map_Kd light_02.png
+

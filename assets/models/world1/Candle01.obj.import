@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bt6brp8rdmefq"
+path="res://.godot/imported/Candle01.obj-11de99f871da55a8a39016a49a505457.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Candle01.obj-11de99f871da55a8a39016a49a505457.mesh"]
+
+source_file="res://assets/models/world1/Candle01.obj"
+dest_files=["res://.godot/imported/Candle01.obj-11de99f871da55a8a39016a49a505457.mesh", "res://.godot/imported/Candle01.obj-11de99f871da55a8a39016a49a505457.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

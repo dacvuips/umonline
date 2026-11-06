@@ -1,0 +1,6883 @@
+{
+ "stormCrow": {
+  "passes": [],
+  "partial": true
+ },
+ "thunderHawk": {
+  "passes": [],
+  "partial": true
+ },
+ "wingsOfDarkness": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "0.5",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "bab2",
+    "light": [
+     "0.8",
+     "0.6",
+     "1.0"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "wingOfStorm": {
+  "passes": [
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "0.7",
+     "0.5"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "0.7",
+     "0.5"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "(1.0)",
+    "u": "((floor(mod((T * 0.025), 16.0)) / 4.0) * 0.25)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "0.9",
+     "0.6",
+     "0.3"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "wingOfRuin": {
+  "passes": [
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "0.1 + (abs(sin(T * 0.001)) * 0.3)",
+     "0.1 + (abs(sin(T * 0.001)) * 0.3)",
+     "0.1 + (abs(sin(T * 0.001)) * 0.3)"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "msword01_r",
+    "light": [
+     "0.0 + (abs(sin(T * 0.001)) * 0.8)",
+     "0.0 + (abs(sin(T * 0.001)) * 0.8)",
+     "0.0 + (abs(sin(T * 0.001)) * 0.8)"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "capeOfEmperor": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "wingsOfDespair": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT",
+     "RENDER_CHROME6"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "wingOfDimension": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "divineSwordOfArchangel": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_METAL"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_LIGHTMAP"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "T * 0.0001",
+    "hidden": -1,
+    "texture": "Chrome01",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "archangelStaff": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_METAL"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_LIGHTMAP"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "-T * 0.0001",
+    "hidden": -1,
+    "texture": "Chrome01",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "divineScepterOfArchangel": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_LIGHTMAP"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "-T * 0.0001",
+    "hidden": -1,
+    "texture": "Chrome01",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "greatReignCrossbow": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_LIGHTMAP"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "-T * 0.0002",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "Chrome01",
+    "light": [
+     "0.8 * (body.x)",
+     "0.0",
+     "0.8 * (body.z)"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "bab2",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "pumpkinOfLuck": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_DARK",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "-T * 0.0002",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "Chrome01",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "skillParchment": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.0) * 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "rollofpaper_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "runeBlade": {
+  "passes": [
+   {
+    "mesh": 3,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "sin(T * 0.01)",
+    "blend_mesh": 1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "T * 0.001",
+    "hidden": -1,
+    "texture": "Chrome01",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 2,
+    "blend_light": "(1.0)",
+    "u": "T * 0.0001",
+    "v": "-T * 0.0005",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "(body.x) * (sin(T * 0.001) * 0.5 + 0.5)",
+     "(body.x) * (sin(T * 0.001) * 0.5 + 0.5)",
+     "(body.x) * (sin(T * 0.001) * 0.5 + 0.5)"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "dragonSpear": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "(1.0)",
+    "u": "T * 0.0001",
+    "v": "T * 0.0005",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "elementalMace": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 2,
+    "blend_light": "(1.0)",
+    "u": "(T * 0.001)",
+    "v": "-T * 0.0005",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "(body.x) * (sin((T * 0.001)) * 0.5 + 0.3)",
+     "(body.x) * (sin((T * 0.001)) * 0.5 + 0.3)",
+     "(body.x) * (sin((T * 0.001)) * 0.5 + 0.3)"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "darkHorse": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "0.8",
+     "0.4",
+     "0.1"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "darkRaven": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "0.3",
+     "0.8",
+     "1.0"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "battleScepter": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(sin(T * 0.001) * 0.6 + 0.4)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(sin(T * 0.001) * 0.6 + 0.4)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "masterScepter": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(sin(T * 0.001) * 0.6 + 0.4)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "0.1",
+     "0.3",
+     "1.0"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "T * 0.0003",
+    "hidden": -1,
+    "texture": "Chrome01",
+    "light": [
+     "0.6",
+     "0.8",
+     "1.0"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "flamberge": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "0.0",
+     "0.2"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 3,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 4,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 5,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 5,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "0.0",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "swordBreaker": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "runeBastardSword": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(sin(T * 0.001) * 0.6 + 0.4)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "frostMace": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": 1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 3,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "deadlyStaff": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "0.5",
+     "0.5"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "imperialStaff": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(abs(sin(T * 0.001)) + 0.1)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "soketmagic_stape02",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(abs(sin(T * 0.001)) + 0.1)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "soketmagic_stape02",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(abs(sin(T * 0.001)) + 0.1)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "soketmagic_stape02",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "staff32": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 3,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 3,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "crimsonGlory": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "salamanderShield": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": 1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "frostBarrier": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(abs((sin(T * 0.001))))",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "guardianShield": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "crossShield": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "mod(-0.0, 2000.0) * 0.0005",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": 1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": 1
+   }
+  ],
+  "partial": true
+ },
+ "oldScroll": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "0.7",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": 1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 4,
+    "blend_light": "(sin(T * 0.002) * 0.3 + 0.7)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": 0,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "illusionSorcererCovenant": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": 0,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(float(sin(T * 0.00004) * 0.15) + 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": 1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "bloodBone": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(sin(0.0 * 0.0001))",
+    "v": "(-T * 0.0005)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "(body.x) * 0.9",
+     "(body.y) * 0.9",
+     "(body.z) * 0.9"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(sin(0.0 * 0.0001))",
+    "v": "(-T * 0.0005)",
+    "hidden": -1,
+    "texture": "Chrome01",
+    "light": [
+     "0.9",
+     "0.1",
+     "0.1"
+    ],
+    "stream": 0
+   }
+  ],
+  "partial": true
+ },
+ "invisibilityCloak": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(sin(T * 0.002) * 0.3 + 0.7)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "scrollOfBlood": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "0.7",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": 0,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(sin(T * 0.002) * 0.3 + 0.7)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": 1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "cursedCastleWater": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0) * 1.5",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0) / 4.0",
+    "u": "T * 0.005",
+    "v": "-T * 0.005",
+    "hidden": 0,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "harmonyShine": {
+  "passes": [],
+  "partial": false
+ },
+ "condorFlame": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "0.9",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "condorFeather": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "0.9",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "deathBeamKnightFlame": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.5) * 0.4)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "deathbeamstone_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "hellMinerHorn": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.5) * 0.4)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "hellhorn_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "darkPhoenixFeather": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.5) * 0.4)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "phoenixfeather_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "abyssalEye": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "((sin(T * 0.0015) + 1.5) * 0.4)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "Deye_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "0.2",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "eventTicket": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.2) * 0.3)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "entrance_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "chaosCard": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": 1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.2) * 0.4)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "juju_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "rareItemTicket1": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.0) * 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "expensiveitem01_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "rareItemTicket2": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.0) * 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "expensiveitem02a_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "rareItemTicket3": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.0) * 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "expensiveitem02b_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "rareItemTicket4": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.0) * 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "expensiveitem03a_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "rareItemTicket": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.0) * 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "expensiveitem03b_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "talismanOfLuck": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.5) * 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "bujuck01alpa",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "elitePotion": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_CHROME4"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "textured": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "rareItemTicket7": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.0) * 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "rareitem_ticket_7_body",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "rareItemTicket8": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.0) * 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "rareitem_ticket_8_body",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "rareItemTicket9": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.0) * 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "rareitem_ticket_9_body",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "rareItemTicket10": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.0) * 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "rareitem_ticket_10_body",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "rareItemTicket11": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.0) * 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "rareitem_ticket_11_body",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "rareItemTicket12": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.0) * 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "rareitem_ticket_12_body",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "openAccessTicketToDoppelganger": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.2) * 0.3)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "DoppelCard",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "openAccessTicketToVarka": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.2) * 0.3)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "BarcaCard",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "openAccessTicketToVarka7": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.2) * 0.3)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "Barca7Card",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "summonerCharacterCard": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": 1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.2) * 0.4)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "alicecard_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "chaosCardGold": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": 1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.2) * 0.4)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "jujug_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "chaosCardRare": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": 1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.2) * 0.4)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "jujul_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "chaosCardMini": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": 1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.2) * 0.4)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "jujum_R",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "texturedAllMeshes": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "greatScepter": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(T * 0.0005)",
+    "v": "(T * 0.0005)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "lordScepter": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(T * 0.0008)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(sin(T * 0.001) * 0.3 + 0.7)",
+    "u": "0.0",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "knightBlade": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 2,
+    "blend_light": "(sin(T * 0.0008) * 0.7 + 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 3,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 3,
+    "blend_light": "(1.0)",
+    "u": "T * 0.0001",
+    "v": "T * 0.0005",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "darkReignBlade": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "T * 0.0005",
+    "v": "T * 0.0005",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "T * 0.0005",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": 1
+   }
+  ],
+  "partial": true
+ },
+ "hurricane": {
+  "passes": [],
+  "partial": true
+ },
+ "sylphWindBow": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": 0
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "mod(0.0, 4000.0) * 0.0004 - 0.7",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "Chrome07",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": 0
+   }
+  ],
+  "partial": true
+ },
+ "explosionBlade": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -2,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "(sin(T * 0.0015) * 0.03 + 0.3)",
+     "(sin(T * 0.0015) * 0.03 + 0.3)",
+     "(sin(T * 0.0015) * 0.03 + 0.3) + 0.1"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "0.5",
+    "blend_mesh": -2,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "0.4",
+     "0.4",
+     "0.8"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "sylphidRay": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "swordDancer": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "0.5",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "Lava",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "0.7",
+    "blend_mesh": 1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "T * 0.0009",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "albatrossBow": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT",
+     "RENDER_CHROME5"
+    ],
+    "alpha": "0.5",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "platinaStaff": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "(1.0)",
+    "u": "T * 0.0009",
+    "v": "T * 0.0009",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "onlyMesh2WithoutSkin": {
+  "passes": [
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "onlyMesh0WithoutSkin": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "onlyMesh1WithoutSkin": {
+  "passes": [
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "violentWindToEternalWingHelm": {
+  "passes": [],
+  "partial": true
+ },
+ "violentWindToEternalWingArmor": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "violentWindToEternalWingPants": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "characterCard": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.0015) + 1.2) * 0.4)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "divineAndSuccubusSkin": {
+  "passes": [],
+  "partial": true
+ },
+ "brova": {
+  "passes": [
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 3,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 4,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 5,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "0.4",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "0.8",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "strikerScepter": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 3,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 4,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 5,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 6,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "0.5",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "arrowViperBow": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 6,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 3,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 3,
+    "blend_light": "(sin(T * 0.002) * 0.3 + 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 4,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 4,
+    "blend_light": "(sin(T * 0.002) * 0.3 + 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 5,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "lostMap": {
+  "passes": [
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "T * 0.0005",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "symbolOfKundun": {
+  "passes": [
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "T * 0.0005",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": 1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 2,
+    "blend_light": "(0.01 + ((float(mod((T * 0.025) * 0.01, 1.98))) < 0.99 ? (float(mod((T * 0.025) * 0.01, 1.98))) : 1.98 - (float(mod((T * 0.025) * 0.01, 1.98)))))",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "0.5",
+     "0.0"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "0.3",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "staffOfKundun": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "0.2",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "sin(T * 0.005)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME4"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "demonicStick": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "1.0",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "stormBlitzStick": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "((sin(T * 0.002) + 0.5) * 0.5)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "greatLordScepter": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "1.0",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 3,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 3,
+    "blend_light": "1.0",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "grandSoulShield": {
+  "passes": [
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "(body.x) * 0.3",
+     "(body.y) * 0.3",
+     "(body.z) * 0.3"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 2,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "T * 0.01",
+    "hidden": -1,
+    "texture": "Chrome01",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "(1.0)",
+    "u": "float(floor(fract(sin((floor(T * 0.06) + 1.0) * 12.9898) * 43758.5453) * 10.0)) * 0.1",
+    "v": "float(floor(fract(sin((floor(T * 0.06) + 2.0) * 12.9898) * 43758.5453) * 10.0)) * 0.1",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 2,
+    "blend_light": "(1.0)",
+    "u": "T * 0.0001",
+    "v": "T * 0.0005",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "(body.x) * (sin(T * 0.001) * 0.4 + 0.6)",
+     "(body.x) * (sin(T * 0.001) * 0.4 + 0.6)",
+     "(body.x) * (sin(T * 0.001) * 0.4 + 0.6)"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "elementalShield": {
+  "passes": [
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "0.8",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 3,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "0.5",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 2,
+    "blend_light": "(1.0)",
+    "u": "T * 0.0005",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 3,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 3,
+    "blend_light": "(1.0)",
+    "u": "float(floor(fract(sin((floor(T * 0.06) + 1.0) * 12.9898) * 43758.5453) * 10.0)) * 0.1",
+    "v": "float(floor(fract(sin((floor(T * 0.06) + 2.0) * 12.9898) * 43758.5453) * 10.0)) * 0.1",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "monsterBattleBow": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "0.1",
+     "0.1",
+     "0.1"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "siegePotion": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_METAL"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "0.1",
+     "0.5",
+     "1.0"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "0.1",
+     "0.5",
+     "1.0"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "contractSummon": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "lifeStone": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "0.0",
+     "0.5",
+     "1.0"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "ammunition": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "0.8",
+     "0.2"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "0.8",
+     "0.2"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "helperNpcPlate": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "0.9",
+     "0.7",
+     "1.0"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "eff_lighting",
+    "light": [
+     "0.9",
+     "0.7",
+     "1.0"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_METAL"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "eff_lighting",
+    "light": [
+     "0.9",
+     "0.7",
+     "1.0"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "socketSeed": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "socketSeedSphere": {
+  "passes": [
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": 1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "gambleItem": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "0.35",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "0.0",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 2,
+    "blend_light": "0.0",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "talismanOfResurrection": {
+  "passes": [
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "((sin(T * 0.003) + 1.0) * 0.3 + 0.3)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "talismanOfMobility": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "talismanOfGuardian": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "talismanOfItemProtection": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "invitationToSantaVillage": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME4"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "((sin(T * 0.003) + 1.0) * 0.3 + 0.6)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "luckyCoin": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "chromeMesh1": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "boostAura": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "0.2",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "chromeMesh0": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "sealedBox": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "goldenOrSilverBox": {
+  "passes": [
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "smallCapeOfLord": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "packageBoxA": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "membership_item_red",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "packageBoxB": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "membership_item_blue",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "packageBoxC": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "membership_item_gold",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "packageBoxD": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "membership_item_green",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "packageBoxE": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "membership_item_pouple",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "packageBoxF": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "membership_item_sky",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "accountServiceItem": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "mebership_3items_green",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "dayPass": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "mebership_3items_red",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "hourPass": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "mebership_3items_yellow",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "jewelryCase": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "skeletonTransformationRing": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "0.5",
+    "blend_mesh": 0,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "phoenixSoulStar": {
+  "passes": [
+   {
+    "mesh": -1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0 * ((sin(T * 0.003) + 1.0) * 0.3 + 0.4)",
+    "blend_mesh": 0,
+    "blend_light": "(1.0) * ((sin(T * 0.003) + 1.0) * 0.3 + 0.4)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": "PhoenixSoul_render",
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE",
+     "RENDER_BRIGHT"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "0.15",
+     "1.0",
+     "0.25"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME3"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": 1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "1.0",
+     "1.0",
+     "1.0"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "phoenixSoulHelmet": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0 * ((sin(T * 0.003) + 1.0) * 0.3 + 0.4)",
+    "blend_mesh": 2,
+    "blend_light": "(1.0) * ((sin(T * 0.003) + 1.0) * 0.3 + 0.4)",
+    "u": "float(-mod(floor(T), 1000.0)) * 0.00009",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": true
+ },
+ "phoenixSoulArmor": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "float(-mod(floor(T), 1000.0)) * 0.00009",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0 * ((sin(T * 0.003) + 1.0) * 0.3 + 0.4)",
+    "blend_mesh": 1,
+    "blend_light": "(1.0) * ((sin(T * 0.003) + 1.0) * 0.3 + 0.4)",
+    "u": "float(-mod(floor(T), 1000.0)) * 0.00009",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 2,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "phoenixSoulBoots": {
+  "passes": [
+   {
+    "mesh": 0,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "(0.0)",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_TEXTURE"
+    ],
+    "alpha": "1.0",
+    "blend_mesh": -1,
+    "blend_light": "(1.0)",
+    "u": "float(-mod(floor(T), 1000.0)) * 0.00009",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   },
+   {
+    "mesh": 1,
+    "flags": [
+     "RENDER_BRIGHT",
+     "RENDER_CHROME"
+    ],
+    "alpha": "1.0 * ((sin(T * 0.003) + 1.0) * 0.3 + 0.4)",
+    "blend_mesh": 1,
+    "blend_light": "(1.0) * ((sin(T * 0.003) + 1.0) * 0.3 + 0.4)",
+    "u": "float(-mod(floor(T), 1000.0)) * 0.00009",
+    "v": "(0.0)",
+    "hidden": -1,
+    "texture": null,
+    "light": [
+     "body.x",
+     "body.y",
+     "body.z"
+    ],
+    "stream": -1
+   }
+  ],
+  "partial": false
+ },
+ "luckyItem": {
+  "passes": [],
+  "partial": true
+ }
+}

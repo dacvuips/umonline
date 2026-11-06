@@ -1,0 +1,20 @@
+# Godot 4+ specific ignores
+.godot/
+*.translation
+
+# Python & Gateway
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# Backup and temporary files
+_backup*/
+*.tmp
+*.log
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
