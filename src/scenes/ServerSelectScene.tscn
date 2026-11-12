@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://bi7tleld5haqq"]
+
+[ext_resource type="Script" path="res://src/scenes/MuServerSelect.gd" id="1_server"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/Server_Select_Full.png" id="2_bg_full"]
+
+[node name="ServerSelectScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_server")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg_full")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ServerDialog" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -165.0
+offset_top = -90.0
+offset_right = 165.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GroupPanel" type="Control" parent="ServerDialog"]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 130.0
+offset_bottom = 200.0
+
+[node name="DecoTopLeft" type="TextureRect" parent="ServerDialog/GroupPanel"]
+z_index = 2
+layout_mode = 0
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 58.0
+offset_bottom = 86.0
+mouse_filter = 2
+
+[node name="GroupVBox" type="VBoxContainer" parent="ServerDialog/GroupPanel"]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 200.0
+theme_override_constants/separation = 3
+
+[node name="SelectionWing" type="TextureRect" parent="ServerDialog/GroupPanel"]
+z_index = 2
+layout_mode = 0
+offset_left = 107.0
+offset_top = 34.0
+offset_right = 129.0
+offset_bottom = 62.0
+mouse_filter = 2
+
+[node name="ChannelPanel" type="Control" parent="ServerDialog"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 137.0
+offset_right = 330.0
+offset_bottom = 200.0
+
+[node name="ChannelVBox" type="VBoxContainer" parent="ServerDialog/ChannelPanel"]
+layout_mode = 0
+offset_right = 193.0
+offset_bottom = 200.0
+theme_override_constants/separation = 3
+
+[node name="BottomPrompt" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -40.0
+offset_right = 300.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PromptLabel" type="Label" parent="BottomPrompt"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.75, 0.75, 0.75, 0.8)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 12
+text = "[ESC] Đổi Tài Khoản  •  Nhấp đúp hoặc bấm Enter để chọn máy chủ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnBack" type="Button" parent="BottomPrompt"]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -12.0
+offset_right = 90.0
+offset_bottom = 12.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 11
+text = "« Đổi tài khoản"

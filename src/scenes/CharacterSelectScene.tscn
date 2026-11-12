@@ -1,0 +1,522 @@
+[gd_scene format=3 uid="uid://c6characterselect01"]
+
+[ext_resource type="Script" path="res://src/scenes/MuCharacterSelect.gd" id="1_select"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/Character_Select_Full.png" id="2_bg_full"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/cha_id.png" id="3_cha_id"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/character_ex.png" id="4_balloon_bg"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/deco.png" id="5_deco"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/op1_b_all.png" id="6_btn_tex"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/SysMenu_Window.png" id="7_sysmenu_win"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/menu_btn_exit_normal.png" id="8_btn_exit_n"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/menu_btn_exit_hover.png" id="8_btn_exit_h"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/menu_btn_exit_pressed.png" id="9_btn_exit_p"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/menu_btn_server_normal.png" id="10_btn_server_n"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/menu_btn_server_hover.png" id="10_btn_server_h"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/menu_btn_server_pressed.png" id="11_btn_server_p"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/menu_btn_option_normal.png" id="12_btn_opt_n"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/menu_btn_option_hover.png" id="12_btn_opt_h"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/menu_btn_option_pressed.png" id="13_btn_opt_p"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/menu_btn_close_normal.png" id="14_btn_close_n"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/menu_btn_close_hover.png" id="14_btn_close_h"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/menu_btn_close_pressed.png" id="15_btn_close_p"]
+[ext_resource type="PackedScene" path="res://src/scenes/CharMakeModal.tscn" id="16_charmake"]
+
+[sub_resource type="Environment" id="Environment_preview"]
+background_mode = 1
+background_color = Color(0, 0, 0, 0)
+ambient_light_source = 2
+ambient_light_color = Color(0.85, 0.85, 0.95, 1)
+ambient_light_energy = 1.4
+
+[node name="CharacterSelectScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_select")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg_full")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="PreviewViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="PreviewViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="PreviewViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.9632, 0.2689, 0, -0.2689, 0.9632, -0.04, 2.15, 3.97)
+current = true
+fov = 36.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="PreviewViewportContainer/SubViewport"]
+environment = SubResource("Environment_preview")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="PreviewViewportContainer/SubViewport"]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 2, 4, 3)
+light_color = Color(1, 0.95, 0.9, 1)
+light_energy = 1.5
+
+[node name="FillLight" type="DirectionalLight3D" parent="PreviewViewportContainer/SubViewport"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -2, 2, -2)
+light_color = Color(0.65, 0.75, 1, 1)
+light_energy = 0.9
+
+[node name="PedestalSlots" type="Node3D" parent="PreviewViewportContainer/SubViewport"]
+
+[node name="Slot0" type="Node3D" parent="PreviewViewportContainer/SubViewport/PedestalSlots"]
+transform = Transform3D(0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, 0.939693, -1.7, -0.14, -0.5)
+
+[node name="Slot1" type="Node3D" parent="PreviewViewportContainer/SubViewport/PedestalSlots"]
+transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -0.85, -0.14, -1.0)
+
+[node name="Slot2" type="Node3D" parent="PreviewViewportContainer/SubViewport/PedestalSlots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, -0.14, -1.2)
+
+[node name="Slot3" type="Node3D" parent="PreviewViewportContainer/SubViewport/PedestalSlots"]
+transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 0.85, -0.14, -1.0)
+
+[node name="Slot4" type="Node3D" parent="PreviewViewportContainer/SubViewport/PedestalSlots"]
+transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 1.7, -0.14, -0.5)
+
+[node name="PedestalClickAreas" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Area0" type="Button" parent="PedestalClickAreas"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 90.0
+offset_right = 320.0
+offset_bottom = 660.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="Area1" type="Button" parent="PedestalClickAreas"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 90.0
+offset_right = 530.0
+offset_bottom = 660.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="Area2" type="Button" parent="PedestalClickAreas"]
+layout_mode = 0
+offset_left = 530.0
+offset_top = 90.0
+offset_right = 750.0
+offset_bottom = 660.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="Area3" type="Button" parent="PedestalClickAreas"]
+layout_mode = 0
+offset_left = 750.0
+offset_top = 90.0
+offset_right = 960.0
+offset_bottom = 660.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="Area4" type="Button" parent="PedestalClickAreas"]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 90.0
+offset_right = 1180.0
+offset_bottom = 660.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="CharBalloon" type="Control" parent="."]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 230.0
+offset_right = 350.0
+offset_bottom = 284.0
+mouse_default_cursor_shape = 2
+
+[node name="BalloonBg" type="TextureRect" parent="CharBalloon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_balloon_bg")
+
+[node name="LblName" type="Label" parent="CharBalloon"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 6.0
+offset_bottom = 21.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "HieuDev"
+horizontal_alignment = 1
+
+[node name="LblGuild" type="Label" parent="CharBalloon"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 21.0
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.9, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 10
+text = "(Người bình thường)"
+horizontal_alignment = 1
+
+[node name="LblClassLevel" type="Label" parent="CharBalloon"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 36.0
+offset_bottom = 51.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.15, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "Phù Thủy 14"
+horizontal_alignment = 1
+
+[node name="TopLeftNotice" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 358.0
+offset_bottom = 50.0
+mouse_filter = 2
+texture = ExtResource("3_cha_id")
+expand_mode = 1
+
+[node name="NoticeLabel" type="Label" parent="TopLeftNotice"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.88, 0.88, 0.92, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "Bạn đã đăng nhập với tư cách Người chơi miễn phí"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BottomBar" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -38.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.04, 0.04, 0.06, 0.75)
+
+[node name="BottomLeft" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -38.0
+offset_right = 150.0
+grow_vertical = 0
+
+[node name="BtnCreate" type="TextureButton" parent="BottomLeft"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 4.0
+offset_right = 72.0
+offset_bottom = 34.0
+mouse_default_cursor_shape = 2
+
+[node name="Lbl" type="Label" parent="BottomLeft/BtnCreate"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.45, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 12
+text = "Create"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnMenu" type="TextureButton" parent="BottomLeft"]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 4.0
+offset_right = 131.0
+offset_bottom = 34.0
+mouse_default_cursor_shape = 2
+
+[node name="Lbl" type="Label" parent="BottomLeft/BtnMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.39, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 12
+text = "Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BottomRight" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="DecoFiligree" type="TextureRect" parent="BottomRight"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -189.0
+offset_top = -98.0
+offset_bottom = 5.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("5_deco")
+
+[node name="BtnConnect" type="TextureButton" parent="BottomRight"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -131.0
+offset_top = -34.0
+offset_right = -77.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+
+[node name="Lbl" type="Label" parent="BottomRight/BtnConnect"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.45, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 12
+text = "Connect"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnDelete" type="TextureButton" parent="BottomRight"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -34.0
+offset_right = -18.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+
+[node name="Lbl" type="Label" parent="BottomRight/BtnDelete"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.78, 0.25, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 12
+text = "Delete"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SysMenuModal" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Backdrop" type="Button" parent="SysMenuModal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+flat = true
+
+[node name="DimOverlay" type="ColorRect" parent="SysMenuModal/Backdrop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="Panel" type="Control" parent="SysMenuModal"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.0
+offset_top = -95.0
+offset_right = 108.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WindowBg" type="TextureRect" parent="SysMenuModal/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_sysmenu_win")
+expand_mode = 1
+
+[node name="BtnExitGame" type="TextureButton" parent="SysMenuModal/Panel"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 36.0
+offset_right = 162.0
+offset_bottom = 66.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("8_btn_exit_n")
+texture_hover = ExtResource("8_btn_exit_h")
+texture_pressed = ExtResource("9_btn_exit_p")
+
+[node name="BtnSelectServer" type="TextureButton" parent="SysMenuModal/Panel"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 70.0
+offset_right = 162.0
+offset_bottom = 100.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("10_btn_server_n")
+texture_hover = ExtResource("10_btn_server_h")
+texture_pressed = ExtResource("11_btn_server_p")
+
+[node name="BtnOption" type="TextureButton" parent="SysMenuModal/Panel"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 104.0
+offset_right = 162.0
+offset_bottom = 134.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("12_btn_opt_n")
+texture_hover = ExtResource("12_btn_opt_h")
+texture_pressed = ExtResource("13_btn_opt_p")
+
+[node name="BtnClose" type="TextureButton" parent="SysMenuModal/Panel"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 138.0
+offset_right = 162.0
+offset_bottom = 168.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("14_btn_close_n")
+texture_hover = ExtResource("14_btn_close_h")
+texture_pressed = ExtResource("15_btn_close_p")
+
+[node name="DeleteConfirmDialog" type="ConfirmationDialog" parent="."]
+title = "Xác nhận xóa nhân vật"
+initial_position = 2
+size = Vector2i(320, 120)
+ok_button_text = "Xóa vĩnh viễn"
+cancel_button_text = "Hủy bỏ"
+
+[node name="CharMakeModal" parent="." instance=ExtResource("16_charmake")]
+visible = false

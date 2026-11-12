@@ -10,7 +10,6 @@ class_name MuLorenciaWorld
 const MODELS_DIR := "res://assets/lorencia/models/"
 const OBJECTS_JSON := "res://assets/lorencia/lorencia_objects.json"
 const FIRES_JSON := "res://assets/lorencia/lorencia_fires.json"
-const CHUNK := 32 # gom vật thể tĩnh theo ô 32x32 vào MultiMesh để giảm draw call
 
 # --- Thông số lấy từ CreateObject()/MoveObject() của ZzzObject.cpp cho Lorencia ---
 const MODEL_TREE01 := 0
@@ -60,10 +59,12 @@ var lorencia_npcs = [
 	{"name": "Lorencia Guard West", "id": 249, "title": "Lính Gác Cổng Tây", "x": 97, "y": 129, "role": "guard"},
 	{"name": "Lorencia Guard South", "id": 247, "title": "Lính Gác Cổng Nam", "x": 132, "y": 85, "role": "guard"},
 	{"name": "Lorencia Guard North", "id": 247, "title": "Lính Gác Cổng Bắc", "x": 121, "y": 149, "role": "guard"},
-	{"name": "Wandering Merchant", "id": 250, "title": "Thương Nhân Lang Thang", "x": 183, "y": 137, "role": "potion"}
+	{"name": "Wandering Merchant", "id": 250, "title": "Thương Nhân Lang Thang", "x": 183, "y": 137, "role": "potion"},
+	{"name": "Shadow Phantom Soldier", "id": 257, "title": "Binh Sĩ Bóng Ma", "x": 130, "y": 128, "role": "buff"}
 ]
 
 const MapObjectsScript = preload("res://src/world/MuMapObjects.gd")
+const MuChunkStreamerRes = preload("res://src/world/MuChunkStreamer.gd")
 
 func _ready() -> void:
 	MuTerrain.ensure_loaded()
@@ -77,7 +78,10 @@ func _ready() -> void:
 	super._ready()
 	_spawn_lorencia_structures()
 	_spawn_all_lorencia_npcs()
+	# Đã tắt player bot quanh thành (trước đây: MuOtherPlayer.spawn_presets(get_parent()))
 	_spawn_ambient_fauna()
+	_setup_dragon_flock_manager()
+	MuAudioManager.set_world(1)
 
 ## Bản đồ khác Lorencia (assets/mu/maps/WorldN): địa hình + vật thể dựng chung, bỏ quái/NPC của Lorencia trong scene
 func _ready_other_map() -> void:
@@ -93,10 +97,17 @@ func _ready_other_map() -> void:
 			node.queue_free()
 	super._ready()
 	_spawn_server_npcs(MuTerrain.world_id)
+	_setup_dragon_flock_manager()
+	MuAudioManager.set_world(MuTerrain.world_id)
 
 # ------------------------------------------------------------------ Mái nhà (Alpha -> AlphaTarget)
 func _process(delta: float) -> void:
 	super._process(delta)
+	if player_node != null:
+		var tile := MuTerrain.layer1_at(player_node.grid_x, player_node.grid_y)
+		var is_indoors := (tile == ROOF_HERO_TILE)
+		MuAudioManager.set_indoor_state(is_indoors)
+
 	if _roof_materials.is_empty() or player_node == null:
 		return
 	var tile := MuTerrain.layer1_at(player_node.grid_x, player_node.grid_y)
@@ -131,9 +142,27 @@ func _spawn_server_npcs(world: int) -> bool:
 		if used.has(key):
 			continue
 		used[key] = true
+
+		var npc_info = NpcDialogueWindow.get_npc_info(id)
+		var display_name: String = str(npc_info.get("name", en))
+		var display_title: String = str(npc_info.get("title", ""))
+		var npc_role: String = str(npc_info.get("role", ""))
+
+		if display_title.is_empty():
+			if ShopWindow.has_shop(id):
+				display_title = "Cửa Hàng"
+				npc_role = "shop"
+			elif "Guard" in en or "Soldier" in en:
+				display_title = "Vệ Binh Gác Cổng"
+				npc_role = "guard"
+			else:
+				display_title = "Nhân Vật Lục Địa"
+				npc_role = "talk"
+
 		npc.name = key
-		npc.npc_name = en
-		npc.npc_title = "Cửa hàng" if ShopWindow.has_shop(id) else ""
+		npc.npc_name = display_name
+		npc.npc_title = display_title
+		npc.role = npc_role
 		npc.npc_id = id
 		var dv: Array = e.get("dir", [0, 0])
 		npc.facing_deg = rad_to_deg(atan2(float(dv[0]), -float(dv[1]))) if (int(dv[0]) != 0 or int(dv[1]) != 0) else 45.0
@@ -159,6 +188,7 @@ func _spawn_all_lorencia_npcs() -> void:
 		npc.name = data["name"].replace(" ", "")
 		npc.npc_name = data["name"]
 		npc.npc_title = data["title"]
+		npc.role = data.get("role", "")
 		npc.npc_id = int(data.get("id", -1))
 		npc.facing_deg = 45.0
 		npc.grid_x = data["x"]
@@ -296,17 +326,20 @@ func _spawn_lorencia_structures() -> void:
 	var static_root := Node3D.new()
 	static_root.name = "Static"
 	root.add_child(static_root)
-	var anim_root := Node3D.new()
-	anim_root.name = "Animated"
-	root.add_child(anim_root)
 	var fx_root := Node3D.new()
 	fx_root.name = "Effects"
 	root.add_child(fx_root)
 
-	_spawn_all_fires(fx_root)
+	# Vật thể chuyển động, lửa và vật thể tĩnh được nạp theo vùng quanh người chơi (MuChunkStreamer)
+	var streamer = MuChunkStreamerRes.new()
+	streamer.name = "Streamed"
+	root.add_child(streamer)
+
+	_spawn_all_fires(streamer)
 
 	var animated_models := {}
-	var batches := {} # key "model#type#chunk" -> Array[Transform3D]
+	var batches := {} # Vector2i chunk -> { "model#type" -> Array[Transform3D] }
+	var roof_batches := {} # "model#type" -> Array[Transform3D] (mái nhà luôn dựng sẵn để fade)
 	var n_anim := 0
 
 	for o in objs:
@@ -325,38 +358,61 @@ func _spawn_lorencia_structures() -> void:
 			animated_models[model] = _is_animated_model(model)
 		var velocity := _object_velocity(t, float(o.get("s", 1.0)))
 		if animated_models[model] and velocity > 0.0:
-			_spawn_animated(anim_root, model, t, xf, velocity)
+			var ck: Vector2i = streamer.chunk_of_pos(xf.origin)
+			streamer.register(ck, _spawn_animated.bind(model, t, xf, velocity))
 			n_anim += 1
 		else:
-			var cx := int(org[0]) / CHUNK
-			var cy := int(-org[2]) / CHUNK
-			var key := "%s#%d#%d_%d" % [model, t, cx, cy]
-			if not batches.has(key):
-				batches[key] = []
-			batches[key].append(xf)
+			var key := "%s#%d" % [model, t]
+			var dict: Dictionary
+			if t in ROOF_TYPES:
+				dict = roof_batches
+			else:
+				var ck: Vector2i = streamer.chunk_of_pos(xf.origin)
+				if not batches.has(ck):
+					batches[ck] = {}
+				dict = batches[ck]
+			if not dict.has(key):
+				dict[key] = []
+			dict[key].append(xf)
 
 	var n_static := 0
-	for key in batches:
-		var parts: PackedStringArray = key.split("#")
-		var mesh_info := _get_static_mesh(parts[0], int(parts[1]))
-		if mesh_info.is_empty():
-			continue
-		var xforms: Array = batches[key]
-		var mm := MultiMesh.new()
-		mm.transform_format = MultiMesh.TRANSFORM_3D
-		mm.mesh = mesh_info[0]
-		mm.instance_count = xforms.size()
-		for i in xforms.size():
-			mm.set_instance_transform(i, xforms[i] * mesh_info[1])
-		var mmi := MultiMeshInstance3D.new()
-		mmi.name = key.replace("#", "_")
-		mmi.multimesh = mm
-		mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		static_root.add_child(mmi)
-		if int(parts[1]) in ROOF_TYPES:
+	for key in roof_batches:
+		var mmi := _make_static_batch(key, roof_batches[key])
+		if mmi:
+			static_root.add_child(mmi)
 			_roof_nodes.append(mmi)
-		n_static += xforms.size()
-	print("[MuLorenciaWorld] Lorencia: %d vật thể tĩnh (MultiMesh), %d vật thể chuyển động" % [n_static, n_anim])
+			n_static += roof_batches[key].size()
+	for ck in batches:
+		var group: Dictionary = batches[ck]
+		for key in group:
+			n_static += group[key].size()
+		streamer.register(ck, _build_static_group.bind(group))
+	print("[MuLorenciaWorld] Lorencia: %d vật thể tĩnh (MultiMesh), %d vật thể chuyển động, %d vùng nạp theo người chơi" % [n_static, n_anim, streamer.total_count()])
+
+func _build_static_group(r: Node3D, group: Dictionary) -> void:
+	for key in group:
+		var mmi := _make_static_batch(key, group[key])
+		if mmi:
+			r.add_child(mmi)
+
+## Gom các vật thể tĩnh cùng model + loại ("model#type") vào một MultiMesh
+func _make_static_batch(key: String, xforms: Array) -> MultiMeshInstance3D:
+	var parts: PackedStringArray = key.split("#")
+	var mesh_info := _get_static_mesh(parts[0], int(parts[1]))
+	if mesh_info.is_empty():
+		return null
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.mesh = mesh_info[0]
+	mm.instance_count = xforms.size()
+	for i in xforms.size():
+		mm.set_instance_transform(i, xforms[i] * mesh_info[1])
+	var mmi := MultiMeshInstance3D.new()
+	mmi.layers |= MuModel.BLOOM_LAYER_MASK   # che bloom của nhân vật đứng sau vật thể
+	mmi.name = key.replace("#", "_")
+	mmi.multimesh = mm
+	mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	return mmi
 
 func _is_animated_model(model: String) -> bool:
 	var ps := _get_scene(model)
@@ -416,7 +472,12 @@ func _spawn_all_fires(parent: Node3D) -> void:
 	for f in json.get_data():
 		var p: Array = f["p"]
 		var d: Array = f["d"]
-		_spawn_fire(parent, Vector3(p[0], p[1], p[2]), Vector3(d[0], d[1], d[2]))
+		var pos := Vector3(p[0], p[1], p[2])
+		var dir := Vector3(d[0], d[1], d[2])
+		if parent.has_method("register"):
+			parent.register(parent.chunk_of_pos(pos), _spawn_fire.bind(pos, dir))
+		else:
+			_spawn_fire(parent, pos, dir)
 
 func _get_fire_material() -> StandardMaterial3D:
 	if _fire_material:
@@ -526,3 +587,12 @@ func _make_fauna_model(ps: PackedScene, obj_type: int) -> Node3D:
 		ap.speed_scale = randf_range(2.0, 3.0)
 		ap.play("idle")
 	return inst
+
+## Khởi tạo trình quản lý binh đoàn Rồng Bầu Trời (Rồng Đỏ & Rồng Vàng)
+func _setup_dragon_flock_manager() -> void:
+	var flock_script = load("res://src/world/MuDragonFlockManager.gd")
+	if flock_script:
+		var flock = flock_script.new()
+		flock.name = "DragonFlockManager"
+		flock.player = player_node
+		add_child(flock)

@@ -188,7 +188,8 @@ func _deathstab_tick(t: int) -> void:
 	var sword := weapon_point(Vector3.ZERO) + rot(Vector3(0, -300, 0), a)
 	if t >= 2 and t <= 8:
 		for j in 3:
-			var far := caster_pos() + mu(Vector3(0, 0, 120)) + rot(Vector3(0, -1400, 0), a)
+			# ZzzCharacter.cpp: TempPos = -1400*sin, +1400*cos -> Vector3(0, 1400, 0) ở sau lưng lao tới trước
+			var far := caster_pos() + mu(Vector3(0, 0, 120)) + rot(Vector3(0, 1400, 0), a)
 			far += Vector3(randf_range(-3, 3), randf_range(-1.5, 1.5), randf_range(-3, 3))
 			var r := ribbon("BITMAP_FLARE_FORCE", far, {"width": 0.6, "max_tails": 5, "life": 20,
 				"color": Color(1.0, 0.3, 0.3), "fade": false})
@@ -247,8 +248,8 @@ func _impale_tick(t: int) -> void:
 func _swell_life() -> void:
 	var c := caster_pos() + mu(Vector3(0, 0, 100))
 	for i in 36:
-		var r := ribbon("BITMAP_JOINT_SPIRIT", c, {"width": 0.6, "max_tails": 3, "life": 20,
-			"color": Color(0.5, 0.5, 0.5)})
+		var r := ribbon("BITMAP_JOINT_SPIRIT", c, {"width": 0.08, "max_tails": 3, "life": 20,
+			"color": Color(0.5, 0.5, 0.5), "taper": true})
 		_spirits.append({"r": r, "pos": c, "ang": Vector3(-10, 0, i * 10.0)})
 	var g := caster_pos() + Vector3(0, 0.05, 0)
 	var m := particle("BITMAP_MAGIC+1", g, {"size": 3.0, "life": 30, "color": Color(1.0, 0.8, 0.4), "rspeed": 3})

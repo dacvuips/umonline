@@ -1,13 +1,14 @@
 shader_type spatial;
 render_mode unshaded, cull_disabled, depth_draw_opaque;
 
-// Làm vùng đổ bóng bớt đen: ánh sáng (gamma) thấp hơn shadow_floor được kéo lên gần mức đó,
-// tỉ lệ shadow_lift (0 = như MU gốc). Chỗ sáng hơn shadow_floor giữ nguyên.
-uniform float shadow_floor = 0.65;
-uniform float shadow_lift = 0.75;
-uniform float brightness = 1.45;
-vec3 lift_shadow(vec3 l) {
-	return l + max(vec3(shadow_floor) - l, vec3(0.0)) * shadow_lift;
+// Ánh sáng địa hình đúng công thức client MU (ZzzLodTerrain.cpp): màu = texture * min(TerrainLight * light_scale, 1),
+// light_scale = 1. Đối chiếu ảnh chụp client IGCN: quảng trường Lorencia ~1.1, trong quán rượu ~0.6-0.7 (client làm
+// tối trong nhà bằng cơ chế không có trong TerrainLight) -> giữ 1 như mã nguồn.
+// Tính thẳng trong gamma: renderer GL Compatibility của dự án KHÔNG đổi sang linear (128 * 0.5 = 64), nên không
+// được đổi ánh sáng sang linear (sRGB -> linear / mũ 2.2) — lỗi cũ đó làm mọi cảnh tối hơn client.
+uniform float light_scale = 1.0;
+vec3 mu_light(vec3 l) {
+	return min(l * light_scale, vec3(1.0));
 }
 
 // Địa hình Lorencia dựng lại đúng thuật toán RenderTerrainFace() của ZzzLodTerrain.cpp:
@@ -22,9 +23,6 @@ uniform sampler2D layers : filter_nearest, repeat_disable; // R = layer1, G = la
 
 const float TILE_SCALE[14] = float[](0.25, 0.5, 0.25, 0.5, 0.5, 0.25, 0.5, 0.25, 0.5, 0.25, 0.25, 0.25, 0.5, 0.25);
 
-vec3 srgb_to_linear(vec3 c) {
-	return mix(pow((c + vec3(0.055)) * (1.0 / 1.055), vec3(2.4)), c * (1.0 / 12.92), lessThan(c, vec3(0.04045)));
-}
 
 vec3 sample_tile(int layer, vec2 tile_uv, float tile_x) {
 	layer = clamp(layer, 0, 13);
@@ -55,5 +53,5 @@ void fragment() {
 			col = mix(col, sample_tile(l2, tuv, float(ti.x)), clamp(COLOR.a, 0.0, 1.0));
 		}
 	}
-	ALBEDO = col * srgb_to_linear(lift_shadow(COLOR.rgb)) * brightness;
+	ALBEDO = col * mu_light(COLOR.rgb);
 }

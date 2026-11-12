@@ -1,0 +1,1992 @@
+{
+  "131": {
+    "id": 131,
+    "name": "Castle Gate",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Castle Gate. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "132": {
+    "id": 132,
+    "name": "Statue of Saint",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Statue of Saint. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "133": {
+    "id": 133,
+    "name": "Statue of Saint",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Statue of Saint. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "134": {
+    "id": 134,
+    "name": "Statue of Saint",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Statue of Saint. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "152": {
+    "id": 152,
+    "name": "Gate to Kalima 1 of {0}",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Gate to Kalima 1 of {0}. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "153": {
+    "id": 153,
+    "name": "Gate to Kalima 2 of {0}",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Gate to Kalima 2 of {0}. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "154": {
+    "id": 154,
+    "name": "Gate to Kalima 3 of {0}",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Gate to Kalima 3 of {0}. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "155": {
+    "id": 155,
+    "name": "Gate to Kalima 4 of {0}",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Gate to Kalima 4 of {0}. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "156": {
+    "id": 156,
+    "name": "Gate to Kalima 5 of {0}",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Gate to Kalima 5 of {0}. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "157": {
+    "id": 157,
+    "name": "Gate to Kalima 6 of {0}",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Gate to Kalima 6 of {0}. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "158": {
+    "id": 158,
+    "name": "Gate to Kalima 7 of {0}",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Gate to Kalima 7 of {0}. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "200": {
+    "id": 200,
+    "name": "Soccerball",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Soccerball. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "215": {
+    "id": 215,
+    "name": "Shield",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Shield. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "216": {
+    "id": 216,
+    "name": "Crown",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Crown. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "217": {
+    "id": 217,
+    "name": "Crown Switch1",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Crown Switch1. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "218": {
+    "id": 218,
+    "name": "Crown Switch2",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Crown Switch2. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "219": {
+    "id": 219,
+    "name": "Castle Gate Switch",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Castle Gate Switch. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "220": {
+    "id": 220,
+    "name": "Guard",
+    "title": "Vệ Binh Gác Cổng",
+    "role": "guard",
+    "has_shop": false,
+    "dialogue": "Chào chiến binh! Ta là vệ binh canh gác thành lũy. Hãy cẩn thận khi bước chân ra vùng hoang dã đầy rẫy quái vật ngoài cổng thành!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "221": {
+    "id": 221,
+    "name": "Slingshot Attack",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Slingshot Attack. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "222": {
+    "id": 222,
+    "name": "Slingshot Defense",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Slingshot Defense. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "223": {
+    "id": 223,
+    "name": "Senior",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Senior. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "224": {
+    "id": 224,
+    "name": "Guardsman",
+    "title": "Vệ Binh Gác Cổng",
+    "role": "guard",
+    "has_shop": false,
+    "dialogue": "Chào chiến binh! Ta là vệ binh canh gác thành lũy. Hãy cẩn thận khi bước chân ra vùng hoang dã đầy rẫy quái vật ngoài cổng thành!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "226": {
+    "id": 226,
+    "name": "Pet Trainer",
+    "title": "Huấn Luyện Viên Thú Nuôi",
+    "role": "pet_trainer",
+    "has_shop": false,
+    "dialogue": "Chào mừng dũng sĩ! Ta là huấn luyện viên kỳ cựu của lục địa MU. Với Linh Hồn Quạ Tinh (Dark Raven Spirit) hoặc Linh Hồn Chiến Mã (Dark Horse Spirit) cùng ngọc Chaos và Bless, ta có thể hồi sinh những chiến thú dũng mãnh nhất cho Chúa Tể Dark Lord!",
+    "options": [
+      {
+        "action": "pet_trainer",
+        "label": "★ Huấn Luyện Thú Nuôi"
+      },
+      {
+        "action": "close",
+        "label": "Tạm Biệt"
+      }
+    ]
+  },
+  "229": {
+    "id": 229,
+    "name": "Marlon",
+    "title": "Hiệp Sĩ Marlon",
+    "role": "quest",
+    "has_shop": false,
+    "dialogue": "Ta là Marlon, hiệp sĩ lang thang tìm kiếm những chiến binh xứng đáng kế thừa ý chí của các bậc tiền bối. Hãy tìm cho ta Chiếc Nhẫn Vinh Quang (Ring of Honor) và Viên Đá Bóng Tối (Dark Stone), ta sẽ khai mở tiềm năng tối thượng và kỹ năng Combo uy lực cho ngươi!",
+    "options": [
+      {
+        "action": "quest_marlon",
+        "label": "★ Nhiệm Vụ Marlon (Hiệp Sĩ Danh Dự)"
+      },
+      {
+        "action": "close",
+        "label": "Để Ta Suy Nghĩ"
+      }
+    ]
+  },
+  "230": {
+    "id": 230,
+    "name": "Alex",
+    "title": "Thương Nhân Giáp Trụ Lorencia",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Chào mừng quý khách! Áo giáp của ta được chế tác từ da quái vật và kim loại bền chắc nhất Lorencia. Mặc những bộ giáp này vào, răng nanh của lũ Budge Dragon hay đao kiếm của đám Skeleton Warrior chỉ như gãi ngứa!",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Giáp Trụ & Khiên"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "231": {
+    "id": 231,
+    "name": "Thompson the Merchant",
+    "title": "Thương Nhân Thompson",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Thuốc hồi máu tinh khiết, nước thánh mana dồi dào, cuộn giấy biến về thành an toàn! Đi thám hiểm vùng đất nguy hiểm mà thiếu bình dược phẩm là cầm chắc cái chết đấy!",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Thuốc & Dược Phẩm"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "232": {
+    "id": 232,
+    "name": "Archangel",
+    "title": "Đại Thiên Sứ Archangel",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Hỡi người con của ánh sáng! Lâu Đài Máu (Blood Castle) đã bị quân đoàn Kundun chiếm đóng và phong ấn. Thanh Vũ Khí Tuyệt Mật của ta đã rơi vào tay chúa quỷ. Hãy giúp ta đoạt lại nó!",
+    "options": [
+      {
+        "action": "blood_castle_info",
+        "label": "★ Nghe Lời Cầu Cứu Của Thiên Sứ"
+      },
+      {
+        "action": "close",
+        "label": "Tôi Sẽ Giúp Ngài"
+      }
+    ]
+  },
+  "233": {
+    "id": 233,
+    "name": "Messenger of Arch.",
+    "title": "Sứ Giả Thiên Sứ (Blood Castle)",
+    "role": "blood_castle",
+    "has_shop": false,
+    "dialogue": "Cánh cổng Lâu Đài Máu sắp mở ra! Chỉ những ai nắm giữ Áo Choàng Tàng Hình (Invisibility Cloak) tương ứng với đẳng cấp của mình mới có thể bước qua cây cầu huyết kiếm để giải cứu Thiên Sứ!",
+    "options": [
+      {
+        "action": "blood_castle",
+        "label": "★ Tiến Vào Lâu Đài Máu"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "235": {
+    "id": 235,
+    "name": "Sevina the Priestess",
+    "title": "Nữ Tu Sevina",
+    "role": "quest",
+    "has_shop": false,
+    "dialogue": "Lời chúc phúc của thần linh ở cùng con! Ta là Sevina, người nắm giữ nghi thức phong chức cao quý. Khi đạt cấp 150, hãy mang về cho ta Cuốn Sách Đế Vương (Scroll of the Emperor) cùng Bảo Vật Tộc Hệ, con sẽ được thăng tiến lên Blade Knight, Soul Master, Muse Elf hay Bloody Summoner!",
+    "options": [
+      {
+        "action": "quest_sevina",
+        "label": "★ Nhiệm Vụ Thăng Chức Cấp 2"
+      },
+      {
+        "action": "close",
+        "label": "Tạ Ơn Người"
+      }
+    ]
+  },
+  "236": {
+    "id": 236,
+    "name": "Golden Archer",
+    "title": "Cung Thủ Hoàng Kim",
+    "role": "quest",
+    "has_shop": false,
+    "dialogue": "Ta thu thập những viên đá Rena và Lucky Stone rải rác trên khắp lục địa. Hãy gom đủ số lượng và mang lại cho ta, hoàng gia MU sẽ ban tặng ngươi những phần thưởng vô cùng quý giá!",
+    "options": [
+      {
+        "action": "exchange_rena",
+        "label": "★ Đổi Đá Rena / Lucky Stone"
+      },
+      {
+        "action": "close",
+        "label": "Hẹn Gặp Lại"
+      }
+    ]
+  },
+  "237": {
+    "id": 237,
+    "name": "Charon",
+    "title": "Người Gác Quảng Trường Quỷ",
+    "role": "devil_square",
+    "has_shop": false,
+    "dialogue": "Ngươi có đủ can đảm đối mặt với làn sóng quái vật vô tận trong Quảng Trường Quỷ (Devil's Square)? Nơi đây kinh nghiệm và ngọc báu ngập tràn, nhưng cũng là nấm mồ chôn vùi vô số kẻ yếu đuối! Hãy chuẩn bị Thiệp Mời Devil Square!",
+    "options": [
+      {
+        "action": "devil_square",
+        "label": "★ Vào Quảng Trường Quỷ"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "238": {
+    "id": 238,
+    "name": "Chaos Goblin",
+    "title": "Yêu Tinh Chaos (Chaos Goblin)",
+    "role": "chaos_box",
+    "has_shop": false,
+    "dialogue": "Kekeke! Ta là bậc thầy kết hợp Chaos tài ba nhất Noria! Muốn ép Vũ khí Chaos, Cánh cấp 1, Cánh cấp 2, Cánh cấp 3 hay cường hóa trang bị lên +10, +11, +12, +13, +14, +15? Cứ đưa đây cho ta, kekeke! Nhưng cẩn thận... có thể xịt đấy nhé!",
+    "options": [
+      {
+        "action": "chaos_box",
+        "label": "★ Kết Hợp Chaos Machine"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "239": {
+    "id": 239,
+    "name": "Arena Guard",
+    "title": "Vệ Binh Đấu Trường Arena",
+    "role": "guard",
+    "has_shop": false,
+    "dialogue": "Đấu trường Arena là nơi giải quyết mọi ân oán giữa các chiến binh. Bước vào đây, mạng sống tự gánh vác! Kẻ nào dám gây rối ở ngoài cổng thành sẽ phải nếm thử ngọn giáo của ta!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Tôi Hiểu Rồi"
+      }
+    ]
+  },
+  "240": {
+    "id": 240,
+    "name": "Baz The Vault Keeper",
+    "title": "Thủ Kho (Vault Keeper)",
+    "role": "vault",
+    "has_shop": false,
+    "dialogue": "Chào mừng ngài đến với kho bảo mật lục địa MU! Hòm đồ của ta được bảo vệ bằng phép thuật cổ xưa, gửi trang bị, ngọc quý và Zen vào đây là an toàn tuyệt đối!",
+    "options": [
+      {
+        "action": "vault",
+        "label": "★ Mở Rương Đồ (Vault)"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "241": {
+    "id": 241,
+    "name": "Guild Master",
+    "title": "Hội Trưởng Hiệp Sĩ Đoàn (Guild Master)",
+    "role": "guild",
+    "has_shop": false,
+    "dialogue": "Một cây làm chẳng nên non! Để sinh tồn trước thế lực Kundun, các chiến binh phải kề vai sát cánh. Đạt cấp 100 trở lên, ngươi có thể thành lập Bang Hội (Guild) và dẫn dắt các huynh đệ xưng bá thiên hạ!",
+    "options": [
+      {
+        "action": "guild_create",
+        "label": "★ Thành Lập Bang Hội"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "242": {
+    "id": 242,
+    "name": "Elf Lala",
+    "title": "Thương Nhân Elf Lala",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Chào mừng đến với Noria xinh đẹp! Ta có những bộ cung tên thần thoại, gậy phép của Tinh Linh và áo giáp tiên nữ nhẹ như mây nhưng vững chãi trước ma thuật hắc ám.",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Cung Tên & Đồ Tiên Nữ"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "243": {
+    "id": 243,
+    "name": "Eo the Craftsman",
+    "title": "Thợ Thủ Công Eo (Eo the Craftsman)",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Gỗ từ Rừng Rậm Noria được ta đẽo gọt thành những cây cung sắc sảo và khiên mây bền chắc. Cần đồ nghề gì cứ bảo ta nhé!",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Vũ Khí Noria"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "244": {
+    "id": 244,
+    "name": "Caren the Barmaid",
+    "title": "Cô Gái Quán Rượu Caren",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Uống một hớp rượu Noria ấm nồng để xua tan mệt mỏi sau chuyến đi săn nào! Ta cũng có bán các bình máu và mana thanh lọc từ sương rừng đấy.",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Dược Phẩm Noria"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "245": {
+    "id": 245,
+    "name": "Izabel The Wizard",
+    "title": "Phù Thủy Izabel",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Băng giá Devias sẽ thiêu rụi kẻ nào không biết tôn trọng ma thuật. Ta nắm giữ những cuộn thần chú băng giá tuyết trắng và gậy phép cổ xưa của tộc phù thủy phương Bắc.",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Phép Thuật Devias"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "246": {
+    "id": 246,
+    "name": "Zienna The Weapons Merchant",
+    "title": "Thương Nhân Vũ Khí Zienna",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Kiếm thép đúc từ băng tuyết nghìn năm, nỏ săn dã thú xứ lạnh! Vũ khí của Zienna này chưa từng làm chiến binh nào phải thất vọng trước bầy Yeti hung dữ!",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Vũ Khí Devias"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "247": {
+    "id": 247,
+    "name": "Crossbow Guard",
+    "title": "Lính Gác Cung Nỏ",
+    "role": "guard",
+    "has_shop": false,
+    "dialogue": "Cảnh giới! Vùng ngoại thành đầy rẫy nhện độc, cẩu ma và rồng con hung dữ. Hãy chuẩn bị vũ khí và dược phẩm trước khi ra ngoài cổng thành!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Cảm Ơn Lời Nhắc Nhở"
+      }
+    ]
+  },
+  "248": {
+    "id": 248,
+    "name": "Wandering Merchant Martin",
+    "title": "Thương Nhân Martin",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Đi buôn khắp các nẻo đường hiểm trở của lục địa MU, ta thu thập được không ít dược phẩm quý và cuộn biến thị trấn. Mau chọn đi kẻo quái vật ùa tới!",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Hàng Hóa"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "249": {
+    "id": 249,
+    "name": "Berdysh Guard",
+    "title": "Lính Gác Rìu Chiến",
+    "role": "guard",
+    "has_shop": false,
+    "dialogue": "Khu vực an toàn được bảo vệ nghiêm ngặt! Không ai được phép vung vũ khí tấn công đồng đội trong phạm vi thành trì!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rõ Ràng"
+      }
+    ]
+  },
+  "250": {
+    "id": 250,
+    "name": "Wandering Merchant Harold",
+    "title": "Thương Nhân Harold",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Hàng tươi mới đây! Dược phẩm phục hồi tức thì, cuộn giấy truyền tống khẩn cấp! An toàn tính mạng là ưu tiên số một của mọi chiến binh!",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Hàng Hóa"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "251": {
+    "id": 251,
+    "name": "Hanzo The Blacksmith",
+    "title": "Thợ Rèn Hanzo (Hanzo the Blacksmith)",
+    "role": "blacksmith",
+    "has_shop": true,
+    "dialogue": "Rèn dũa kiếm bén, mài sắc rìu chiến! Hanzo ta là thợ rèn danh tiếng nhất vùng Lorencia. Ta có bán đao kiếm, búa chiến cơ bản và có thể sửa chữa toàn bộ trang bị hỏng hóc của ngươi như mới!",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Vũ Khí & Sửa Chữa"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "253": {
+    "id": 253,
+    "name": "Potion Girl Amy",
+    "title": "Cô Gái Bán Thuốc Amy",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Lạnh quá phải không anh hùng? Uống một ngụm dược thảo ấm nóng này sẽ hồi phục sinh lực ngay tức khắc! Đừng để bị đông cứng ngoài thảo nguyên tuyết trắng nhé!",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Thuốc Devias"
+      },
+      {
+        "action": "close",
+        "label": "Tạm Biệt Em"
+      }
+    ]
+  },
+  "254": {
+    "id": 254,
+    "name": "Pasi The Mage",
+    "title": "Pháp Sư Pasi (Pasi the Mage)",
+    "role": "mage",
+    "has_shop": true,
+    "dialogue": "Năng lượng ma thuật chảy tràn trong huyết quản! Ta là Pasi, người truyền dạy bí kíp hỏa cầu, lốc xoáy, địa chấn cho các Dark Wizard và kỹ năng vũ khí cho Dark Knight. Hãy khám phá sức mạnh thần bí!",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Sách Phép & Ngọc Kỹ Năng"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "255": {
+    "id": 255,
+    "name": "Lumen the Barmaid",
+    "title": "Cô Gái Quán Rượu Lumen",
+    "role": "bar",
+    "has_shop": true,
+    "dialogue": "Keng! Chào mừng chàng dũng sĩ ghé thăm Quán Rượu Lorencia ấm cúng! Ngồi xuống làm cốc bia mát lạnh, nghe ngóng tin đồn về đại ma vương Kundun và mua ít nước ngọt hồi sinh lực nào!",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Nước Giải Khát & Đồ Ăn"
+      },
+      {
+        "action": "close",
+        "label": "Hẹn Gặp Lại Lumen"
+      }
+    ]
+  },
+  "256": {
+    "id": 256,
+    "name": "Lahap",
+    "title": "Thương Nhân Ngọc Lahap",
+    "role": "lahap",
+    "has_shop": false,
+    "dialogue": "Rương đồ của bạn quá chật chội vì chứa nhiều Ngọc Ước Nguyện (Bless) và Ngọc Tâm Hồn (Soul)? Ta có bí thuật nén 10, 20, 30 viên ngọc thành một cụm duy nhất để tiết kiệm ô rương, và có thể giải nén nguyên vẹn bất cứ lúc nào!",
+    "options": [
+      {
+        "action": "lahap",
+        "label": "★ Nén / Giải Nén Ngọc"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "257": {
+    "id": 257,
+    "name": "Elf Soldier",
+    "title": "Binh Sĩ Bóng Ma (Shadow Phantom Soldier)",
+    "role": "buff",
+    "has_shop": false,
+    "dialogue": "Welcome to the world of Mu! Ta là Vệ Binh Bóng Ma được phái đến để trợ giúp những tân thủ quả cảm. Bất kỳ chiến binh nào từ cấp 220 trở xuống đều có thể nhận Lời Chúc Phúc ban tặng +Sát thương Tấn công và +Phòng thủ cực mạnh trong 30 phút!",
+    "options": [
+      {
+        "action": "buff",
+        "label": "★ Nhận Lời Chúc Phúc (Buff Tấn Công & Thủ)"
+      },
+      {
+        "action": "close",
+        "label": "Cảm Ơn Chiến Binh"
+      }
+    ]
+  },
+  "259": {
+    "id": 259,
+    "name": "Oracle Layla",
+    "title": "Nhà Tiên Tri Layla",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Vận mệnh lục địa MU đang cuộn trào trong bóng tối... Hãy mang theo những bình thánh dược tinh khiết này để soi đường và bảo toàn tính mạng nơi đất khách quê người.",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Thánh Dược"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "277": {
+    "id": 277,
+    "name": "Castle Gate1",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Castle Gate1. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "278": {
+    "id": 278,
+    "name": "Life Stone",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Life Stone. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "283": {
+    "id": 283,
+    "name": "Guardian Statue",
+    "title": "Vệ Binh Gác Cổng",
+    "role": "guard",
+    "has_shop": false,
+    "dialogue": "Chào chiến binh! Ta là vệ binh canh gác thành lũy. Hãy cẩn thận khi bước chân ra vùng hoang dã đầy rẫy quái vật ngoài cổng thành!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "285": {
+    "id": 285,
+    "name": "Guardian",
+    "title": "Vệ Binh Gác Cổng",
+    "role": "guard",
+    "has_shop": false,
+    "dialogue": "Chào chiến binh! Ta là vệ binh canh gác thành lũy. Hãy cẩn thận khi bước chân ra vùng hoang dã đầy rẫy quái vật ngoài cổng thành!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "286": {
+    "id": 286,
+    "name": "Battle Guard1",
+    "title": "Vệ Binh Gác Cổng",
+    "role": "guard",
+    "has_shop": false,
+    "dialogue": "Chào chiến binh! Ta là vệ binh canh gác thành lũy. Hãy cẩn thận khi bước chân ra vùng hoang dã đầy rẫy quái vật ngoài cổng thành!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "287": {
+    "id": 287,
+    "name": "Battle Guard2",
+    "title": "Vệ Binh Gác Cổng",
+    "role": "guard",
+    "has_shop": false,
+    "dialogue": "Chào chiến binh! Ta là vệ binh canh gác thành lũy. Hãy cẩn thận khi bước chân ra vùng hoang dã đầy rẫy quái vật ngoài cổng thành!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "288": {
+    "id": 288,
+    "name": "Canon Tower",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Canon Tower. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "367": {
+    "id": 367,
+    "name": "Gateway Machine",
+    "title": "Cỗ Máy Cổng Dịch Chuyển (Gateway Machine)",
+    "role": "warp",
+    "has_shop": false,
+    "dialogue": "Cỗ máy dẫn lối vào Di Tích Kanturu cổ xưa. Khi mang trên mình Chiếc Nhẫn Mặt Trăng Băng Giá (Moonstone Pendant), cỗ máy sẽ kích hoạt lối vào trận chiến Boss Maya và Nightmare!",
+    "options": [
+      {
+        "action": "warp_kanturu",
+        "label": "★ Dịch Chuyển Vào Tháp Kanturu"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "368": {
+    "id": 368,
+    "name": "Elphis",
+    "title": "Nhà Luyện Kim Elpis (Kanturu Refinery)",
+    "role": "refinery",
+    "has_shop": false,
+    "dialogue": "Ta là Elpis, người bảo hộ Tháp Tinh Chế Kanturu. Đưa cho ta những viên Đá Quý Thô (Gemstone) nhặt được từ quái vật Kanturu, ta sẽ tinh chế thành Đá Tạo Hóa (Jewel of Harmony) lấp lánh mang quyền năng vô tận!",
+    "options": [
+      {
+        "action": "refinery",
+        "label": "★ Tinh Chế Đá Tạo Hóa (Harmony)"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "369": {
+    "id": 369,
+    "name": "Osbourne",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Osbourne. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "370": {
+    "id": 370,
+    "name": "Jerridon",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Jerridon. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "371": {
+    "id": 371,
+    "name": "Leo The Helper",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Leo The Helper. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "372": {
+    "id": 372,
+    "name": "Elite Skill Soldier",
+    "title": "Vệ Binh Gác Cổng",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Elite Skill Soldier. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "375": {
+    "id": 375,
+    "name": "Chaos Card Master",
+    "title": "Bậc Thầy Thẻ Chaos (Chaos Card Master)",
+    "role": "chaos_box",
+    "has_shop": false,
+    "dialogue": "Bạn sở hữu những chiếc Thẻ Chaos thần bí? Đưa cho ta, cánh cửa may mắn sẽ mở ra với những món trang bị siêu phẩm hiếm có bậc nhất!",
+    "options": [
+      {
+        "action": "chaos_card",
+        "label": "★ Đổi Thẻ Chaos"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "376": {
+    "id": 376,
+    "name": "Pamela the Supplier",
+    "title": "Nhà Cung Cấp Pamela",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Thánh địa Elbeland được bảo bọc bởi thiên nhiên nguyên sơ. Ta cung cấp các loại thảo dược bí truyền của người Elves và Summoner giúp phục hồi năng lượng tức thì.",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Thảo Dược Elbeland"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "377": {
+    "id": 377,
+    "name": "Angela the Supplier",
+    "title": "Nhà Cung Cấp Angela",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Xin chào người lữ khách! Rừng Elbeland rất bí hiểm, hãy chuẩn bị đầy đủ bình dược liệu trước khi tiến sâu vào đầm lầy ô nhiễm nhé!",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Dược Liệu"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "378": {
+    "id": 378,
+    "name": "GameMaster",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là GameMaster. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "379": {
+    "id": 379,
+    "name": "Fireworks Girl",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Fireworks Girl. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "380": {
+    "id": 380,
+    "name": "Stone Statue",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Stone Statue. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "381": {
+    "id": 381,
+    "name": "MU Allies General",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là MU Allies General. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "382": {
+    "id": 382,
+    "name": "Illusion Elder",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Illusion Elder. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "383": {
+    "id": 383,
+    "name": "Alliance Item Storage",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Alliance Item Storage. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "384": {
+    "id": 384,
+    "name": "Illusion Item Storage",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Illusion Item Storage. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "385": {
+    "id": 385,
+    "name": "Mirage",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Mirage. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "404": {
+    "id": 404,
+    "name": "MU Allies",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là MU Allies. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "405": {
+    "id": 405,
+    "name": "Illusion Sorcerer",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Illusion Sorcerer. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "406": {
+    "id": 406,
+    "name": "Priest Devin",
+    "title": "Đại Giáo Sĩ Devin (Priest Devin)",
+    "role": "quest",
+    "has_shop": false,
+    "dialogue": "Ngươi đã đạt đến đỉnh cao cấp độ 400? Đã đến lúc rũ bỏ giới hạn phàm trần để tiến hóa thành Đẳng Cấp Thượng Thừa (Master Class): Blade Master, Grand Master, High Elf, Duel Master, Lord Emperor hay Fist Master! Hãy vượt qua 3 thử thách khốc liệt của ta!",
+    "options": [
+      {
+        "action": "quest_devin",
+        "label": "★ Nhiệm Vụ Chuyển Chức Cấp 3 (Master Class)"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "407": {
+    "id": 407,
+    "name": "Werewolf Quarrel",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Werewolf Quarrel. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "408": {
+    "id": 408,
+    "name": "Gatekeeper",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Gatekeeper. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "414": {
+    "id": 414,
+    "name": "NPC 414",
+    "title": "Thợ Kim Hoàn Osbourne",
+    "role": "refinery",
+    "has_shop": false,
+    "dialogue": "Ta có thể khai mở dòng tính năng bí ẩn của Đá Tạo Hóa (Jewel of Harmony) lên vũ khí và áo giáp cấp cao của bạn, gia tăng sức công phá và phòng thủ đáng kinh ngạc!",
+    "options": [
+      {
+        "action": "harmony_add",
+        "label": "★ Khảm Đá Tạo Hóa (Harmony)"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "415": {
+    "id": 415,
+    "name": "Silvia",
+    "title": "Dược Sĩ Silvia",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Cửa hàng thảo dược của Silvia luôn chào đón bạn! Thuốc tiên trị độc, nước hồi phục sinh mạng, tất cả đều được tinh chế từ hoa lá Elbeland.",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Thảo Dược Silvia"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "416": {
+    "id": 416,
+    "name": "Rhea",
+    "title": "Thương Nhân Giáp Trụ Rhea",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Trang phục thanh tao và quyền năng của Triệu Hồi Sư Summoner! Từng đường chỉ đều thấm đượm ma thuật bảo hộ của rừng già Elbeland.",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Trang Phục Triệu Hồi Sư"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "417": {
+    "id": 417,
+    "name": "Marce",
+    "title": "Thương Nhân Sách Phép Marce",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Sách thần chú triệu hồi sách nguyền (Curse Spellbooks), gậy ma thuật bóng đêm! Dành riêng cho những ai khao khát nắm giữ nghệ thuật nguyền rủa của Summoner.",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Sách Thần Chú & Gậy Phép"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "450": {
+    "id": 450,
+    "name": "Cherry Blossom Spirit",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Cherry Blossom Spirit. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "451": {
+    "id": 451,
+    "name": "Cherry Blossom Tree",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Cherry Blossom Tree. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "452": {
+    "id": 452,
+    "name": "Seed Master",
+    "title": "Bậc Thầy Socket (Seed Master)",
+    "role": "socket",
+    "has_shop": false,
+    "dialogue": "Quyền năng Socket - đỉnh cao của công nghệ chế tạo trang bị Season 6! Ta có thể chiết xuất các hạt giống Thuộc Tính (Lửa, Nước, Băng, Gió, Sét, Đất) và kết hợp thành Hạt Ngọc Socket (Seed Sphere) mang sức mạnh vô song!",
+    "options": [
+      {
+        "action": "seed_extract",
+        "label": "★ Chiết Xuất Hạt Giống (Seed)"
+      },
+      {
+        "action": "seed_combine",
+        "label": "★ Ép Ngọc Socket (Seed Sphere)"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "453": {
+    "id": 453,
+    "name": "Seed Researcher",
+    "title": "Nhà Nghiên Cứu Socket (Seed Researcher)",
+    "role": "socket",
+    "has_shop": false,
+    "dialogue": "Khi đã có Hạt Ngọc Socket (Seed Sphere), hãy mang trang bị có lỗ Socket đến đây! Ta sẽ khảm ngọc vào trang bị hoặc hủy dòng socket cũ để khảm dòng mới theo ý bạn!",
+    "options": [
+      {
+        "action": "socket_mount",
+        "label": "★ Khảm Ngọc Vào Trang Bị"
+      },
+      {
+        "action": "socket_destroy",
+        "label": "★ Hủy Ngọc Socket Cũ"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "467": {
+    "id": 467,
+    "name": "Snowman",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Snowman. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "468": {
+    "id": 468,
+    "name": "Little Santa Yellow",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Little Santa Yellow. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "469": {
+    "id": 469,
+    "name": "Little Santa Green",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Little Santa Green. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "470": {
+    "id": 470,
+    "name": "Little Santa Red",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Little Santa Red. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "471": {
+    "id": 471,
+    "name": "Little Santa Blue",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Little Santa Blue. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "472": {
+    "id": 472,
+    "name": "Little Santa White",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Little Santa White. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "473": {
+    "id": 473,
+    "name": "Little Santa Black",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Little Santa Black. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "474": {
+    "id": 474,
+    "name": "Little Santa Orange",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Little Santa Orange. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "475": {
+    "id": 475,
+    "name": "Little Santa Pink",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Little Santa Pink. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "476": {
+    "id": 476,
+    "name": "Cursed Santa",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Cursed Santa. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "477": {
+    "id": 477,
+    "name": "Transformed Snowman",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Transformed Snowman. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "478": {
+    "id": 478,
+    "name": "Delgado - Lucky Coins",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Delgado - Lucky Coins. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "479": {
+    "id": 479,
+    "name": "Gatekeeper Titus",
+    "title": "Người Gác Đấu Trường Titus (Gatekeeper Titus)",
+    "role": "duel",
+    "has_shop": false,
+    "dialogue": "Chào mừng đến Đấu Trường Sinh Tử Vulcanus! Nơi chứng minh bản lĩnh và kỹ năng PK đỉnh cao của các đại hiệp MU Online. Không mất điểm trừng phạt, thỏa sức quyết đấu!",
+    "options": [
+      {
+        "action": "duel_arena",
+        "label": "★ Tiến Vào Đấu Trường Quyết Đấu"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "492": {
+    "id": 492,
+    "name": "Moss The Merchant",
+    "title": "Thương Nhân Vận May Moss (Moss the Merchant)",
+    "role": "shop",
+    "has_shop": false,
+    "dialogue": "Kekeke! Muốn thử vận may không chàng trai? Chỉ với một ít Zen, ngươi có thể mua được một món vũ khí ngẫu nhiên... và nếu may mắn mỉm cười, một món vũ khí Hoàn Hảo (Excellent) hoặc Tuyệt Phẩm sẽ thuộc về ngươi!",
+    "options": [
+      {
+        "action": "moss_gamble",
+        "label": "★ Thử Vận May (Gamble Item)"
+      },
+      {
+        "action": "close",
+        "label": "Hôm Khác Nhé"
+      }
+    ]
+  },
+  "522": {
+    "id": 522,
+    "name": "Adviser Jerinteu",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Adviser Jerinteu. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "540": {
+    "id": 540,
+    "name": "Lugard",
+    "title": "Người Dẫn Đường Lugard (Doppelganger)",
+    "role": "warp",
+    "has_shop": false,
+    "dialogue": "Vùng đất Bóng Gương Kép Doppelganger là nơi quái vật nhân bản vô tính xuất hiện. Chỉ cần có Tấm Gương Thứ Nguyên (Mirror of Dimension), ngươi sẽ có cơ hội nhận các Rương Thưởng Hoàng Kim chứa đầy châu báu!",
+    "options": [
+      {
+        "action": "doppelganger_enter",
+        "label": "★ Tiến Vào Vùng Đất Bóng Gương"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "541": {
+    "id": 541,
+    "name": "Compensation Box",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Compensation Box. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "542": {
+    "id": 542,
+    "name": "Golden Compensation Box",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Golden Compensation Box. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "543": {
+    "id": 543,
+    "name": "Gens Duprian",
+    "title": "Quản Gia Gens Duprian (Gregory)",
+    "role": "gens",
+    "has_shop": false,
+    "dialogue": "How do you do? Ta là Gregory, Quản Gia của Gia Tộc Gens Duprian hùng mạnh! Chúng ta là tập hợp của những dũng sĩ tôn kính hoàng tộc và danh dự cao quý nhất Arca. Hãy gia nhập Duprian để cùng nhau chinh phạt lục địa!",
+    "options": [
+      {
+        "action": "gens_join_duprian",
+        "label": "★ Gia Nhập Gia Tộc Gens Duprian"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "544": {
+    "id": 544,
+    "name": "Gens Vanert",
+    "title": "Quản Gia Gens Vanert (Bernard)",
+    "role": "gens",
+    "has_shop": false,
+    "dialogue": "Chào chiến binh tự do! Ta là Bernard, đại diện của Gia Tộc Gens Vanert! Chúng ta tôn thờ tự do, sức mạnh và trí tuệ, kiên quyết chống lại sự áp đặt phong kiến. Hãy sát cánh cùng liên minh Vanert!",
+    "options": [
+      {
+        "action": "gens_join_vanert",
+        "label": "★ Gia Nhập Gia Tộc Gens Vanert"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "545": {
+    "id": 545,
+    "name": "Christine the General Goods Merchant",
+    "title": "Thương Nhân Tạp Hóa Christine",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Sa mạc gió cát Karutan khắc nghiệt khôn cùng. Trước khi băng qua cồn cát chết chóc, hãy tích trữ đầy đủ bình nước hồi sức và thuốc giải độc của ta!",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Tạp Hóa Karutan"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "546": {
+    "id": 546,
+    "name": "Jeweler Raul",
+    "title": "Thương Gia Đá Quý Raul",
+    "role": "lahap",
+    "has_shop": false,
+    "dialogue": "Chào mừng đến tiền đồn Karutan! Ta là Raul, có cùng ngón nghề nén ngọc và tách ngọc tinh tế như lão già Lahap ở Noria. Cần gộp ngọc Bless và Soul cứ giao cho ta!",
+    "options": [
+      {
+        "action": "lahap",
+        "label": "★ Nén / Giải Nén Ngọc"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "547": {
+    "id": 547,
+    "name": "Market Union Member Julia",
+    "title": "Thành Viên Chợ Liên Lục Địa Julia",
+    "role": "warp",
+    "has_shop": false,
+    "dialogue": "Cần tìm kiếm đồ quý hoặc buôn bán tự do với toàn thể người chơi từ các máy chủ khác? Ta có thể đưa bạn đến Chợ Loren (Loren Market) sầm uất ngay lập tức!",
+    "options": [
+      {
+        "action": "warp_loren_market",
+        "label": "★ Đến Chợ Loren Market"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "566": {
+    "id": 566,
+    "name": "Mercenary Guild Felicia",
+    "title": "Hiệp Hội Lính Đánh Thuê Felicia",
+    "role": "quest",
+    "has_shop": false,
+    "dialogue": "Chào mừng đến với Văn Phòng Lính Đánh Thuê! Ta có những bản hợp đồng săn lùng thủ lĩnh quái vật nguy hiểm nhất lục địa. Hoàn thành hợp đồng, danh vọng và vàng bạc sẽ thuộc về ngươi!",
+    "options": [
+      {
+        "action": "mercenary_quests",
+        "label": "★ Xem Hợp Đồng Săn Quái"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "568": {
+    "id": 568,
+    "name": "Wandering Merchant Zyro",
+    "title": "Thương Nhân Bí Ẩn Zyro",
+    "role": "shop",
+    "has_shop": false,
+    "dialogue": "Khà khà, tìm được ta ở chốn hoang vu này chứng tỏ duyên số của ngươi không nhỏ! Ta nắm giữ những món đồ cổ vật mà không một cửa tiệm nào trong thành có được...",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Cổ Vật Hiếm"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "577": {
+    "id": 577,
+    "name": "Leina the General Goods Merchant",
+    "title": "Thương Nhân Cửa Hàng",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Chào mừng chiến binh đến với cửa hàng của Leina the General Goods Merchant! Ta cung cấp đầy đủ các nhu yếu phẩm tốt nhất cho chuyến thám hiểm của bạn.",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mở Cửa Hàng"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "578": {
+    "id": 578,
+    "name": "Weapons Merchant Bolo",
+    "title": "Thợ Rèn Bolo (Weapons Merchant Bolo)",
+    "role": "shop",
+    "has_shop": true,
+    "dialogue": "Cát bụi Karutan làm cùn gỉ đao kiếm tầm thường. Những thanh gươm của Bolo ta được rèn từ hợp kim sa mạc đặc biệt, chém sắt như chém bùn!",
+    "options": [
+      {
+        "action": "shop",
+        "label": "★ Mua Vũ Khí Karutan"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "579": {
+    "id": 579,
+    "name": "David",
+    "title": "Thợ May Trang Bị May Mắn David",
+    "role": "refinery",
+    "has_shop": false,
+    "dialogue": "Ta chuyên kết hợp và tinh luyện các Trang Bị May Mắn (Lucky Items). Khi được dung luyện đúng cách, chúng sẽ mang lại sức mạnh vượt trội cho chủ nhân!",
+    "options": [
+      {
+        "action": "lucky_item_mix",
+        "label": "★ Tinh Luyện Trang Bị May Mắn"
+      },
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "658": {
+    "id": 658,
+    "name": "Cursed Statue",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Cursed Statue. Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "659": {
+    "id": 659,
+    "name": "Captured Stone Statue (1)",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Captured Stone Statue (1). Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "660": {
+    "id": 660,
+    "name": "Captured Stone Statue (2)",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Captured Stone Statue (2). Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "661": {
+    "id": 661,
+    "name": "Captured Stone Statue (3)",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Captured Stone Statue (3). Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "662": {
+    "id": 662,
+    "name": "Captured Stone Statue (4)",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Captured Stone Statue (4). Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "663": {
+    "id": 663,
+    "name": "Captured Stone Statue (5)",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Captured Stone Statue (5). Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "664": {
+    "id": 664,
+    "name": "Captured Stone Statue (6)",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Captured Stone Statue (6). Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "665": {
+    "id": 665,
+    "name": "Captured Stone Statue (7)",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Captured Stone Statue (7). Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "666": {
+    "id": 666,
+    "name": "Captured Stone Statue (8)",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Captured Stone Statue (8). Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "667": {
+    "id": 667,
+    "name": "Captured Stone Statue (9)",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Captured Stone Statue (9). Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  },
+  "668": {
+    "id": 668,
+    "name": "Captured Stone Statue (10)",
+    "title": "Nhân Vật Lục Địa",
+    "role": "talk",
+    "has_shop": false,
+    "dialogue": "Xin chào chiến binh lục địa MU! Tôi là Captured Stone Statue (10). Chúc bạn có một hành trình phiêu lưu đầy vinh quang!",
+    "options": [
+      {
+        "action": "close",
+        "label": "Rời Khỏi"
+      }
+    ]
+  }
+}

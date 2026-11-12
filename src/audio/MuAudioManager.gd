@@ -27,6 +27,16 @@ var current_idx_3d: int = 0
 # Cache bộ nhớ AudioStreamWAV (tránh nạp lại nhiều lần từ ổ đĩa)
 var _wav_cache: Dictionary = {}
 
+# Ambient Map Players (Âm thanh nền bản đồ & thời tiết)
+var ambient_player: AudioStreamPlayer = null
+var ambient_weather_player: AudioStreamPlayer = null
+var _current_ambient_file: String = ""
+var _base_ambient_volume: float = -24.0
+var _target_ambient_volume: float = -24.0
+var _is_indoors: bool = false
+var _current_world_id: int = 0
+var _ambient_timer: float = 6.0
+
 # Dữ liệu âm quái vật ánh xạ từ Sounds.json và Monsters.json
 var _monster_by_id: Dictionary = {}
 var _monster_by_name: Dictionary = {}
@@ -78,11 +88,44 @@ func _ready() -> void:
 		add_child(p)
 		players_3d.append(p)
 
-	# 3. Nạp database âm quái
+	# 3. Tạo Ambient Loop Player (cho âm thanh nền bản đồ: Gió, Rừng, Hầm ngục...)
+	ambient_player = AudioStreamPlayer.new()
+	ambient_player.name = "AmbientLoopPlayer"
+	ambient_player.volume_db = -14.0
+	ambient_player.bus = "Master"
+	add_child(ambient_player)
+	ambient_player.finished.connect(func():
+		if ambient_player and not _current_ambient_file.is_empty() and not ambient_player.playing:
+			ambient_player.play()
+	)
+
+	# 4. Secondary Ambient Player (cho hiệu ứng thời tiết như Mưa rào aRain.wav)
+	ambient_weather_player = AudioStreamPlayer.new()
+	ambient_weather_player.name = "AmbientWeatherPlayer"
+	ambient_weather_player.volume_db = -12.0
+	ambient_weather_player.bus = "Master"
+	add_child(ambient_weather_player)
+
+	# 5. Nạp database âm quái
 	_load_monster_sound_map()
 
-	# 4. Preload trước các âm thanh thường dùng nhất để phát tức thì không giật
+	# 6. Preload trước các âm thanh thường dùng nhất để phát tức thì không giật
 	_preload_common_sounds()
+
+	# 7. Khởi động âm thanh bản đồ (chỉ khi đã vào thế giới thật)
+	if _current_world_id > 0:
+		_set_world_internal(_current_world_id)
+
+func _process(delta: float) -> void:
+	# Cập nhật âm lượng mượt mà cho Ambient Player khi chuyển đổi trong nhà / ngoài trời
+	if ambient_player and ambient_player.playing:
+		ambient_player.volume_db = move_toward(ambient_player.volume_db, _target_ambient_volume, delta * 12.0)
+
+	# Quản lý sự kiện âm thanh môi trường ngẫu nhiên (chim hót, gió thoảng, rừng cây, dơi kêu...)
+	_ambient_timer -= delta
+	if _ambient_timer <= 0.0:
+		_ambient_timer = randf_range(10.0, 24.0)
+		_trigger_random_ambient_event()
 
 func _get_player_2d() -> AudioStreamPlayer:
 	if players_2d.is_empty():
@@ -100,7 +143,7 @@ func _get_player_3d() -> AudioStreamPlayer3D:
 
 # ==================== TRÌNH NẠP FILE WAV GỐC (DIRECT WAV LOADER) ====================
 
-func load_wav(filename_or_path: String) -> AudioStreamWAV:
+func load_wav(filename_or_path: String, loop: bool = false) -> AudioStreamWAV:
 	var clean_path := filename_or_path.replace("\\", "/").strip_edges()
 	if not clean_path.begins_with("res://"):
 		if not clean_path.begins_with("assets/"):
@@ -108,14 +151,21 @@ func load_wav(filename_or_path: String) -> AudioStreamWAV:
 		else:
 			clean_path = "res://" + clean_path
 
-	if _wav_cache.has(clean_path):
-		return _wav_cache[clean_path]
+	var cache_key = clean_path + (":loop" if loop else "")
+	if _wav_cache.has(cache_key):
+		return _wav_cache[cache_key]
 
 	# Thử nạp qua ResourceLoader nếu Godot đã import
 	if ResourceLoader.exists(clean_path):
 		var res = ResourceLoader.load(clean_path)
 		if res is AudioStreamWAV:
-			_wav_cache[clean_path] = res
+			if loop:
+				var looped_res = res.duplicate() as AudioStreamWAV
+				looped_res.loop_mode = AudioStreamWAV.LOOP_FORWARD
+				looped_res.loop_begin = 0
+				_wav_cache[cache_key] = looped_res
+				return looped_res
+			_wav_cache[cache_key] = res
 			return res
 
 	# Tự động phân tích nhị phân RIFF WAV chuẩn xác 100%
@@ -168,13 +218,30 @@ func load_wav(filename_or_path: String) -> AudioStreamWAV:
 	if audio_data.is_empty():
 		return null
 
+	if bits_per_sample == 8:
+		# Chuẩn WAV lưu 8-bit PCM không dấu (0..255, tĩnh = 128).
+		# Godot FORMAT_8_BITS yêu cầu có dấu (-128..127, tĩnh = 0).
+		var signed_data := PackedByteArray()
+		signed_data.resize(audio_data.size())
+		for b_idx in range(audio_data.size()):
+			var u: int = audio_data[b_idx]
+			signed_data[b_idx] = (u - 128) & 0xFF
+		audio_data = signed_data
+
 	var stream := AudioStreamWAV.new()
 	stream.format = AudioStreamWAV.FORMAT_16_BITS if bits_per_sample == 16 else AudioStreamWAV.FORMAT_8_BITS
 	stream.stereo = (channels == 2)
 	stream.mix_rate = sample_rate
 	stream.data = audio_data
 
-	_wav_cache[clean_path] = stream
+	if loop:
+		stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+		stream.loop_begin = 0
+		var bytes_per_frame = (bits_per_sample / 8) * channels
+		if bytes_per_frame > 0:
+			stream.loop_end = audio_data.size() / bytes_per_frame
+
+	_wav_cache[cache_key] = stream
 	return stream
 
 func _find_case_insensitive_path(path: String) -> String:
@@ -192,12 +259,13 @@ func _find_case_insensitive_path(path: String) -> String:
 
 func _preload_common_sounds() -> void:
 	var common := [
-		"Jewel_Sound.wav", "eGem.wav", "pDropItem.wav", "pDropMoney.wav",
+		"Jewel_Sound.wav", "eGem.wav", "eMix.wav", "eBreak.wav", "pDropItem.wav", "pDropMoney.wav",
 		"pGetItem.wav", "pDrink.wav", "pEatApple.wav", "pLevelUp.wav",
 		"iButtonClick.wav", "iCreateWindow.wav",
 		"eSwingWeapon1.wav", "eSwingWeapon2.wav", "eSwingLightSword.wav",
 		"eMeleeHit1.wav", "eMeleeHit2.wav", "eMeleeHit3.wav",
-		"sKnightSkill1.wav", "sMagic.wav", "eExplosion.wav"
+		"sKnightSkill1.wav", "sMagic.wav", "eExplosion.wav",
+		"aBird1.wav", "aBird2.wav", "aWind.wav", "aForest.wav", "aWater.wav"
 	]
 	for snd in common:
 		load_wav(snd)
@@ -248,11 +316,25 @@ func _play_sound_file_internal(filename: String, volume_db: float = 0.0, pitch: 
 
 # ==================== 1. ÂM THANH VẬT PHẨM (ITEM SOUNDS) ====================
 
-## Tiếng KENG ngọc rơi thần thánh của MU Online (Jewel of Bless / Soul / Chaos Drop)
+## Tiếng ngọc của client gốc = SOUND_JEWEL01 = eGem.wav. Dùng khi: ngọc rơi xuống đất (isFreshDrop), nhặt ngọc
+## (WSclient ReceiveGetItem), đập ngọc lên đồ (ReceiveModifyItem), kết quả trộn Chaos thành công.
 static func play_jewel_drop(pos: Vector3 = Vector3.ZERO) -> void:
 	var inst = get_instance()
 	if inst:
+		inst._play_sound_file_internal("eGem.wav", 3.0, 1.0, pos)
+
+## Đá Nguyên Thủy (Gemstone) dùng SOUND_JEWEL02 = Jewel_Sound.wav khi rơi / nhặt
+static func play_gemstone_sound(pos: Vector3 = Vector3.ZERO) -> void:
+	var inst = get_instance()
+	if inst:
 		inst._play_sound_file_internal("Jewel_Sound.wav", 3.0, 1.0, pos)
+
+## Trộn Chaos: SOUND_MIX01 (eMix.wav) cùng SOUND_JEWEL01 khi thành công, SOUND_BREAK01 (eBreak.wav) khi thất bại
+static func play_mix_result(success: bool) -> void:
+	var inst = get_instance()
+	if inst:
+		inst._play_sound_file_internal("eMix.wav", 0.0, 1.0)
+		inst._play_sound_file_internal("eGem.wav" if success else "eBreak.wav", 0.0, 1.0)
 
 ## Tiếng Rơi Trang Bị / Vật phẩm thường ra đất (Item Drop)
 static func play_item_drop(pos: Vector3 = Vector3.ZERO) -> void:
@@ -300,6 +382,12 @@ static func play_melee_hit(pos: Vector3 = Vector3.ZERO) -> void:
 	if inst:
 		var snd = MELEE_HIT_SOUNDS[randi() % MELEE_HIT_SOUNDS.size()]
 		inst._play_sound_file_internal(snd, 1.0, randf_range(0.93, 1.07), pos)
+
+## Tiếng Nổ Combo của Chiến Binh (Blade Knight Combo Strike: eCombo.wav)
+static func play_combo(pos: Vector3 = Vector3.ZERO) -> void:
+	var inst = get_instance()
+	if inst:
+		inst._play_sound_file_internal("eCombo.wav", 3.0, 1.0, pos)
 
 ## Tiếng Kỹ Năng Xoay Kiếm DK (Twisting Slash)
 static func play_twisting_slash(pos: Vector3 = Vector3.ZERO) -> void:
@@ -396,3 +484,211 @@ static func play_level_up() -> void:
 	var inst = get_instance()
 	if inst:
 		inst._play_sound_file_internal("pLevelUp.wav", 4.0, 1.0)
+
+## Âm thanh Thông Báo Sự Kiện (Đã tắt hoàn toàn theo yêu cầu người dùng)
+static func play_event_notice() -> void:
+	return
+
+## Âm thanh Bắt Đầu Sự Kiện / Còi Báo Động (Đã tắt hoàn toàn theo yêu cầu người dùng)
+static func play_event_start() -> void:
+	return
+
+## Âm thanh Kết Thúc Sự Kiện (Đã tắt hoàn toàn theo yêu cầu người dùng)
+static func play_event_end() -> void:
+	return
+
+# ==================== 5. ÂM THANH MÔI TRƯỜNG BẢN ĐỒ & THIÊN NHIÊN (MAP & AMBIENT) ====================
+
+## Đặt bản đồ hiện tại và tự động chuyển đổi âm thanh nền (Wind, Dungeon, Forest, Water...)
+static func set_world(world_id: int) -> void:
+	var inst = get_instance()
+	if inst:
+		inst._set_world_internal(world_id)
+
+func _set_world_internal(world_id: int) -> void:
+	_current_world_id = world_id
+	var ambient_file := ""
+	var default_vol := -20.0
+
+	if world_id <= 0:
+		if ambient_player:
+			ambient_player.stop()
+		_current_ambient_file = ""
+		return
+
+	match world_id:
+		1: # Lorencia: Tắt tiếng gió hú nền aWind.wav (tránh tiếng hú dài chói tai)
+			ambient_file = ""
+			default_vol = -40.0
+		2: # Dungeon (Âm vang hầm ngục âm u, huyền bí)
+			ambient_file = "aDungeon.wav"
+			default_vol = -15.0
+		3: # Devias (Gió tuyết gầm rít băng giá)
+			ambient_file = "aWind.wav"
+			default_vol = -18.0
+		4: # Noria (Gió rừng tiên êm dịu)
+			ambient_file = "aWind.wav"
+			default_vol = -24.0
+		5: # Lost Tower (Âm hưởng tháp quỷ ma mị)
+			ambient_file = "aTower.wav"
+			default_vol = -16.0
+		8: # Atlans (Âm hưởng đại dương dưới đáy biển sâu)
+			ambient_file = "aWater.wav"
+			default_vol = -16.0
+		9: # Tarkan (Bão cát sa mạc gầm rú)
+			ambient_file = "desert.wav"
+			default_vol = -16.0
+		10: # Devil Square
+			ambient_file = "aWind.wav"
+			default_vol = -20.0
+		11: # Icarus (Gió lộng trời cao tầng mây)
+			ambient_file = "aHeaven.wav"
+			default_vol = -16.0
+		19, 20, 21, 22, 23, 24, 54: # Chaos Castle (Hỗn Nguyên Lâu rực lửa hỗn mang)
+			ambient_file = "aChaos.wav"
+			default_vol = -16.0
+		25, 26, 27, 28, 29, 30, 37: # Kalima (Thành phố cổ chìm sâu dưới nước)
+			ambient_file = "aKalima.wav"
+			default_vol = -15.0
+		_:
+			ambient_file = "aWind.wav"
+			default_vol = -24.0
+
+	_base_ambient_volume = default_vol
+	_target_ambient_volume = default_vol
+
+	if ambient_file.is_empty():
+		if ambient_player:
+			ambient_player.stop()
+		_current_ambient_file = ""
+		return
+
+	if _current_ambient_file == ambient_file and ambient_player and ambient_player.playing:
+		return
+
+	_current_ambient_file = ambient_file
+	var stream = load_wav(ambient_file, true)
+	if stream and ambient_player:
+		ambient_player.stream = stream
+		ambient_player.volume_db = default_vol
+		ambient_player.play()
+
+## Bật/tắt trạng thái trong nhà / dưới mái che (muffle giảm âm lượng gió bên ngoài như client gốc)
+static func set_indoor_state(is_indoor: bool) -> void:
+	var inst = get_instance()
+	if inst:
+		inst._set_indoor_state_internal(is_indoor)
+
+func _set_indoor_state_internal(is_indoor: bool) -> void:
+	if _is_indoors == is_indoor:
+		return
+	_is_indoors = is_indoor
+	if is_indoor:
+		# Giảm âm lượng khi vào trong nhà (chuẩn client MU tắt/giảm âm gió ngoài trời)
+		_target_ambient_volume = _base_ambient_volume - 16.0
+	else:
+		_target_ambient_volume = _base_ambient_volume
+
+## Bật/tắt tiếng mưa rào lặp lại (aRain.wav)
+static func set_rain_active(active: bool) -> void:
+	var inst = get_instance()
+	if inst:
+		inst._set_rain_active_internal(active)
+
+func _set_rain_active_internal(active: bool) -> void:
+	if not ambient_weather_player:
+		return
+	if active:
+		if not ambient_weather_player.playing:
+			var stream = load_wav("aRain.wav", true)
+			if stream:
+				ambient_weather_player.stream = stream
+				ambient_weather_player.volume_db = -12.0
+				ambient_weather_player.play()
+	else:
+		ambient_weather_player.stop()
+
+## Dừng toàn bộ âm thanh môi trường nền
+static func stop_ambient() -> void:
+	var inst = get_instance()
+	if inst:
+		inst._stop_ambient_internal()
+
+func _stop_ambient_internal() -> void:
+	if ambient_player:
+		ambient_player.stop()
+	if ambient_weather_player:
+		ambient_weather_player.stop()
+	_current_ambient_file = ""
+
+## Kích hoạt ngẫu nhiên âm thanh môi trường theo từng bản đồ (chim hót, rừng cây, dơi kêu, sấm sét...)
+func _trigger_random_ambient_event() -> void:
+	match _current_world_id:
+		1: # Lorencia
+			# Tiếng chim hót ngẫu nhiên tự nhiên
+			play_bird_sound()
+		2: # Dungeon
+			# Dơi bay hoặc chuột kêu trong hầm ngục tối
+			if randf() < 0.5:
+				play_bat_sound()
+			else:
+				_play_sound_file_internal("aMouse.wav", -8.0, randf_range(0.95, 1.05))
+		3: # Devias
+			# Tiếng tuyết rơi / gió rít thoảng qua
+			if randf() < 0.3:
+				_play_sound_file_internal("aWind.wav", -18.0, randf_range(0.85, 1.15))
+		4: # Noria
+			# Âm thanh rừng cây cổ tích Noria (aForest.wav) hoặc chim tiên hót
+			if randf() < 0.6:
+				play_forest_ambient()
+			else:
+				play_bird_sound()
+		5: # Lost Tower
+			_play_sound_file_internal("aTower.wav", -6.0, randf_range(0.9, 1.1))
+		8: # Atlans
+			play_water_splash()
+		9: # Tarkan
+			_play_sound_file_internal("desert.wav", -6.0, randf_range(0.95, 1.05))
+		11: # Icarus
+			play_thunder_sound()
+		25, 26, 27, 28, 29, 30, 37: # Kalima
+			var kalimas = ["aKalima01.wav", "aKalima02.wav", "aKalimaWaterFall.wav"]
+			_play_sound_file_internal(kalimas[randi() % kalimas.size()], -3.0, randf_range(0.95, 1.05))
+
+# ==================== 6. ÂM THANH SINH VẬT & HIỆU ỨNG TỰ NHIÊN ====================
+
+## Tiếng chim hót (Đã loại bỏ âm thanh aBird1/aBird2 chói tai theo yêu cầu)
+static func play_bird_sound(_pos: Vector3 = Vector3.ZERO) -> void:
+	return
+
+## Tiếng quạ kêu (eCrow.wav)
+static func play_crow_sound(pos: Vector3 = Vector3.ZERO) -> void:
+	var inst = get_instance()
+	if inst:
+		inst._play_sound_file_internal("eCrow.wav", randf_range(-3.0, 0.0), randf_range(0.95, 1.05), pos)
+
+## Tiếng dơi đập cánh & rít kêu (aBat.wav)
+static func play_bat_sound(pos: Vector3 = Vector3.ZERO) -> void:
+	var inst = get_instance()
+	if inst:
+		inst._play_sound_file_internal("aBat.wav", randf_range(-4.0, -1.0), randf_range(0.95, 1.05), pos)
+
+## Tiếng rừng cây cổ tích Noria (aForest.wav)
+static func play_forest_ambient(pos: Vector3 = Vector3.ZERO) -> void:
+	var inst = get_instance()
+	if inst:
+		inst._play_sound_file_internal("aForest.wav", -4.0, randf_range(0.95, 1.05), pos)
+
+## Tiếng nước chảy / bì bõm / quẫy nước (aWater.wav / pSwim.wav)
+static func play_water_splash(pos: Vector3 = Vector3.ZERO) -> void:
+	var inst = get_instance()
+	if inst:
+		var snd = "pSwim.wav" if randf() < 0.5 else "aWater.wav"
+		inst._play_sound_file_internal(snd, -6.0, randf_range(0.92, 1.08), pos)
+
+## Tiếng sấm chớp giông bão (aThunder01..03.wav)
+static func play_thunder_sound(pos: Vector3 = Vector3.ZERO) -> void:
+	var inst = get_instance()
+	if inst:
+		var ths = ["aThunder01.wav", "aThunder02.wav", "aThunder03.wav"]
+		inst._play_sound_file_internal(ths[randi() % ths.size()], 2.0, randf_range(0.92, 1.08), pos)

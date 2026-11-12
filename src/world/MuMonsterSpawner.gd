@@ -32,7 +32,7 @@ func setup(world, world_id: int) -> bool:
 	for a in areas:
 		var id := int(a.get("id", -1))
 		var mon := MuCatalogRes.find_monster(id)
-		if mon.is_empty() or MuCatalogRes.monster_stats(id).is_empty():
+		if mon.is_empty():
 			continue
 		var nm = mon.get("name", {})
 		var name_en: String = str(nm.get("en", "")) if nm is Dictionary else str(nm)
@@ -44,13 +44,42 @@ func setup(world, world_id: int) -> bool:
 	print("[MuMonsterSpawner] World%d: %d chỗ quái (%d vùng)" % [world_id, _slots.size(), areas.size()])
 	return not _slots.is_empty()
 
-## Ô ngẫu nhiên đi được, ngoài thành, trong vùng
+## Ô ngẫu nhiên đi được, ngoài thành (nếu ở bản đồ thành), trong vùng
 func _pick_tile(x1: int, y1: int, x2: int, y2: int) -> Vector2i:
+	var min_x := mini(x1, x2)
+	var max_x := maxi(x1, x2)
+	var min_y := mini(y1, y2)
+	var max_y := maxi(y1, y2)
+
+	# Điểm đơn (single spot spawn)
+	if min_x == max_x and min_y == max_y:
+		if _world.is_walkable(min_x, min_y):
+			return Vector2i(min_x, min_y)
+		for r in range(1, 4):
+			for dy in range(-r, r + 1):
+				for dx in range(-r, r + 1):
+					var tx := min_x + dx
+					var ty := min_y + dy
+					if _world.is_walkable(tx, ty):
+						return Vector2i(tx, ty)
+		return Vector2i(min_x, min_y)
+
+	# Vùng ngẫu nhiên
+	var is_town: bool = (MuTerrain.world_id in [1, 3, 4, 52])
 	for _i in 30:
-		var t := Vector2i(randi_range(mini(x1, x2), maxi(x1, x2)), randi_range(mini(y1, y2), maxi(y1, y2)))
-		if _world.is_walkable(t.x, t.y) and not MuWorld.is_safe_tile(t.x, t.y):
+		var t := Vector2i(randi_range(min_x, max_x), randi_range(min_y, max_y))
+		if _world.is_walkable(t.x, t.y) and (not is_town or not MuWorld.is_safe_tile(t.x, t.y)):
 			return t
-	return Vector2i(-1, -1)
+
+	# Quét lưới tìm ô hợp lệ nếu random 30 lần chưa thấy
+	var step_x := maxi(1, (max_x - min_x) / 10)
+	var step_y := maxi(1, (max_y - min_y) / 10)
+	for y in range(min_y, max_y + 1, step_y):
+		for x in range(min_x, max_x + 1, step_x):
+			if _world.is_walkable(x, y) and (not is_town or not MuWorld.is_safe_tile(x, y)):
+				return Vector2i(x, y)
+
+	return Vector2i(min_x, min_y)
 
 func _process(delta: float) -> void:
 	_t += delta
@@ -58,7 +87,10 @@ func _process(delta: float) -> void:
 	if _tick > 0.0 or _slots.is_empty():
 		return
 	_tick = TICK
-	var player = get_tree().get_first_node_in_group("Player")
+	var tree := get_tree()
+	if not tree:
+		return
+	var player = tree.get_first_node_in_group("Player")
 	if player == null:
 		return
 	var pt := Vector2i(player.grid_x, player.grid_y)

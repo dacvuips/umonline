@@ -51,7 +51,7 @@ func _start() -> void:
 				_magic_circle(3, caster)
 
 func _mu_tick(t: int) -> void:
-	if _heal_sub > 0 and t < 20:
+	if _heal_sub > 0 and t < 16 and (t % 2 == 0):
 		_healing_tick()
 	_move_joints()
 	if skill_num == PENETRATION and t == 4:
@@ -92,9 +92,9 @@ func _magic_circle(sub: int, who: Node3D) -> void:
 		m["flat"] = true
 	if sub == 2:
 		for j in 5:
-			var r := ribbon("BITMAP_FLARE_BLUE", g, {"width": 0.25, "max_tails": 20, "life": 50,
-				"color": Color(0.4, 0.8, 0.2)})
-			_joints.append({"r": r, "kind": "orbit", "who": who, "phase": j * 72.0, "h": 0.3 + j * 0.3})
+			var r := ribbon("BITMAP_FLARE_BLUE", g, {"width": 0.07, "max_tails": 18, "life": 45,
+				"color": Color(0.4, 0.8, 0.2), "taper": false})
+			_joints.append({"r": r, "kind": "orbit", "who": who, "phase": j * 72.0, "h": 0.25 + j * 0.25})
 	_min_ticks = 22
 	impact_delay = 0.1
 
@@ -103,11 +103,19 @@ func _healing_tick() -> void:
 		return
 	var c := _heal_at.global_position
 	var col: Color = HEAL_COLOR.get(_heal_sub, Color(1, 1, 1))
-	for j in 3:
-		var a := Vector3(rnd(90), 0, rnd(360))
-		var from := c - rot(Vector3(0, -200, 0), a) + mu(Vector3(0, 0, 120))
-		var r := ribbon("BITMAP_JOINT_HEALING", from, {"width": 0.15, "max_tails": 3, "life": 12, "color": col})
-		_joints.append({"r": r, "kind": "home", "pos": from, "to": c + Vector3(0, 1.0, 0)})
+	var target_chest := c + Vector3(0, 1.1, 0)
+	# 2 tia thanh mảnh mỗi lần bắn lượn vào ngực (Scale 5 MU gốc = 0.045m, đuôi ngắn ~12-15cm)
+	for j in 2:
+		var a := Vector3(rnd(75), 0, rnd(360))
+		var from := target_chest - rot(Vector3(0, -140, 0), a)
+		var r := ribbon("BITMAP_JOINT_HEALING", from, {
+			"width": 0.045,
+			"max_tails": 2,
+			"life": 12,
+			"color": col,
+			"taper": true
+		})
+		_joints.append({"r": r, "kind": "home", "pos": from, "to": target_chest, "vel": 0.09})
 
 func _move_joints() -> void:
 	for s in _joints:
@@ -117,20 +125,34 @@ func _move_joints() -> void:
 		match s["kind"]:
 			"home":
 				var p: Vector3 = s["pos"]
-				p = p.lerp(s["to"], 0.25)
-				s["pos"] = p
-				r["head"] = p
+				var to: Vector3 = s["to"]
+				var vel: float = float(s.get("vel", 0.09))
+				var diff := to - p
+				var dist := diff.length()
+				if dist <= vel or dist < 0.08:
+					r["life"] = 0.0
+					if randf() < 0.35:
+						particle("BITMAP_SHINY+1", to + Vector3(randf_range(-0.15, 0.15), randf_range(-0.1, 0.15), randf_range(-0.15, 0.15)), {
+							"size": 0.3, "life": 6, "color": r["color"], "fade": true
+						})
+				else:
+					p += diff.normalized() * vel
+					s["pos"] = p
+					s["vel"] = vel + 0.018
+					r["head"] = p
+					ribbon_push(r)
 			"orbit":
 				var who: Node3D = s["who"]
 				if not is_instance_valid(who):
 					continue
-				s["phase"] = float(s["phase"]) + 25.0
+				s["phase"] = float(s["phase"]) + 22.0
 				var ph := deg_to_rad(float(s["phase"]))
-				r["head"] = who.global_position + Vector3(cos(ph) * 0.7, float(s["h"]) + sin(ph * 0.5) * 0.2, sin(ph) * 0.7)
+				r["head"] = who.global_position + Vector3(cos(ph) * 0.55, float(s["h"]) + sin(ph * 0.5) * 0.15, sin(ph) * 0.55)
+				ribbon_push(r)
 			"line":
 				s["pos"] = (s["pos"] as Vector3) + (s["vel"] as Vector3)
 				r["head"] = s["pos"]
-		ribbon_push(r)
+				ribbon_push(r)
 
 # ------------------------------------------------------------------ 46 Starfall (Deep Impact)
 ## MODEL_ARROW_IMPACT (Skill/ArrowImpact, Scale 1.8, BlendMesh -2, Light (0.3,0.8,1), LifeTime 20):

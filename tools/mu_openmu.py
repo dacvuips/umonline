@@ -145,10 +145,15 @@ def main(openmu_root, mugodot):
 
 
 # ============================================================================= bản đồ: NPC, quái, cổng
-DIR_DELTA = {'Undefined': (0, 0), 'North': (-1, 1), 'South': (1, -1), 'East': (1, 1), 'West': (-1, -1),
-             'NorthEast': (0, 1), 'NorthWest': (-1, 0), 'SouthEast': (1, 0), 'SouthWest': (0, -1)}
+DIR_DELTA = {
+    'Undefined': (0, 0), 'North': (-1, 1), 'South': (1, -1), 'East': (1, 1), 'West': (-1, -1),
+    'NorthEast': (0, 1), 'NorthWest': (-1, 0), 'SouthEast': (1, 0), 'SouthWest': (0, -1),
+    '0': (0, 0), '1': (0, 0), '2': (1, 1), '3': (1, 0), '4': (1, -1), '5': (0, -1), '6': (-1, -1), '7': (-1, 0), '8': (-1, 1)
+}
 
-SPAWN_RE = re.compile(r'CreateMonsterSpawn\(\s*(\d+)\s*,\s*this\.NpcDictionary\[(\d+)\]\s*,([^;]*?)\)\s*;')
+SPAWN_CALL_RE = re.compile(
+    r'CreateMonsterSpawn\(\s*(\d+)\s*,\s*(?:this\.NpcDictionary\[(\d+)\]|this\.GameConfiguration\.Monsters\.First\(m\s*=>\s*m\.Number\s*==\s*(\d+)\)|(\w+))\s*,([^;]*?)\)\s*;'
+)
 
 
 def _method_body(text, name):
@@ -168,30 +173,96 @@ def _method_body(text, name):
     return text[i:j]
 
 
-def _spawns(body):
-    npcs, mons = [], []
-    for m in SPAWN_RE.finditer(body or ''):
+def parse_spawns(body, is_npc, class_text=''):
+    items = []
+    local_vars = {}
+    for m in re.finditer(r'(?:const\s+byte|var|int|byte|short)\s+(\w+)\s*=\s*(\d+)', body or ''):
+        local_vars[m.group(1)] = int(m.group(2))
+    for m in re.finditer(r'var\s+(\w+)\s*=.*?First\(m\s*=>\s*m\.Number\s*==\s*(\d+)\)', body or ''):
+        local_vars[m.group(1)] = int(m.group(2))
+    for m in re.finditer(r'(?:const\s+short|const\s+int|const\s+byte)\s+(\w+)\s*=\s*(\d+)', class_text or ''):
+        local_vars[m.group(1)] = int(m.group(2))
+
+    for m in SPAWN_CALL_RE.finditer(body or ''):
         line_start = body.rfind('\n', 0, m.start())
         if body[line_start:m.start()].strip().startswith('//'):
             continue
-        num = int(m.group(2))
-        args = split_args(m.group(3))
+        g1, g2, g3 = m.group(2), m.group(3), m.group(4)
+        if g1:
+            mid = int(g1)
+        elif g2:
+            mid = int(g2)
+        elif g3 and g3 in local_vars:
+            mid = local_vars[g3]
+        else:
+            continue
+
+        raw_args = split_args(m.group(5))
         nums = []
         direction = 'Undefined'
         wander = False
-        for a in args:
+        for a in raw_args:
             a = a.strip()
             if a.startswith('Direction.'):
                 direction = a.split('.')[1]
+            elif a.startswith('(Direction)'):
+                direction = a.replace('(Direction)', '').strip()
             elif 'Wandering' in a:
                 wander = True
             elif re.fullmatch(r'\d+', a):
                 nums.append(int(a))
-        if len(nums) == 2:       # (x, y, hướng)
-            npcs.append({'id': num, 'x': nums[0], 'y': nums[1], 'dir': DIR_DELTA.get(direction, (0, 0)), 'wander': wander})
-        elif len(nums) >= 4:     # (x1, x2, y1, y2, số lượng)
-            mons.append({'id': num, 'x1': nums[0], 'x2': nums[1], 'y1': nums[2], 'y2': nums[3], 'count': nums[4] if len(nums) > 4 else 1})
-    return npcs, mons
+            elif a in local_vars:
+                nums.append(local_vars[a])
+
+        if is_npc:
+            if len(nums) == 2:
+                items.append({'id': mid, 'x': nums[0], 'y': nums[1], 'dir': DIR_DELTA.get(direction, (0, 0)), 'wander': wander})
+            elif len(nums) >= 4:
+                items.append({'id': mid, 'x': nums[0], 'y': nums[2], 'x2': nums[1], 'y2': nums[3], 'dir': DIR_DELTA.get(direction, (0, 0)), 'wander': True})
+        else:
+            if len(nums) == 2:
+                items.append({'id': mid, 'x1': nums[0], 'x2': nums[0], 'y1': nums[1], 'y2': nums[1], 'count': 1, 'dir': DIR_DELTA.get(direction, (0, 0))})
+            elif len(nums) >= 4:
+                items.append({'id': mid, 'x1': nums[0], 'x2': nums[1], 'y1': nums[2], 'y2': nums[3], 'count': nums[4] if len(nums) > 4 else 1, 'dir': DIR_DELTA.get(direction, (0, 0))})
+    return items
+
+
+def parse_kanturu_event(t):
+    consts = {
+        'MayaBodyNumber': 364, 'MayaLeftHandNumber': 362, 'MayaRightHandNumber': 363,
+        'NightmareNumber': 361, 'BladeHunterNumber': 354, 'DreadfearNumber': 360,
+        'TwinTaleNumber': 359, 'GenociderNumber': 357, 'PersonaNumber': 358
+    }
+    mons = []
+    for m in re.finditer(r'\(\s*\d+\s*,\s*(\w+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*\d+\s*\)', t):
+        cname, x1, x2, y1, y2, cnt = m.group(1), int(m.group(2)), int(m.group(3)), int(m.group(4)), int(m.group(5)), int(m.group(6))
+        mid = consts.get(cname)
+        if mid:
+            mons.append({'id': mid, 'x1': x1, 'x2': x2, 'y1': y1, 'y2': y2, 'count': cnt, 'dir': (0, 0)})
+    return mons
+
+
+def parse_imperial_guardian(base):
+    p = os.path.join(base, 'VersionSeasonSix', 'Events', 'ImperialGuardianSpawns.cs')
+    if not os.path.exists(p):
+        return {}
+    t = open(p, encoding='utf-8-sig', errors='ignore').read()
+    maps_spawns = {}
+    for map_num in [69, 70, 71, 72]:
+        arr_m = re.search(r'Map%dSpawns\s*=\s*\[(.*?)\];' % map_num, t, re.DOTALL)
+        if not arr_m:
+            continue
+        sp_text = arr_m.group(1)
+        mons = []
+        seen = set()
+        for sm in re.finditer(r'new\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*\(Direction\)(\d+)\s*,\s*(\d+)\s*,\s*ImperialGuardianDay\.(\w+)\)', sp_text):
+            num, mid, x, y, direction, zone, day = int(sm.group(1)), int(sm.group(2)), int(sm.group(3)), int(sm.group(4)), sm.group(5), int(sm.group(6)), sm.group(7)
+            if (num, mid, x, y) in seen:
+                continue
+            seen.add((num, mid, x, y))
+            mons.append({'id': mid, 'x1': x, 'x2': x, 'y1': y, 'y2': y, 'count': 1, 'dir': DIR_DELTA.get(direction, (0, 0))})
+        maps_spawns[map_num] = mons
+    return maps_spawns
 
 
 def parse_maps(base):
@@ -210,12 +281,17 @@ def parse_maps(base):
             name, parent = m.group(1), m.group(2)
             pver = ver
             if '.' in parent:
-                pver, parent = parent.split('.')[0], parent.split('.')[-1]
-            num = re.search(r'const\s+byte\s+Number\s*=\s*(\d+)', t)
-            info = {'parent': (pver, parent), 'number': int(num.group(1)) if num else None}
+                parts = parent.split('.')
+                pver = parts[0]
+                parent = parts[-1]
+            num_m = re.search(r'(?:(?:const|readonly)\s+byte\s+Number\s*=\s*|override\s+byte\s+MapNumber\s*=>\s*|override\s+byte\s+MapNumber\s*\{\s*get;\s*\}\s*=\s*)(\d+)', t)
+            info = {'parent': (pver, parent), 'number': int(num_m.group(1)) if num_m else None, 'text': t}
             for meth in ('CreateNpcSpawns', 'CreateMonsterSpawns'):
                 body = _method_body(t, meth)
-                info[meth] = None if body is None else {'base': ('base.%s' % meth) in body, 'list': _spawns(body)}
+                info[meth] = None if body is None else {
+                    'base': ('base.%s' % meth) in body,
+                    'list': parse_spawns(body, meth == 'CreateNpcSpawns', t)
+                }
             classes[(ver, name)] = info
     return classes
 
@@ -223,19 +299,18 @@ def parse_maps(base):
 def resolve(classes, key, field):
     info = classes.get(key)
     if not info:
-        return [], [], None
+        return [], None
     num = info['number']
-    pnpcs, pmons, pnum = resolve(classes, info['parent'], field)
+    pitems, pnum = resolve(classes, info['parent'], field)
     if num is None:
         num = pnum
     m = info.get(field)
     if m is None:
-        return pnpcs, pmons, num
-    npcs, mons = m['list']
+        return pitems, num
+    items = m['list']
     if m['base']:
-        npcs = pnpcs + npcs
-        mons = pmons + mons
-    return npcs, mons, num
+        items = pitems + items
+    return items, num
 
 
 def parse_gates_and_warps(base):
@@ -264,23 +339,67 @@ def main_all(openmu_root, mugodot):
     gates, warps = parse_gates_and_warps(base)
     json.dump(warps, open(os.path.join(out_dir, 'warps.json'), 'w', encoding='utf-8'), indent=0, ensure_ascii=False)
     print('== Danh sách dịch chuyển (Move): %d mục -> warps.json' % len(warps), flush=True)
+    
     classes = parse_maps(base)
-    spawns = {}
-    for key in classes:
-        if key[0] != 'VersionSeasonSix' and any(k[1] == key[1] and k[0] == 'VersionSeasonSix' for k in classes):
+    imp_spawns = parse_imperial_guardian(base)
+
+    gmi_path = os.path.join(base, 'VersionSeasonSix', 'GameMapsInitializer.cs')
+    type_matches = []
+    if os.path.exists(gmi_path):
+        gmi_text = open(gmi_path, encoding='utf-8-sig').read()
+        type_matches = re.findall(r'typeof\((?:(Version\w+)\.Maps\.)?(\w+)\)', gmi_text)
+
+    # Thêm các map khác nếu chưa có trong GameMapsInitializer
+    checked_keys = set()
+    map_list = []
+    for ver, name in type_matches:
+        actual_ver = ver if ver else 'VersionSeasonSix'
+        k = (actual_ver, name)
+        checked_keys.add(k)
+        map_list.append(k)
+
+    for k in sorted(classes.keys()):
+        if k[0] != 'VersionSeasonSix' and any(k[1] == other[1] and other[0] == 'VersionSeasonSix' for other in classes):
             continue
-        npcs, _, num = resolve(classes, key, 'CreateNpcSpawns')
-        _, mons, num2 = resolve(classes, key, 'CreateMonsterSpawns')
-        num = num if num is not None else num2
+        if k not in checked_keys:
+            map_list.append(k)
+
+    spawns = {}
+    for key in map_list:
+        npcs, num1 = resolve(classes, key, 'CreateNpcSpawns')
+        mons, num2 = resolve(classes, key, 'CreateMonsterSpawns')
+        num = num1 if num1 is not None else num2
         if num is None:
             continue
+
+        if key[1] == 'KanturuEvent':
+            mons = mons + parse_kanturu_event(classes[key]['text'])
+        elif num in imp_spawns:
+            mons = mons + imp_spawns[num]
+
         w = str(num + 1)
         sp = [g for g in gates.values() if g['map'] == num and g['spawn']]
-        spawns[w] = {'map': num, 'class': key[1], 'npcs': npcs, 'monsters': mons,
-                     'spawn_gate': sp[0] if sp else None}
+
+        if w not in spawns:
+            spawns[w] = {
+                'map': num,
+                'class': key[1],
+                'npcs': npcs,
+                'monsters': mons,
+                'spawn_gate': sp[0] if sp else None
+            }
+        else:
+            existing_npcs = spawns[w]['npcs']
+            for n in npcs:
+                if n not in existing_npcs:
+                    existing_npcs.append(n)
+            spawns[w]['monsters'].extend(mons)
+
     json.dump(spawns, open(os.path.join(out_dir, 'spawns.json'), 'w', encoding='utf-8'), separators=(',', ':'))
-    print('== NPC / quái theo bản đồ: %d bản đồ, %d NPC, %d vùng quái -> spawns.json' % (
-        len(spawns), sum(len(v['npcs']) for v in spawns.values()), sum(len(v['monsters']) for v in spawns.values())), flush=True)
+    tot_mon_areas = sum(len(v['monsters']) for v in spawns.values())
+    tot_monsters = sum(sum(m.get('count', 1) for m in v['monsters']) for v in spawns.values())
+    print('== NPC / quái theo bản đồ: %d bản đồ, %d NPC, %d vùng quái (%d tổng số quái) -> spawns.json' % (
+        len(spawns), sum(len(v['npcs']) for v in spawns.values()), tot_mon_areas, tot_monsters), flush=True)
 
 
 if __name__ == '__main__':

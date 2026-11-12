@@ -76,6 +76,26 @@ async def local_login(ws, msg: bytes) -> None:
         await ws.send(bytes([0xC1, 0x05, 0xF1, 0x01, 0x01 if ok else 0x00]))
 
 
+async def local_register(ws, msg: bytes) -> None:
+    """Gói đăng ký tự chế: F1 02 + 10 byte tên + 10 byte mật khẩu + 30 byte email. Trả F1 02 <1 ok | 0 sai dữ liệu | 2 trùng | 3 quá nhiều | 4 lỗi>."""
+    name, password, email = _cstr(msg[4:14]), _cstr(msg[14:24]), _cstr(msg[24:54])
+    ip = client_ip(ws)
+    if not auth.ENABLED:
+        code = 4
+    elif not auth.reg_allowed(ip):
+        code = 3
+    else:
+        try:
+            code = await asyncio.to_thread(auth.register_account, name, password, email)
+        except Exception as e:
+            log.error("register '%s': lỗi (%r)", name, e)
+            code = 4
+        if code == 1:
+            auth.reg_note(ip)
+    log.info("register '%s' từ %s -> mã %s", name, ip, code)
+    await ws.send(bytes([0xC1, 0x05, 0xF1, 0x02, code]))
+
+
 async def ws_to_tcp(ws, writer):
     async for msg in ws:
         if isinstance(msg, bytes):
@@ -84,6 +104,12 @@ async def ws_to_tcp(ws, writer):
                     await local_login(ws, msg)
                 else:
                     await ws.send(bytes([0xC1, 0x05, 0xF1, 0x01, 0x00]))
+                continue
+            if len(msg) >= 4 and msg[2] == 0xF1 and msg[3] == 0x02:
+                if len(msg) >= 54:
+                    await local_register(ws, msg)
+                else:
+                    await ws.send(bytes([0xC1, 0x05, 0xF1, 0x02, 0x00]))
                 continue
             writer.write(msg)
             await writer.drain()

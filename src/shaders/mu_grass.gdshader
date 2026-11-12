@@ -1,32 +1,32 @@
 shader_type spatial;
 render_mode unshaded, cull_disabled, depth_draw_opaque;
 
-// Làm vùng đổ bóng bớt đen: ánh sáng (gamma) thấp hơn shadow_floor được kéo lên gần mức đó,
-// tỉ lệ shadow_lift (0 = như MU gốc). Chỗ sáng hơn shadow_floor giữ nguyên.
-uniform float shadow_floor = 0.58;
-uniform float shadow_lift = 0.68;
-uniform float brightness = 1.15;
-vec3 lift_shadow(vec3 l) {
-	return l + max(vec3(shadow_floor) - l, vec3(0.0)) * shadow_lift;
+// Ánh sáng địa hình đúng công thức client MU (ZzzLodTerrain.cpp): màu = texture * min(TerrainLight * light_scale, 1),
+// light_scale = 1. Đối chiếu ảnh chụp client IGCN: quảng trường Lorencia ~1.1, trong quán rượu ~0.6-0.7 (client làm
+// tối trong nhà bằng cơ chế không có trong TerrainLight) -> giữ 1 như mã nguồn.
+// Tính thẳng trong gamma: renderer GL Compatibility của dự án KHÔNG đổi sang linear (128 * 0.5 = 64), nên không
+// được đổi ánh sáng sang linear (sRGB -> linear / mũ 2.2) — lỗi cũ đó làm mọi cảnh tối hơn client.
+uniform float light_scale = 1.0;
+vec3 mu_light(vec3 l) {
+	return min(l * light_scale, vec3(1.0));
 }
 
-// Cỏ mọc trên địa hình (TERRAIN_MAP_GRASS trong RenderTerrainFace):
-// mỗi ô cỏ là một tấm đứng, 2 đỉnh trên lay theo gió
-// TerrainGrassWind = sin(WorldTime*0.002 + x*5) * 10  (đơn vị MU, cộng vào trục Y của MU = -Z Godot)
+// Cỏ mọc trên địa hình (TERRAIN_MAP_GRASS):
+// mỗi khóm cỏ gồm các tấm đan chéo (crossed quads), 2 đỉnh trên lay theo gió
+// TerrainGrassWind = sin(WorldTime*0.002 + x*5)
 
 uniform sampler2D grass_atlas : source_color, filter_nearest, repeat_enable;
 
 varying vec3 v_light;
 
-vec3 srgb_to_linear(vec3 c) {
-	return mix(pow((c + vec3(0.055)) * (1.0 / 1.055), vec3(2.4)), c * (1.0 / 12.92), lessThan(c, vec3(0.04045)));
-}
 
 void vertex() {
-	// COLOR.a = 1 với 2 đỉnh trên, UV2.x = chỉ số cột x của ô (để tính gió)
-	float wind = sin(TIME * 2.0 + UV2.x * 5.0) * 10.0 * 0.01;
-	VERTEX.z -= wind * COLOR.a;
-	v_light = srgb_to_linear(lift_shadow(COLOR.rgb));
+	// COLOR.a = 1 với 2 đỉnh trên, UV2.x = toạ độ x của đám cỏ (để tính gió)
+	float wind_z = sin(TIME * 2.0 + UV2.x * 5.0) * 10.0 * 0.01;
+	float wind_x = cos(TIME * 1.6 + UV2.x * 3.5) * 4.0 * 0.01;
+	VERTEX.z -= wind_z * COLOR.a;
+	VERTEX.x += wind_x * COLOR.a;
+	v_light = mu_light(COLOR.rgb);
 }
 
 void fragment() {
@@ -35,5 +35,5 @@ void fragment() {
 	if (t.a <= 0.25) {
 		discard;
 	}
-	ALBEDO = t.rgb * v_light * brightness;
+	ALBEDO = t.rgb * v_light;
 }

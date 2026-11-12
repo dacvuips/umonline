@@ -1,0 +1,896 @@
+{
+  "11": [
+    {
+      "kind": 2,
+      "x": 13,
+      "y": 8,
+      "rot": 315,
+      "name": "Entrance to the Lost Tower"
+    }
+  ],
+  "1": [
+    {
+      "kind": 1,
+      "x": 121,
+      "y": 108,
+      "rot": 0,
+      "name": "Trainer"
+    },
+    {
+      "kind": 1,
+      "x": 59,
+      "y": 129,
+      "rot": 0,
+      "name": "Wandering Merchant Alex"
+    },
+    {
+      "kind": 1,
+      "x": 183,
+      "y": 137,
+      "rot": 0,
+      "name": "Wandering Merchant Herald"
+    },
+    {
+      "kind": 1,
+      "x": 125,
+      "y": 86,
+      "rot": 0,
+      "name": "Potion Girl Amy"
+    },
+    {
+      "kind": 1,
+      "x": 114,
+      "y": 141,
+      "rot": 0,
+      "name": "Hanzo the Blacksmith"
+    },
+    {
+      "kind": 1,
+      "x": 121,
+      "y": 135,
+      "rot": 0,
+      "name": "Lumen the Barmaid"
+    },
+    {
+      "kind": 1,
+      "x": 116,
+      "y": 112,
+      "rot": 0,
+      "name": "Pasi the Mage"
+    },
+    {
+      "kind": 1,
+      "x": 146,
+      "y": 145,
+      "rot": 0,
+      "name": "Safety Guardian"
+    },
+    {
+      "kind": 1,
+      "x": 144,
+      "y": 109,
+      "rot": 0,
+      "name": "Safety Guardian"
+    },
+    {
+      "kind": 1,
+      "x": 96,
+      "y": 129,
+      "rot": 0,
+      "name": "Shadow Phantom Soldier"
+    },
+    {
+      "kind": 1,
+      "x": 130,
+      "y": 165,
+      "rot": 0,
+      "name": "Shadow Phantom Soldier"
+    },
+    {
+      "kind": 1,
+      "x": 130,
+      "y": 90,
+      "rot": 0,
+      "name": "Shadow Phantom Soldier"
+    },
+    {
+      "kind": 1,
+      "x": 170,
+      "y": 129,
+      "rot": 0,
+      "name": "Shadow Phantom Soldier"
+    },
+    {
+      "kind": 1,
+      "x": 142,
+      "y": 126,
+      "rot": 0,
+      "name": "Gens Duprian Steward"
+    },
+    {
+      "kind": 1,
+      "x": 130,
+      "y": 161,
+      "rot": 0,
+      "name": "Chaos Card Master"
+    },
+    {
+      "kind": 2,
+      "x": 121,
+      "y": 232,
+      "rot": 135,
+      "name": "Dungeon Entrance"
+    },
+    {
+      "kind": 2,
+      "x": 1,
+      "y": 38,
+      "rot": 225,
+      "name": "Entrance to Devias"
+    },
+    {
+      "kind": 2,
+      "x": 216,
+      "y": 248,
+      "rot": 135,
+      "name": "Entrance to Noria"
+    },
+    {
+      "kind": 2,
+      "x": 242,
+      "y": 15,
+      "rot": 90,
+      "name": "Entrance to Valley of Loren"
+    }
+  ],
+  "2": [
+    {
+      "kind": 2,
+      "x": 108,
+      "y": 249,
+      "rot": 135,
+      "name": "Entrance to Lorencia"
+    },
+    {
+      "kind": 2,
+      "x": 238,
+      "y": 150,
+      "rot": 225,
+      "name": "Dungeon Level 2 Entrance"
+    },
+    {
+      "kind": 2,
+      "x": 232,
+      "y": 128,
+      "rot": 135,
+      "name": "Dungeon Level 1 Entrance"
+    },
+    {
+      "kind": 2,
+      "x": 1,
+      "y": 18,
+      "rot": 225,
+      "name": "Dungeon Level 3 West Entrance"
+    },
+    {
+      "kind": 2,
+      "x": 5,
+      "y": 35,
+      "rot": 135,
+      "name": "Dungeon Level 3 East Entrance"
+    },
+    {
+      "kind": 2,
+      "x": 1,
+      "y": 85,
+      "rot": 225,
+      "name": "Dungeon Level 2 West Entrance"
+    },
+    {
+      "kind": 2,
+      "x": 29,
+      "y": 127,
+      "rot": 135,
+      "name": "Dungeon Level 2 East Entrance"
+    }
+  ],
+  "32": [
+    {
+      "kind": 2,
+      "x": 60,
+      "y": 8,
+      "rot": 315,
+      "name": "Entrance to the Valley of Loren"
+    }
+  ],
+  "34": [
+    {
+      "kind": 1,
+      "x": 77,
+      "y": 13,
+      "rot": 0,
+      "name": "Osbourne"
+    },
+    {
+      "kind": 1,
+      "x": 85,
+      "y": 13,
+      "rot": 0,
+      "name": "Jerridon"
+    },
+    {
+      "kind": 2,
+      "x": 72,
+      "y": 10,
+      "rot": 225,
+      "name": "Entrance to Noria"
+    },
+    {
+      "kind": 2,
+      "x": 238,
+      "y": 165,
+      "rot": 135,
+      "name": "Entrance to Karutan"
+    }
+  ],
+  "35": [
+    {
+      "kind": 1,
+      "x": 228,
+      "y": 48,
+      "rot": 0,
+      "name": "Apostle Devin"
+    },
+    {
+      "kind": 1,
+      "x": 62,
+      "y": 239,
+      "rot": 0,
+      "name": "Werewolf Quarel"
+    },
+    {
+      "kind": 1,
+      "x": 135,
+      "y": 47,
+      "rot": 0,
+      "name": "Trainer"
+    },
+    {
+      "kind": 1,
+      "x": 99,
+      "y": 40,
+      "rot": 0,
+      "name": "Wandering Merchant Martin"
+    },
+    {
+      "kind": 1,
+      "x": 96,
+      "y": 25,
+      "rot": 0,
+      "name": "Lahap"
+    },
+    {
+      "kind": 1,
+      "x": 145,
+      "y": 14,
+      "rot": 0,
+      "name": "Hanzo the Blacksmith"
+    },
+    {
+      "kind": 1,
+      "x": 113,
+      "y": 56,
+      "rot": 0,
+      "name": "Safety Guardian"
+    },
+    {
+      "kind": 1,
+      "x": 118,
+      "y": 11,
+      "rot": 0,
+      "name": "Guardsman"
+    },
+    {
+      "kind": 2,
+      "x": 238,
+      "y": 42,
+      "rot": 45,
+      "name": "Entrance to the Valley of Loren"
+    }
+  ],
+  "38": [
+    {
+      "kind": 2,
+      "x": 16,
+      "y": 222,
+      "rot": 180,
+      "name": "Entrance to Tarkan"
+    },
+    {
+      "kind": 2,
+      "x": 89,
+      "y": 91,
+      "rot": 45,
+      "name": "Entrance to the Kanturu Relics"
+    }
+  ],
+  "39": [
+    {
+      "kind": 2,
+      "x": 66,
+      "y": 105,
+      "rot": 225,
+      "name": "Entrance to the Kanturu Ruins"
+    },
+    {
+      "kind": 2,
+      "x": 141,
+      "y": 186,
+      "rot": 135,
+      "name": "Gateway Machine"
+    }
+  ],
+  "3": [
+    {
+      "kind": 1,
+      "x": 209,
+      "y": 28,
+      "rot": 0,
+      "name": "Messenger of Archangel"
+    },
+    {
+      "kind": 1,
+      "x": 183,
+      "y": 31,
+      "rot": 0,
+      "name": "Sebina the Priest"
+    },
+    {
+      "kind": 1,
+      "x": 226,
+      "y": 23,
+      "rot": 0,
+      "name": "Caren the Barmaid"
+    },
+    {
+      "kind": 1,
+      "x": 225,
+      "y": 39,
+      "rot": 0,
+      "name": "Wizard Izabel"
+    },
+    {
+      "kind": 1,
+      "x": 186,
+      "y": 46,
+      "rot": 0,
+      "name": "Weapons Merchant Zienna"
+    },
+    {
+      "kind": 1,
+      "x": 215,
+      "y": 45,
+      "rot": 0,
+      "name": "Royal Guard Captain Lorence"
+    },
+    {
+      "kind": 1,
+      "x": 217,
+      "y": 62,
+      "rot": 0,
+      "name": "Safety Guardian"
+    },
+    {
+      "kind": 1,
+      "x": 170,
+      "y": 44,
+      "rot": 0,
+      "name": "Shadow Phantom Soldier"
+    },
+    {
+      "kind": 1,
+      "x": 219,
+      "y": 73,
+      "rot": 0,
+      "name": "Shadow Phantom Soldier"
+    },
+    {
+      "kind": 1,
+      "x": 229,
+      "y": 221,
+      "rot": 0,
+      "name": "Jerint the Assistant"
+    },
+    {
+      "kind": 1,
+      "x": 30,
+      "y": 30,
+      "rot": 0,
+      "name": "Natasha the Firecracker Merchant"
+    },
+    {
+      "kind": 1,
+      "x": 204,
+      "y": 61,
+      "rot": 0,
+      "name": "Mercenary Guild Manager Tercia"
+    },
+    {
+      "kind": 2,
+      "x": 251,
+      "y": 33,
+      "rot": 45,
+      "name": "Entrance to Lorencia"
+    },
+    {
+      "kind": 2,
+      "x": 162,
+      "y": 248,
+      "rot": 135,
+      "name": "Entrance to Elveland"
+    },
+    {
+      "kind": 2,
+      "x": 0,
+      "y": 250,
+      "rot": 180,
+      "name": "Entrance to the Lost Tower"
+    },
+    {
+      "kind": 2,
+      "x": 51,
+      "y": 92,
+      "rot": 135,
+      "name": "Entrance to La Cleon"
+    }
+  ],
+  "42": [
+    {
+      "kind": 1,
+      "x": 120,
+      "y": 168,
+      "rot": 0,
+      "name": "Gatekeeper"
+    }
+  ],
+  "4": [
+    {
+      "kind": 1,
+      "x": 169,
+      "y": 104,
+      "rot": 0,
+      "name": "Charon"
+    },
+    {
+      "kind": 1,
+      "x": 170,
+      "y": 125,
+      "rot": 0,
+      "name": "Elf Lala"
+    },
+    {
+      "kind": 1,
+      "x": 193,
+      "y": 123,
+      "rot": 0,
+      "name": "Eo the Craftsman"
+    },
+    {
+      "kind": 1,
+      "x": 170,
+      "y": 95,
+      "rot": 0,
+      "name": "Safety Guardian"
+    },
+    {
+      "kind": 1,
+      "x": 179,
+      "y": 103,
+      "rot": 0,
+      "name": "Chaos Goblin"
+    },
+    {
+      "kind": 1,
+      "x": 166,
+      "y": 118,
+      "rot": 0,
+      "name": "Shadow Phantom Soldier"
+    },
+    {
+      "kind": 1,
+      "x": 165,
+      "y": 84,
+      "rot": 0,
+      "name": "Shadow Phantom Soldier"
+    },
+    {
+      "kind": 1,
+      "x": 200,
+      "y": 128,
+      "rot": 0,
+      "name": "Shadow Phantom Soldier"
+    },
+    {
+      "kind": 1,
+      "x": 166,
+      "y": 99,
+      "rot": 0,
+      "name": "Gens Vanert Steward"
+    },
+    {
+      "kind": 2,
+      "x": 151,
+      "y": 2,
+      "rot": 315,
+      "name": "Entrance to Lorencia"
+    },
+    {
+      "kind": 2,
+      "x": 222,
+      "y": 29,
+      "rot": 135,
+      "name": "Entrance to Aida"
+    },
+    {
+      "kind": 2,
+      "x": 242,
+      "y": 241,
+      "rot": 45,
+      "name": "Entrance to Atlans"
+    }
+  ],
+  "52": [
+    {
+      "kind": 1,
+      "x": 36,
+      "y": 241,
+      "rot": 0,
+      "name": "Lahap"
+    },
+    {
+      "kind": 1,
+      "x": 43,
+      "y": 229,
+      "rot": 0,
+      "name": "Potion Merchant Silvia"
+    },
+    {
+      "kind": 1,
+      "x": 28,
+      "y": 236,
+      "rot": 0,
+      "name": "Weapons Merchant Rhea"
+    },
+    {
+      "kind": 1,
+      "x": 35,
+      "y": 219,
+      "rot": 0,
+      "name": "Magic Shop Owner Marce"
+    },
+    {
+      "kind": 1,
+      "x": 41,
+      "y": 191,
+      "rot": 0,
+      "name": "Shadow Phantom Soldier"
+    },
+    {
+      "kind": 1,
+      "x": 56,
+      "y": 232,
+      "rot": 0,
+      "name": "Shadow Phantom Soldier"
+    },
+    {
+      "kind": 1,
+      "x": 72,
+      "y": 220,
+      "rot": 0,
+      "name": "Shadow Phantom Soldier"
+    },
+    {
+      "kind": 1,
+      "x": 49,
+      "y": 229,
+      "rot": 0,
+      "name": "Safety Guardian"
+    },
+    {
+      "kind": 1,
+      "x": 54,
+      "y": 243,
+      "rot": 0,
+      "name": "Mirage"
+    },
+    {
+      "kind": 1,
+      "x": 45,
+      "y": 243,
+      "rot": 0,
+      "name": "Seed Master"
+    },
+    {
+      "kind": 1,
+      "x": 49,
+      "y": 243,
+      "rot": 0,
+      "name": "Seed Researcher"
+    },
+    {
+      "kind": 1,
+      "x": 48,
+      "y": 216,
+      "rot": 0,
+      "name": "Lugard"
+    },
+    {
+      "kind": 1,
+      "x": 21,
+      "y": 225,
+      "rot": 0,
+      "name": "Moss"
+    },
+    {
+      "kind": 1,
+      "x": 20,
+      "y": 214,
+      "rot": 0,
+      "name": "David"
+    },
+    {
+      "kind": 2,
+      "x": 248,
+      "y": 149,
+      "rot": 45,
+      "name": "Entrance to Atlans"
+    },
+    {
+      "kind": 2,
+      "x": 19,
+      "y": 27,
+      "rot": 225,
+      "name": "Entrance to Devias"
+    }
+  ],
+  "57": [
+    {
+      "kind": 2,
+      "x": 139,
+      "y": 125,
+      "rot": 135,
+      "name": "Swamp of Peace Hunting Grounds Entrance (1)"
+    },
+    {
+      "kind": 2,
+      "x": 124,
+      "y": 109,
+      "rot": 225,
+      "name": "Swamp of Peace Hunting Grounds Entrance (2)"
+    },
+    {
+      "kind": 2,
+      "x": 140,
+      "y": 95,
+      "rot": 315,
+      "name": "Swamp of Peace Hunting Grounds Entrance (3)"
+    },
+    {
+      "kind": 2,
+      "x": 150,
+      "y": 109,
+      "rot": 45,
+      "name": "Swamp of Peace Hunting Grounds Entrance (4)"
+    },
+    {
+      "kind": 2,
+      "x": 185,
+      "y": 188,
+      "rot": 270,
+      "name": "Entrance to Safe Zone"
+    },
+    {
+      "kind": 2,
+      "x": 56,
+      "y": 177,
+      "rot": 225,
+      "name": "Entrance to Safe Zone"
+    },
+    {
+      "kind": 2,
+      "x": 68,
+      "y": 52,
+      "rot": 90,
+      "name": "Entrance to Safe Zone"
+    },
+    {
+      "kind": 2,
+      "x": 197,
+      "y": 13,
+      "rot": 225,
+      "name": "Entrance to Safe Zone"
+    }
+  ],
+  "58": [
+    {
+      "kind": 2,
+      "x": 224,
+      "y": 214,
+      "rot": 135,
+      "name": "Entrance to Devias"
+    },
+    {
+      "kind": 2,
+      "x": 169,
+      "y": 22,
+      "rot": 225,
+      "name": "Entrance to the Hatchery"
+    }
+  ],
+  "5": [
+    {
+      "kind": 2,
+      "x": 164,
+      "y": 0,
+      "rot": 315,
+      "name": "Entrance to Devias"
+    },
+    {
+      "kind": 2,
+      "x": 190,
+      "y": 5,
+      "rot": 225,
+      "name": "Lost Tower Level 2 Entrance"
+    },
+    {
+      "kind": 2,
+      "x": 165,
+      "y": 165,
+      "rot": 225,
+      "name": "Lost Tower Level 3 Entrance"
+    },
+    {
+      "kind": 2,
+      "x": 133,
+      "y": 246,
+      "rot": 135,
+      "name": "Lost Tower Level 4 Entrance"
+    },
+    {
+      "kind": 2,
+      "x": 133,
+      "y": 136,
+      "rot": 135,
+      "name": "Lost Tower Level 5 Entrance"
+    },
+    {
+      "kind": 2,
+      "x": 129,
+      "y": 14,
+      "rot": 225,
+      "name": "Lost Tower Level 6 Entrance"
+    },
+    {
+      "kind": 2,
+      "x": 4,
+      "y": 7,
+      "rot": 225,
+      "name": "Lost Tower Level 7 Entrance"
+    },
+    {
+      "kind": 2,
+      "x": 16,
+      "y": 250,
+      "rot": 135,
+      "name": "Entrance to Icarus"
+    }
+  ],
+  "64": [
+    {
+      "kind": 1,
+      "x": 121,
+      "y": 135,
+      "rot": 0,
+      "name": "Doorkeeper Titus"
+    }
+  ],
+  "81": [
+    {
+      "kind": 1,
+      "x": 121,
+      "y": 102,
+      "rot": 45,
+      "name": "Leina, the General Goods Merchant"
+    },
+    {
+      "kind": 1,
+      "x": 117,
+      "y": 126,
+      "rot": 45,
+      "name": "Weapons Merchant Bolo"
+    },
+    {
+      "kind": 1,
+      "x": 123,
+      "y": 132,
+      "rot": 0,
+      "name": "Safety Guardian"
+    },
+    {
+      "kind": 1,
+      "x": 122,
+      "y": 96,
+      "rot": 45,
+      "name": "Safety Guardian"
+    },
+    {
+      "kind": 1,
+      "x": 158,
+      "y": 126,
+      "rot": 225,
+      "name": "Safety Guardian"
+    },
+    {
+      "kind": 2,
+      "x": 115,
+      "y": 45,
+      "rot": 180,
+      "name": "Entrance to Aida"
+    },
+    {
+      "kind": 2,
+      "x": 187,
+      "y": 212,
+      "rot": 135,
+      "name": "Entrance to Karutan 2"
+    }
+  ],
+  "82": [
+    {
+      "kind": 2,
+      "x": 162,
+      "y": 9,
+      "rot": 225,
+      "name": "Entrance to Karutan 1"
+    }
+  ],
+  "8": [
+    {
+      "kind": 2,
+      "x": 8,
+      "y": 8,
+      "rot": 270,
+      "name": "Entrance to Noria"
+    },
+    {
+      "kind": 2,
+      "x": 9,
+      "y": 18,
+      "rot": 225,
+      "name": "Entrance to Elveland"
+    },
+    {
+      "kind": 2,
+      "x": 10,
+      "y": 228,
+      "rot": 225,
+      "name": "Entrance to Tarkan"
+    }
+  ],
+  "9": [
+    {
+      "kind": 2,
+      "x": 250,
+      "y": 40,
+      "rot": 45,
+      "name": "Entrance to Atlans"
+    },
+    {
+      "kind": 2,
+      "x": 3,
+      "y": 199,
+      "rot": 225,
+      "name": "Entrance to the Kanturu Ruins"
+    }
+  ]
+}

@@ -1,0 +1,351 @@
+[gd_scene format=3 uid="uid://c3bbig0dbtn37"]
+
+[ext_resource type="Script" path="res://src/scenes/MuCharacterCreate.gd" id="1_make"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/Login_Back_Full.png" id="2_bg_full"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/New_character01.png" id="4_make_top"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/New_character02.png" id="5_make_bottom"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/New_character001.png" id="6_arr_left"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/New_character002.png" id="7_arr_right"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/New_character003.png" id="8_arr_left_p"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/New_character004.png" id="9_arr_right_p"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/New_character_ok.png" id="10_btn_ok"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/New_character_cancel.png" id="11_btn_cancel"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/login_classic/Webzenlogo.png" id="12_logo"]
+
+[sub_resource type="Environment" id="Environment_preview"]
+background_mode = 1
+background_color = Color(0.04, 0.04, 0.06, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.75, 0.75, 0.8, 1)
+ambient_light_energy = 1.2
+
+[node name="CharacterCreateScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_make")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg_full")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="WebzenLogo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 160.0
+offset_bottom = 120.0
+texture = ExtResource("12_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PreviewViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -280.0
+offset_right = 80.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="PreviewViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(560, 600)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="PreviewViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.99863, 0.052336, 0, -0.052336, 0.99863, 0, 1.05, 3.2)
+current = true
+fov = 38.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="PreviewViewportContainer/SubViewport"]
+environment = SubResource("Environment_preview")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="PreviewViewportContainer/SubViewport"]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 2, 4, 3)
+light_color = Color(1, 0.95, 0.85, 1)
+light_energy = 1.6
+
+[node name="FillLight" type="DirectionalLight3D" parent="PreviewViewportContainer/SubViewport"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -2, 2, -2)
+light_color = Color(0.6, 0.7, 0.9, 1)
+light_energy = 0.8
+
+[node name="PreviewAnchor" type="Node3D" parent="PreviewViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="Pedestal" type="CSGCylinder3D" parent="PreviewViewportContainer/SubViewport/PreviewAnchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+radius = 0.8
+height = 0.1
+sides = 24
+
+[node name="PanelContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -320.0
+offset_right = -110.0
+offset_bottom = 310.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="StoneFrameTop" type="TextureRect" parent="PanelContainer"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 380.0
+grow_horizontal = 2
+texture = ExtResource("4_make_top")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StoneFrameBottom" type="TextureRect" parent="PanelContainer"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -250.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("5_make_bottom")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBox" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 55.0
+offset_top = 40.0
+offset_right = -55.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="PanelContainer/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.55, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "TẠO NHÂN VẬT"
+horizontal_alignment = 1
+
+[node name="NameLabel" type="Label" parent="PanelContainer/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
+theme_override_font_sizes/font_size = 13
+text = "Tên nhân vật (3 - 10 ký tự):"
+
+[node name="NameInput" type="LineEdit" parent="PanelContainer/VBox"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.8, 1)
+theme_override_font_sizes/font_size = 14
+text = "KnightMU"
+placeholder_text = "Nhập tên nhân vật"
+alignment = 1
+max_length = 10
+
+[node name="ClassTitle" type="Label" parent="PanelContainer/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.75, 1)
+theme_override_font_sizes/font_size = 13
+text = "Chọn Lớp Nhân Vật:"
+
+[node name="ClassRow" type="HBoxContainer" parent="PanelContainer/VBox"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+alignment = 1
+
+[node name="BtnPrev" type="TextureButton" parent="PanelContainer/VBox/ClassRow"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("6_arr_left")
+texture_pressed = ExtResource("8_arr_left_p")
+texture_hover = ExtResource("8_arr_left_p")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ClassNameLabel" type="Label" parent="PanelContainer/VBox/ClassRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "Dark Knight
+(Chiến Binh)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnNext" type="TextureButton" parent="PanelContainer/VBox/ClassRow"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("7_arr_right")
+texture_pressed = ExtResource("9_arr_right_p")
+texture_hover = ExtResource("9_arr_right_p")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="StatsGrid" type="VBoxContainer" parent="PanelContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="RowStr" type="HBoxContainer" parent="PanelContainer/VBox/StatsGrid"]
+layout_mode = 2
+
+[node name="Lbl" type="Label" parent="PanelContainer/VBox/StatsGrid/RowStr"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.78, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "Sức mạnh (Strength):"
+
+[node name="ValStr" type="Label" parent="PanelContainer/VBox/StatsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_font_sizes/font_size = 13
+text = "28"
+horizontal_alignment = 2
+
+[node name="RowAgi" type="HBoxContainer" parent="PanelContainer/VBox/StatsGrid"]
+layout_mode = 2
+
+[node name="Lbl" type="Label" parent="PanelContainer/VBox/StatsGrid/RowAgi"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.78, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "Nhanh nhẹn (Agility):"
+
+[node name="ValAgi" type="Label" parent="PanelContainer/VBox/StatsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_font_sizes/font_size = 13
+text = "20"
+horizontal_alignment = 2
+
+[node name="RowVit" type="HBoxContainer" parent="PanelContainer/VBox/StatsGrid"]
+layout_mode = 2
+
+[node name="Lbl" type="Label" parent="PanelContainer/VBox/StatsGrid/RowVit"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.78, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "Thể lực (Vitality):"
+
+[node name="ValVit" type="Label" parent="PanelContainer/VBox/StatsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_font_sizes/font_size = 13
+text = "25"
+horizontal_alignment = 2
+
+[node name="RowEne" type="HBoxContainer" parent="PanelContainer/VBox/StatsGrid"]
+layout_mode = 2
+
+[node name="Lbl" type="Label" parent="PanelContainer/VBox/StatsGrid/RowEne"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.78, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "Năng lượng (Energy):"
+
+[node name="ValEne" type="Label" parent="PanelContainer/VBox/StatsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_font_sizes/font_size = 13
+text = "10"
+horizontal_alignment = 2
+
+[node name="CmdRow" type="HBoxContainer" parent="PanelContainer/VBox/StatsGrid"]
+visible = false
+layout_mode = 2
+
+[node name="Lbl" type="Label" parent="PanelContainer/VBox/StatsGrid/CmdRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.78, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "Mệnh lệnh (Command):"
+
+[node name="ValCmd" type="Label" parent="PanelContainer/VBox/StatsGrid/CmdRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_font_sizes/font_size = 13
+text = "25"
+horizontal_alignment = 2
+
+[node name="DescLabel" type="Label" parent="PanelContainer/VBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.75, 0.75, 1)
+theme_override_font_sizes/font_size = 11
+text = "Chiến binh kiên cường của vương quốc Lorencia..."
+autowrap_mode = 2
+
+[node name="ButtonRow" type="HBoxContainer" parent="PanelContainer/VBox"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 20
+
+[node name="BtnOk" type="TextureButton" parent="PanelContainer/VBox/ButtonRow"]
+custom_minimum_size = Vector2(90, 26)
+layout_mode = 2
+texture_normal = ExtResource("10_btn_ok")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BtnCancel" type="TextureButton" parent="PanelContainer/VBox/ButtonRow"]
+custom_minimum_size = Vector2(90, 26)
+layout_mode = 2
+texture_normal = ExtResource("11_btn_cancel")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="StatusLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -50.0
+offset_right = 300.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+vertical_alignment = 1

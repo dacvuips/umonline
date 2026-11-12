@@ -6,11 +6,26 @@ const MuCharModelRes = preload("res://src/mu/MuCharacterModel.gd")
 const MuModelRes = preload("res://src/mu/MuModel.gd")
 const MuWorldRes = preload("res://src/world/MuWorld.gd")
 const MuCatalogRes = preload("res://src/mu/MuCatalog.gd")
+const MuDropGeneratorRes = preload("res://src/mu/MuDropGenerator.gd")
+const MonsterAttackFxRes = preload("res://src/effects/MonsterAttackFx.gd")
+const MuSkillFxRes = preload("res://src/effects/MuSkillFx.gd")
+
+## Đòn đánh riêng biệt của quái vật (client gốc ZzzCharacter.cpp: AttackEffect)
+const ORIGINAL_ATTACK := {
+	35: MonsterAttackFxRes.GORGON_FIRE_RING,    # Death Gorgon
+	37: MonsterAttackFxRes.DEVIL_LASER,         # Devil
+	54: MonsterAttackFxRes.ARROW_BOMB_1,        # Golden Soldier
+	57: MonsterAttackFxRes.ARROW_BOMB_3,        # Iron Wheel
+	151: MonsterAttackFxRes.ARROW_BOMB_1,       # Soldier
+	494: MonsterAttackFxRes.DEVIL_LASER,        # Golden Devil
+	511: MonsterAttackFxRes.DEVIL_LASER,        # Devil Lord
+}
 
 ## Đại diện cho Quái vật trong MU Online (Bull Fighter, Hound, Skeleton, Yeti...)
 ## Tương thích Animation GLB và thanh máu trên đầu theo phong cách Season 6
 
 signal monster_clicked(monster: MuMonster)
+signal hp_changed(current_hp: int, max_hp: int)
 
 ## Số hiệu quái trong Monsters.json của MU (0 Bull Fighter, 20 Elite Yeti ...). -1 = tìm theo monster_name
 @export var monster_id: int = -1
@@ -25,6 +40,8 @@ signal monster_clicked(monster: MuMonster)
 signal died(monster: MuMonster)
 
 ## Chỉ số theo server OpenMU (assets/mu/monster_stats.json, tools/mu_gamedata.py)
+var is_boss: bool = false
+var is_golden: bool = false
 var level: int = 1
 var dmg_min: int = 5
 var dmg_max: int = 10
@@ -32,6 +49,8 @@ var defense: int = 0
 var attack_delay: float = 1.6     # giây giữa 2 đòn
 var view_range: int = 5           # ô: thấy người chơi thì đuổi
 var attack_range: int = 1         # ô: đứng cách bấy nhiêu ô thì đánh
+var attack_skill: String = ""       # tên skill từ monster_stats.json (Meteorite, Lightning, PowerWave...)
+var attack_skill_id: int = -1       # ID kỹ năng tương ứng trong skills.json
 var move_range: int = 3           # ô: đi lang thang quanh chỗ sinh
 var respawn_delay: float = 10.0   # giây
 ## AI: false = đứng yên như quái đặt tay cũ
@@ -46,6 +65,7 @@ var is_dead: bool = false
 var model = null
 var _action_lock := 0.0
 var _idle_sound_timer := randf_range(3.0, 10.0)
+var _target_ring: Node3D = null
 
 @onready var anim_player: AnimationPlayer = _find_animation_player()
 @onready var hp_label: Label3D = $HealthLabel if has_node("HealthLabel") else null
@@ -80,6 +100,9 @@ func _apply_stats() -> void:
 	attack_delay = maxf(0.4, float(st.get("attack_delay", 1600)) / 1000.0)
 	view_range = int(st.get("view_range", view_range))
 	attack_range = maxi(1, int(st.get("attack_range", attack_range)))
+	attack_skill = str(st.get("attack_skill", ""))
+	if attack_skill != "":
+		attack_skill_id = MuCatalogRes.find_skill_by_name(attack_skill)
 	move_range = int(st.get("move_range", move_range))
 	respawn_delay = maxf(1.0, float(st.get("respawn", respawn_delay)))
 	# MoveDelay = ms mỗi ô
@@ -137,32 +160,55 @@ func _setup_collision() -> void:
 		add_child(col)
 
 func _setup_overhead_ui() -> void:
-	if not hp_label:
-		hp_label = Label3D.new()
-		hp_label.name = "HealthLabel"
-		hp_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		hp_label.no_depth_test = true
-		hp_label.font_size = 24
-		hp_label.outline_size = 6
-		hp_label.outline_modulate = Color.BLACK
-		hp_label.position = Vector3(0, 2.2, 0)
-		add_child(hp_label)
-	_update_hp_display()
+	# Bỏ hiển thị tên quái vật lơ lửng trên đầu
+	if hp_label:
+		hp_label.visible = false
 
 func _update_hp_display() -> void:
 	if hp_label:
-		hp_label.text = "%s [%d/%d]" % [monster_name, current_hp, max_hp]
-		var ratio = float(current_hp) / float(max_hp)
-		if ratio > 0.5:
-			hp_label.modulate = Color(0.2, 1.0, 0.3)
-		elif ratio > 0.2:
-			hp_label.modulate = Color(1.0, 0.8, 0.2)
-		else:
-			hp_label.modulate = Color(1.0, 0.2, 0.2)
+		hp_label.visible = false
+
+## Tên hiển thị sạch sẽ (loại bỏ hậu tố #1, #2 từ scene editor)
+func get_display_name() -> String:
+	return monster_name.split("#")[0].strip_edges()
+
+## Bật / tắt vòng tròn chọn mục tiêu 3D dưới chân quái khi được player target
+func set_targeted(targeted: bool) -> void:
+	if targeted and not is_dead:
+		if not _target_ring:
+			_target_ring = _create_target_ring()
+		if _target_ring:
+			_target_ring.visible = true
+	else:
+		if _target_ring:
+			_target_ring.visible = false
+
+func _create_target_ring() -> Node3D:
+	var ring = MeshInstance3D.new()
+	ring.name = "TargetRing"
+	var torus = TorusMesh.new()
+	torus.inner_radius = 0.65
+	torus.outer_radius = 0.8
+	torus.rings = 32
+	torus.ring_segments = 4
+	ring.mesh = torus
+	
+	var mat = StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = Color(1.0, 0.25, 0.15, 0.85)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	ring.material_override = mat
+	
+	ring.position = Vector3(0, 0.05, 0)
+	add_child(ring)
+	return ring
 
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
+	if _target_ring and _target_ring.visible:
+		_target_ring.rotate_y(2.0 * delta)
 	if _action_lock > 0.0:
 		_action_lock -= delta
 		if _action_lock <= 0.0:
@@ -245,7 +291,10 @@ func _think(delta: float) -> void:
 
 ## Người chơi còn sống, không trong thành, cùng bản đồ
 func _target_player() -> MuPlayer:
-	var p = get_tree().get_first_node_in_group("Player")
+	var tree := get_tree()
+	if not tree:
+		return null
+	var p = tree.get_first_node_in_group("Player")
 	if p == null or not (p is MuPlayer):
 		return null
 	if p.current_hp <= 0 or p.is_in_safe_zone():
@@ -274,8 +323,23 @@ func _path_to(target: Vector2i, stop: int) -> void:
 ## Đòn đánh của quái: sát thương [dmg_min, dmg_max] trừ phòng thủ của người chơi
 func _attack(player: MuPlayer) -> void:
 	play_action("action02" if randf() < 0.5 else "action03")
+	if model and model.has_node("MonsterFx"):
+		var mfx = model.get_node("MonsterFx")
+		if mfx.has_method("on_attack"):
+			mfx.on_attack()
+
+	var impact_time := 0.35
+	if ORIGINAL_ATTACK.has(monster_id):
+		var d := MonsterAttackFxRes.play(self, ORIGINAL_ATTACK[monster_id], player)
+		if d > 0.0:
+			impact_time = d
+	elif attack_skill_id > 0:
+		var d := MuSkillFxRes.play(self, attack_skill_id, player)
+		if d > 0.0:
+			impact_time = d
+
 	var dmg := randi_range(dmg_min, dmg_max)
-	get_tree().create_timer(0.35).timeout.connect(func():
+	get_tree().create_timer(impact_time).timeout.connect(func():
 		if is_instance_valid(self) and not is_dead and is_instance_valid(player):
 			player.take_damage(dmg, self))
 
@@ -317,6 +381,7 @@ func take_damage(damage: int, damage_type: DamageNumber3D.DamageType = DamageNum
 	_chasing = true
 	_think_timer = 0.0
 	_update_hp_display()
+	hp_changed.emit(current_hp, max_hp)
 
 	# Tạo số sát thương 3D bay lên
 	var dmg_label = DamageNumber3D.new()
@@ -332,6 +397,7 @@ func take_damage(damage: int, damage_type: DamageNumber3D.DamageType = DamageNum
 
 func die() -> void:
 	is_dead = true
+	set_targeted(false)
 	if hp_label:
 		hp_label.visible = false
 	play_action("action05") # Die
@@ -344,31 +410,50 @@ func die() -> void:
 	get_tree().create_timer(3.0).timeout.connect(queue_free)
 
 func _spawn_drop_loot() -> void:
-	var roll = randf()
-	var drop = MuDropItem.new()
-	drop.global_position = global_position
-	
-	if roll < 0.60:
-		# Rơi Zen
-		drop.category = MuDropItem.ItemCategory.ZEN
-		drop.item_name = "Zen"
-		drop.amount = randi_range(300, 1800)
-	elif roll < 0.78:
-		# Rơi Jewel of Bless
-		drop.category = MuDropItem.ItemCategory.BLESS
-		drop.item_name = "Jewel of Bless"
-	elif roll < 0.92:
-		# Rơi Jewel of Soul
-		drop.category = MuDropItem.ItemCategory.SOUL
-		drop.item_name = "Jewel of Soul"
-	else:
-		# Rơi Jewel of Chaos
-		drop.category = MuDropItem.ItemCategory.CHAOS
-		drop.item_name = "Jewel of Chaos"
+	var parent = get_parent()
+	if not parent:
+		return
 
-	get_parent().add_child(drop)
+	var drop_count := 1
+	if is_boss:
+		drop_count = 3
+	elif is_golden:
+		drop_count = 2
+
+	for i in drop_count:
+		var loot := MuDropGeneratorRes.generate_drop(level)
+		if loot.get("type", "none") == "none":
+			continue
+		
+		var drop = MuDropItem.new()
+		var offset := Vector3.ZERO
+		if i > 0:
+			var ang := randf_range(0.0, TAU)
+			var dist := randf_range(0.6, 1.4)
+			offset = Vector3(cos(ang) * dist, 0.0, sin(ang) * dist)
+		var target_pos := global_position + offset
+		var spawn_pos := global_position + Vector3(0.0, 0.8, 0.0)
+		drop.setup_drop(target_pos, spawn_pos)
+		
+		var loot_type: String = loot.get("type", "")
+		if loot_type == "zen":
+			drop.category = MuDropItem.ItemCategory.ZEN
+			drop.item_name = "Zen"
+			drop.amount = int(loot.get("amount", 100))
+		elif loot_type == "item":
+			drop.category = loot.get("category", MuDropItem.ItemCategory.EQUIPMENT)
+			drop.item_dict = loot.get("item_dict", {})
+			drop.amount = int(loot.get("amount", 1))
+		
+		drop.position = spawn_pos
+		parent.add_child(drop)
 
 func _input_event(_camera: Camera3D, event: InputEvent, _position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
+	var tree := get_tree()
+	if tree:
+		var item_ui = tree.get_first_node_in_group("MuItemUi")
+		if item_ui and not item_ui.held.is_empty():
+			return
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		get_viewport().set_input_as_handled()
 		emit_signal("monster_clicked", self)

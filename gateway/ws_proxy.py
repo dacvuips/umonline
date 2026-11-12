@@ -2,7 +2,7 @@
 MU Online WebSocket-to-TCP Gateway Proxy
 Hỗ trợ cả 2 chế độ:
 1. Online Proxy: Chuyển tiếp giữa Godot (WebSocket) và OpenMU GameServer (TCP Port 45901).
-2. Standalone / Mock Mode: Tự động phản hồi Đăng nhập thành công nếu OpenMU chưa bật, giúp kiểm thử client mượt mà.
+2. Standalone / Mock Mode: Tự động phản hồi Đăng nhập, Tạo / Chọn nhân vật thành công nếu OpenMU chưa bật, giúp kiểm thử client mượt mà.
 """
 
 import asyncio
@@ -10,6 +10,8 @@ import logging
 import os
 import subprocess
 import sys
+
+import presence
 
 logging.basicConfig(
     level=logging.INFO,
@@ -47,6 +49,18 @@ def create_login_success_packet() -> bytes:
     """Tạo gói tin Login Success: C1 05 F1 01 01"""
     return bytes([0xC1, 0x05, 0xF1, 0x01, 0x01])
 
+def create_char_create_success_packet() -> bytes:
+    """Tạo gói tin Character Create Success: C1 05 F3 01 01"""
+    return bytes([0xC1, 0x05, 0xF3, 0x01, 0x01])
+
+def create_char_delete_success_packet() -> bytes:
+    """Tạo gói tin Character Delete Success: C1 05 F3 02 01"""
+    return bytes([0xC1, 0x05, 0xF3, 0x02, 0x01])
+
+def create_char_select_success_packet() -> bytes:
+    """Tạo gói tin Character Select Success: C1 05 F3 03 01"""
+    return bytes([0xC1, 0x05, 0xF3, 0x03, 0x01])
+
 async def forward_ws_to_tcp(ws, tcp_writer):
     """Đọc dữ liệu từ WebSocket (Godot Client) và gửi sang TCP Socket (OpenMU Server)"""
     try:
@@ -56,10 +70,8 @@ async def forward_ws_to_tcp(ws, tcp_writer):
                 
                 # Kiểm tra gói tin Đăng nhập (0xF1 0x01)
                 if len(message) >= 4 and message[2] == 0xF1 and message[3] == 0x01:
-                    # Trích xuất username để log
                     username = message[4:14].decode('latin1', errors='ignore').rstrip('\x00')
                     logger.info(f"==> Yêu cầu Đăng nhập cho tài khoản: '{username}'")
-                    # Gửi phản hồi Đăng nhập thành công trực tiếp cho Client
                     await ws.send(create_login_success_packet())
                     logger.info(f"[Gateway] Đã gửi phản hồi Đăng nhập thành công (0xF1 0x01 0x01)")
 
@@ -70,8 +82,8 @@ async def forward_ws_to_tcp(ws, tcp_writer):
                     except Exception as e:
                         logger.warning(f"Lỗi gửi TCP tới OpenMU: {e}")
             else:
-                logger.warning(f"Bỏ qua tin nhắn dạng text: {message}")
-    except (asyncio.CancelledError, Exception) as e:
+                await presence.handle_text(ws, message)
+    except (asyncio.CancelledError, Exception):
         pass
 
 async def forward_tcp_to_ws(tcp_reader, ws):
@@ -120,9 +132,30 @@ async def handle_client(ws):
                         username = message[4:14].decode('latin1', errors='ignore').rstrip('\x00')
                         logger.info(f"==> [Standalone] Xác nhận đăng nhập cho '{username}'")
                         await ws.send(create_login_success_packet())
+                    
+                    # Gói tin Character Create (0xF3 0x01)
+                    elif len(message) >= 4 and message[2] == 0xF3 and message[3] == 0x01:
+                        char_name = message[4:14].decode('latin1', errors='ignore').rstrip('\x00')
+                        logger.info(f"==> [Standalone] Tạo nhân vật thành công: '{char_name}'")
+                        await ws.send(create_char_create_success_packet())
+                    
+                    # Gói tin Character Delete (0xF3 0x02)
+                    elif len(message) >= 4 and message[2] == 0xF3 and message[3] == 0x02:
+                        char_name = message[4:14].decode('latin1', errors='ignore').rstrip('\x00')
+                        logger.info(f"==> [Standalone] Xóa nhân vật thành công: '{char_name}'")
+                        await ws.send(create_char_delete_success_packet())
+                    
+                    # Gói tin Character Select (0xF3 0x03)
+                    elif len(message) >= 4 and message[2] == 0xF3 and message[3] == 0x03:
+                        char_name = message[4:14].decode('latin1', errors='ignore').rstrip('\x00')
+                        logger.info(f"==> [Standalone] Chọn nhân vật vào thế giới: '{char_name}'")
+                        await ws.send(create_char_select_success_packet())
+                else:
+                    await presence.handle_text(ws, message)
     except Exception as e:
         logger.error(f"Lỗi trong phiên kết nối Client: {e}")
     finally:
+        await presence.disconnect(ws)
         if tcp_writer:
             try:
                 tcp_writer.close()

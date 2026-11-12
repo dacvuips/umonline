@@ -201,7 +201,8 @@
     "stream": -1
    }
   ],
-  "partial": true
+  "partial": true,
+  "unlit": true
  },
  "wingsOfDespair": {
   "passes": [
@@ -6241,7 +6242,8 @@
     "stream": -1
    }
   ],
-  "partial": true
+  "partial": true,
+  "unlit": true
  },
  "packageBoxA": {
   "passes": [

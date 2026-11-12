@@ -130,3 +130,63 @@ def check_password(name: str, password: str) -> bool:
         log.info("login '%s': tài khoản bị cấm", name)
         return False
     return True
+
+
+# ---------------------------------------------------------------- đăng ký tài khoản (từ trong game)
+import re
+import uuid
+
+USER_RE = re.compile(r"^[A-Za-z0-9]{4,10}$")
+REG_PER_IP, REG_GLOBAL, REG_WINDOW = 5, 100, 3600   # IP công cộng: 5/giờ; toàn hệ thống: 100/giờ
+_reg_hits: list = []
+_reg_ip: dict = {}
+
+
+def reg_allowed(ip: str) -> bool:
+    now = time.time()
+    with _lock:
+        _reg_hits[:] = [t for t in _reg_hits if now - t < REG_WINDOW]
+        if len(_reg_hits) >= REG_GLOBAL:
+            return False
+        if not _private(ip):
+            hits = [t for t in _reg_ip.get(ip, []) if now - t < REG_WINDOW]
+            _reg_ip[ip] = hits
+            if len(hits) >= REG_PER_IP:
+                return False
+        return True
+
+
+def reg_note(ip: str) -> None:
+    with _lock:
+        _reg_hits.append(time.time())
+        if not _private(ip):
+            _reg_ip.setdefault(ip, []).append(time.time())
+
+
+def register_account(name: str, password: str, email: str) -> int:
+    """Tạo tài khoản trong OpenMU (đồng bộ; gọi qua asyncio.to_thread).
+    Trả: 1 = thành công, 0 = dữ liệu không hợp lệ, 2 = tên đã có, 4 = lỗi máy chủ."""
+    if not USER_RE.match(name) or not 6 <= len(password) <= 10 or not password.isprintable():
+        return 0
+    email = "".join(ch for ch in email if ch.isprintable())[:30]
+    import bcrypt
+    import pg8000.exceptions
+    import pg8000.native
+    pw_hash = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt(11)).decode("ascii")
+    conn = pg8000.native.Connection(**_params())
+    try:
+        if conn.run('SELECT 1 FROM data."Account" WHERE lower("LoginName") = lower(:n)', n=name):
+            return 2
+        try:
+            conn.run(
+                'INSERT INTO data."Account" ("Id","LoginName","PasswordHash","SecurityCode","EMail",'
+                '"LanguageIsoCode","RegistrationDate","State","TimeZone","VaultPassword","IsVaultExtended",'
+                '"WCoinC","WCoinP","GoblinPoints","IsBot","IsNetworkObservationActive","IsTemplate") '
+                "VALUES (:id,:n,:h,'',:e,'en',now(),0,0,'',false,0,0,0,false,false,false)",
+                id=uuid.uuid4(), n=name, h=pw_hash, e=email,
+            )
+        except pg8000.exceptions.DatabaseError:
+            return 2   # trùng tên do đăng ký đồng thời
+        return 1
+    finally:
+        conn.close()

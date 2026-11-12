@@ -23,9 +23,12 @@ const ENERGYBALL := 17
 const DECAY := 38
 const ICE_STORM := 39
 const NOVA := 40
+const FLAME_OF_EVIL := 50
+const MONSTER_SKILL := 150
+const DEVIL_FIRE_BEAM := 151
 
 const SKILLS := [POISON, METEO, LIGHTNING, FIREBALL, FLAME, ICE, STORM, EVIL_SPIRIT, HELL_FIRE,
-	POWERWAVE, FLASH, BLAST, INFERNO, ENERGYBALL, DECAY, ICE_STORM, NOVA]
+	POWERWAVE, FLASH, BLAST, INFERNO, ENERGYBALL, DECAY, ICE_STORM, NOVA, FLAME_OF_EVIL, MONSTER_SKILL, DEVIL_FIRE_BEAM]
 
 var _spirits: Array = []
 var _hand := Vector3.ZERO
@@ -49,6 +52,9 @@ func _start() -> void:
 		DECAY: _decay()
 		ICE_STORM: _ice_storm()
 		NOVA: _nova_start()
+		FLAME_OF_EVIL: _flame_of_evil()
+		MONSTER_SKILL: _monster_skill()
+		DEVIL_FIRE_BEAM: _devil_fire_beam()
 
 func _mu_tick(t: int) -> void:
 	match skill_num:
@@ -57,6 +63,7 @@ func _mu_tick(t: int) -> void:
 		EVIL_SPIRIT: _evil_spirit_tick(t)
 		NOVA: _nova_tick(t)
 		STORM: _storm_tick(t)
+		DEVIL_FIRE_BEAM: _devil_fire_tick(t)
 
 # ------------------------------------------------------------------ dùng chung
 
@@ -503,3 +510,226 @@ func _lightning_tick(t: int) -> void:
 	bolt("BITMAP_JOINT_THUNDER", a, b, 0.5, Color(0.6, 0.7, 1.0), 2, 0.35, 0.4)
 	bolt("BITMAP_JOINT_THUNDER", a, b, 0.1, Color(1, 1, 1), 2, 0.35, 0.4)
 	particle("BITMAP_ENERGY", a, {"size": 0.6, "life": 4, "color": Color(0.6, 0.7, 1.0)})
+
+# ------------------------------------------------------------------ 50 Flame of Evil
+func _flame_of_evil() -> void:
+	var p := target_pos()
+	p.y = ground(p)
+	explosion(p, 3.2, Color(1.0, 0.3, 0.8))
+	for i in 8:
+		particle("BITMAP_FLAME", p + mu(Vector3(rnd(40) - 20, rnd(40) - 20, 0)), {
+			"size": randf_range(0.8, 1.3), "grow": 0.95, "life": 16 + rnd(8),
+			"vel": Vector3(0, randf_range(0.04, 0.08), 0), "color": Color(0.9, 0.2, 0.7)
+		})
+	stones(p, 3, 1.0)
+	if MuAudioManager:
+		MuAudioManager.play_sound_file("sHellFire.wav", 1.0, 1.0, p)
+	impact_delay = 0.3
+
+# ------------------------------------------------------------------ 150 Monster Skill (Boss / Elite mob special attack)
+func _monster_skill() -> void:
+	var from := caster_pos()
+	var to := target_pos()
+	to.y = ground(to)
+	var dist := from.distance_to(to)
+	if dist > 2.0:
+		bolt("BITMAP_JOINT_THUNDER", from + Vector3(0, 1.2, 0), to + Vector3(0, 1.0, 0), 0.35, Color(1.0, 0.5, 0.2), 3, 0.35, 0.4)
+	explosion(to, 4.0, Color(1.0, 0.45, 0.15))
+	stones(to, 8, 1.6)
+	smoke(to + Vector3(0, 0.4, 0), Color(0.8, 0.4, 0.2), 1.5, 30)
+	for i in 6:
+		particle("BITMAP_SPARK+1", to + Vector3(0, 0.6, 0), {
+			"size": randf_range(0.6, 1.2), "life": 18,
+			"vel": Vector3(randf_range(-0.06, 0.06), randf_range(0.02, 0.08), randf_range(-0.06, 0.06)),
+			"color": Color(1.0, 0.7, 0.2)
+		})
+	if MuAudioManager:
+		MuAudioManager.play_sound_file("eMonsterBoom1.wav", 2.0, randf_range(0.9, 1.1), to)
+	impact_delay = 0.35
+
+# ------------------------------------------------------------------ 151 Devil Fire Beam (Quái Devil Lost Tower / Golden Devil)
+## Port chính xác từ ZzzCharacter.cpp (MONSTER_DEVIL) & ZzzEffectJoint.cpp (BITMAP_JOINT_LASER+1, 50.f):
+## Luồng tia lửa cuồn cuộn dạng khối 3D (cross-plane), nở rộng dần (cone), UV cuộn nhanh về phía mục tiêu,
+## kết hợp lõi plasma vàng trắng và chùm hạt nổ lửa BITMAP_FIRE (Fire01.jpg 4 frame).
+
+var _devil_fire_active := false
+var _devil_mesh_outer: ImmediateMesh = null
+var _devil_node_outer: MeshInstance3D = null
+var _devil_mesh_inner: ImmediateMesh = null
+var _devil_node_inner: MeshInstance3D = null
+
+func _process(delta: float) -> void:
+	super._process(delta)
+	if skill_num == DEVIL_FIRE_BEAM and _devil_fire_active:
+		_devil_update_mesh()
+
+func _exit_tree() -> void:
+	_devil_cleanup()
+
+func _devil_mouth_pos() -> Vector3:
+	var m = caster.get("model") if is_instance_valid(caster) else null
+	if m != null and m.get("skeleton") != null:
+		var sk := m.skeleton as Skeleton3D
+		for bname in ["b006", "b016", "b025", "b001", "b002"]:
+			var b := sk.find_bone(bname)
+			if b >= 0:
+				var pos := sk.global_transform * sk.get_bone_global_pose(b).origin
+				if pos.y > caster_pos().y + 0.6:
+					return pos
+	return caster_pos() + Vector3(0, 1.35, 0)
+
+func _target_chest_pos() -> Vector3:
+	return target_pos() + Vector3(0, 1.1, 0)
+
+func _devil_fire_beam() -> void:
+	_min_ticks = 16
+	impact_delay = 0.25
+	_devil_fire_active = true
+	
+	_devil_mesh_outer = ImmediateMesh.new()
+	_devil_node_outer = MeshInstance3D.new()
+	_devil_node_outer.mesh = _devil_mesh_outer
+	_devil_node_outer.material_override = mat("BITMAP_JOINT_LASER+1", "add")
+	_devil_node_outer.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	add_child(_devil_node_outer)
+	
+	_devil_mesh_inner = ImmediateMesh.new()
+	_devil_node_inner = MeshInstance3D.new()
+	_devil_node_inner.mesh = _devil_mesh_inner
+	_devil_node_inner.material_override = mat("BITMAP_JOINT_LASER+1", "add")
+	_devil_node_inner.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	add_child(_devil_node_inner)
+	
+	if MuAudioManager:
+		MuAudioManager.play_sound_file("sEvil.wav", 1.8, randf_range(0.95, 1.05), caster_pos())
+		MuAudioManager.play_sound_file("sFlame.wav", 1.3, randf_range(0.95, 1.05), caster_pos())
+
+func _devil_fire_tick(t: int) -> void:
+	if t >= 16:
+		_devil_cleanup()
+		return
+	
+	var a := _devil_mouth_pos()
+	var b := _target_chest_pos()
+	var dir := (b - a).normalized()
+	
+	# Hạt lửa bốc lên tại miệng / tay quái (BITMAP_FIRE dùng spritesheet 4 frame)
+	particle("BITMAP_FIRE", a + Vector3(randf_range(-0.1, 0.1), randf_range(-0.1, 0.1), randf_range(-0.1, 0.1)), {
+		"size": randf_range(0.8, 1.4), "life": 8, "grow": 1.03,
+		"sheet": Vector2i(4, 1), "frames": 4,
+		"color": Color(1.0, 0.75, 0.25),
+		"vel": dir * randf_range(0.04, 0.08)
+	})
+	
+	# Quả cầu lửa nổ tung và lửa cuồn cuộn khi va chạm vào người chơi
+	for i in 2:
+		var hit_offset := Vector3(randf_range(-0.35, 0.35), randf_range(-0.25, 0.45), randf_range(-0.35, 0.35))
+		particle("BITMAP_FIRE", b + hit_offset, {
+			"size": randf_range(1.6, 2.5), "life": 12 + rnd(4), "grow": 1.05,
+			"sheet": Vector2i(4, 1), "frames": 4,
+			"color": Color(1.0, randf_range(0.55, 0.75), 0.15),
+			"vel": Vector3(randf_range(-0.04, 0.04), randf_range(0.02, 0.06), randf_range(-0.04, 0.04))
+		})
+	
+	# Tia lửa tóe ra xung quanh
+	particle("BITMAP_SPARK+1", b + Vector3(0, 0.2, 0), {
+		"size": randf_range(0.5, 0.9), "life": 14,
+		"color": Color(1.0, 0.85, 0.35),
+		"vel": Vector3(randf_range(-0.08, 0.08), randf_range(0.02, 0.09), randf_range(-0.08, 0.08))
+	})
+	
+	if t % 5 == 0:
+		stones(b, 2, 0.8)
+
+func _devil_update_mesh() -> void:
+	if not _devil_fire_active:
+		return
+	if not is_instance_valid(_devil_mesh_outer) or not is_instance_valid(_devil_mesh_inner):
+		return
+	var a := _devil_mouth_pos()
+	var b := _target_chest_pos()
+	var dist := a.distance_to(b)
+	if dist < 0.2:
+		return
+	
+	var dir := (b - a).normalized()
+	var ref_up := Vector3.UP
+	if absf(dir.dot(ref_up)) > 0.95:
+		ref_up = Vector3.RIGHT
+	var right := dir.cross(ref_up).normalized()
+	var up := right.cross(dir).normalized()
+	var segs := clampi(int(dist * 6.0), 14, 30)
+	
+	# Luồng lửa ngoài: nở rộng từ 0.5m tới 1.6m, màu vàng cam đậm
+	_draw_fire_ribbon(_devil_mesh_outer, a, b, dir, right, up, segs, 0.5, 1.6, Color(1.0, 0.55, 0.12, 0.9), 0.0, 1.0)
+	# Lõi plasma trong: nở từ 0.28m tới 0.9m, màu vàng trắng sáng chói
+	_draw_fire_ribbon(_devil_mesh_inner, a, b, dir, right, up, segs, 0.28, 0.9, Color(1.0, 0.95, 0.55, 1.0), 1.5, 1.3)
+
+func _draw_fire_ribbon(im: ImmediateMesh, a: Vector3, b: Vector3, dir: Vector3, right: Vector3, up: Vector3, segs: int, w_start: float, w_end: float, col: Color, phase_shift: float, speed_mult: float) -> void:
+	im.clear_surfaces()
+	var cam_pos := _cam()
+	var dist := a.distance_to(b)
+	
+	var pts: Array[Vector3] = []
+	var widths: Array[float] = []
+	var u_coords: Array[float] = []
+	
+	for i in segs + 1:
+		var frac := float(i) / float(segs)
+		var base_p := a.lerp(b, frac)
+		var envelope := sin(frac * PI)
+		var wave_r := sin(frac * PI * 2.5 - _t * 10.0 * speed_mult + phase_shift) * 0.16 * envelope
+		var wave_u := cos(frac * PI * 3.2 - _t * 8.0 * speed_mult + phase_shift) * 0.14 * envelope
+		var p := base_p + right * wave_r + up * wave_u
+		pts.append(p)
+		widths.append(lerpf(w_start, w_end, pow(frac, 0.8)))
+		u_coords.append(frac * (dist * 1.5) - _t * 6.0 * speed_mult)
+	
+	# Mặt 1: Billboard hướng về Camera
+	im.surface_begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
+	for i in segs + 1:
+		var p := pts[i]
+		var w := widths[i] * 0.5
+		var u := u_coords[i]
+		var seg_dir := (pts[mini(i + 1, segs)] - pts[maxi(i - 1, 0)]).normalized()
+		if seg_dir.length_squared() < 0.001:
+			seg_dir = dir
+		var to_cam := (cam_pos - p).normalized()
+		var side := seg_dir.cross(to_cam).normalized() * w
+		
+		im.surface_set_color(col)
+		im.surface_set_uv(Vector2(u, 0.0))
+		im.surface_add_vertex(p - side)
+		im.surface_set_uv(Vector2(u, 1.0))
+		im.surface_add_vertex(p + side)
+	im.surface_end()
+	
+	# Mặt 2: Mặt phẳng vuông góc (Cross-plane tạo hiệu ứng khối 3D như client gốc)
+	im.surface_begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
+	for i in segs + 1:
+		var p := pts[i]
+		var w := widths[i] * 0.5
+		var u := u_coords[i]
+		var seg_dir := (pts[mini(i + 1, segs)] - pts[maxi(i - 1, 0)]).normalized()
+		if seg_dir.length_squared() < 0.001:
+			seg_dir = dir
+		var to_cam := (cam_pos - p).normalized()
+		var side := seg_dir.cross(to_cam).normalized()
+		var norm_up := seg_dir.cross(side).normalized() * w
+		
+		im.surface_set_color(col * 0.85)
+		im.surface_set_uv(Vector2(u, 0.0))
+		im.surface_add_vertex(p - norm_up)
+		im.surface_set_uv(Vector2(u, 1.0))
+		im.surface_add_vertex(p + norm_up)
+	im.surface_end()
+
+func _devil_cleanup() -> void:
+	_devil_fire_active = false
+	if is_instance_valid(_devil_node_outer):
+		_devil_node_outer.queue_free()
+		_devil_node_outer = null
+	if is_instance_valid(_devil_node_inner):
+		_devil_node_inner.queue_free()
+		_devil_node_inner = null
+

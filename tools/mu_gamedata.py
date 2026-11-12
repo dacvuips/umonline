@@ -142,7 +142,7 @@ def calls(text, fn):
 def num(v, default=0):
     if v is None:
         return default
-    v = str(v).strip().rstrip('fFdDmM')
+    v = str(v).strip().rstrip('fFdDmM').replace('_', '')
     try:
         return int(v)
     except ValueError:
@@ -257,8 +257,18 @@ def _designation(v):
 
 
 def parse_monsters_in(text):
+    const_map = {m.group(1): int(m.group(2)) for m in re.finditer(r'(?:const\s+short|const\s+int|const\s+byte)\s+(\w+)\s*=\s*(\d+)', text)}
     out = {}
-    starts = [(m.start(), m.group(1), int(m.group(2))) for m in re.finditer(r'\b(\w+)\.Number\s*=\s*(\d+)\s*;', text)]
+    starts = []
+    for m in re.finditer(r'\b(\w+)\.Number\s*=\s*(\w+)\s*;', text):
+        var, raw_num = m.group(1), m.group(2)
+        if raw_num.isdigit():
+            number = int(raw_num)
+        elif raw_num in const_map:
+            number = const_map[raw_num]
+        else:
+            continue
+        starts.append((m.start(), var, number))
     for i, (pos, var, number) in enumerate(starts):
         end = starts[i + 1][0] if i + 1 < len(starts) else len(text)
         block = text[pos:end]
@@ -277,7 +287,7 @@ def parse_monsters_in(text):
                 v = int(m.group(1))
                 mon[k] = v * 1000 if m.group(2) == 'PerSecond' and k != 'respawn' else v
         for f, k in MONSTER_STATS.items():
-            m = re.search(r'\{\s*Stats\.' + f + r'\s*,\s*([\d.]+)f?\s*\}', block)
+            m = re.search(r'\{\s*Stats\.' + f + r'\s*,\s*([\d._]+)f?\s*\}', block)
             if m:
                 mon[k] = num(m.group(1))
         sk = re.search(r'\b' + re.escape(var) + r'\.AttackSkill\s*=[^;]*SkillNumber\.(\w+)', block)
@@ -288,14 +298,44 @@ def parse_monsters_in(text):
     return out
 
 
-def parse_monsters(init):
+def parse_monsters(init, catalog_path=None):
     monsters = {}
-    for version in ('Version075', 'VersionSeasonSix'):
+    for version in ('Version075', 'Version095d', 'Version097d', 'VersionSeasonSix', 'Updates'):
         base = os.path.join(init, version)
+        if not os.path.isdir(base):
+            continue
         for dirpath, _, files in os.walk(base):
             for f in sorted(files):
                 if f.endswith('.cs'):
                     monsters.update(parse_monsters_in(strip_comments(read(os.path.join(dirpath, f)))))
+    
+    # Bổ sung quái / đối tượng từ catalog nếu chưa có chỉ số
+    if catalog_path and os.path.exists(catalog_path):
+        try:
+            cat_data = json.load(open(catalog_path, encoding='utf-8'))
+            for m in cat_data.get('monsters', []):
+                num = m.get('number')
+                if num is not None and num not in monsters:
+                    name_en = m.get('name', {}).get('en', f'Monster {num}')
+                    monsters[num] = {
+                        'name': name_en,
+                        'level': 50,
+                        'hp': 5000,
+                        'dmg_min': 50,
+                        'dmg_max': 100,
+                        'def': 60,
+                        'atk_rate': 250,
+                        'def_rate': 80,
+                        'move_range': 3,
+                        'attack_range': 2,
+                        'view_range': 6,
+                        'move_delay': 400,
+                        'attack_delay': 1600,
+                        'respawn': 10
+                    }
+        except Exception as e:
+            pass
+
     return {str(k): v for k, v in sorted(monsters.items())}
 
 
@@ -306,7 +346,8 @@ def main(openmu_root, mugodot, log=print):
     numbers = parse_skill_numbers(init)
     skills = parse_skills(init, numbers)
     items = parse_skill_items(init, numbers)
-    monsters = parse_monsters(init)
+    cat_file = os.path.join(mugodot, 'assets', 'mu', 'catalog', 'Monsters', 'Monsters.json')
+    monsters = parse_monsters(init, cat_file)
     out_dir = os.path.join(mugodot, 'assets', 'mu')
     with open(os.path.join(out_dir, 'skills.json'), 'w', encoding='utf-8') as f:
         json.dump({'skills': skills, 'items': items}, f, ensure_ascii=False, separators=(',', ':'))

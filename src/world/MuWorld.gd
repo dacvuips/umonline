@@ -4,6 +4,11 @@ class_name MuWorld
 ## Quản lý thế giới, mặt đất (Terrain), Hệ thống Grid 256x256 và Tìm đường (Pathfinding)
 ## Tương thích 100% bản đồ Lorencia / Devias / Noria của MU Online
 
+const MuDropItemRes = preload("res://src/entities/MuDropItem.gd")
+const MuItemsRes = preload("res://src/mu/MuItems.gd")
+const MuItemUiRes = preload("res://src/ui/MuItemUi.gd")
+const MuCharModelRes = preload("res://src/mu/MuCharacterModel.gd")
+
 @export var map_collision_path: String = "res://assets/maps/lorencia_collision.json"
 @export var player_node: MuPlayer
 
@@ -35,6 +40,7 @@ func _ready() -> void:
 	build_navigation_graph()
 	_connect_monsters()
 	_setup_monster_spawner()
+	MuAudioManager.set_world(MuTerrain.world_id)
 
 ## Quái theo vùng của server (spawns.json + monster_stats.json); bỏ quái đặt tay trong scene
 func _setup_monster_spawner() -> void:
@@ -81,6 +87,11 @@ func _setup_bloom() -> void:
 	env.glow_hdr_threshold = 0.85
 	for i in 7:
 		env.set_glow_level(i, 1.0 if i in [1, 2, 3, 4] else 0.0)
+	# Bloom riêng cho lớp cộng sáng của model (chrome / glow / Bright) như client gốc
+	if get_node_or_null("MuModelBloom") == null:
+		var mb: Node = load("res://src/world/MuModelBloom.gd").new()
+		mb.name = "MuModelBloom"
+		add_child(mb)
 
 func _connect_monsters() -> void:
 	# Tự động kết nối sự kiện click của quái vật với Player
@@ -198,31 +209,55 @@ func _process(delta: float) -> void:
 		_handle_ground_click(get_viewport().get_mouse_position())
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		_hold_move = true
-		_hold_timer = 0.25
-		_handle_ground_click(event.position)
+	var tree := get_tree()
+	if not tree:
+		return
+	var item_ui = tree.get_first_node_in_group("MuItemUi")
+	if item_ui and not item_ui.held.is_empty():
+		if event is InputEventMouseButton:
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				var is_click = event.pressed
+				var is_drag_release = (not event.pressed and Time.get_ticks_msec() - item_ui.held_time > 150)
+				if is_click or is_drag_release:
+					_handle_drop_item(event.position)
+					get_viewport().set_input_as_handled()
+					return
+			elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+				item_ui.cancel_held(player_node)
+				get_viewport().set_input_as_handled()
+				return
+		elif event is InputEventScreenTouch and event.pressed:
+			_handle_drop_item(event.position)
+			get_viewport().set_input_as_handled()
+			return
+
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			_hold_move = true
+			_hold_timer = 0.25
+			_handle_ground_click(event.position)
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			# Chuột phải: Thi triển Kỹ Năng Đang Chọn (Active Skill) chuẩn 100% MU Game Gốc!
+			if player_node:
+				player_node.cast_active_skill()
+			get_viewport().set_input_as_handled()
 	elif event is InputEventScreenTouch and event.pressed:
 		_handle_ground_click(event.position)
 
-func _handle_ground_click(screen_pos: Vector2) -> void:
+func raycast_ground(screen_pos: Vector2) -> Dictionary:
 	var camera = get_viewport().get_camera_3d()
-	if not camera or not player_node:
-		return
+	if not camera:
+		return {"hit": false, "pos": Vector3.ZERO}
 
 	var from: Vector3 = camera.project_ray_origin(screen_pos)
 	var normal: Vector3 = camera.project_ray_normal(screen_pos)
 
-	# Dò tia theo địa hình có độ cao (giống CollisionDetectLineToFace của MU)
-	var hit_found := false
-	var hit_pos := Vector3.ZERO
 	var prev: Vector3 = from
 	var t := 0.0
 	while t < 120.0:
 		t += 0.2
 		var p: Vector3 = from + normal * t
 		if p.y <= ground_height(p):
-			# tinh chỉnh bằng chia đôi
 			var a: Vector3 = prev
 			var b: Vector3 = p
 			for _i in 8:
@@ -231,11 +266,20 @@ func _handle_ground_click(screen_pos: Vector2) -> void:
 					b = m
 				else:
 					a = m
-			hit_pos = b
-			hit_found = true
-			break
+			return {"hit": true, "pos": b}
 		prev = p
-	if hit_found:
+	return {"hit": false, "pos": Vector3.ZERO}
+
+func _handle_ground_click(screen_pos: Vector2) -> void:
+	if not player_node:
+		return
+	var hud = get_tree().get_first_node_in_group("HUD")
+	if hud and hud.has_method("cancel_follow"):
+		hud.cancel_follow()
+
+	var res := raycast_ground(screen_pos)
+	if res.get("hit", false):
+		var hit_pos: Vector3 = res.get("pos", Vector3.ZERO)
 		var target_tile = world_to_grid(hit_pos)
 		
 		# Giới hạn trong kích thước bản đồ
@@ -247,4 +291,202 @@ func _handle_ground_click(screen_pos: Vector2) -> void:
 		var path = find_path_grid(current_tile, target_tile)
 		if path.size() > 0:
 			player_node.move_to_path(path)
+			# Điểm đích như client gốc (MODEL_MOVE_TARGETPOSITION_EFFECT): vòng phép + sao 4 cánh + tia sáng
+			MoveTargetFx.show_at(self, hit_pos)
 			print("[MuWorld] Di chuyển tới: (%d, %d), tổng bước: %d" % [target_tile.x, target_tile.y, path.size()])
+
+func _handle_drop_item(screen_pos: Vector2) -> void:
+	var tree := get_tree()
+	if not tree:
+		return
+	var item_ui = tree.get_first_node_in_group("MuItemUi")
+	if item_ui == null or item_ui.held.is_empty() or player_node == null:
+		return
+	if item_ui.has_method("is_confirm_open") and item_ui.is_confirm_open():
+		return
+	# Đang giao dịch: không vứt đồ ra đất — trả đồ đang cầm về túi
+	var trade = tree.get_first_node_in_group("MuTradeWindow")
+	if trade and trade.is_trading():
+		item_ui.cancel_held(player_node)
+		return
+
+	var it: Dictionary = item_ui.held
+	# Rương / hộp / trái tim: vứt ra đất là MỞ, rớt đồ hoặc Zen ngẫu nhiên (OpenMU ItemBoxDroppedPlugIn)
+	if MuBoxDrop.is_box(it):
+		_open_box_on_ground(item_ui, it)
+		return
+
+	if MuItemsRes.is_valuable(it):
+		# Client gốc (InventoryActionController::TryDropItem + IsHighValueItem): đồ ép cao / excellent / ancient
+		# KHÔNG được vứt ra đất — báo lỗi hệ thống và trả đồ về túi, không có hộp xác nhận hay phím tắt bỏ qua.
+		var chat = tree.get_first_node_in_group("ChatWindow")
+		if chat and chat.has_method("add_system_message"):
+			chat.add_system_message("Bạn không được phép vứt vật phẩm đắt giá này.")
+		item_ui.cancel_held(player_node)
+	else:
+		var dropped_it: Dictionary = item_ui.drop_held()
+		_do_drop_item(dropped_it, screen_pos)
+
+## Mở hộp tại chỗ người chơi đứng: hộp biến mất, các món / Zen rơi ra xung quanh như vật phẩm rơi từ quái
+func _open_box_on_ground(item_ui: Node, it: Dictionary) -> void:
+	var tree := get_tree()
+	var chat = tree.get_first_node_in_group("ChatWindow") if tree else null
+	var lvl: int = int(player_node.level) if player_node else 1
+	var res: Dictionary = MuBoxDrop.open(it, lvl)
+	if not bool(res.get("ok", false)):
+		if chat and chat.has_method("add_system_message") and str(res.get("message", "")) != "":
+			chat.add_system_message(str(res["message"]))
+		item_ui.cancel_held(player_node)
+		return
+
+	item_ui.drop_held()   # hộp bị tiêu hao
+	var center: Vector3 = player_node.global_position
+	var parent_node = get_parent()
+	if parent_node == null:
+		parent_node = self
+	var drops: Array = res.get("drops", [])
+	for i in drops.size():
+		_spawn_box_loot(parent_node, drops[i] as Dictionary, center, i)
+	_box_effect(parent_node, str(res.get("effect", "")), center)
+	if player_node.model:
+		player_node.model.play_skill(MuCharModelRes.P_SKILL_HAND1, 1.5)
+		player_node._lock_action(0.35)
+	if chat and chat.has_method("add_system_message"):
+		chat.add_system_message("Bạn đã mở %s." % MuItemsRes.display_name(it))
+	if player_node:
+		player_node.inventory_changed.emit()
+
+func _spawn_box_loot(parent_node: Node, loot: Dictionary, center: Vector3, index: int) -> void:
+	var drop = MuDropItemRes.new()
+	var ang := randf_range(0.0, TAU)
+	var dist := randf_range(0.5, 1.2) if index > 0 or loot.get("type", "") == "item" else randf_range(0.4, 0.9)
+	var target := center + Vector3(cos(ang) * dist, 0.0, sin(ang) * dist)
+	target.y = ground_height(target)
+	var spawn := center + Vector3(0.0, 1.2, 0.0)
+	drop.setup_drop(target, spawn)
+	drop.pickup_delay = 1.5   # đồ rơi ngay dưới chân người chơi: chờ chạm đất rồi mới tự nhặt
+	if str(loot.get("type", "")) == "zen":
+		drop.category = MuDropItemRes.ItemCategory.ZEN
+		drop.item_name = "Zen"
+		drop.amount = int(loot.get("amount", 0))
+	else:
+		var d: Dictionary = loot.get("item_dict", {})
+		drop.item_dict = d
+		if MuItemsRes.is_jewel(d):
+			drop.category = MuDropItemRes.ItemCategory.BLESS
+		elif MuItemsRes.is_potion(d):
+			drop.category = MuDropItemRes.ItemCategory.POTION
+		else:
+			drop.category = MuDropItemRes.ItemCategory.EQUIPMENT
+		drop.amount = int(d.get("count", 1))
+	drop.position = spawn
+	parent_node.add_child(drop)
+
+## DropEffect của hộp (Fireworks / FanfareSound / Swirl / ChristmasFireworks): chùm tia sáng vàng bắn lên từ người chơi
+func _box_effect(parent_node: Node, effect: String, center: Vector3) -> void:
+	if effect == "":
+		return
+	var p := CPUParticles3D.new()
+	p.one_shot = true
+	p.explosiveness = 1.0
+	p.amount = 60 if effect != "Swirl" else 36
+	p.lifetime = 1.1
+	p.direction = Vector3.UP
+	p.spread = 55.0 if effect != "Swirl" else 180.0
+	p.initial_velocity_min = 3.0
+	p.initial_velocity_max = 6.0
+	p.gravity = Vector3(0, -6.0, 0)
+	p.scale_amount_min = 0.08
+	p.scale_amount_max = 0.16
+	var m := StandardMaterial3D.new()
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.albedo_color = Color(1.0, 0.8, 0.3) if effect != "ChristmasFireworks" else Color(1.0, 0.4, 0.4)
+	m.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+	var q := QuadMesh.new()
+	q.size = Vector2.ONE
+	q.material = m
+	p.mesh = q
+	parent_node.add_child(p)
+	p.global_position = center + Vector3(0, 0.6, 0)
+	p.emitting = true
+	get_tree().create_timer(2.0).timeout.connect(p.queue_free)
+
+func _do_drop_item(it: Dictionary, screen_pos: Vector2) -> void:
+	if it.is_empty() or player_node == null:
+		return
+	
+	var drop_pos := Vector3.ZERO
+	var res := raycast_ground(screen_pos)
+	var p_pos: Vector3 = player_node.global_position
+	
+	if res.get("hit", false):
+		var hit_pos: Vector3 = res.get("pos", Vector3.ZERO)
+		var diff := hit_pos - p_pos
+		diff.y = 0.0
+		# Nếu click quá xa (ngoài 2.5m), vứt về hướng đó cách người chơi 1.8m
+		if diff.length() > 2.5:
+			drop_pos = p_pos + diff.normalized() * 1.8
+		else:
+			drop_pos = hit_pos
+	else:
+		var fwd: Vector3 = -player_node.transform.basis.z.normalized()
+		if fwd.is_zero_approx():
+			fwd = Vector3(0, 0, 1)
+		drop_pos = p_pos + fwd * 1.2
+	
+	drop_pos.y = ground_height(drop_pos)
+	
+	var drop = MuDropItemRes.new()
+	drop.item_dict = it
+	var g := int(it.get("group", 0))
+	var n := int(it.get("number", 0))
+	if MuItemsRes.is_jewel(it):
+		if g == 14 and n == 13:
+			drop.category = MuDropItemRes.ItemCategory.BLESS
+		elif g == 14 and n == 14:
+			drop.category = MuDropItemRes.ItemCategory.SOUL
+		elif g == 12 and n == 15:
+			drop.category = MuDropItemRes.ItemCategory.CHAOS
+		else:
+			drop.category = MuDropItemRes.ItemCategory.BLESS
+	elif MuItemsRes.is_potion(it):
+		drop.category = MuDropItemRes.ItemCategory.POTION
+	else:
+		drop.category = MuDropItemRes.ItemCategory.EQUIPMENT
+	drop.amount = int(it.get("count", 1))
+	drop.pickup_delay = 2.0 # 2 giây tránh tự nhặt lại ngay lập tức
+	
+	# Động tác vứt tay của nhân vật & quay mặt về hướng ném
+	var throw_dir := (drop_pos - p_pos)
+	throw_dir.y = 0.0
+	if not throw_dir.is_zero_approx():
+		player_node.rotation.y = atan2(throw_dir.x, throw_dir.z)
+	if player_node.model:
+		player_node.model.play_skill(MuCharModelRes.P_SKILL_HAND1, 1.5)
+		player_node._lock_action(0.35)
+	
+	# Vị trí xuất phát của vật phẩm: từ tay / ngực người chơi ném ra
+	var start_pos: Vector3 = p_pos + Vector3(0.0, 1.1, 0.0)
+	if not throw_dir.is_zero_approx():
+		start_pos += throw_dir.normalized() * 0.4
+	
+	drop.setup_drop(drop_pos, start_pos)
+	
+	var parent_node = get_parent()
+	if parent_node == null:
+		parent_node = self
+	
+	drop.position = start_pos
+	parent_node.add_child(drop)
+	
+	var disp_name := MuItemsRes.display_name(it)
+	var tree := get_tree()
+	var hud = tree.get_first_node_in_group("HUD") if tree else null
+	if hud and hud.has_method("show_pickup_notification"):
+		hud.show_pickup_notification("Đã vứt: " + disp_name, Color(1.0, 0.8, 0.5))
+	print("[MuWorld] Đã vứt %s ra đất tại %s" % [disp_name, str(drop_pos)])
+	
+	if player_node:
+		player_node.inventory_changed.emit()

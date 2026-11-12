@@ -22,6 +22,7 @@ var server_url: String = "ws://127.0.0.1:8080"
 var incoming_buffer: PackedByteArray = PackedByteArray()
 
 func _ready() -> void:
+	add_to_group("Network")
 	# Cấu hình WebSocketPeer
 	socket.inbound_buffer_size = 1048576 # 1MB
 	socket.outbound_buffer_size = 1048576

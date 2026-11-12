@@ -6,6 +6,8 @@ class_name MuItemGrid
 
 signal cell_clicked(col: int, row: int, button: int)
 signal hover_changed(item: Dictionary)
+## Nhả chuột trái sau khi bấm ở một ô khác / ngoài lưới (kéo thả): vị trí màn hình, ô đang chỉ tới, có nằm trong lưới không
+signal released_at(global_pos: Vector2, cell: Vector2i, inside: bool)
 
 const MuItemsRes = preload("res://src/mu/MuItems.gd")
 const MuItemIconRes = preload("res://src/ui/MuItemIcon.gd")
@@ -20,6 +22,7 @@ var hover_cell := Vector2i(-1, -1)
 var preview_size := Vector2i.ZERO
 var preview_ok := false
 var _hover_item: Dictionary = {}
+var _press_cell := Vector2i(-1, -1)
 var _box_tex: Texture2D
 
 func setup(c: int, r: int, cell_px: float) -> void:
@@ -63,8 +66,21 @@ func _gui_input(event: InputEvent) -> void:
 	if mb and mb.pressed and (mb.button_index == MOUSE_BUTTON_LEFT or mb.button_index == MOUSE_BUTTON_RIGHT):
 		var c := Vector2i(floori(mb.position.x / cell), floori(mb.position.y / cell))
 		if c.x >= 0 and c.y >= 0 and c.x < cols and c.y < rows:
+			if mb.button_index == MOUSE_BUTTON_LEFT:
+				_press_cell = c
 			cell_clicked.emit(c.x, c.y, mb.button_index)
 			accept_event()
+	elif mb and not mb.pressed and mb.button_index == MOUSE_BUTTON_LEFT and _press_cell.x >= 0:
+		# kéo thả: bấm ở ô này (nhấc đồ lên) rồi nhả ở ô khác / ngoài lưới -> coi như bấm thả vào đó
+		var rc := Vector2i(floori(mb.position.x / cell), floori(mb.position.y / cell))
+		var inside := rc.x >= 0 and rc.y >= 0 and rc.x < cols and rc.y < rows
+		var moved := (not inside) or rc != _press_cell
+		_press_cell = Vector2i(-1, -1)
+		if moved:
+			released_at.emit(get_global_transform() * mb.position, rc, inside)
+			accept_event()
+	elif mb and not mb.pressed:
+		_press_cell = Vector2i(-1, -1)
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_MOUSE_EXIT:
@@ -74,10 +90,23 @@ func _notification(what: int) -> void:
 			hover_changed.emit({})
 		queue_redraw()
 
+## Nền ô có đồ (item_grid.rcss: .item-cell.tint-normal = rgba(80, 128, 128, 153)), vẽ dưới khung newui_item_box
+const TINT_NORMAL := Color(80.0 / 255.0, 128.0 / 255.0, 128.0 / 255.0, 153.0 / 255.0)
+
 func _draw() -> void:
+	var occupied := {}   # ô -> màu nền (tint-normal, hoặc vàng / cam / đỏ khi độ bền thấp)
+	for it in items:
+		var osz: Vector2i = MuItemsRes.size_of(it)
+		var st: int = MuItemsRes.durability_state(it)
+		var tc: Color = TINT_NORMAL if st == 0 else MuItemsRes.durability_tint(st, 102.0 / 255.0)
+		for dy in osz.y:
+			for dx in osz.x:
+				occupied[Vector2i(int(it["x"]) + dx, int(it["y"]) + dy)] = tc
 	for r in rows:
 		for c in cols:
 			var rc := Rect2(Vector2(c, r) * cell, Vector2(cell, cell))
+			if occupied.has(Vector2i(c, r)):
+				draw_rect(rc, occupied[Vector2i(c, r)])
 			if _box_tex:
 				draw_texture_rect(_box_tex, rc, false)
 			else:
@@ -90,9 +119,8 @@ func _draw() -> void:
 	for it in items:
 		var sz: Vector2i = MuItemsRes.size_of(it)
 		var rc := Rect2(Vector2(int(it["x"]), int(it["y"])) * cell, Vector2(sz) * cell)
-		# nền đồ: xanh lam mờ như newui (đỏ nhạt khi rê chuột)
 		var hov := hover_cell.x >= int(it["x"]) and hover_cell.x < int(it["x"]) + sz.x and hover_cell.y >= int(it["y"]) and hover_cell.y < int(it["y"]) + sz.y
-		# MU không tô nền cho ô có đồ (chỉ ô trống newui_item_box) — chỉ sáng nhẹ khi rê chuột
+		# nền xanh của ô có đồ đã vẽ ở trên (tint-normal); rê chuột chỉ sáng nhẹ
 		if hov:
 			draw_rect(rc.grow(-1), Color(0.35, 0.35, 0.35, 0.18))
 		# đồ đang rê chuột: ảnh 3D sống, xoay vòng như MU

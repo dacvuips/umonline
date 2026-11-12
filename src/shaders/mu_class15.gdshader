@@ -19,13 +19,18 @@ void vertex() {
 
 void fragment() {
 	float f = 0.8 - abs(sin(TIME * 1.8) * 0.5);
-	vec3 c = texture(albedo_tex, UV).rgb * pow(max(f - 0.1, 0.0), 2.2);
-	c += texture(rgb_mix_tex, UV + vec2(abs(sin(TIME * 0.5)), 0.0)).rgb * pow(max(f - 0.3, 0.0), 2.2);
+	vec3 c = texture(albedo_tex, UV).rgb * max(f - 0.1, 0.0);
+	c += texture(rgb_mix_tex, UV + vec2(abs(sin(TIME * 0.5)), 0.0)).rgb * max(f - 0.3, 0.0);
 	vec3 n = normalize(v_nmu);
 	float wave = mod(TIME * 1000.0, 10000.0) * 0.0001;
 	vec3 L = vec3(cos(TIME), sin(TIME * 2.0), 1.0);
 	float cx = dot(n, L);
 	vec2 uv = vec2(cx + n.y * 0.5 + L.y * 3.0, 1.0 - cx - n.z * 0.5 - wave * 3.0);
 	c += texture(chrome2_tex, uv).rgb;
-	ALBEDO = c;
+	float a = clamp(max(max(c.r, c.g), c.b), 0.0, 1.0);
+	if (a < 0.03) {
+		discard;
+	}
+	ALPHA = a;
+	ALBEDO = c / max(a, 0.001);
 }

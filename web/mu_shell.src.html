@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<title>MU Online</title>
+<style>
+html, body, #canvas { margin: 0; padding: 0; border: 0; }
+body { color: #fff; background-color: #232323; overflow: hidden; touch-action: none; font-family: "Segoe UI", Roboto, Arial, sans-serif; }
+#canvas { display: block; }
+#canvas:focus { outline: none; }
+
+#status {
+	position: absolute; inset: 0; visibility: hidden;
+	display: flex; flex-direction: column; align-items: center; justify-content: center;
+	gap: 18px; padding: 24px; box-sizing: border-box;
+	background: radial-gradient(ellipse at 50% 38%, #3a2c1a 0%, #232323 62%, #141414 100%);
+}
+#status-logo { width: min(380px, 70vw); height: auto; filter: drop-shadow(0 6px 22px rgba(255, 170, 40, .35)); animation: mu-float 3.2s ease-in-out infinite; }
+@keyframes mu-float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
+
+#status-title { font-size: 20px; font-weight: 600; letter-spacing: .5px; color: #ffe9b8; text-align: center; margin-top: 6px; }
+#status-title .dots::after { content: ""; animation: mu-dots 1.4s steps(4, end) infinite; }
+@keyframes mu-dots { 0% { content: "" } 25% { content: "." } 50% { content: ".." } 75% { content: "..." } }
+
+#status-once { max-width: min(560px, 86vw); text-align: center; font-size: 15px; color: #e8d9b5; margin-top: -8px; }
+#status-once b { color: #ffd66b; }
+
+#status-bar { width: min(560px, 86vw); display: flex; align-items: center; gap: 12px; }
+#status-track { flex: 1; height: 8px; border-radius: 4px; background: rgba(255,255,255,.14); overflow: hidden; }
+#status-fill { height: 100%; width: 0; border-radius: 4px; background: linear-gradient(90deg, #f5a623, #ffd66b); box-shadow: 0 0 10px rgba(255,190,60,.6); transition: width .2s ease-out; }
+#status-fill.indeterminate { width: 35%; animation: mu-slide 1.2s ease-in-out infinite; }
+@keyframes mu-slide { 0% { margin-left: -35% } 100% { margin-left: 100% } }
+#status-percent { min-width: 44px; text-align: right; font-weight: 600; color: #ffd66b; font-variant-numeric: tabular-nums; }
+
+#status-tip { max-width: min(560px, 86vw); min-height: 44px; text-align: center; font-size: 14px; line-height: 1.5; color: #c9c9c9; transition: opacity .4s; }
+#status-tip b { color: #ffd66b; }
+#status-notice { display: none; max-width: min(560px, 86vw); background: #3b1f1f; border: 1px solid #a33; border-radius: 6px; padding: 10px 14px; font-size: 14px; text-align: center; }
+
+#mobile-block {
+	position: absolute; inset: 0; z-index: 10; display: none; overflow-y: auto;
+	align-items: center; justify-content: center; padding: 24px; box-sizing: border-box;
+	background: radial-gradient(ellipse at 50% 30%, #3a2c1a 0%, #232323 62%, #141414 100%);
+}
+#mobile-block .box { width: min(420px, 100%); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+#mobile-block img { width: min(300px, 70vw); height: auto; filter: drop-shadow(0 6px 22px rgba(255, 170, 40, .35)); }
+#mobile-block h1 { margin: 6px 0 0; font-size: 22px; line-height: 1.3; color: #ffe9b8; }
+#mobile-block p { margin: 0; font-size: 15px; line-height: 1.55; color: #e8d9b5; }
+#mobile-block .dl {
+	display: block; width: 100%; padding: 15px 18px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 17px;
+	color: #2a1a00; background: linear-gradient(180deg, #ffd16a, #e39a1c); border: 1px solid #ffdc8a;
+}
+#mobile-block .dl:active { transform: translateY(1px); }
+#mobile-block .meta { font-size: 13px; color: #b9a98a; }
+#mobile-block .steps { text-align: left; width: 100%; margin: 4px 0 0; padding: 14px 16px 14px 34px; font-size: 14px; line-height: 1.6; color: #d8c9a6;
+	background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 10px; }
+#mobile-block .ios { font-size: 13px; color: #b9a98a; }
+</style>
+$GODOT_HEAD_INCLUDE
+</head>
+<body>
+<canvas id="canvas">Trình duyệt của bạn không hỗ trợ HTML5 canvas.</canvas>
+<noscript>Hãy bật JavaScript để chơi MU Online.</noscript>
+
+<div id="mobile-block" role="alert">
+	<div class="box">
+		<img alt="MU Online" src="data:image/png;base64,__MU_LOGO_B64__">
+		<h1>Hãy tải ứng dụng MU Online để chơi trên điện thoại</h1>
+		<p>Không thể chơi trên trình duyệt với điện thoại, máy tính bảng hoặc màn hình nhỏ. Hãy cài ứng dụng MU Online để có điều khiển cảm ứng và chơi mượt hơn.</p>
+		<a class="dl" id="apk-link" href="https://mu.viettheo.site/download/mu-launcher.apk" download>Tải APK cho Android</a>
+		<p class="meta">Dùng chung tài khoản với trang web và bản PC.</p>
+		<ol class="steps">
+			<li>Bấm nút tải APK ở trên.</li>
+			<li>Mở file vừa tải. Nếu máy hỏi, cho phép cài ứng dụng từ nguồn này.</li>
+			<li>Mở MU Online, đăng nhập và vào game.</li>
+		</ol>
+		<p class="ios">Dùng iPhone / iPad? Bản iOS đang được chuẩn bị, vui lòng quay lại sau.</p>
+	</div>
+</div>
+
+<div id="status">
+	<img id="status-logo" alt="MU Online" src="data:image/png;base64,__MU_LOGO_B64__">
+	<div id="status-title">Game đang tải, vui lòng chờ<span class="dots"></span></div>
+	<div id="status-once">Game chỉ tải dữ liệu <b>1 lần duy nhất</b> — vui lòng chờ, những lần sau vào game ngay.</div>
+	<div id="status-bar">
+		<div id="status-track"><div id="status-fill" class="indeterminate"></div></div>
+		<div id="status-percent">0%</div>
+	</div>
+	<div id="status-tip"></div>
+	<div id="status-notice"></div>
+</div>
+
+<script src="$GODOT_URL"></script>
+<script>
+const GODOT_CONFIG = $GODOT_CONFIG;
+const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
+const engine = new Engine(GODOT_CONFIG);
+
+// ---- Mẹo hiển thị luân phiên trong lúc tải ----
+const TIPS = [
+	"<b>Mẹo:</b> Lần đầu tải có thể mất vài phút, những lần sau game sẽ vào ngay nhờ bộ nhớ đệm.",
+	"<b>Mẹo:</b> Dùng mạng ổn định (Wi-Fi) để tải nhanh và tránh bị gián đoạn.",
+	"<b>Mẹo:</b> Đừng đóng hoặc làm mới (F5) trang khi thanh tiến độ đang chạy.",
+	"<b>Mẹo:</b> Nhấn <b>F11</b> để chơi toàn màn hình cho trải nghiệm tốt nhất.",
+	"<b>Mẹo:</b> Dùng Chrome, Edge hoặc Firefox bản mới nhất để game chạy mượt hơn.",
+	"<b>Mẹo:</b> Nhớ nhặt Jewel of Bless / Soul rơi ra từ quái — chúng rất giá trị khi nâng cấp đồ.",
+	"<b>Mẹo:</b> Nhấn <b>Enter</b> để mở khung chat, <b>C</b> để xem nhân vật, <b>I</b> để mở túi đồ.",
+	"<b>Mẹo:</b> Luôn mang theo thuốc hồi máu (HP) và mana khi đi săn ở khu vực mới.",
+];
+const tipEl = document.getElementById('status-tip');
+let tipIdx = Math.floor(Math.random() * TIPS.length);
+function showTip() {
+	tipEl.style.opacity = 0;
+	setTimeout(() => { tipEl.innerHTML = TIPS[tipIdx]; tipEl.style.opacity = 1; tipIdx = (tipIdx + 1) % TIPS.length; }, 300);
+}
+showTip();
+const tipTimer = setInterval(showTip, 5000);
+
+// ---- Trạng thái tải ----
+const statusOverlay = document.getElementById('status');
+const fillEl = document.getElementById('status-fill');
+const percentEl = document.getElementById('status-percent');
+const noticeEl = document.getElementById('status-notice');
+let initializing = true;
+
+function setStatusMode(mode) {
+	if (!initializing) return;
+	if (mode === 'hidden') {
+		clearInterval(tipTimer);
+		statusOverlay.remove();
+		initializing = false;
+		return;
+	}
+	statusOverlay.style.visibility = 'visible';
+}
+function setProgress(current, total) {
+	if (total > 0) {
+		fillEl.classList.remove('indeterminate');
+		const p = Math.min(100, Math.round(current / total * 100));
+		fillEl.style.width = p + '%';
+		percentEl.textContent = p + '%';
+	} else {
+		fillEl.classList.add('indeterminate');
+		percentEl.textContent = '';
+	}
+}
+function setNotice(text) {
+	noticeEl.style.display = text ? 'block' : 'none';
+	noticeEl.textContent = text || '';
+}
+function displayFailureNotice(err) {
+	console.error(err);
+	setNotice(String(err));
+	setStatusMode('notice');
+	initializing = false;
+}
+
+// ---- Điện thoại / máy tính bảng: không chơi trên trình duyệt, yêu cầu tải APK ----
+// Chặn: điện thoại, máy tính bảng, màn hình cảm ứng, chế độ "xem bản dành cho máy tính" trên điện thoại, và cửa sổ quá nhỏ.
+const SMALL_SCREEN = 900;   // px: nhỏ hơn thì coi là thiết bị nhỏ
+function isBlockedDevice() {
+	const ua = navigator.userAgent;
+	if (/Android|iPhone|iPad|iPod|Mobile|Tablet|Silk|CriOS|FxiOS|Kindle|PlayBook|Windows Phone/i.test(ua)) return true;
+	if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) return true;       // iPad báo là Mac
+	const coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;          // chỉ có cảm ứng, không có chuột
+	if (coarse && navigator.maxTouchPoints > 0) return true;
+	const sw = window.screen && window.screen.width > 0 ? window.screen.width : 9999;   // 0 = trình duyệt không báo
+	const w = Math.min(sw, window.innerWidth);
+	return w < SMALL_SCREEN;
+}
+const IS_MOBILE_DEVICE = isBlockedDevice();
+const mobileBlock = document.getElementById('mobile-block');
+function showMobileBlock() { mobileBlock.style.display = 'flex'; }
+// Thu nhỏ cửa sổ sau khi đã vào: phủ màn chặn lên (game tạm dừng phía sau); mở rộng lại thì tải lại trang để vào game
+window.addEventListener('resize', () => {
+	if (!IS_MOBILE_DEVICE && window.innerWidth < SMALL_SCREEN) showMobileBlock();
+	else if (!IS_MOBILE_DEVICE && mobileBlock.style.display === 'flex') mobileBlock.style.display = 'none';
+});
+
+const missing = Engine.getMissingFeatures({ threads: GODOT_THREADS_ENABLED });
+if (IS_MOBILE_DEVICE) {
+	clearInterval(tipTimer);
+	statusOverlay.remove();
+	initializing = false;
+	showMobileBlock();
+	// không khởi động engine: tránh tải hàng trăm MB dữ liệu game cho thiết bị không được chơi
+} else if (missing.length !== 0) {
+	displayFailureNotice('Trình duyệt không hỗ trợ các tính năng cần thiết:\n' + missing.join('\n'));
+} else {
+	setStatusMode('progress');
+	engine.startGame({
+		onProgress: function (current, total) { setProgress(current, total); },
+	}).then(() => { setStatusMode('hidden'); }, displayFailureNotice);
+}
+</script>
+</body>
+</html>

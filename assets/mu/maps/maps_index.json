@@ -80,8 +80,8 @@
  "7": {
   "world": 7,
   "name": "Arena",
-  "objects": 1488,
-  "object_types": 39,
+  "objects": 1434,
+  "object_types": 38,
   "object_folder": "Object7",
   "tiles": 12,
   "height24": false,
@@ -93,8 +93,8 @@
  "8": {
   "world": 8,
   "name": "Atlans",
-  "objects": 5215,
-  "object_types": 40,
+  "objects": 4364,
+  "object_types": 38,
   "object_folder": "Object8",
   "tiles": 9,
   "height24": false,
@@ -106,8 +106,8 @@
  "9": {
   "world": 9,
   "name": "Tarkan",
-  "objects": 3332,
-  "object_types": 77,
+  "objects": 3217,
+  "object_types": 73,
   "object_folder": "Object9",
   "tiles": 11,
   "height24": false,
@@ -630,6 +630,382 @@
   "object_types": 83,
   "object_folder": "Object82",
   "tiles": 14,
+  "height24": false,
+  "spawn": [
+   128,
+   128
+  ]
+ },
+ "13": {
+  "world": 12,
+  "name": "Blood Castle 2",
+  "objects": 201,
+  "object_types": 34,
+  "object_folder": "Object12",
+  "tiles": 10,
+  "height24": false,
+  "spawn": [
+   15,
+   14
+  ],
+  "alias_of": 12
+ },
+ "14": {
+  "world": 12,
+  "name": "Blood Castle 3",
+  "objects": 201,
+  "object_types": 34,
+  "object_folder": "Object12",
+  "tiles": 10,
+  "height24": false,
+  "spawn": [
+   15,
+   14
+  ],
+  "alias_of": 12
+ },
+ "15": {
+  "world": 12,
+  "name": "Blood Castle 4",
+  "objects": 201,
+  "object_types": 34,
+  "object_folder": "Object12",
+  "tiles": 10,
+  "height24": false,
+  "spawn": [
+   15,
+   14
+  ],
+  "alias_of": 12
+ },
+ "16": {
+  "world": 12,
+  "name": "Blood Castle 5",
+  "objects": 201,
+  "object_types": 34,
+  "object_folder": "Object12",
+  "tiles": 10,
+  "height24": false,
+  "spawn": [
+   15,
+   14
+  ],
+  "alias_of": 12
+ },
+ "17": {
+  "world": 12,
+  "name": "Blood Castle 6",
+  "objects": 201,
+  "object_types": 34,
+  "object_folder": "Object12",
+  "tiles": 10,
+  "height24": false,
+  "spawn": [
+   15,
+   14
+  ],
+  "alias_of": 12
+ },
+ "18": {
+  "world": 12,
+  "name": "Blood Castle 7",
+  "objects": 201,
+  "object_types": 34,
+  "object_folder": "Object12",
+  "tiles": 10,
+  "height24": false,
+  "spawn": [
+   15,
+   14
+  ],
+  "alias_of": 12
+ },
+ "20": {
+  "world": 19,
+  "name": "Chaos Castle 2",
+  "objects": 194,
+  "object_types": 33,
+  "object_folder": "Object19",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   44,
+   108
+  ],
+  "alias_of": 19
+ },
+ "21": {
+  "world": 19,
+  "name": "Chaos Castle 3",
+  "objects": 194,
+  "object_types": 33,
+  "object_folder": "Object19",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   44,
+   108
+  ],
+  "alias_of": 19
+ },
+ "22": {
+  "world": 19,
+  "name": "Chaos Castle 4",
+  "objects": 194,
+  "object_types": 33,
+  "object_folder": "Object19",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   44,
+   108
+  ],
+  "alias_of": 19
+ },
+ "23": {
+  "world": 19,
+  "name": "Chaos Castle 5",
+  "objects": 194,
+  "object_types": 33,
+  "object_folder": "Object19",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   44,
+   108
+  ],
+  "alias_of": 19
+ },
+ "24": {
+  "world": 19,
+  "name": "Chaos Castle 6",
+  "objects": 194,
+  "object_types": 33,
+  "object_folder": "Object19",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   44,
+   108
+  ],
+  "alias_of": 19
+ },
+ "26": {
+  "world": 25,
+  "name": "Kalima 2",
+  "objects": 2314,
+  "object_types": 56,
+  "object_folder": "Object25",
+  "tiles": 10,
+  "height24": false,
+  "spawn": [
+   115,
+   114
+  ],
+  "alias_of": 25
+ },
+ "27": {
+  "world": 25,
+  "name": "Kalima 3",
+  "objects": 2314,
+  "object_types": 56,
+  "object_folder": "Object25",
+  "tiles": 10,
+  "height24": false,
+  "spawn": [
+   115,
+   114
+  ],
+  "alias_of": 25
+ },
+ "28": {
+  "world": 25,
+  "name": "Kalima 4",
+  "objects": 2314,
+  "object_types": 56,
+  "object_folder": "Object25",
+  "tiles": 10,
+  "height24": false,
+  "spawn": [
+   115,
+   114
+  ],
+  "alias_of": 25
+ },
+ "29": {
+  "world": 25,
+  "name": "Kalima 5",
+  "objects": 2314,
+  "object_types": 56,
+  "object_folder": "Object25",
+  "tiles": 10,
+  "height24": false,
+  "spawn": [
+   115,
+   114
+  ],
+  "alias_of": 25
+ },
+ "30": {
+  "world": 25,
+  "name": "Kalima 6",
+  "objects": 2314,
+  "object_types": 56,
+  "object_folder": "Object25",
+  "tiles": 10,
+  "height24": false,
+  "spawn": [
+   115,
+   114
+  ],
+  "alias_of": 25
+ },
+ "33": {
+  "world": 10,
+  "name": "Devil Square 2",
+  "objects": 564,
+  "object_types": 7,
+  "object_folder": "Object10",
+  "tiles": 9,
+  "height24": false,
+  "spawn": [
+   128,
+   115
+  ],
+  "alias_of": 10
+ },
+ "37": {
+  "world": 25,
+  "name": "Kalima 7",
+  "objects": 2314,
+  "object_types": 56,
+  "object_folder": "Object25",
+  "tiles": 10,
+  "height24": false,
+  "spawn": [
+   115,
+   114
+  ],
+  "alias_of": 25
+ },
+ "46": {
+  "world": 47,
+  "name": "Illusion Temple 1",
+  "objects": 1961,
+  "object_types": 77,
+  "object_folder": "Object47",
+  "tiles": 13,
+  "height24": false,
+  "spawn": [
+   110,
+   128
+  ],
+  "alias_of": 47
+ },
+ "48": {
+  "world": 47,
+  "name": "Illusion Temple 3",
+  "objects": 1961,
+  "object_types": 77,
+  "object_folder": "Object47",
+  "tiles": 13,
+  "height24": false,
+  "spawn": [
+   110,
+   128
+  ],
+  "alias_of": 47
+ },
+ "49": {
+  "world": 47,
+  "name": "Illusion Temple 4",
+  "objects": 1961,
+  "object_types": 77,
+  "object_folder": "Object47",
+  "tiles": 13,
+  "height24": false,
+  "spawn": [
+   110,
+   128
+  ],
+  "alias_of": 47
+ },
+ "50": {
+  "world": 47,
+  "name": "Illusion Temple 5",
+  "objects": 1961,
+  "object_types": 77,
+  "object_folder": "Object47",
+  "tiles": 13,
+  "height24": false,
+  "spawn": [
+   110,
+   128
+  ],
+  "alias_of": 47
+ },
+ "51": {
+  "world": 47,
+  "name": "Illusion Temple 6",
+  "objects": 1961,
+  "object_types": 77,
+  "object_folder": "Object47",
+  "tiles": 13,
+  "height24": false,
+  "spawn": [
+   110,
+   128
+  ],
+  "alias_of": 47
+ },
+ "53": {
+  "world": 12,
+  "name": "Blood Castle (Master)",
+  "objects": 201,
+  "object_types": 34,
+  "object_folder": "Object12",
+  "tiles": 10,
+  "height24": false,
+  "spawn": [
+   15,
+   14
+  ],
+  "alias_of": 12
+ },
+ "54": {
+  "world": 19,
+  "name": "Chaos Castle (Master)",
+  "objects": 194,
+  "object_types": 33,
+  "object_folder": "Object19",
+  "tiles": 14,
+  "height24": false,
+  "spawn": [
+   44,
+   108
+  ],
+  "alias_of": 19
+ },
+ "94": {
+  "world": 94,
+  "name": "Character Scene (Season 9)",
+  "objects": 232,
+  "object_types": 35,
+  "object_folder": "Object94",
+  "tiles": 13,
+  "height24": false,
+  "spawn": [
+   127,
+   121
+  ]
+ },
+ "95": {
+  "world": 95,
+  "name": "Login Scene (Season 9)",
+  "objects": 43,
+  "object_types": 16,
+  "object_folder": "Object95",
+  "tiles": 13,
   "height24": false,
   "spawn": [
    128,

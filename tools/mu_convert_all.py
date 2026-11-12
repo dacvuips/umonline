@@ -94,6 +94,10 @@ def load_bmd(path):
     elif ver == 0x0C:
         n = struct.unpack_from('<i', d, 4)[0]
         data, p = map_decrypt(d[8:8 + n]), 0
+    elif ver == 0x0E:   # IGCN Season 9+: mã hoá 2 tầng (mu_bmd14.py)
+        from mu_bmd14 import decrypt_payload
+        n = struct.unpack_from('<i', d, 4)[0]
+        data, p = decrypt_payload(d[8:8 + n]), 0
     else:
         raise ValueError('BMD version %d chưa hỗ trợ' % ver)
     m = Model(); m.version = ver
@@ -506,7 +510,7 @@ def main():
                     continue   # file rỗng (chỗ trống trong danh sách model)
                 m = load_bmd(os.path.join(src_dir, f))
                 skel = m
-                part = folder == 'Player' and name.lower() != 'player' and player is not None and len(m.bones) <= len(player.bones) and (len(m.actions) <= 1 or not is_animated(m))
+                part = folder == 'Player' and name.lower() != 'player' and not name.lower().startswith('helper') and player is not None and len(m.bones) <= len(player.bones) and (len(m.actions) <= 1 or not is_animated(m))
                 if part:
                     skel = player
                 else:

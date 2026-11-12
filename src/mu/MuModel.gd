@@ -11,12 +11,22 @@ const GLOW_SHADER := preload("res://src/shaders/mu_item_glow.gdshader")
 const CHAR_ALPHA_SHADER := preload("res://src/shaders/mu_character_alpha.gdshader")
 const CHAR_ADD_SHADER := preload("res://src/shaders/mu_character_add.gdshader")
 const ItemStylesRes = preload("res://src/mu/MuItemStyles.gd")
-## Độ sáng chung của nhân vật, quái, NPC và các lớp phát sáng của đồ (nâng sáng tươi rõ, không bị tối).
-const BRIGHTNESS := 1.7
+## Độ sáng chung của nhân vật, quái, NPC và các lớp phát sáng của đồ. 1 = như client gốc: shader đã tính
+## đúng trong không gian gamma (trước đây đổi sang linear làm tối nên phải nhân bù 1.4 .. 1.7).
+const BRIGHTNESS := 1.0
+## Độ sáng thân model (mu_character*.gdshader), 1 = như client gốc.
+const BODY_BRIGHTNESS := 1.0
 ## Độ sáng thân đồ theo cấp
-const LEVEL_BODY_BRIGHT_7 := 1.15    # +7, +8
-const LEVEL_BODY_BRIGHT_9 := 1.45   # +9 .. +15
+const LEVEL_BODY_BRIGHT_7 := 1.1    # +7, +8
+const LEVEL_BODY_BRIGHT_9 := 1   # +9 .. +15
+## Độ sáng lớp phủ phát sáng theo cấp của đồ MẶC TRÊN NGƯỜI / ngoài thế giới
+## (mu_item_glow.gdshader). Ảnh đồ trong túi / rương dùng bộ riêng: MuItemIcon.ICON_GLOW_GAIN_*
+const GLOW_GAIN_7 := 0.45  # +7 .. +10
+const GLOW_GAIN_11 := 0.85  # +11, +12
+const GLOW_GAIN_13 := 1  # +13 .. +15
 const HIDDEN_SHADER := preload("res://src/shaders/mu_hidden.gdshader")
+## Visual layer 20: mesh của model MU (nhân vật, quái, NPC, đồ, thú) — nguồn bloom của MuModelBloom
+const BLOOM_LAYER_MASK := 1 << 19
 const BASE_PLAY_SPEED := 0.16
 const MuTerrainRes = preload("res://src/world/MuTerrain.gd")
 
@@ -28,6 +38,8 @@ static var _terrain_light: Texture2D = null
 static var _fx: Dictionary = {}
 ## >= 0: ánh sáng cố định (Model Viewer) thay cho ánh sáng địa hình
 static var fixed_light: float = -1.0
+## Hệ số nhân thêm vào BRIGHTNESS cho vật liệu đang dựng (quái / NPC đặt > 1 trong build_monster)
+static var brightness_scale: float = 1.0
 
 static func scene(path: String) -> PackedScene:
 	if path == "":
@@ -126,11 +138,51 @@ static func reset_cache() -> void:
 	_terrain_light = null
 	_mats.clear()
 
+## Texture hiệu ứng (chrome / shiny...). Bản web tải nội dung theo gói: texture có thể CHƯA có lúc gọi lần đầu
+## (vd. màn chọn nhân vật chỉ có gói tier 1) -> KHÔNG nhớ kết quả null, và khi gói mới nạp xong thì làm mới vật liệu cũ
+## (nếu không, đồ trong game mất lớp bóng loáng kim loại vì vật liệu cũ giữ texture null mãi mãi).
+static var _content_hooked := false
+
+## Mảng số từ JSON (float) -> int. Trong Godot `1 in [1.0]` là FALSE nên các điều kiện "mesh số N" luôn sai nếu không đổi.
+static func ints(a: Array) -> Array:
+	var out: Array = []
+	for v in a:
+		out.append(int(v))
+	return out
+
 static func fx(name: String) -> Texture2D:
-	if not _fx.has(name):
-		var p := "res://assets/mu/fx/%s.jpg" % name
-		_fx[name] = load(p) if ResourceLoader.exists(p) else null
-	return _fx[name]
+	var t = _fx.get(name)
+	if t != null:
+		return t
+	var p := "res://assets/mu/fx/%s.jpg" % name
+	if ResourceLoader.exists(p):
+		t = load(p)
+		_fx[name] = t
+		return t
+	_hook_content()
+	return null
+
+static func _hook_content() -> void:
+	if _content_hooked:
+		return
+	var tree := Engine.get_main_loop() as SceneTree
+	var mc: Node = tree.root.get_node_or_null("MuContent") if tree and tree.root else null
+	if mc == null or not mc.has_signal("tier_ready"):
+		return
+	_content_hooked = true
+	mc.connect("tier_ready", func(_t): flush_content_caches())
+
+## Gói nội dung mới vừa nạp: bỏ vật liệu / ảnh đồ đã dựng khi còn thiếu texture
+static func flush_content_caches() -> void:
+	_mats.clear()
+	for k in _fx.keys():
+		if _fx[k] == null:
+			_fx.erase(k)
+	var icon_script = load("res://src/ui/MuItemIcon.gd")
+	if icon_script != null:
+		var c = icon_script.get("_cache")
+		if c is Dictionary:
+			c.clear()
 
 static func find_all(n: Node, type_name: String, out: Array) -> Array:
 	if n.is_class(type_name):
@@ -154,14 +206,25 @@ static func tex_stem(src: Material) -> String:
 		return ""
 	var nm := src.resource_name
 	var sep := nm.find("__")
-	return nm.substr(sep + 2) if sep >= 0 else nm
+	if sep >= 0:
+		return nm.substr(sep + 2)
+	var bm := src as BaseMaterial3D
+	if bm and bm.albedo_texture and bm.albedo_texture.resource_path != "":
+		return bm.albedo_texture.resource_path.get_file().get_basename()
+	return nm
 
 ## TextureScriptParsing::parsingTScriptA của MU: hậu tố sau dấu "_" ĐẦU TIÊN của tên texture
 ##   R = Bright (cộng màu, không ánh sáng) ; H = ẩn ; S = stream ; N = không blend ; DC/DT = bóng
 ## Trả về "hide" | "bright" | "stream" | "none" | ""
 static func mesh_script(stem: String) -> String:
-	if stem.to_lower() == "hide":
+	var low := stem.to_lower()
+	if low == "hide" or low.ends_with("_hide"):
 		return "hide"     # texture hide.jpg -> BITMAP_HIDE: không vẽ
+	# Cánh và hiệu ứng có nền đen cần vẽ cộng sáng (EnableAlphaBlend / blend_add) như MU gốc
+	if low in ["newingel", "elfin_wing", "elfw2_06", "elfw_06", "alicewing_01", "fairy2", "condolswing", "ju01", "ju01_r", "neww_r", "ndw_r", "elfwing3d_r", "cherrywing_r", "snowmanwing_r", "amuletelfwing_r", "amuletspititwing_r"]:
+		return "bright"
+	if low.ends_with("_r") or low.ends_with("_bright") or low.ends_with("_add") or low.contains("_r_"):
+		return "bright"
 	var u := stem.find("_")
 	if u < 0:
 		return ""
@@ -169,7 +232,7 @@ static func mesh_script(stem: String) -> String:
 	var res := {}
 	var i := 1
 	while i < tok.length():
-		var ch := tok[i]
+		var ch := tok[i].to_upper()
 		match ch:
 			"R":
 				res["bright"] = true
@@ -180,7 +243,7 @@ static func mesh_script(stem: String) -> String:
 			"N":
 				res["none"] = true
 			"D":
-				if i + 1 < tok.length() and (tok[i + 1] == "C" or tok[i + 1] == "T"):
+				if i + 1 < tok.length() and (tok[i + 1].to_upper() == "C" or tok[i + 1].to_upper() == "T"):
 					i += 1
 				else:
 					return ""
@@ -197,43 +260,105 @@ static func mesh_script(stem: String) -> String:
 		return "none"
 	return ""
 
+## Kiểm tra texture có phải da thịt, khuôn mặt hoặc tóc của nhân vật hay không (tương đương MarkSkinAndHair trong source gốc).
+## Trong source gốc, khi vẽ đồ vật (inventory / ground), cờ HideSkin = true làm ẩn các mesh này.
+static func is_skin_or_hair(stem: String) -> bool:
+	var low := stem.to_lower()
+	# Không ẩn nếu là phần mũ bảo hiểm hoặc giáp
+	if "helmet" in low or "_helm" in low:
+		return false
+	# Không ẩn các phần giáp/quần/găng/giày của RF/Summoner có đuôi _upper, _lower, _glove, _boot
+	if "_upper" in low or "_lower" in low or "_glove" in low or "_boot" in low:
+		return false
+	# 1. Texture da nhân vật trong MU gốc (Webzen C++: fileName starts with "ski" hoặc "level")
+	# VD: skin_barbarian_01, skin_warrior_01, skin_wizard_01, skin_special_01,
+	#     level_man01, level_man02, level_man022, level_man033, LevelClass107, LevelClass207, skinClass...
+	if low.begins_with("skin") or low.begins_with("level"):
+		return true
+	# 2. Texture tóc nhân vật trong MU gốc (bắt đầu bằng "hair" hoặc chứa "hair")
+	# VD: hair_R, guard_hair, cobraset_hair, RFighter_Hair, ...headhair...
+	if low.begins_with("hair") or "hair" in low:
+		return true
+	# 3. Texture mặt/đầu nhân vật gắn trong các model mũ (Season 4+)
+	# VD: darknight_face, richface, DK_face, Item3002_Head, Item6001_head, head_n
+	if "face" in low:
+		return true
+	if "head_n" in low or (low.ends_with("_head") and "item" in low):
+		return true
+	return false
+
+## Ánh xạ texture thay thế khi vẽ đồ trong ô / rớt đất (HideSkin = true trong Webzen C++: ItemRenderStyles.cpp)
+## Đối với các set Summoner và Seraphim/Succubus, model 3D là thân nhân vật kèm giáp.
+## Khi vẽ đồ vật, MU thay texture sang file chuyên dụng có kênh alpha để làm trong suốt phần da thịt nhân vật.
+static func inven_texture_path(g: int, n: int) -> String:
+	if g == 8: # Áo (Armor)
+		match n:
+			39: return "res://assets/mu/Player/inven_tex/InvenArmorMale40.png"
+			40: return "res://assets/mu/Player/inven_tex/InvenArmorMale41.png"
+			41: return "res://assets/mu/Player/inven_tex/InvenArmorMale42.png"
+			42: return "res://assets/mu/Player/inven_tex/InvenArmorMale43.png"
+			43: return "res://assets/mu/Player/inven_tex/InvenArmorMale44.png"
+			44: return "res://assets/mu/Player/inven_tex/InvenArmorMale45.png"
+			50: return "res://assets/mu/Player/inven_tex/Item312_Armoritem.png"
+			53: return "res://assets/mu/Player/inven_tex/SkinClass706_upperitem.png"
+			65: return "res://assets/mu/Player/inven_tex/InvenArmorMale40_luck.png"
+			70: return "res://assets/mu/Player/inven_tex/InvenArmorMale41_luck.png"
+	elif g == 9: # Quần (Pants)
+		match n:
+			39: return "res://assets/mu/Player/inven_tex/InvenPantsMale40.png"
+			40: return "res://assets/mu/Player/inven_tex/InvenPantsMale41.png"
+			41: return "res://assets/mu/Player/inven_tex/InvenPantsMale42.png"
+			42: return "res://assets/mu/Player/inven_tex/InvenPantsMale43.png"
+			43: return "res://assets/mu/Player/inven_tex/InvenPantsMale44.png"
+			44: return "res://assets/mu/Player/inven_tex/InvenPantsMale45.png"
+			# 49 (Seraphim Pants) KHÔNG có renderStyle trong source gốc -> vẽ texture thường (Item302_Pant)
+			50: return "res://assets/mu/Player/inven_tex/Item312_Pantitem.png"
+			53: return "res://assets/mu/Player/inven_tex/SkinClass706_loweritem.png"
+			65: return "res://assets/mu/Player/inven_tex/InvenPantsMale40_luck.png"
+			70: return "res://assets/mu/Player/inven_tex/InvenPantsMale41_luck.png"
+	return ""
+
 static var _hidden_mat: ShaderMaterial = null
 
 ## Vật liệu MU cho 1 surface (cache theo texture + kiểu + tint)
-static func char_material(src: Material, tint: Color = Color(1, 1, 1), spec: float = 0.0) -> ShaderMaterial:
-	var tex: Texture2D = null
-	var alpha := false
-	var bm := src as BaseMaterial3D
-	if bm:
-		tex = bm.albedo_texture
-		alpha = bm.transparency != BaseMaterial3D.TRANSPARENCY_DISABLED
-	var kind := mesh_script(tex_stem(src))
+static func char_material(src: Material, tint: Color = Color(1, 1, 1), spec: float = 0.0, override_tex: Texture2D = null) -> ShaderMaterial:
+	var tex: Texture2D = override_tex
+	var alpha := override_tex != null
+	if tex == null:
+		var bm := src as BaseMaterial3D
+		if bm:
+			tex = bm.albedo_texture
+			alpha = bm.transparency != BaseMaterial3D.TRANSPARENCY_DISABLED
+	var kind := mesh_script(tex_stem(src)) if override_tex == null else ""
 	if kind == "hide":
 		if _hidden_mat == null:
 			_hidden_mat = ShaderMaterial.new()
 			_hidden_mat.shader = HIDDEN_SHADER
 		return _hidden_mat
-	var key := "%d|%s|%s|%s|%.2f|%.2f" % [tex.get_instance_id() if tex else 0, str(alpha), kind, "%.3f,%.3f,%.3f,%.2f" % [tint.r, tint.g, tint.b, tint.a], fixed_light, spec]
+	var key := "%d|%s|%s|%s|%.2f|%.2f|%.2f" % [tex.get_instance_id() if tex else 0, str(alpha), kind, "%.3f,%.3f,%.3f,%.2f" % [tint.r, tint.g, tint.b, tint.a], fixed_light, spec, brightness_scale]
 	if _mats.has(key):
 		return _mats[key]
 	var m := ShaderMaterial.new()
 	if kind == "bright":
 		m.shader = CHAR_ADD_SHADER
 		m.set_shader_parameter("albedo_tex", tex)
+		m.set_shader_parameter("intensity", 1.0)
+		m.set_shader_parameter("light", Vector3(tint.r, tint.g, tint.b))
 		_mats[key] = m
 		return m
 	m.shader = CHAR_ALPHA_SHADER if alpha else CHAR_SHADER
 	m.set_shader_parameter("albedo_tex", tex)
 	m.set_shader_parameter("terrain_light", terrain_light())
-	m.set_shader_parameter("alpha_cut", 0.25 if alpha else -1.0)
+	m.set_shader_parameter("alpha_cut", 0.02 if override_tex != null else (0.25 if alpha else -1.0))
 	# tint > 1 (đồ +7 trở lên): phần vượt 1 nhân thẳng vào màu đồ (body_boost), không qua đoạn nén sáng (knee)
 	var boost := maxf(maxf(tint.r, tint.g), maxf(tint.b, 1.0))
 	m.set_shader_parameter("body_tint", Vector3(tint.r, tint.g, tint.b) / boost)
-	m.set_shader_parameter("body_boost", boost)
+	# quái / NPC (brightness_scale > 1): tăng cả sau bước nén sáng (knee), nếu không chỗ sáng gần như không đổi
+	m.set_shader_parameter("body_boost", boost * (1.0 + (brightness_scale - 1.0) * 0.6))
 	m.set_shader_parameter("tint_pulse", 1.0 if tint.a < 0.99 else 0.0)
 	m.set_shader_parameter("fixed_light", fixed_light)
 	m.set_shader_parameter("specular", spec)
-	m.set_shader_parameter("brightness", BRIGHTNESS)
+	m.set_shader_parameter("brightness", BODY_BRIGHTNESS * brightness_scale)
 	_mats[key] = m
 	return m
 
@@ -243,41 +368,67 @@ static func apply_materials(root: Node, tint: Color = Color(1, 1, 1), glow: Dict
 	var lvl := int(glow.get("level", 0))
 	var want_glow := lvl >= 7 or bool(glow.get("excellent", false)) or bool(glow.get("ancient", false))
 	var style := str(glow.get("style", ""))
-	var only: Array = glow.get("meshes", []) if glow.get("meshes") is Array else []
+	var only: Array = ints(glow.get("meshes", [])) if glow.get("meshes") is Array else []
 	var hidden_mesh := int(glow.get("hidden", -1))
 	var spec := float(glow.get("specular", 0.0))
+	var hide_skin := bool(glow.get("hide_skin", false))
 	for mi in find_all(root, "MeshInstance3D", []):
 		var mesh: Mesh = mi.mesh
 		if mesh == null:
 			continue
 		mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		mi.layers |= BLOOM_LAYER_MASK   # camera bloom (MuModelBloom) chỉ vẽ layer này
 		for s in mesh.get_surface_count():
 			var src := mesh.surface_get_material(s)
+			var stem := tex_stem(src)
+			if hide_skin and is_skin_or_hair(stem):
+				mi.set_surface_override_material(s, _hidden())
+				continue
+			var inven_override_tex: Texture2D = null
+			if hide_skin and s == 0 and glow.has("group") and glow.has("number"):
+				var itp := inven_texture_path(int(glow["group"]), int(glow["number"]))
+				if itp != "" and ResourceLoader.exists(itp):
+					inven_override_tex = load(itp)
 			var chain: Array = []
 			# kiểu vẽ chuyển tự động từ source gốc (assets/mu/item_styles.json)
-			var jm = ItemStylesRes.json_materials(style, s, src, tint, fixed_light,
-				mesh_script(tex_stem(src)) == "bright", terrain_light()) if style != "" else null
+			var jm = null
+			if inven_override_tex == null and style != "":
+				jm = ItemStylesRes.json_materials(style, s, src, tint, fixed_light,
+					mesh_script(tex_stem(src)) == "bright", terrain_light())
 			if jm != null and mesh_script(tex_stem(src)) == "hide":
 				jm = []
-			var styled: Array = ItemStylesRes.passes_for(style, s) if style != "" and jm == null else []
+			# itemEffect "Applied": các lớp của hiệu ứng vẽ trước, rồi vẽ món đồ như thường / theo renderStyle
+			if jm != null and bool(glow.get("fx_base", false)) and not (jm as Array).is_empty():
+				var bs := str(glow.get("base_style", ""))
+				var bj = ItemStylesRes.json_materials(bs, s, src, tint, fixed_light,
+					mesh_script(tex_stem(src)) == "bright", terrain_light()) if bs != "" else null
+				jm = (jm as Array) + (bj if bj != null else [char_material(src, tint, spec, inven_override_tex)])
+			var styled: Array = ItemStylesRes.passes_for(style, s) if (style != "" and jm == null and inven_override_tex == null) else []
 			if jm != null:
 				chain.append_array(jm)
 				if chain.is_empty():
 					chain.append(_hidden())
 			elif styled.is_empty():
-				chain.append(char_material(src, tint, spec))
+				chain.append(char_material(src, tint, spec, inven_override_tex))
 			else:
 				for e in styled:
 					var m := _style_pass(src, tint, e)
 					if m != null:
 						chain.append(m)
 			if chain.is_empty():
-				chain.append(char_material(src, tint, spec))
+				chain.append(char_material(src, tint, spec, inven_override_tex))
 			# lớp chrome / excellent không vẽ lên mesh ẩn / mesh sáng (ResolveMaterial: NoneBlendMesh, Bright)
 			var first: ShaderMaterial = chain[0]
 			if want_glow and first.shader != HIDDEN_SHADER and first.shader != CHAR_ADD_SHADER \
 					and (only.is_empty() or s in only) and s != hidden_mesh:
-				chain.append(glow_material(src, glow))
+				chain.append(MuModel.glow_material(src, glow, inven_override_tex if s == 0 else null))
+			# itemEffect: BlendMeshLight nhấp nháy của mesh sáng (redSpirit, wingsOfSoul, wingsOfDragon)
+			var bp: Vector3 = glow.get("blend_pulse", Vector3.ZERO)
+			if bp != Vector3.ZERO:
+				for i in chain.size():
+					if (chain[i] as ShaderMaterial).shader == CHAR_ADD_SHADER:
+						chain[i] = (chain[i] as ShaderMaterial).duplicate()
+						(chain[i] as ShaderMaterial).set_shader_parameter("sin_pulse", bp)
 			if chain.size() > 1:
 				for i in chain.size():
 					chain[i] = (chain[i] as ShaderMaterial).duplicate()
@@ -336,13 +487,15 @@ static func _hidden() -> ShaderMaterial:
 	return _hidden_mat
 
 ## Lớp phát sáng: glow = {"level": int, "excellent": bool, "color": Color, "shine": Color}
-static func glow_material(src: Material, glow: Dictionary) -> ShaderMaterial:
+static func glow_material(src: Material, glow: Dictionary, override_tex: Texture2D = null) -> ShaderMaterial:
 	var g := ShaderMaterial.new()
 	g.shader = GLOW_SHADER
 	var bm := src as BaseMaterial3D
-	if bm:
-		g.set_shader_parameter("albedo_tex", bm.albedo_texture)
-		g.set_shader_parameter("alpha_cut", 0.25 if bm.transparency != BaseMaterial3D.TRANSPARENCY_DISABLED else -1.0)
+	var tex: Texture2D = override_tex if override_tex != null else (bm.albedo_texture if bm else null)
+	var has_alpha: bool = override_tex != null or (bm != null and bm.transparency != BaseMaterial3D.TRANSPARENCY_DISABLED)
+	if tex:
+		g.set_shader_parameter("albedo_tex", tex)
+		g.set_shader_parameter("alpha_cut", 0.02 if override_tex != null else (0.25 if has_alpha else -1.0))
 	g.set_shader_parameter("chrome_tex", fx("Chrome01"))
 	g.set_shader_parameter("chrome2_tex", fx("Chrome02"))
 	g.set_shader_parameter("chrome3_tex", fx("Chrome02"))   # ResolveMaterial: CHROME3 dùng BITMAP_CHROME2
@@ -359,6 +512,9 @@ static func glow_material(src: Material, glow: Dictionary) -> ShaderMaterial:
 	g.set_shader_parameter("ancient", bool(glow.get("ancient", false)))
 	var ac: Color = glow.get("ancient_color", Color(0.0, 0.5, 1.0))
 	g.set_shader_parameter("ancient_color", Vector3(ac.r, ac.g, ac.b))
+	g.set_shader_parameter("glow_gain_7", GLOW_GAIN_7)
+	g.set_shader_parameter("glow_gain_11", GLOW_GAIN_11)
+	g.set_shader_parameter("glow_gain_13", GLOW_GAIN_13)
 	return g
 
 ## BodyLight theo cấp đồ (RenderPartObjectEffect, ZzzObject.cpp):

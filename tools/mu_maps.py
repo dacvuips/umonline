@@ -42,6 +42,7 @@ WORLD_NAMES = {
     70: 'Imperial Guardian 1', 71: 'Imperial Guardian 2', 72: 'Imperial Guardian 3', 73: 'Imperial Guardian 4',
     74: 'Login Scene (New)', 75: 'Character Scene (New)', 78: 'Login Scene 2', 79: 'Character Scene 2',
     80: 'Loren Market', 81: 'Karutan 1', 82: 'Karutan 2',
+    94: 'Character Scene (Season 9)', 95: 'Login Scene (Season 9)',
 }
 # Tile thay thế bằng AlphaTile (.tga) theo MapManager::LoadWorld
 ALPHA_TILES = {
@@ -57,6 +58,18 @@ TILE_NAMES = ['TileGrass01', 'TileGrass02', 'TileGround01', 'TileGround02', 'Til
 NO_GRASS = {12, 19, 31, 53, 54} | set(range(13, 19)) | set(range(20, 25))   # Blood/Chaos/Battle Castle
 HEIGHT_EXT = {43, 64, 67}   # IsTerrainHeightExtMap: WD_42, PK field (WD_63), Doppelganger 2 (WD_66)
 WATER_SPEED = {9: 0.025, 43: 0.02, 31: -0.05}   # WaterMove / giây (mặc định 0.05)
+# Vật thể ẩn trong client gốc (HiddenMesh = -2): PoseBox (ghế/điểm ngồi), bẫy ẩn, trigger hiệu ứng
+HIDDEN_OBJECT_TYPES = {
+    1: {130, 131, 132, 133},
+    2: {51, 52, 60},
+    3: {91, 100},
+    4: {38},
+    5: {24, 25},
+    7: {38},
+    8: {22, 39},
+    9: {60, 64, 70, 76, 83},
+    11: {0, 1, 2, 3, 4, 5},
+}
 
 
 class Dir:
@@ -92,15 +105,25 @@ def find_object_dir(data_root, n):
 
 
 # ----------------------------------------------------------------------------- địa hình
+def read_enc(path):
+    """Nội dung EncTerrain sau MapFileDecrypt. File IGCN Season 9+ ('MAP\x01', 'ATT\x01', 'OBJ\x01')
+    dùng mã hoá 2 tầng như BMD v14 thay cho MapFileDecrypt (mu_bmd14.py)."""
+    d = open(path, 'rb').read()
+    if d[:3] in (b'MAP', b'ATT', b'OBJ') and d[3] == 1:
+        from mu_bmd14 import decrypt_payload
+        return decrypt_payload(d[4:])
+    return map_decrypt(d)
+
+
 def read_mapping(path):
-    d = map_decrypt(open(path, 'rb').read())
+    d = read_enc(path)
     if len(d) < 2 + NN * 3:
         raise ValueError('EncTerrain.map quá ngắn (%d)' % len(d))
     return d[2:2 + NN], d[2 + NN:2 + 2 * NN], d[2 + 2 * NN:2 + 3 * NN]
 
 
 def read_attr(path):
-    a = bytearray(map_decrypt(open(path, 'rb').read()))
+    a = bytearray(read_enc(path))
     bux = (0xFC, 0xCF, 0xAB)
     for i in range(len(a)):
         a[i] ^= bux[i % 3]
@@ -187,7 +210,7 @@ def tr(a):
 
 
 def read_objects(path, obj_folder, stems=None):
-    d = map_decrypt(open(path, 'rb').read())
+    d = read_enc(path)
     if len(d) < 4:
         return []
     cnt = struct.unpack_from('<h', d, 2)[0]
@@ -267,9 +290,10 @@ def convert_world(data_root, mugodot, n, wdir):
             od = os.path.join(data_root, obj_folder)
             stems = {os.path.splitext(f)[0].lower(): os.path.splitext(f)[0] for f in os.listdir(od) if f.lower().endswith('.bmd')}
             objs = read_objects(op, obj_folder, stems)
-            # bỏ vật thể không có model (file BMD rỗng / thiếu) — MU cũng không vẽ chúng
+            # bỏ vật thể không có model (file BMD rỗng / thiếu) hoặc vật thể ẩn (HiddenMesh = -2)
             okm = {os.path.splitext(f)[0] for f in os.listdir(od) if f.lower().endswith('.bmd') and os.path.getsize(os.path.join(od, f)) >= 64}
-            objs = [o for o in objs if o['m'].split('/', 1)[1] in okm]
+            hidden = HIDDEN_OBJECT_TYPES.get(n, set())
+            objs = [o for o in objs if o['m'].split('/', 1)[1] in okm and o['t'] not in hidden]
         except Exception as e:
             print('   ! %s: %s' % (op, e))
     types = sorted({o['t'] for o in objs})

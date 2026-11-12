@@ -65,6 +65,14 @@ func setup(p_player: MuPlayer) -> void:
 
 func _preload_textures() -> void:
 	var paths = [
+		"res://assets/textures/ui/skills/skill_0.png",
+		"res://assets/textures/ui/skills/skill_41.png",
+		"res://assets/textures/ui/skills/skill_4.png",
+		"res://assets/textures/ui/skills/skill_24.png",
+		"res://assets/textures/ui/skills/skill_55.png",
+		"res://assets/textures/ui/skills/skill_61.png",
+		"res://assets/textures/ui/skills/skill_215.png",
+		"res://assets/textures/ui/skills/skill_260.png",
 		"res://assets/textures/ui/btn_skill_twisting.png",
 		"res://assets/textures/ui/btn_skill_fireball.png",
 		"res://assets/textures/ui/mobile_skills/skill_attack.png",
@@ -83,8 +91,16 @@ func _get_texture(path: String) -> Texture2D:
 		return loaded_textures[path]
 	if ResourceLoader.exists(path):
 		var tex = load(path)
-		loaded_textures[path] = tex
-		return tex
+		if tex:
+			loaded_textures[path] = tex
+			return tex
+	if path.begins_with("res://") and FileAccess.file_exists(path):
+		var abs_p := ProjectSettings.globalize_path(path)
+		var img := Image.load_from_file(abs_p)
+		if img:
+			var itex := ImageTexture.create_from_image(img)
+			loaded_textures[path] = itex
+			return itex
 	return null
 
 func _process(delta: float) -> void:
@@ -96,6 +112,9 @@ func _process(delta: float) -> void:
 		cooldown_timers[k] -= delta
 		if cooldown_timers[k] <= 0.0:
 			cooldown_timers.erase(k)
+		need_redraw = true
+
+	if player and not player.skill_delays.is_empty():
 		need_redraw = true
 		
 	# Xoay nhẹ vòng ma thuật khi mở
@@ -160,14 +179,18 @@ func execute_main_skill() -> void:
 	if not player:
 		return
 	var act_skill = player.get_active_skill()
-	var s_id = act_skill.get("id", "twisting")
+	var s_id = act_skill.get("id", "sk_41")
+	var sk_num = int(act_skill.get("skill", -1))
 	
-	# Kiểm tra cooldown
+	# Kiểm tra cooldown chuẩn MU gốc
+	if player.has_method("check_skill_delay") and not player.check_skill_delay(sk_num):
+		return
 	if cooldown_timers.has(s_id) and cooldown_timers[s_id] > 0.0:
 		return
 		
-	var cd = act_skill.get("cooldown", 0.6)
-	cooldown_timers[s_id] = cd
+	var cd = float(act_skill.get("cooldown", 0.0))
+	if cd > 0.0:
+		cooldown_timers[s_id] = cd
 	
 	# Hiệu ứng nảy nút (Punch Tween)
 	main_btn_scale = 0.88
@@ -373,7 +396,7 @@ func _draw() -> void:
 	_draw_potion_button(mp_btn_pos, mp_btn_radius, "res://assets/textures/ui/mobile_skills/potion_mp.png", Color(0.2, 0.5, 0.95), "MP")
 
 	# 5. Vẽ Nút Đánh Thường (Normal Melee Attack)
-	_draw_icon_button(attack_btn_pos, attack_btn_radius, "res://assets/textures/ui/mobile_skills/skill_attack.png", Color(0.85, 0.7, 0.3), "Chém")
+	_draw_icon_button(attack_btn_pos, attack_btn_radius, "res://assets/textures/ui/skills/skill_0.png", Color(0.85, 0.7, 0.3), "Chém")
 
 	# 6. Vẽ Nút Vòng Kỹ Năng (Radial Skill Wheel Button)
 	_draw_wheel_toggle_button()
@@ -444,6 +467,13 @@ func _draw_skill_ring() -> void:
 		var name_str = sk.get("name", "")
 		var mp_str = "%d MP" % sk.get("mana_cost", 0) if sk.get("mana_cost", 0) > 0 else "0 MP"
 		
+		# Cooldown overlay cho slot kỹ năng trong vòng xoay
+		var sk_n := int(sk.get("skill", -1))
+		if player and player.has_method("get_skill_cooldown_fraction"):
+			var sl_frac := player.get_skill_cooldown_fraction(sk_n)
+			if sl_frac > 0.0:
+				draw_arc(c, r * 0.5, -PI*0.5, -PI*0.5 + TAU * sl_frac, 28, Color(0.05, 0.05, 0.05, 0.82 * alpha), r)
+
 		# Nhãn tên
 		draw_string(ThemeDB.fallback_font, c + Vector2(-r * 1.2, -r - 4), name_str, HORIZONTAL_ALIGNMENT_CENTER, int(r * 2.4), 11, Color(1.0, 0.95, 0.8, alpha))
 		# Nhãn MP
@@ -468,24 +498,32 @@ func _draw_main_skill_button() -> void:
 	
 	# Icon Kỹ năng đang chọn
 	var act_skill = player.get_active_skill() if player else {}
-	var icon_path = act_skill.get("icon_path", "res://assets/textures/ui/btn_skill_twisting.png")
+	var icon_path = act_skill.get("icon_path", "res://assets/textures/ui/skills/skill_41.png")
 	var tex = _get_texture(icon_path)
 	if tex:
 		var isize = Vector2(r * 1.25, r * 1.25)
 		draw_texture_rect(tex, Rect2(c - isize * 0.5, isize), false)
 		
 	# Cooldown Sweep Overlay (Hình cánh quạt tối dần)
-	var s_id = act_skill.get("id", "twisting")
-	if cooldown_timers.has(s_id) and cooldown_timers[s_id] > 0.0:
-		var cd_left = cooldown_timers[s_id]
-		var total_cd = act_skill.get("cooldown", 0.6)
-		var fraction = clampf(cd_left / max(0.01, total_cd), 0.0, 1.0)
-		
-		# Quạt mờ
+	var s_id = act_skill.get("id", "sk_41")
+	var sk_num = int(act_skill.get("skill", -1))
+	var fraction: float = 0.0
+	var cd_left: float = 0.0
+	if player and player.has_method("get_skill_cooldown_fraction"):
+		fraction = player.get_skill_cooldown_fraction(sk_num)
+		cd_left = player.get_skill_cooldown_remaining(sk_num)
+	elif cooldown_timers.has(s_id) and cooldown_timers[s_id] > 0.0:
+		cd_left = cooldown_timers[s_id]
+		var total_cd = float(act_skill.get("cooldown", 0.0))
+		fraction = clampf(cd_left / maxf(0.01, total_cd), 0.0, 1.0)
+
+	if fraction > 0.0:
+		# Quạt mờ phủ bóng đen
 		draw_arc(c, r * 0.5, -PI*0.5, -PI*0.5 + TAU * fraction, 36, Color(0.05, 0.05, 0.05, 0.75), r)
-		# Số giây đếm ngược
-		var sec_str = "%.1f" % cd_left
-		draw_string(ThemeDB.fallback_font, c + Vector2(-20, 5), sec_str, HORIZONTAL_ALIGNMENT_CENTER, 40, 16, Color(1, 1, 0.3, 1.0))
+		# Số giây đếm ngược nếu cd >= 0.5s
+		if cd_left >= 0.5:
+			var sec_str = "%.1f" % cd_left
+			draw_string(ThemeDB.fallback_font, c + Vector2(-20, 5), sec_str, HORIZONTAL_ALIGNMENT_CENTER, 40, 16, Color(1, 1, 0.3, 1.0))
 
 	# Tên kỹ năng viết nhỏ phía dưới nút
 	var skill_title = act_skill.get("name", "Xoay Kiếm")

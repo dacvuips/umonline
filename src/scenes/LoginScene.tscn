@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://xlrmp6t3afwe"]
 
 [ext_resource type="Script" uid="uid://h7ehwvekdkiq" path="res://src/scenes/MuLogin.gd" id="1_login"]
+[ext_resource type="Texture2D" uid="uid://cpv0cbdt4ilqh" path="res://assets/textures/ui/login_back.png" id="2_bg_fallback"]
 
-[node name="LoginScene" type="Control" unique_id=1170537425]
+[node name="LoginScene" type="Control" unique_id=1636361011]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,104 +12,610 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_login")
 
-[node name="Background" type="ColorRect" parent="." unique_id=364121008]
+[node name="BackgroundFallback" type="TextureRect" parent="." unique_id=2098883121]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.08, 0.08, 0.12, 1)
+texture = ExtResource("2_bg_fallback")
+expand_mode = 1
+stretch_mode = 6
 
-[node name="Title" type="Label" parent="." unique_id=1380666176]
+[node name="VideoBackground" type="VideoStreamPlayer" parent="." unique_id=1555905952]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand = true
+
+[node name="BgmPlayer" type="AudioStreamPlayer" parent="." unique_id=1234307593]
+volume_db = -6.0
+
+[node name="TopLogo" type="TextureRect" parent="." unique_id=1915536185]
+visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -250.0
-offset_top = 80.0
-offset_right = 250.0
-offset_bottom = 140.0
+offset_left = -145.0
+offset_top = 35.0
+offset_right = 145.0
+offset_bottom = 76.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 42
-text = "MU ONLINE GODOT"
-horizontal_alignment = 1
-vertical_alignment = 1
+expand_mode = 1
+stretch_mode = 5
 
-[node name="Subtitle" type="Label" parent="." unique_id=1103457378]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -200.0
-offset_top = 145.0
-offset_right = 200.0
-offset_bottom = 175.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.7, 0.7, 0.75, 1)
-theme_override_font_sizes/font_size = 18
-text = "Hỗ trợ WebAssembly (Browser) & Mobile"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Panel" type="PanelContainer" parent="." unique_id=1725134710]
+[node name="StatusLabel" type="Label" parent="." unique_id=927841479]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -120.0
-offset_right = 200.0
-offset_bottom = 180.0
+offset_left = -350.0
+offset_top = -158.0
+offset_right = 350.0
+offset_bottom = -130.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.45, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 14
+text = "Chào mừng đến với Lục Địa MU Online"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoginBox" type="Control" parent="." unique_id=1125275765]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.5
+offset_top = -122.5
+offset_right = 164.5
+offset_bottom = 122.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=936812412]
-layout_mode = 2
-theme_override_constants/separation = 12
+[node name="BoxTexture" type="TextureRect" parent="LoginBox" unique_id=586655687]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
 
-[node name="ServerLabel" type="Label" parent="Panel/VBoxContainer" unique_id=873901096]
-layout_mode = 2
-text = "Địa chỉ WebSocket Gateway:"
-
-[node name="ServerInput" type="LineEdit" parent="Panel/VBoxContainer" unique_id=957756053]
-layout_mode = 2
-text = "ws://127.0.0.1:8080"
-placeholder_text = "ws://localhost:8080"
-
-[node name="UserLabel" type="Label" parent="Panel/VBoxContainer" unique_id=1839787880]
-layout_mode = 2
+[node name="LblAccount" type="Label" parent="LoginBox" unique_id=825011661]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 106.0
+offset_right = 104.0
+offset_bottom = 129.0
+theme_override_colors/font_color = Color(1, 0.9, 0.82, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
 text = "Tài khoản:"
+vertical_alignment = 1
 
-[node name="UserInput" type="LineEdit" parent="Panel/VBoxContainer" unique_id=161860851]
-layout_mode = 2
+[node name="PlateAccount" type="TextureRect" parent="LoginBox" unique_id=91183661]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 106.0
+offset_right = 264.0
+offset_bottom = 129.0
+expand_mode = 1
+
+[node name="UserInput" type="LineEdit" parent="LoginBox" unique_id=1908748174]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 106.0
+offset_right = 258.0
+offset_bottom = 129.0
+theme_override_colors/font_color = Color(1, 0.98, 0.88, 1)
+theme_override_colors/font_placeholder_color = Color(0.7, 0.65, 0.6, 0.5)
+theme_override_font_sizes/font_size = 11
 text = "test1"
 placeholder_text = "Nhập tài khoản"
+max_length = 10
+flat = true
 
-[node name="PassLabel" type="Label" parent="Panel/VBoxContainer" unique_id=371940559]
-layout_mode = 2
+[node name="LblPassword" type="Label" parent="LoginBox" unique_id=1327330740]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 133.0
+offset_right = 104.0
+offset_bottom = 156.0
+theme_override_colors/font_color = Color(1, 0.9, 0.82, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
 text = "Mật khẩu:"
+vertical_alignment = 1
 
-[node name="PassInput" type="LineEdit" parent="Panel/VBoxContainer" unique_id=1803775651]
-layout_mode = 2
-text = "123456"
+[node name="PlatePassword" type="TextureRect" parent="LoginBox" unique_id=81340703]
+texture_filter = 1
+layout_mode = 0
+offset_left = 108.0
+offset_top = 133.0
+offset_right = 264.0
+offset_bottom = 156.0
+expand_mode = 1
+
+[node name="PassInput" type="LineEdit" parent="LoginBox" unique_id=1102068523]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 133.0
+offset_right = 258.0
+offset_bottom = 156.0
+theme_override_colors/font_color = Color(1, 0.98, 0.88, 1)
+theme_override_colors/font_placeholder_color = Color(0.7, 0.65, 0.6, 0.5)
+theme_override_font_sizes/font_size = 11
+text = "123"
 placeholder_text = "Nhập mật khẩu"
+max_length = 15
+flat = true
 secret = true
 
-[node name="LoginButton" type="Button" parent="Panel/VBoxContainer" unique_id=1514031439]
-custom_minimum_size = Vector2(0, 42)
-layout_mode = 2
-text = "VÀO GAME (ONLINE)"
+[node name="ChkRemember" type="CheckBox" parent="LoginBox" unique_id=235235338]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 158.0
+offset_right = 175.0
+offset_bottom = 182.0
+theme_override_colors/font_color = Color(0.85, 0.8, 0.75, 1)
+theme_override_font_sizes/font_size = 10
+button_pressed = true
+text = "Ghi nhớ tài khoản"
 
-[node name="OfflineButton" type="Button" parent="Panel/VBoxContainer" unique_id=1867606416]
-custom_minimum_size = Vector2(0, 38)
-layout_mode = 2
-text = "CHƠI NGAY (OFFLINE TEST)"
+[node name="BtnForgot" type="Button" parent="LoginBox" unique_id=1495824004]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 158.0
+offset_right = 285.0
+offset_bottom = 182.0
+theme_override_colors/font_color = Color(0.9, 0.78, 0.45, 1)
+theme_override_colors/font_hover_color = Color(1, 0.92, 0.6, 1)
+theme_override_font_sizes/font_size = 10
+text = "Quên mật khẩu?"
+flat = true
 
-[node name="StatusLabel" type="Label" parent="Panel/VBoxContainer" unique_id=1228924665]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.9, 0.8, 0.3, 1)
-text = "Sẵn sàng kết nối"
+[node name="BtnRegister" type="TextureButton" parent="LoginBox" unique_id=979164694]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 188.0
+offset_right = 114.0
+offset_bottom = 220.0
+
+[node name="BtnOk" type="TextureButton" parent="LoginBox" unique_id=2048590466]
+layout_mode = 0
+offset_left = 127.0
+offset_top = 188.0
+offset_right = 203.0
+offset_bottom = 220.0
+
+[node name="BtnExit" type="TextureButton" parent="LoginBox" unique_id=938412967]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 188.0
+offset_right = 292.0
+offset_bottom = 220.0
+
+[node name="RegisterBox" type="Control" parent="." unique_id=1093890102]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.5
+offset_top = -122.5
+offset_right = 164.5
+offset_bottom = 122.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoxTexture" type="TextureRect" parent="RegisterBox" unique_id=334747153]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TitleLabel" type="Label" parent="RegisterBox" unique_id=1628680404]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 309.0
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(1, 0.85, 0.35, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "✦ ĐĂNG KÝ TÀI KHOẢN MỚI ✦"
 horizontal_alignment = 1
+
+[node name="LblRegUser" type="Label" parent="RegisterBox" unique_id=425188085]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 74.0
+offset_right = 104.0
+offset_bottom = 97.0
+theme_override_colors/font_color = Color(1, 0.9, 0.82, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "Tài khoản:"
+vertical_alignment = 1
+
+[node name="PlateRegUser" type="TextureRect" parent="RegisterBox" unique_id=590145284]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 74.0
+offset_right = 264.0
+offset_bottom = 97.0
+expand_mode = 1
+
+[node name="RegUserInput" type="LineEdit" parent="RegisterBox" unique_id=675631266]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 74.0
+offset_right = 258.0
+offset_bottom = 97.0
+theme_override_colors/font_color = Color(1, 0.98, 0.88, 1)
+theme_override_colors/font_placeholder_color = Color(0.7, 0.65, 0.6, 0.5)
+theme_override_font_sizes/font_size = 11
+placeholder_text = "3-10 ký tự"
+max_length = 10
+flat = true
+
+[node name="LblRegPass" type="Label" parent="RegisterBox" unique_id=787047637]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 102.0
+offset_right = 104.0
+offset_bottom = 125.0
+theme_override_colors/font_color = Color(1, 0.9, 0.82, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "Mật khẩu:"
+vertical_alignment = 1
+
+[node name="PlateRegPass" type="TextureRect" parent="RegisterBox" unique_id=2017878790]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 102.0
+offset_right = 264.0
+offset_bottom = 125.0
+expand_mode = 1
+
+[node name="RegPassInput" type="LineEdit" parent="RegisterBox" unique_id=659849749]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 102.0
+offset_right = 258.0
+offset_bottom = 125.0
+theme_override_colors/font_color = Color(1, 0.98, 0.88, 1)
+theme_override_colors/font_placeholder_color = Color(0.7, 0.65, 0.6, 0.5)
+theme_override_font_sizes/font_size = 11
+placeholder_text = "Tối thiểu 3 ký tự"
+max_length = 15
+flat = true
+secret = true
+
+[node name="LblRegConfirm" type="Label" parent="RegisterBox" unique_id=305350732]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 130.0
+offset_right = 104.0
+offset_bottom = 153.0
+theme_override_colors/font_color = Color(1, 0.9, 0.82, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "Xác nhận:"
+vertical_alignment = 1
+
+[node name="PlateRegConfirm" type="TextureRect" parent="RegisterBox" unique_id=2053642151]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 130.0
+offset_right = 264.0
+offset_bottom = 153.0
+expand_mode = 1
+
+[node name="RegConfirmInput" type="LineEdit" parent="RegisterBox" unique_id=2057269036]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 130.0
+offset_right = 258.0
+offset_bottom = 153.0
+theme_override_colors/font_color = Color(1, 0.98, 0.88, 1)
+theme_override_colors/font_placeholder_color = Color(0.7, 0.65, 0.6, 0.5)
+theme_override_font_sizes/font_size = 11
+placeholder_text = "Nhập lại mật khẩu"
+max_length = 15
+flat = true
+secret = true
+
+[node name="LblRegContact" type="Label" parent="RegisterBox" unique_id=1731145807]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 158.0
+offset_right = 104.0
+offset_bottom = 181.0
+theme_override_colors/font_color = Color(1, 0.9, 0.82, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "Email/SĐT:"
+vertical_alignment = 1
+
+[node name="PlateRegContact" type="TextureRect" parent="RegisterBox" unique_id=1311431018]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 158.0
+offset_right = 264.0
+offset_bottom = 181.0
+expand_mode = 1
+
+[node name="RegContactInput" type="LineEdit" parent="RegisterBox" unique_id=5846533]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 158.0
+offset_right = 258.0
+offset_bottom = 181.0
+theme_override_colors/font_color = Color(1, 0.98, 0.88, 1)
+theme_override_colors/font_placeholder_color = Color(0.7, 0.65, 0.6, 0.5)
+theme_override_font_sizes/font_size = 11
+placeholder_text = "Dùng lấy lại MK"
+max_length = 30
+flat = true
+
+[node name="BtnRegSubmit" type="TextureButton" parent="RegisterBox" unique_id=814391150]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 188.0
+offset_right = 151.0
+offset_bottom = 220.0
+
+[node name="BtnRegBack" type="TextureButton" parent="RegisterBox" unique_id=662890184]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 188.0
+offset_right = 251.0
+offset_bottom = 220.0
+
+[node name="ForgotBox" type="Control" parent="." unique_id=1381705746]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -164.5
+offset_top = -122.5
+offset_right = 164.5
+offset_bottom = 122.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BoxTexture" type="TextureRect" parent="ForgotBox" unique_id=1438947363]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TitleLabel" type="Label" parent="ForgotBox" unique_id=1336826254]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 309.0
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(1, 0.85, 0.35, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "✦ KHÔI PHỤC MẬT KHẨU ✦"
+horizontal_alignment = 1
+
+[node name="LblForgotUser" type="Label" parent="ForgotBox" unique_id=1270580479]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 74.0
+offset_right = 104.0
+offset_bottom = 97.0
+theme_override_colors/font_color = Color(1, 0.9, 0.82, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "Tài khoản:"
+vertical_alignment = 1
+
+[node name="PlateForgotUser" type="TextureRect" parent="ForgotBox" unique_id=1343072136]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 74.0
+offset_right = 264.0
+offset_bottom = 97.0
+expand_mode = 1
+
+[node name="ForgotUserInput" type="LineEdit" parent="ForgotBox" unique_id=1020551245]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 74.0
+offset_right = 258.0
+offset_bottom = 97.0
+theme_override_colors/font_color = Color(1, 0.98, 0.88, 1)
+theme_override_colors/font_placeholder_color = Color(0.7, 0.65, 0.6, 0.5)
+theme_override_font_sizes/font_size = 11
+placeholder_text = "Nhập tài khoản"
+max_length = 10
+flat = true
+
+[node name="LblForgotContact" type="Label" parent="ForgotBox" unique_id=535040619]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 102.0
+offset_right = 104.0
+offset_bottom = 125.0
+theme_override_colors/font_color = Color(1, 0.9, 0.82, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "Email/SĐT:"
+vertical_alignment = 1
+
+[node name="PlateForgotContact" type="TextureRect" parent="ForgotBox" unique_id=150588444]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 102.0
+offset_right = 264.0
+offset_bottom = 125.0
+expand_mode = 1
+
+[node name="ForgotContactInput" type="LineEdit" parent="ForgotBox" unique_id=401260035]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 102.0
+offset_right = 258.0
+offset_bottom = 125.0
+theme_override_colors/font_color = Color(1, 0.98, 0.88, 1)
+theme_override_colors/font_placeholder_color = Color(0.7, 0.65, 0.6, 0.5)
+theme_override_font_sizes/font_size = 11
+placeholder_text = "Email hoặc SĐT đã ĐK"
+max_length = 30
+flat = true
+
+[node name="LblForgotNewPass" type="Label" parent="ForgotBox" unique_id=1914714963]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 130.0
+offset_right = 104.0
+offset_bottom = 153.0
+theme_override_colors/font_color = Color(1, 0.9, 0.82, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "MK mới:"
+vertical_alignment = 1
+
+[node name="PlateForgotNewPass" type="TextureRect" parent="ForgotBox" unique_id=1121743421]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 130.0
+offset_right = 264.0
+offset_bottom = 153.0
+expand_mode = 1
+
+[node name="ForgotNewPassInput" type="LineEdit" parent="ForgotBox" unique_id=1301309084]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 130.0
+offset_right = 258.0
+offset_bottom = 153.0
+theme_override_colors/font_color = Color(1, 0.98, 0.88, 1)
+theme_override_colors/font_placeholder_color = Color(0.7, 0.65, 0.6, 0.5)
+theme_override_font_sizes/font_size = 11
+placeholder_text = "Tối thiểu 3 ký tự"
+max_length = 15
+flat = true
+secret = true
+
+[node name="LblForgotConfirm" type="Label" parent="ForgotBox" unique_id=861803659]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 158.0
+offset_right = 104.0
+offset_bottom = 181.0
+theme_override_colors/font_color = Color(1, 0.9, 0.82, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
+text = "Xác nhận:"
+vertical_alignment = 1
+
+[node name="PlateForgotConfirm" type="TextureRect" parent="ForgotBox" unique_id=373433005]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 158.0
+offset_right = 264.0
+offset_bottom = 181.0
+expand_mode = 1
+
+[node name="ForgotConfirmInput" type="LineEdit" parent="ForgotBox" unique_id=1556470127]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 158.0
+offset_right = 258.0
+offset_bottom = 181.0
+theme_override_colors/font_color = Color(1, 0.98, 0.88, 1)
+theme_override_colors/font_placeholder_color = Color(0.7, 0.65, 0.6, 0.5)
+theme_override_font_sizes/font_size = 11
+placeholder_text = "Nhập lại MK mới"
+max_length = 15
+flat = true
+secret = true
+
+[node name="BtnForgotSubmit" type="TextureButton" parent="ForgotBox" unique_id=377645836]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 188.0
+offset_right = 151.0
+offset_bottom = 220.0
+
+[node name="BtnForgotBack" type="TextureButton" parent="ForgotBox" unique_id=61556239]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 188.0
+offset_right = 251.0
+offset_bottom = 220.0
+
+[node name="ThemeToggleButton" type="Button" parent="." unique_id=2117405107]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -215.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = 55.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.8, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 11
+text = "🎬 Đổi Nền Video (S9 / Classic)"
+
+[node name="GatewayConfig" type="HBoxContainer" parent="." unique_id=2133412764]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -40.0
+offset_right = 320.0
+offset_bottom = -12.0
+grow_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="GatewayLabel" type="Label" parent="GatewayConfig" unique_id=2043367921]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.75, 1)
+theme_override_font_sizes/font_size = 11
+text = "Gateway:"
+
+[node name="GatewayInput" type="LineEdit" parent="GatewayConfig" unique_id=598892240]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "ws://127.0.0.1:8080"
+placeholder_text = "ws://127.0.0.1:8080"

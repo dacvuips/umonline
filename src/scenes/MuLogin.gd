@@ -40,6 +40,8 @@ class_name MuLogin
 var network_client: MuNetworkClient = null
 var current_video_is_season9: bool = false
 var is_authenticating: bool = false
+## Đang chờ gửi gói đăng ký sau khi kết nối gateway: {"user","pwd","contact"} (rỗng = đang đăng nhập bình thường)
+var _pending_register: Dictionary = {}
 
 ## Địa chỉ Gateway lấy từ manifest của server nội dung (MuContent tải ngầm), điền sẵn vào ô Gateway.
 func _sync_gateway_from_content() -> void:
@@ -170,6 +172,7 @@ func _show_forgot_modal() -> void:
 
 func _on_login_pressed() -> void:
 	MuAudioManager.play_ui_click()
+	_pending_register = {}
 	var username = txt_user.text.strip_edges()
 	var password = txt_pass.text.strip_edges()
 
@@ -226,6 +229,11 @@ func _fallback_local_login(username: String, password: String) -> void:
 		is_authenticating = false
 
 func _on_connected() -> void:
+	if not _pending_register.is_empty():
+		_set_status("Đang đăng ký tài khoản...", Color(1.0, 0.9, 0.4))
+		network_client.send_packet(MuPackets.build_register_packet(
+			_pending_register["user"], _pending_register["pwd"], _pending_register["contact"]))
+		return
 	_set_status("Đã kết nối! Đang xác thực thông tin...", Color(0.6, 1.0, 0.6))
 	var username = txt_user.text.strip_edges()
 	var password = txt_pass.text.strip_edges()
@@ -233,12 +241,41 @@ func _on_connected() -> void:
 	network_client.send_packet(login_packet)
 
 func _on_network_error(_msg: String) -> void:
+	if not _pending_register.is_empty():
+		_pending_register = {}
+		_set_status("Không kết nối được máy chủ. Vui lòng thử lại sau.", Color(1.0, 0.4, 0.4))
+		return
 	# Khi máy chủ Gateway chưa bật, tự động chuyển sang xác thực cục bộ mượt mà!
 	var username = txt_user.text.strip_edges()
 	var password = txt_pass.text.strip_edges()
 	_fallback_local_login(username, password)
 
+func _on_register_result(result: int) -> void:
+	var reg := _pending_register
+	_pending_register = {}
+	network_client.disconnect_from_gateway()
+	match result:
+		1:
+			_set_status("Đăng ký thành công tài khoản '%s'!" % reg.get("user", ""), Color(0.4, 1.0, 0.4))
+			# Điền sẵn vào ô đăng nhập rồi quay về màn đăng nhập
+			txt_user.text = reg.get("user", "")
+			txt_pass.text = reg.get("pwd", "")
+			register_box.visible = false
+			login_box.visible = true
+		2:
+			_set_status("Tên tài khoản đã có người dùng!", Color(1.0, 0.35, 0.35))
+			txt_reg_user.grab_focus()
+		3:
+			_set_status("Đăng ký quá nhiều lần, hãy thử lại sau.", Color(1.0, 0.35, 0.35))
+		4:
+			_set_status("Máy chủ tài khoản đang bận, hãy thử lại sau.", Color(1.0, 0.35, 0.35))
+		_:
+			_set_status("Thông tin đăng ký không hợp lệ!", Color(1.0, 0.35, 0.35))
+
 func _on_packet_received(_header: int, code: int, sub_code: int, data: PackedByteArray) -> void:
+	if code == 0xF1 and sub_code == 0x02:
+		_on_register_result(data[4] if data.size() > 4 else 4)
+		return
 	if code == 0xF1 and sub_code == 0x01:
 		var result = data[4] if data.size() > 4 else 1
 		if result == 1:
@@ -265,13 +302,36 @@ func _on_packet_received(_header: int, code: int, sub_code: int, data: PackedByt
 
 func _on_register_submit() -> void:
 	MuAudioManager.play_ui_click()
-	if not OS.has_feature("editor"):
-		_set_status("Hãy đăng ký tài khoản tại muonline.viettheo.site", Color(1.0, 0.9, 0.4))
-		return
 	var user = txt_reg_user.text.strip_edges()
 	var pwd = txt_reg_pass.text.strip_edges()
 	var confirm = txt_reg_confirm.text.strip_edges()
 	var contact = txt_reg_contact.text.strip_edges()
+
+	var gateway_url := txt_gateway.text.strip_edges()
+	if gateway_url != "":
+		# Đăng ký thật trên máy chủ (cùng kho tài khoản với web và game)
+		var rx := RegEx.new()
+		rx.compile("^[A-Za-z0-9]{4,10}$")
+		if rx.search(user) == null:
+			_set_status("Tài khoản gồm 4-10 chữ cái hoặc số, không dấu!", Color(1.0, 0.35, 0.35))
+			txt_reg_user.grab_focus()
+			return
+		if pwd.length() < 6 or pwd.length() > 10:
+			_set_status("Mật khẩu cần từ 6 đến 10 ký tự!", Color(1.0, 0.35, 0.35))
+			txt_reg_pass.grab_focus()
+			return
+		if pwd != confirm:
+			_set_status("Mật khẩu xác nhận không khớp!", Color(1.0, 0.35, 0.35))
+			txt_reg_confirm.grab_focus()
+			return
+		MuAccountSession.server_gateway_url = gateway_url
+		_pending_register = {"user": user, "pwd": pwd, "contact": contact}
+		_set_status("Đang kết nối tới máy chủ...", Color(1.0, 0.9, 0.4))
+		network_client.connect_to_gateway(gateway_url)
+		return
+	if not OS.has_feature("editor"):
+		_set_status("Không có địa chỉ máy chủ để đăng ký.", Color(1.0, 0.35, 0.35))
+		return
 
 	var res = MuAccountManager.register_account(user, pwd, confirm, contact, contact)
 	if res.success:

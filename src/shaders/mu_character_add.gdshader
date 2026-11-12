@@ -9,6 +9,7 @@ uniform vec3 light = vec3(1.0);        // BodyLight của kiểu vẽ (vd kiếm
 uniform vec2 uv_scroll = vec2(0.0);    // đơn vị / giây
 uniform float flame = 0.0;             // > 0.5: lật 4 khung texture lửa mỗi 80 ms (fV của RenderFlamberge)
 uniform float pulse = 0.0;             // > 0.5: độ sáng sin(t*0.8)*0.7+0.5 (RenderKnightBlade)
+uniform vec3 sin_pulse = vec3(0.0);    // x != 0: BlendMeshLight = x * sin(WorldTime * y) + z (itemEffect redSpirit, wingsOfSoul...)
 
 void fragment() {
 	vec2 uv = UV + uv_scroll * TIME;
@@ -20,6 +21,18 @@ void fragment() {
 	if (pulse > 0.5) {
 		k *= max(sin(TIME * 800.0 * 0.001) * 0.7 + 0.5, 0.0);
 	}
+	if (sin_pulse.x != 0.0) {
+		k *= max(sin_pulse.x * sin(TIME * 1000.0 * sin_pulse.y) + sin_pulse.z, 0.0);
+	}
 	// cộng thẳng giá trị gamma như bộ đệm 8-bit của MU (xem mu_item_glow.gdshader)
-	ALBEDO = t.rgb * k * light;
+	vec3 c = t.rgb * k * light;
+	// Phần đen của texture không được viết alpha: ảnh đồ vẽ trên nền trong suốt (SubViewport) nếu để alpha = 1
+	// sẽ thành khung đen quanh đồ. Alpha = độ sáng, rồi bù lại màu để kết quả cộng không đổi (rgb * alpha = c).
+	// Loại bỏ hoàn toàn điểm đen / viền nhiễu nén JPEG (discard) để không tạo bóng đen / ô vuông trên cánh & lông vũ
+	float a = clamp(max(max(c.r, c.g), c.b), 0.0, 1.0);
+	if (a < 0.03) {
+		discard;
+	}
+	ALPHA = a;
+	ALBEDO = c / max(a, 0.001);
 }

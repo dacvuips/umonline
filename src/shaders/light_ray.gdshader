@@ -18,5 +18,8 @@ void fragment() {
 	}
 	
 	float smooth_val = (lum - cutoff) / (1.0 - cutoff);
-	ALBEDO = tex.rgb * light_color.rgb * intensity * smooth_val;
+	vec3 c = tex.rgb * light_color.rgb * intensity * smooth_val;
+	float a = clamp(max(max(c.r, c.g), c.b), 0.0, 1.0);
+	ALPHA = a;
+	ALBEDO = c / max(a, 0.001);
 }

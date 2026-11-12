@@ -52,20 +52,44 @@ static func set_level(equip: Dictionary, cls: int) -> int:
 static func _tex(name: String) -> Texture2D:
 	return MuModelRes.fx(name)
 
-static func _add_mat(tex: Texture2D, col: Color, billboard: bool = true) -> StandardMaterial3D:
-	var m := StandardMaterial3D.new()
-	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	m.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
-	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	m.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_DISABLED
-	m.no_depth_test = false
-	m.cull_mode = BaseMaterial3D.CULL_DISABLED
-	m.albedo_texture = tex
-	m.albedo_color = col
-	m.vertex_color_use_as_albedo = true
-	if billboard:
-		m.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
-		m.billboard_keep_scale = true
+## Quad billboard vẽ cộng sáng. Dùng shader riêng (alpha = độ sáng, màu bù lại) thay cho StandardMaterial3D
+## BLEND_MODE_ADD: với StandardMaterial3D phần đen của texture có alpha = 1 nên trên nền trong suốt
+## (SubViewport chọn nhân vật) nó thành khung đen đặc quanh nhân vật.
+const ADD_SHADER_CODE := """
+shader_type spatial;
+render_mode unshaded, blend_add, depth_draw_never, cull_disabled, shadows_disabled;
+uniform sampler2D tex : source_color, filter_linear_mipmap, repeat_disable;
+uniform vec4 tint : source_color = vec4(1.0);
+uniform bool billboard = true;
+void vertex() {
+	if (billboard) {
+		mat4 w = mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
+		MODELVIEW_MATRIX = VIEW_MATRIX * w * mat4(vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0),
+			vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0), vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0), vec4(0.0, 0.0, 0.0, 1.0));
+	}
+}
+void fragment() {
+	vec4 t = texture(tex, UV);
+	vec3 c = t.rgb * tint.rgb * COLOR.rgb * (t.a * tint.a * COLOR.a);
+	float a = clamp(max(max(c.r, c.g), c.b), 0.0, 1.0);
+	if (a < 0.02) {
+		discard;
+	}
+	ALPHA = a;
+	ALBEDO = c / max(a, 0.001);
+}
+"""
+static var _add_shader: Shader = null
+
+static func _add_mat(tex: Texture2D, col: Color, billboard: bool = true) -> ShaderMaterial:
+	if _add_shader == null:
+		_add_shader = Shader.new()
+		_add_shader.code = ADD_SHADER_CODE
+	var m := ShaderMaterial.new()
+	m.shader = _add_shader
+	m.set_shader_parameter("tex", tex)
+	m.set_shader_parameter("tint", col)
+	m.set_shader_parameter("billboard", billboard)
 	return m
 
 func _sprite(parent: Node3D, tex: Texture2D, size: float, col: Color, pos := Vector3.ZERO) -> MeshInstance3D:

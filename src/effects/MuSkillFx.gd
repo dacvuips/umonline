@@ -10,6 +10,7 @@ class_name MuSkillFx
 
 const MuModelRes = preload("res://src/mu/MuModel.gd")
 const MuCharModelRes = preload("res://src/mu/MuCharacterModel.gd")
+const MuWorldRes = preload("res://src/world/MuWorld.gd")
 const DATA_PATH := "res://assets/mu/skill_fx.json"
 const TICK := 1.0 / 25.0
 
@@ -63,18 +64,17 @@ static func has_skill(num: int) -> bool:
 
 ## Ra chiêu: animation + âm thanh + hiệu ứng. Trả về số giây tới lúc trúng đích (-1 nếu skill không có dữ liệu).
 static func play(p_caster: Node3D, num: int, p_target: Node3D = null) -> float:
-	var sk := skill_info(num)
-	if sk.is_empty() or p_caster == null or p_caster.get_parent() == null:
+	if p_caster == null or p_caster.get_parent() == null:
 		return -1.0
+	var sk := skill_info(num)
 	_play_action(p_caster, sk)
 	var sounds: Array = sk.get("sounds", [])
 	if not sounds.is_empty() and MuAudioManager:
 		MuAudioManager.play_sound_file(str(sounds[0]), 0.0, 1.0, p_caster.global_position)
-	# hiệu ứng port tay theo skill (ưu tiên hơn bản tự động)
+	# hiệu ứng port tay theo skill (ưu tiên hơn bản tự động, chạy được cả khi sk trong skill_fx.json trống)
 	var base := int(sk.get("base", num))
 	for script in PORTED_SKILLS:
 		var cls = load(script)
-		# script lỗi (parse) thì bỏ qua, các skill khác vẫn chạy
 		if cls == null or not cls.can_instantiate() or not ("SKILLS" in cls.get_script_constant_map()):
 			continue
 		var skills: Array = cls.get_script_constant_map()["SKILLS"]
@@ -83,6 +83,8 @@ static func play(p_caster: Node3D, num: int, p_target: Node3D = null) -> float:
 			hand.setup_skill(p_caster, p_target, num if num in skills else base)
 			p_caster.get_parent().add_child(hand)
 			return hand.impact_delay
+	if sk.is_empty():
+		return -1.0
 	var fx := MuSkillFx.new()
 	fx.caster = p_caster
 	fx.target = p_target
@@ -92,8 +94,17 @@ static func play(p_caster: Node3D, num: int, p_target: Node3D = null) -> float:
 	return fx._impact
 
 static func _play_action(c: Node3D, sk: Dictionary) -> void:
+	if c.has_method("play_action") and c.get("is_player") != true:
+		c.play_action("action02" if randf() < 0.5 else "action03")
+		return
 	var model = c.get("model")
-	if model == null or model.get("anim") == null:
+	if model == null:
+		return
+	if model.get("is_player") != true:
+		if model.has_method("play_attack"):
+			model.play_attack()
+		return
+	if model.get("anim") == null:
 		return
 	var idx := int(sk.get("action_index", -1))
 	var act := str(sk.get("action", ""))
@@ -105,6 +116,31 @@ static func _play_action(c: Node3D, sk: Dictionary) -> void:
 	model.play_skill(idx, 0.3)
 	if c.has_method("_lock_action"):
 		c._lock_action(0.9)
+
+## Hiệu ứng trúng đòn cận chiến (tia lửa va chạm + âm thanh đánh trúng)
+static func play_melee_hit(hit_pos: Vector3, parent: Node = null) -> void:
+	var root := parent
+	if root == null and MuWorldRes != null and MuWorldRes.current != null:
+		root = MuWorldRes.current
+	if root == null:
+		return
+	var cls = load("res://src/effects/DarkWizardFx.gd")
+	if cls != null and cls.can_instantiate():
+		var fx: MuFx = cls.new()
+		fx._min_ticks = 4
+		fx.setup_skill(null, null, 0)
+		root.add_child(fx)
+		fx.particle("BITMAP_SPARK+1", hit_pos, {
+			"size": randf_range(0.4, 0.7), "life": 8,
+			"vel": Vector3(randf_range(-0.04, 0.04), randf_range(0.01, 0.05), randf_range(-0.04, 0.04)),
+			"color": Color(1.0, 0.85, 0.4)
+		})
+		fx.particle("BITMAP_LIGHT", hit_pos, {
+			"size": 0.8, "life": 5, "color": Color(1.0, 0.7, 0.3)
+		})
+	if MuAudioManager:
+		var sounds := ["eMeleeHit1.wav", "eMeleeHit2.wav", "eMeleeHit3.wav"]
+		MuAudioManager.play_sound_file(sounds[randi() % sounds.size()], 0.0, randf_range(0.95, 1.05), hit_pos)
 
 # ------------------------------------------------------------------ dựng hiệu ứng
 
@@ -307,8 +343,16 @@ static func _tex(name: String) -> Texture2D:
 			break
 	if t == null:
 		t = MuModelRes.fx(name)
+	if t == null:
+		_tex_miss[name] = int(_tex_miss.get(name, 0)) + 1
+		if int(_tex_miss[name]) == 1:
+			push_warning("MuSkillFx: thiếu texture '%s'" % name)
+		if int(_tex_miss[name]) < 4:
+			return null
 	_tex_cache[name] = t
 	return t
+
+static var _tex_miss := {}
 
 func _make_quad(tex_name: String, color: Color) -> MeshInstance3D:
 	if _quad == null:
@@ -322,12 +366,20 @@ func _make_quad(tex_name: String, color: Color) -> MeshInstance3D:
 		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		m.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_DISABLED
 		m.cull_mode = BaseMaterial3D.CULL_DISABLED
-		m.albedo_texture = _tex(tex_name)
-		m.albedo_color = color
+		var _qt := _tex(tex_name)
+		m.albedo_texture = _qt
+		m.albedo_color = color if _qt != null else Color(1, 1, 1, 0)   # thiếu texture -> ẩn, tránh ô trắng
 		if tex_name.to_lower().begins_with("explotion01"):
 			# texture 4x4 khung (10 khung thật, phần còn lại nền trắng): chỉ lấy khung đầu
 			m.uv1_scale = Vector3(0.24, 0.24, 1)
 			m.uv1_offset = Vector3(0.005, 0.005, 0)
+		if _qt == null:
+			var mi0 := MeshInstance3D.new()
+			mi0.mesh = _quad
+			mi0.material_override = m
+			mi0.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			add_child(mi0)
+			return mi0
 		_mats[key] = m
 	var mi := MeshInstance3D.new()
 	mi.mesh = _quad
@@ -355,6 +407,8 @@ func _additive(root: Node) -> void:
 				m.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_DISABLED
 				m.cull_mode = BaseMaterial3D.CULL_DISABLED
 				m.albedo_texture = tex
+				if tex == null:
+					m.albedo_color = Color(1, 1, 1, 0)   # mesh hiệu ứng không texture -> ẩn
 				_model_mats[key] = m
 			mi.set_surface_override_material(s, _model_mats[key])
 

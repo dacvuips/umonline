@@ -9,11 +9,15 @@ render_mode unshaded, blend_mix, depth_draw_always, cull_disabled;
 // Lớp này được nối vào cuối chuỗi next_pass của mỗi mesh (MuCharacterModel._add_body_shadow).
 
 // gốc nhân vật (mặt đất dưới chân), MuCharacterModel cập nhật mỗi khung hình
-instance uniform vec3 shadow_origin = vec3(0.0);
+// Uniform THƯỜNG (mỗi nhân vật một vật liệu riêng) chứ không phải instance uniform: trên bản web instance uniform không tới được
+// shader nên gốc bóng rơi về (0,0,0) -> trong thế giới (toạ độ lớn) bóng bị kéo xiên đi xa và chìm dưới mặt đất.
+uniform vec3 shadow_origin = vec3(0.0);
 uniform float shadow_alpha = 0.5;
 uniform float shadow_sx = 20.0;
 uniform float shadow_sy = 40.0;
 uniform float ground_offset = 0.05;
+// kích thước viewport bloom (MuModelBloom): bóng không phải nguồn bloom
+global uniform vec2 mu_bloom_size;
 
 void vertex() {
 	vec3 w = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
@@ -25,6 +29,9 @@ void vertex() {
 }
 
 void fragment() {
+	if (all(equal(VIEWPORT_SIZE, mu_bloom_size))) {
+		discard;
+	}
 	ALBEDO = vec3(0.0);
 	ALPHA = shadow_alpha;
 }

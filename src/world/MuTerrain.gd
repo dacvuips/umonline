@@ -16,7 +16,8 @@ const DIR := "res://assets/lorencia/terrain/"
 const GRASS_V_OFFSET := [0.0, 0.25, 0.5]
 const GRASS_V_SIZE := [0.25, 0.25, 0.5]
 const GRASS_HEIGHT := [1.28, 1.28, 2.56]
-const GRASS_CHUNK := 32
+const GRASS_CHUNK := 16
+const MuChunkStreamerRes = preload("res://src/world/MuChunkStreamer.gd")
 
 @export var grass_enabled: bool = true
 @export var grass_visibility_range: float = 42.0
@@ -41,12 +42,29 @@ static var _alpha: PackedByteArray = PackedByteArray()
 static var _attrib: PackedByteArray = PackedByteArray()
 static var _layer1: PackedByteArray = PackedByteArray()
 static var _light_img: Image = null
+static var _height_tex: ImageTexture = null
 
 var _terrain_shader: Shader = preload("res://src/shaders/mu_terrain.gdshader")
 var _grass_shader: Shader = preload("res://src/shaders/mu_grass.gdshader")
 
+## Thư mục dữ liệu thật của bản đồ n (MapManager.cpp GetFilesFolder): nhiều bản đồ dùng chung 1 thư mục WorldN.
+##   Blood Castle 1-7 + Master (12..18, 53) -> World12 ; Chaos Castle 1-6 + Master (19..24, 54) -> World19
+##   Kalima 1-7 (25..30, 37) -> World25 ; Illusion Temple 1-6 (46..51) -> World47 ; Devil Square 2 (33) -> World10
+static func files_world(n: int) -> int:
+	if (n >= 12 and n <= 18) or n == 53:
+		return 12
+	if (n >= 19 and n <= 24) or n == 54:
+		return 19
+	if (n >= 25 and n <= 30) or n == 37:
+		return 25
+	if n >= 46 and n <= 51:
+		return 47
+	if n == 33:
+		return 10
+	return n
+
 static func map_path(n: int) -> String:
-	return "res://assets/mu/maps/World%d/terrain.mumap" % n
+	return "res://assets/mu/maps/World%d/terrain.mumap" % files_world(n)
 
 static func has_map(n: int) -> bool:
 	if n == 1:
@@ -70,11 +88,22 @@ static func change_world(n: int, spawn: Vector2i = Vector2i(-1, -1)) -> void:
 	_layer2 = PackedByteArray()
 	_light_img = null
 	_light_tex = null
+	_height_tex = null
 	_tile_imgs = []
 	_grass_imgs = []
 	var mm = load("res://src/mu/MuModel.gd")
 	if mm:
 		mm.reset_cache()
+
+## Thay ánh sáng địa hình bằng một màu phẳng (cảnh đăng nhập / chọn nhân vật Season 9: client gốc không
+## dùng bóng bake trong TerrainLight). Gọi sau ensure_loaded(), trước khi dựng địa hình và vật thể.
+static func override_light(c: Color) -> void:
+	ensure_loaded()
+	if _light_img == null:
+		return
+	_light_img.fill(c)
+	_light_tex = null
+
 
 ## Ánh sáng địa hình 256x256 (cho shader vật thể / nhân vật)
 static func light_texture() -> Texture2D:
@@ -82,6 +111,14 @@ static func light_texture() -> Texture2D:
 	if _light_tex == null and _light_img != null:
 		_light_tex = ImageTexture.create_from_image(_light_img)
 	return _light_tex
+
+## Độ cao địa hình (mét) mỗi đỉnh 256x256 dạng R32F — shader bóng thân đọc để ép bóng xuống đúng mặt đất từng điểm
+static func height_texture() -> Texture2D:
+	ensure_loaded()
+	if _height_tex == null and _hf.size() == TERRAIN_SIZE * TERRAIN_SIZE:
+		var img := Image.create_from_data(TERRAIN_SIZE, TERRAIN_SIZE, false, Image.FORMAT_RF, _hf.to_byte_array())
+		_height_tex = ImageTexture.create_from_image(img)
+	return _height_tex
 
 static func ensure_loaded() -> void:
 	if _loaded_world == world_id and _hf.size() == TERRAIN_SIZE * TERRAIN_SIZE:
@@ -260,6 +297,12 @@ static func is_water(x: int, y: int) -> bool:
 static func _light_at(x: int, y: int) -> Color:
 	return _light_img.get_pixel(clampi(x, 0, 255), clampi(y, 0, 255))
 
+## Hàm băm giả ngẫu nhiên tất định theo toạ độ ô (x, y) để sinh vị trí, góc xoay cho các đám cỏ
+static func _hash2(x: int, y: int, seed: int = 0) -> float:
+	var h := int((x * 374761393 + y * 668265263 + seed * 962458427) ^ 0x5bf03635)
+	h = (h ^ (h >> 13)) * 1274126177
+	return float((h ^ (h >> 16)) & 0x7FFFFFFF) / float(0x7FFFFFFF)
+
 func _ready() -> void:
 	ensure_loaded()
 	if _hf.is_empty():
@@ -333,106 +376,21 @@ func _build_grass() -> void:
 	mat.shader = _grass_shader
 	mat.set_shader_parameter("grass_atlas", load(DIR + "grass_atlas.png"))
 
-	# TerrainGrassTexture[y] = (rand % 4) / 4  — cố định seed để bản đồ luôn giống nhau
-	var rng := RandomNumberGenerator.new()
-	rng.seed = 12345
-	var row_offset := PackedFloat32Array()
-	row_offset.resize(n)
-	for i in n:
-		row_offset[i] = float(rng.randi() % 4) / 4.0
-
-	var container := Node3D.new()
+	var container = MuChunkStreamerRes.new()
 	container.name = "LorenciaGrass"
+	container.chunk_size = GRASS_CHUNK
+	container.load_radius = grass_visibility_range
+	container.unload_radius = grass_visibility_range + 12.0
 	add_child(container)
-	var total := 0
 	for cy in range(0, n - 1, GRASS_CHUNK):
 		for cx in range(0, n - 1, GRASS_CHUNK):
-			var verts := PackedVector3Array()
-			var uvs := PackedVector2Array()
-			var uv2s := PackedVector2Array()
-			var cols := PackedColorArray()
-			var idx := PackedInt32Array()
-			for y in range(cy, mini(cy + GRASS_CHUNK, n - 1)):
-				for x in range(cx, mini(cx + GRASS_CHUNK, n - 1)):
-					var i1 := y * n + x
-					var i2 := i1 + 1
-					var i3 := i1 + n + 1
-					var i4 := i1 + n
-					if _alpha[i1] > 0 or _alpha[i2] > 0 or _alpha[i3] > 0 or _alpha[i4] > 0:
-						continue
-					var layer := _layer1[i1]
-					if layer > 2:
-						continue
-					if (_attrib[i1] & 0x08) != 0:
-						continue
-					var gh: float = GRASS_HEIGHT[layer]
-					var v0: float = GRASS_V_OFFSET[layer] + 0.5 / 256.0
-					var v1: float = GRASS_V_OFFSET[layer] + GRASS_V_SIZE[layer] - 0.5 / 256.0
-					var su := x * 0.25 + row_offset[y]
-					# VectorCopy(TerrainVertex[0], TerrainVertex[3]) của MU chép đỉnh 0 VÀO đỉnh 3:
-					# tấm cỏ đứng ở cạnh y của ô, 2 đỉnh trên nâng Height và lệch x -50
-					var h0 := _heights[i1] * HEIGHT_SCALE
-					var h1 := _heights[i2] * HEIGHT_SCALE
-					var base := verts.size()
-					verts.append(Vector3(x - 0.5, h0 + gh, -y))
-					verts.append(Vector3(x + 0.5, h1 + gh, -y))
-					verts.append(Vector3(x + 1, h1, -y))
-					verts.append(Vector3(x, h0, -y))
-					uvs.append(Vector2(su, v0))
-					uvs.append(Vector2(su + 0.25, v0))
-					uvs.append(Vector2(su + 0.25, v1))
-					uvs.append(Vector2(su, v1))
-					uv2s.append(Vector2(x, 0))
-					uv2s.append(Vector2(x + 1, 0))
-					uv2s.append(Vector2(x + 1, 0))
-					uv2s.append(Vector2(x, 0))
-					var c1 := _light_at(x, y)
-					c1.a = 1.0
-					var c2 := _light_at(x + 1, y)
-					c2.a = 1.0
-					var c3 := _light_at(x + 1, y + 1)
-					c3.a = 0.0
-					var c4 := _light_at(x, y + 1)
-					c4.a = 0.0
-					cols.append(c1)
-					cols.append(c2)
-					cols.append(c3)
-					cols.append(c4)
-					idx.append(base)
-					idx.append(base + 1)
-					idx.append(base + 2)
-					idx.append(base)
-					idx.append(base + 2)
-					idx.append(base + 3)
-			if verts.is_empty():
-				continue
-			# đặt gốc ở giữa chunk để visibility range tính đúng khoảng cách
-			var center := Vector3(cx + GRASS_CHUNK * 0.5, 0.0, -(cy + GRASS_CHUNK * 0.5))
-			for vi in verts.size():
-				verts[vi] = verts[vi] - center
-			var arrays := []
-			arrays.resize(Mesh.ARRAY_MAX)
-			arrays[Mesh.ARRAY_VERTEX] = verts
-			arrays[Mesh.ARRAY_TEX_UV] = uvs
-			arrays[Mesh.ARRAY_TEX_UV2] = uv2s
-			arrays[Mesh.ARRAY_COLOR] = cols
-			arrays[Mesh.ARRAY_INDEX] = idx
-			var mesh := ArrayMesh.new()
-			mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-			mesh.surface_set_material(0, mat)
-			var mi := MeshInstance3D.new()
-			mi.name = "Grass_%d_%d" % [cx, cy]
-			mi.mesh = mesh
-			mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-			mi.visibility_range_end = grass_visibility_range
-			mi.visibility_range_end_margin = 4.0
-			mi.position = center
-			container.add_child(mi)
-			total += verts.size() / 4
-	print("[MuTerrain] Cỏ địa hình: %d ô" % total)
+			container.register(Vector2i(cx / GRASS_CHUNK, cy / GRASS_CHUNK), _build_grass_chunk.bind(cx, cy, mat))
+	print("[MuTerrain] Cỏ: %d vùng, nạp theo người chơi" % container.total_count())
 
 # ======================================================================= bản đồ khác (terrain.mumap)
 var _terrain_arr_shader: Shader = preload("res://src/shaders/mu_terrain_arr.gdshader")
+## Devias, Raklion, Raklion Boss
+const SNOW_WORLDS := [3, 58, 59]
 var _grass_arr_shader: Shader = preload("res://src/shaders/mu_grass_arr.gdshader")
 
 static func _make_array(imgs: Array, w: int, h: int) -> Texture2DArray:
@@ -451,6 +409,129 @@ static func _make_array(imgs: Array, w: int, h: int) -> Texture2DArray:
 	var arr := Texture2DArray.new()
 	arr.create_from_images(list)
 	return arr
+
+func _build_grass_chunk(r: Node3D, cx: int, cy: int, mat: ShaderMaterial) -> void:
+	var n := TERRAIN_SIZE
+	var verts := PackedVector3Array()
+	var uvs := PackedVector2Array()
+	var uv2s := PackedVector2Array()
+	var cols := PackedColorArray()
+	var idx := PackedInt32Array()
+	for y in range(cy, mini(cy + GRASS_CHUNK, n - 1)):
+		for x in range(cx, mini(cx + GRASS_CHUNK, n - 1)):
+			var i1 := y * n + x
+			var i2 := i1 + 1
+			var i3 := i1 + n + 1
+			var i4 := i1 + n
+			if _alpha[i1] > 0 or _alpha[i2] > 0 or _alpha[i3] > 0 or _alpha[i4] > 0:
+				continue
+			var layer := _layer1[i1]
+			if layer > 2:
+				continue
+			if (_attrib[i1] & 0x08) != 0:
+				continue
+
+			var gh: float = GRASS_HEIGHT[layer]
+			var v0: float = GRASS_V_OFFSET[layer] + 0.5 / 256.0
+			var v1: float = GRASS_V_OFFSET[layer] + GRASS_V_SIZE[layer] - 0.5 / 256.0
+
+			# Sinh các đám cỏ (tufts) tại các vị trí phân tán ngẫu nhiên bên trong ô
+			var h0 := _hash2(x, y, 0)
+			var num_clumps := 1 if h0 < 0.25 else (2 if h0 < 0.72 else 3)
+			for c in num_clumps:
+				var ox: float = 0.0
+				var oy: float = 0.0
+				if c == 0:
+					ox = lerpf(0.18, 0.42, _hash2(x, y, 1))
+					oy = lerpf(0.18, 0.42, _hash2(x, y, 2))
+				elif c == 1:
+					ox = lerpf(0.58, 0.82, _hash2(x, y, 3))
+					oy = lerpf(0.58, 0.82, _hash2(x, y, 4))
+				else:
+					ox = lerpf(0.25, 0.75, _hash2(x, y, 5))
+					oy = lerpf(0.58, 0.82, _hash2(x, y, 6))
+
+				var px := float(x) + ox
+				var py := float(y) + oy
+				var ch := gh * lerpf(0.8, 1.15, _hash2(x, y, c * 13 + 7))
+				var cw := lerpf(0.48, 0.68, _hash2(x, y, c * 13 + 8))
+				var angle := _hash2(x, y, c * 13 + 9) * PI
+
+				var light_col := _light_at(int(px), int(py))
+				var c_top := light_col
+				c_top.a = 1.0
+				var c_bot := light_col
+				c_bot.a = 0.0
+
+				# Mỗi đám gồm 2 tấm đan chéo chữ X (crossed quads) để nhìn từ mọi góc đều có độ dày
+				for k in 2:
+					var q_angle := angle if k == 0 else angle + 1.25
+					var dx := cos(q_angle) * (cw * 0.5)
+					var dy := sin(q_angle) * (cw * 0.5)
+
+					var ax := px - dx
+					var ay := py - dy
+					var az := -ay
+					var ah := height_at(ax, ay)
+
+					var bx := px + dx
+					var by := py + dy
+					var bz := -by
+					var bh := height_at(bx, by)
+
+					var base := verts.size()
+					verts.append(Vector3(ax, ah + ch, az))
+					verts.append(Vector3(bx, bh + ch, bz))
+					verts.append(Vector3(bx, bh, bz))
+					verts.append(Vector3(ax, ah, az))
+
+					var u_start := _hash2(x, y, c * 13 + 10 + k) * 0.70
+					var u_width := 0.28
+					uvs.append(Vector2(u_start, v0))
+					uvs.append(Vector2(u_start + u_width, v0))
+					uvs.append(Vector2(u_start + u_width, v1))
+					uvs.append(Vector2(u_start, v1))
+
+					uv2s.append(Vector2(px, 0.0))
+					uv2s.append(Vector2(px, 0.0))
+					uv2s.append(Vector2(px, 0.0))
+					uv2s.append(Vector2(px, 0.0))
+
+					cols.append(c_top)
+					cols.append(c_top)
+					cols.append(c_bot)
+					cols.append(c_bot)
+
+					idx.append(base)
+					idx.append(base + 1)
+					idx.append(base + 2)
+					idx.append(base)
+					idx.append(base + 2)
+					idx.append(base + 3)
+	if verts.is_empty():
+		return
+	# đặt gốc ở giữa chunk để visibility range tính đúng khoảng cách
+	var center := Vector3(cx + GRASS_CHUNK * 0.5, 0.0, -(cy + GRASS_CHUNK * 0.5))
+	for vi in verts.size():
+		verts[vi] = verts[vi] - center
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = verts
+	arrays[Mesh.ARRAY_TEX_UV] = uvs
+	arrays[Mesh.ARRAY_TEX_UV2] = uv2s
+	arrays[Mesh.ARRAY_COLOR] = cols
+	arrays[Mesh.ARRAY_INDEX] = idx
+	var mesh := ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	mesh.surface_set_material(0, mat)
+	var mi := MeshInstance3D.new()
+	mi.name = "Grass_%d_%d" % [cx, cy]
+	mi.mesh = mesh
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	mi.visibility_range_end = grass_visibility_range
+	mi.visibility_range_end_margin = 4.0
+	mi.position = center
+	r.add_child(mi)
 
 func _build_terrain_generic() -> void:
 	var n := TERRAIN_SIZE
@@ -512,6 +593,7 @@ func _build_terrain_generic() -> void:
 	mat.set_shader_parameter("tile_scale", _tile_scale)
 	mat.set_shader_parameter("tile_count", _tile_imgs.size())
 	mat.set_shader_parameter("water_speed", _water_speed)
+	# (min(ánh sáng * 2, 1) không bao giờ vượt màu texture -> bản đồ tuyết không cần mức riêng)
 	mesh.surface_set_material(0, mat)
 	var mi := MeshInstance3D.new()
 	mi.name = "TerrainMesh"
@@ -524,89 +606,130 @@ func _build_grass_generic() -> void:
 	var mat := ShaderMaterial.new()
 	mat.shader = _grass_arr_shader
 	mat.set_shader_parameter("grass", _make_array(_grass_imgs, 256, 128))
-	var rng := RandomNumberGenerator.new()
-	rng.seed = 12345
-	var row_offset := PackedFloat32Array()
-	row_offset.resize(n)
-	for i in n:
-		row_offset[i] = float(rng.randi() % 4) / 4.0
-	var container := Node3D.new()
+	var container = MuChunkStreamerRes.new()
 	container.name = "Grass"
+	container.chunk_size = GRASS_CHUNK
+	container.load_radius = grass_visibility_range
+	container.unload_radius = grass_visibility_range + 12.0
 	add_child(container)
-	var total := 0
 	for cy in range(0, n - 1, GRASS_CHUNK):
 		for cx in range(0, n - 1, GRASS_CHUNK):
-			var verts := PackedVector3Array()
-			var uvs := PackedVector2Array()
-			var uv2s := PackedVector2Array()
-			var cols := PackedColorArray()
-			var idx := PackedInt32Array()
-			for y in range(cy, mini(cy + GRASS_CHUNK, n - 1)):
-				for x in range(cx, mini(cx + GRASS_CHUNK, n - 1)):
-					var i1 := y * n + x
-					var i2 := i1 + 1
-					if _alpha[i1] > 0 or _alpha[i2] > 0 or _alpha[i1 + n + 1] > 0 or _alpha[i1 + n] > 0:
-						continue
-					var layer := _layer1[i1]
-					if layer > 2 or layer >= _grass_imgs.size() or _grass_imgs[layer] == null:
-						continue
-					if (_attrib[i1] & 0x08) != 0:
-						continue
-					var gh: float = _grass_h[layer]
-					var su := x * 0.25 + row_offset[y]
-					var h0 := _hf[i1]
-					var h1 := _hf[i2]
+			container.register(Vector2i(cx / GRASS_CHUNK, cy / GRASS_CHUNK), _build_grass_chunk_generic.bind(cx, cy, mat))
+	print("[MuTerrain] Cỏ: %d vùng, nạp theo người chơi" % container.total_count())
+
+func _build_grass_chunk_generic(r: Node3D, cx: int, cy: int, mat: ShaderMaterial) -> void:
+	var n := TERRAIN_SIZE
+	var verts := PackedVector3Array()
+	var uvs := PackedVector2Array()
+	var uv2s := PackedVector2Array()
+	var cols := PackedColorArray()
+	var idx := PackedInt32Array()
+	for y in range(cy, mini(cy + GRASS_CHUNK, n - 1)):
+		for x in range(cx, mini(cx + GRASS_CHUNK, n - 1)):
+			var i1 := y * n + x
+			var i2 := i1 + 1
+			if _alpha[i1] > 0 or _alpha[i2] > 0 or _alpha[i1 + n + 1] > 0 or _alpha[i1 + n] > 0:
+				continue
+			var layer := _layer1[i1]
+			if layer > 2 or layer >= _grass_imgs.size() or _grass_imgs[layer] == null:
+				continue
+			if (_attrib[i1] & 0x08) != 0:
+				continue
+			var gh: float = _grass_h[layer]
+
+			# Sinh các đám cỏ (tufts) tại các vị trí phân tán ngẫu nhiên bên trong ô
+			var h0 := _hash2(x, y, 0)
+			var num_clumps := 1 if h0 < 0.25 else (2 if h0 < 0.72 else 3)
+			for c in num_clumps:
+				var ox: float = 0.0
+				var oy: float = 0.0
+				if c == 0:
+					ox = lerpf(0.18, 0.42, _hash2(x, y, 1))
+					oy = lerpf(0.18, 0.42, _hash2(x, y, 2))
+				elif c == 1:
+					ox = lerpf(0.58, 0.82, _hash2(x, y, 3))
+					oy = lerpf(0.58, 0.82, _hash2(x, y, 4))
+				else:
+					ox = lerpf(0.25, 0.75, _hash2(x, y, 5))
+					oy = lerpf(0.58, 0.82, _hash2(x, y, 6))
+
+				var px := float(x) + ox
+				var py := float(y) + oy
+				var ch := gh * lerpf(0.8, 1.15, _hash2(x, y, c * 13 + 7))
+				var cw := lerpf(0.48, 0.68, _hash2(x, y, c * 13 + 8))
+				var angle := _hash2(x, y, c * 13 + 9) * PI
+
+				var light_col := _light_at(int(px), int(py))
+				var c_top := light_col
+				c_top.a = 1.0
+				var c_bot := light_col
+				c_bot.a = 0.0
+
+				# Mỗi đám gồm 2 tấm đan chéo chữ X (crossed quads)
+				for k in 2:
+					var q_angle := angle if k == 0 else angle + 1.25
+					var dx := cos(q_angle) * (cw * 0.5)
+					var dy := sin(q_angle) * (cw * 0.5)
+
+					var ax := px - dx
+					var ay := py - dy
+					var az := -ay
+					var ah := height_at(ax, ay)
+
+					var bx := px + dx
+					var by := py + dy
+					var bz := -by
+					var bh := height_at(bx, by)
+
 					var base := verts.size()
-					verts.append(Vector3(x - 0.5, h0 + gh, -y))
-					verts.append(Vector3(x + 0.5, h1 + gh, -y))
-					verts.append(Vector3(x + 1, h1, -y))
-					verts.append(Vector3(x, h0, -y))
-					uvs.append(Vector2(su, 0.004))
-					uvs.append(Vector2(su + 0.25, 0.004))
-					uvs.append(Vector2(su + 0.25, 0.996))
-					uvs.append(Vector2(su, 0.996))
-					for xx in [x, x + 1, x + 1, x]:
-						uv2s.append(Vector2(xx, layer))
-					var c1 := _light_at(x, y)
-					c1.a = 1.0
-					var c2 := _light_at(x + 1, y)
-					c2.a = 1.0
-					var c3 := _light_at(x + 1, y + 1)
-					c3.a = 0.0
-					var c4 := _light_at(x, y + 1)
-					c4.a = 0.0
-					cols.append(c1)
-					cols.append(c2)
-					cols.append(c3)
-					cols.append(c4)
+					verts.append(Vector3(ax, ah + ch, az))
+					verts.append(Vector3(bx, bh + ch, bz))
+					verts.append(Vector3(bx, bh, bz))
+					verts.append(Vector3(ax, ah, az))
+
+					var u_start := _hash2(x, y, c * 13 + 10 + k) * 0.70
+					var u_width := 0.28
+					uvs.append(Vector2(u_start, 0.004))
+					uvs.append(Vector2(u_start + u_width, 0.004))
+					uvs.append(Vector2(u_start + u_width, 0.996))
+					uvs.append(Vector2(u_start, 0.996))
+
+					uv2s.append(Vector2(px, float(layer)))
+					uv2s.append(Vector2(px, float(layer)))
+					uv2s.append(Vector2(px, float(layer)))
+					uv2s.append(Vector2(px, float(layer)))
+
+					cols.append(c_top)
+					cols.append(c_top)
+					cols.append(c_bot)
+					cols.append(c_bot)
+
 					idx.append(base)
 					idx.append(base + 1)
 					idx.append(base + 2)
 					idx.append(base)
 					idx.append(base + 2)
 					idx.append(base + 3)
-			if verts.is_empty():
-				continue
-			var center := Vector3(cx + GRASS_CHUNK * 0.5, 0.0, -(cy + GRASS_CHUNK * 0.5))
-			for vi in verts.size():
-				verts[vi] = verts[vi] - center
-			var arrays := []
-			arrays.resize(Mesh.ARRAY_MAX)
-			arrays[Mesh.ARRAY_VERTEX] = verts
-			arrays[Mesh.ARRAY_TEX_UV] = uvs
-			arrays[Mesh.ARRAY_TEX_UV2] = uv2s
-			arrays[Mesh.ARRAY_COLOR] = cols
-			arrays[Mesh.ARRAY_INDEX] = idx
-			var mesh := ArrayMesh.new()
-			mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-			mesh.surface_set_material(0, mat)
-			var mi := MeshInstance3D.new()
-			mi.name = "Grass_%d_%d" % [cx, cy]
-			mi.mesh = mesh
-			mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-			mi.visibility_range_end = grass_visibility_range
-			mi.visibility_range_end_margin = 4.0
-			mi.position = center
-			container.add_child(mi)
-			total += verts.size() / 4
-	print("[MuTerrain] World%d: cỏ %d ô" % [world_id, total])
+	if verts.is_empty():
+		return
+	var center := Vector3(cx + GRASS_CHUNK * 0.5, 0.0, -(cy + GRASS_CHUNK * 0.5))
+	for vi in verts.size():
+		verts[vi] = verts[vi] - center
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = verts
+	arrays[Mesh.ARRAY_TEX_UV] = uvs
+	arrays[Mesh.ARRAY_TEX_UV2] = uv2s
+	arrays[Mesh.ARRAY_COLOR] = cols
+	arrays[Mesh.ARRAY_INDEX] = idx
+	var mesh := ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	mesh.surface_set_material(0, mat)
+	var mi := MeshInstance3D.new()
+	mi.name = "Grass_%d_%d" % [cx, cy]
+	mi.mesh = mesh
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	mi.visibility_range_end = grass_visibility_range
+	mi.visibility_range_end_margin = 4.0
+	mi.position = center
+	r.add_child(mi)

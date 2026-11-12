@@ -116,14 +116,24 @@ static func tex(bitmap: String) -> Texture2D:
 		if ResourceLoader.exists(p % stem):
 			t = load(p % stem)
 			break
+	if t == null:
+		# Chưa thấy texture: thử lại vài lần (gói có thể vừa nạp xong) rồi mới nhớ là thiếu.
+		_tex_miss[bitmap] = int(_tex_miss.get(bitmap, 0)) + 1
+		if int(_tex_miss[bitmap]) == 1:
+			push_warning("MuFx: thiếu texture hiệu ứng '%s' (%s)" % [bitmap, stem])
+		if int(_tex_miss[bitmap]) < 4:
+			return null
 	_tex_cache[bitmap] = t
 	return t
+
+static var _tex_miss := {}
 
 ## blend: "add" (cộng sáng), "sub" (RENDER_TYPE_ALPHA_BLEND_MINUS: làm tối), "alpha"
 static func mat(bitmap: String, blend := "add") -> StandardMaterial3D:
 	var key := bitmap + "|" + blend
 	if _mats.has(key):
 		return _mats[key]
+	var _t := tex(bitmap)
 	var m := StandardMaterial3D.new()
 	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -131,7 +141,11 @@ static func mat(bitmap: String, blend := "add") -> StandardMaterial3D:
 	m.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_DISABLED
 	m.cull_mode = BaseMaterial3D.CULL_DISABLED
 	m.vertex_color_use_as_albedo = true
-	m.albedo_texture = tex(bitmap)
+	m.albedo_texture = _t
+	if _t == null:
+		# Không có texture thì quad cộng sáng thành ô trắng mờ -> ẩn hẳn, không lưu cache để lần sau thử lại.
+		m.albedo_color = Color(1, 1, 1, 0)
+		return m
 	_mats[key] = m
 	return m
 
@@ -151,7 +165,7 @@ func model(glb: String, pos: Vector3, opts: Dictionary = {}) -> Dictionary:
 		add_child(o["node"])
 	else:
 		add_child(node)
-		_model_materials(o, int(opts.get("blend_mesh", -2)))
+		_model_materials(o, int(opts.get("blend_mesh", -2)), int(opts.get("hide_mesh", -1)))
 		var ap := MuModelRes.find_first(node, "AnimationPlayer") as AnimationPlayer
 		if ap and ap.get_animation_list().size() > 0:
 			var a := ap.get_animation_list()[0]
@@ -161,7 +175,7 @@ func model(glb: String, pos: Vector3, opts: Dictionary = {}) -> Dictionary:
 	_place(o)
 	return o
 
-func _model_materials(o: Dictionary, blend_mesh: int) -> void:
+func _model_materials(o: Dictionary, blend_mesh: int, hide_mesh: int = -1) -> void:
 	var i := 0
 	for n in MuModelRes.find_all(o["node"], "MeshInstance3D", []):
 		var mi := n as MeshInstance3D
@@ -175,6 +189,15 @@ func _model_materials(o: Dictionary, blend_mesh: int) -> void:
 				# tự chọn: texture jpg (không alpha) hoặc hậu tố _R -> cộng sáng ; tga/png (có alpha) -> trộn alpha
 				var path := src.albedo_texture.resource_path.to_lower() if src and src.albedo_texture else ""
 				additive = path.ends_with(".jpg") or MuModelRes.mesh_script(MuModelRes.tex_stem(src)) == "bright"
+			if i == hide_mesh:
+				# HiddenMesh của MU: mesh này không vẽ
+				var hm := StandardMaterial3D.new()
+				hm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+				hm.albedo_color = Color(1, 1, 1, 0)
+				hm.cull_mode = BaseMaterial3D.CULL_DISABLED
+				mi.set_surface_override_material(s, hm)
+				i += 1
+				continue
 			var m := StandardMaterial3D.new()
 			m.albedo_texture = src.albedo_texture if src else null
 			m.cull_mode = BaseMaterial3D.CULL_DISABLED
@@ -333,7 +356,8 @@ func _tint(mi: MeshInstance3D, c: Color) -> void:
 	(mi.material_override as StandardMaterial3D).albedo_color = c
 
 func _cam() -> Vector3:
-	var cam := get_viewport().get_camera_3d()
+	var vp := get_viewport()
+	var cam := vp.get_camera_3d() if vp else null
 	return cam.global_position if cam else Vector3(0, 100, 0)
 
 func _face(mi: MeshInstance3D, pos: Vector3, size: float, rot_deg: float) -> void:
@@ -364,7 +388,8 @@ func ribbon(bitmap: String, head: Vector3, opts: Dictionary = {}) -> Dictionary:
 		"color": opts.get("color", Color(1, 1, 1)), "max_tails": int(opts.get("max_tails", 6)),
 		"life": float(opts.get("life", 20)), "max": float(opts.get("life", 20)),
 		"fade": bool(opts.get("fade", true)), "uv_tile": float(opts.get("uv_tile", 1.0)),
-		"fixed": bool(opts.get("fixed", false))}
+		"fixed": bool(opts.get("fixed", false)),
+		"taper": bool(opts.get("taper", true))}
 	_ribbons.append(r)
 	return r
 
@@ -377,7 +402,7 @@ func ribbon_push(r: Dictionary) -> void:
 
 ## Tia sét zigzag A -> B: điểm cố định, sống life tick
 func bolt(bitmap: String, a: Vector3, b: Vector3, width: float, color: Color, life := 2.0, jitter := 0.3, seg_len := 0.5) -> Dictionary:
-	var r := ribbon(bitmap, a, {"width": width, "color": color, "life": life, "fade": false, "fixed": true, "uv_tile": 4.0})
+	var r := ribbon(bitmap, a, {"width": width, "color": color, "life": life, "fade": false, "fixed": true, "uv_tile": 4.0, "taper": false})
 	var n := maxi(2, int(a.distance_to(b) / seg_len))
 	var pts: Array = []
 	for i in n + 1:
@@ -405,6 +430,7 @@ func _update_ribbons(dt: float) -> void:
 			continue
 		var k := clampf(float(r["life"]) / float(r["max"]), 0.0, 1.0) if r["fade"] else 1.0
 		var c: Color = r["color"]
+		var taper: bool = bool(r.get("taper", true))
 		im.surface_begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
 		var n := pts.size()
 		for i in n:
@@ -415,9 +441,11 @@ func _update_ribbons(dt: float) -> void:
 			var side := nb.normalized().cross((cam - p).normalized())
 			if side.length() < 0.0001:
 				side = Vector3.RIGHT
-			side = side.normalized() * float(r["width"]) * 0.5
+			var t_factor := 1.0 - float(i) / float(maxi(n - 1, 1))
+			var w_scale := lerpf(0.12, 1.0, t_factor) if taper else 1.0
+			side = side.normalized() * (float(r["width"]) * 0.5 * w_scale)
 			var u := float(i) / (n - 1) * float(r["uv_tile"])
-			var tail := 1.0 - float(i) / n * 0.6
+			var tail := (t_factor * 0.85 + 0.15) if taper else (1.0 - float(i) / n * 0.6)
 			im.surface_set_color(Color(c.r * k * tail, c.g * k * tail, c.b * k * tail, 1.0))
 			im.surface_set_uv(Vector2(u, 0))
 			im.surface_add_vertex(p - side)

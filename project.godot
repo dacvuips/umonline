@@ -19,9 +19,20 @@ config/description="Cross-platform MU Online Client built with Godot 4 for Web &
 config/version="1.0.0"
 run/main_scene="uid://xlrmp6t3afwe"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+run/max_fps=60
 boot_splash/show_image=false
 boot_splash/stretch_mode=0
 boot_splash/use_filter=false
+config/icon="res://web/mu_icon.png"
+
+[audio]
+
+general/default_playback_type.web=0
+driver/output_latency.web=120
+
+[autoload]
+
+MuContent="*res://src/boot/MuContent.gd"
 
 [display]
 
@@ -29,7 +40,7 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/handheld/orientation=6
+window/handheld/orientation=4
 
 [editor_plugins]
 
@@ -44,3 +55,10 @@ limits/tcp/general_buffer_size=65536
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
+
+[shader_globals]
+
+mu_bloom_size={
+"type": "vec2",
+"value": Vector2(-1, -1)
+}

@@ -1,0 +1,382 @@
+[gd_scene format=3 uid="uid://cmcharmakemodal01"]
+
+[ext_resource type="Script" path="res://src/scenes/MuCharMakeModal.gd" id="1_modal"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/cha_id.png" id="2_cha_id"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_edit"]
+
+[sub_resource type="World3D" id="World3D_modal"]
+
+[node name="CharMakeModal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_modal")
+
+[node name="DimOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.45)
+
+[node name="Panel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.0
+offset_top = -203.0
+offset_right = 227.0
+offset_bottom = 203.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PreviewContainer" type="SubViewportContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 410.0
+offset_bottom = 335.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Panel/PreviewContainer"]
+own_world_3d = true
+world_3d = SubResource("World3D_modal")
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(410, 335)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Panel/PreviewContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.088, 0.32)
+current = true
+fov = 30.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Panel/PreviewContainer/SubViewport"]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 2, 4, 3)
+light_color = Color(1, 0.95, 0.9, 1)
+light_energy = 1.35
+
+[node name="FillLight" type="DirectionalLight3D" parent="Panel/PreviewContainer/SubViewport"]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -2, 2, -2)
+light_color = Color(0.8, 0.85, 1, 1)
+light_energy = 0.7
+
+[node name="BustAnchor" type="Node3D" parent="Panel/PreviewContainer/SubViewport"]
+
+[node name="StatPanel" type="Control" parent="Panel"]
+layout_mode = 0
+offset_left = 346.0
+offset_top = 24.0
+offset_right = 454.0
+offset_bottom = 120.0
+
+[node name="StatBg" type="ColorRect" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_right = 108.0
+offset_bottom = 80.0
+color = Color(0, 0, 0, 0.65)
+
+[node name="RowStr" type="Control" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 102.0
+offset_bottom = 22.0
+
+[node name="Lbl" type="Label" parent="Panel/StatPanel/RowStr"]
+layout_mode = 0
+offset_right = 65.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.88, 0.88, 0.9, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "Sức mạnh"
+
+[node name="Val" type="Label" parent="Panel/StatPanel/RowStr"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_bottom = 16.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0.7, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "28"
+horizontal_alignment = 2
+
+[node name="RowAgi" type="Control" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 22.0
+offset_right = 102.0
+offset_bottom = 38.0
+
+[node name="Lbl" type="Label" parent="Panel/StatPanel/RowAgi"]
+layout_mode = 0
+offset_right = 65.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.88, 0.88, 0.9, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "Nhanh nhẹn"
+
+[node name="Val" type="Label" parent="Panel/StatPanel/RowAgi"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_bottom = 16.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0.7, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "20"
+horizontal_alignment = 2
+
+[node name="RowVit" type="Control" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 38.0
+offset_right = 102.0
+offset_bottom = 54.0
+
+[node name="Lbl" type="Label" parent="Panel/StatPanel/RowVit"]
+layout_mode = 0
+offset_right = 65.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.88, 0.88, 0.9, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "Thể lực"
+
+[node name="Val" type="Label" parent="Panel/StatPanel/RowVit"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_bottom = 16.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0.7, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "25"
+horizontal_alignment = 2
+
+[node name="RowEne" type="Control" parent="Panel/StatPanel"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 54.0
+offset_right = 102.0
+offset_bottom = 70.0
+
+[node name="Lbl" type="Label" parent="Panel/StatPanel/RowEne"]
+layout_mode = 0
+offset_right = 65.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.88, 0.88, 0.9, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "Năng lượng"
+
+[node name="Val" type="Label" parent="Panel/StatPanel/RowEne"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_bottom = 16.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0.7, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "10"
+horizontal_alignment = 2
+
+[node name="RowCmd" type="Control" parent="Panel/StatPanel"]
+visible = false
+layout_mode = 0
+offset_left = 6.0
+offset_top = 70.0
+offset_right = 102.0
+offset_bottom = 86.0
+
+[node name="Lbl" type="Label" parent="Panel/StatPanel/RowCmd"]
+layout_mode = 0
+offset_right = 65.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0.88, 0.88, 0.9, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "Mệnh lệnh"
+
+[node name="Val" type="Label" parent="Panel/StatPanel/RowCmd"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_bottom = 16.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0.7, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "25"
+horizontal_alignment = 2
+
+[node name="JobButtons" type="Control" parent="Panel"]
+layout_mode = 0
+offset_right = 454.0
+offset_bottom = 406.0
+
+[node name="InputFrame" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_top = 317.0
+offset_right = 346.0
+offset_bottom = 355.0
+texture = ExtResource("2_cha_id")
+expand_mode = 1
+
+[node name="BtnDice" type="TextureButton" parent="Panel/InputFrame"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 9.0
+offset_right = 60.0
+offset_bottom = 29.0
+mouse_default_cursor_shape = 2
+
+[node name="TxtName" type="LineEdit" parent="Panel/InputFrame"]
+layout_mode = 0
+offset_left = 66.0
+offset_top = 7.0
+offset_right = 320.0
+offset_bottom = 31.0
+theme_override_colors/caret_color = Color(1, 0.9, 0.5, 1)
+theme_override_colors/font_placeholder_color = Color(0.7, 0.65, 0.5, 0.6)
+theme_override_colors/font_color = Color(1, 0.91, 0.42, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/focus = SubResource("StyleBoxEmpty_edit")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_edit")
+placeholder_text = "Nhập tên nhân vật"
+max_length = 10
+caret_blink = true
+
+[node name="DescPanel" type="Control" parent="Panel"]
+layout_mode = 0
+offset_top = 355.0
+offset_right = 454.0
+offset_bottom = 406.0
+
+[node name="DescBg" type="ColorRect" parent="Panel/DescPanel"]
+layout_mode = 0
+offset_right = 454.0
+offset_bottom = 51.0
+color = Color(0, 0, 0, 0.65)
+
+[node name="LblDesc" type="Label" parent="Panel/DescPanel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 444.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "Chiến Binh: Rất mạnh trong trận đánh cận chiến với sức chịu đựng cao, có khả năng sử dụng tất cả các vũ khí"
+autowrap_mode = 2
+
+[node name="StatusLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 294.0
+offset_right = 340.0
+offset_bottom = 315.0
+theme_override_colors/font_color = Color(1, 0.35, 0.35, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+
+[node name="BtnOk" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 346.0
+offset_top = 325.0
+offset_right = 400.0
+offset_bottom = 355.0
+mouse_default_cursor_shape = 2
+
+[node name="Lbl" type="Label" parent="Panel/BtnOk"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.94, 0.73, 0.35, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 12
+text = "OK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnCancel" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 325.0
+offset_right = 454.0
+offset_bottom = 355.0
+mouse_default_cursor_shape = 2
+
+[node name="Lbl" type="Label" parent="Panel/BtnCancel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.94, 0.73, 0.35, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 12
+text = "Cancel"
+horizontal_alignment = 1
+vertical_alignment = 1

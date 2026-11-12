@@ -8,7 +8,8 @@ enum DamageType {
 	NORMAL,
 	EXCELLENT,
 	CRITICAL,
-	MISS
+	MISS,
+	COMBO
 }
 
 func setup(damage_value: int, type: DamageType = DamageType.NORMAL, start_pos: Vector3 = Vector3.ZERO) -> void:
@@ -34,6 +35,11 @@ func setup(damage_value: int, type: DamageType = DamageType.NORMAL, start_pos: V
 		DamageType.MISS:
 			text = "MISS"
 			modulate = Color(0.7, 0.7, 0.7)
+		DamageType.COMBO:
+			text = "★ COMBO " + str(damage_value) + "! ★"
+			modulate = Color(0.3, 0.9, 1.0) # Xanh băng sáng rực rỡ đặc trưng Combo MU
+			outline_modulate = Color(0.1, 0.1, 0.4)
+			font_size = 48
 
 	# Hiệu ứng Tween bay lên và mờ dần
 	var tween = create_tween().set_parallel(true)

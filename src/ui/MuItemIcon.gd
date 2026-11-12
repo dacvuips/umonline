@@ -15,7 +15,7 @@ const HIDDEN_SHADER := preload("res://src/shaders/mu_hidden.gdshader")
 const PX := 48   # điểm ảnh render cho mỗi ô
 ## Lề render thêm quanh ô (tính bằng ô, mỗi phía): phần đồ lớn hơn khung (áo, vũ khí, cánh...) tràn ra ngoài
 ## khung thay vì bị cắt. Chỗ vẽ ảnh dùng overflow_rect() để nới khung vẽ ra đúng lề này.
-const PAD_CELLS := 1.0
+const PAD_CELLS := 0.4
 
 static var _host: Node = null
 static var _cache: Dictionary = {}
@@ -65,7 +65,10 @@ static func _material(src: Material, level: int, light_mul: float = 1.0) -> Mate
 	if bm:
 		tex = bm.albedo_texture
 		alpha = bm.transparency != BaseMaterial3D.TRANSPARENCY_DISABLED
-	var kind: String = MuModelRes.mesh_script(MuModelRes.tex_stem(src))
+	var stem := MuModelRes.tex_stem(src)
+	if MuModelRes.is_skin_or_hair(stem):
+		return HIDDEN_SHADER_MAT()
+	var kind: String = MuModelRes.mesh_script(stem)
 	var tint: Color = MuModelRes.level_tint(level)
 	tint = Color(tint.r * light_mul, tint.g * light_mul, tint.b * light_mul, tint.a)
 	var key := "%d|%s|%s|%s" % [tex.get_instance_id() if tex else 0, kind, str(alpha), "%.3f,%.3f,%.3f,%.2f" % [tint.r, tint.g, tint.b, tint.a]]
@@ -97,7 +100,7 @@ static func _glow_info(it: Dictionary, g: int, n: int) -> Dictionary:
 		if gl.get("excellent", true) == false:
 			out["excellent"] = false   # Glow::HasExcellentGlow
 		if gl.get("meshes") is Array:
-			out["meshes"] = gl["meshes"]
+			out["meshes"] = MuModelRes.ints(gl["meshes"])   # JSON là float: `1 in [1.0]` là false -> đổi sang int
 		if gl.has("hiddenMesh"):
 			out["hidden"] = int(gl["hiddenMesh"])
 	return out
@@ -112,6 +115,18 @@ static func _animated(it: Dictionary, style: String) -> bool:
 
 const ItemStylesRes = preload("res://src/mu/MuItemStyles.gd")
 const ICON_DIR := "res://assets/mu/icons/"
+## ITEM_SACRED_ARMOR (8:59), STORM_HARD_ARMOR (8:60), PIERCING_ARMOR (8:61), PHOENIX_SOUL_ARMOR (8:73)
+const RF_ARMOR_INVENTORY_GLB := {
+	"8:59": "res://assets/mu/Player/Armor_inventory60.glb",
+	"8:60": "res://assets/mu/Player/ArmorMale61_inventory.glb",
+	"8:61": "res://assets/mu/Player/ArmorMale62_inventory.glb",
+	"8:73": "res://assets/mu/Player/ArmorMale74_inven.glb",
+}
+## Độ sáng lớp phủ phát sáng theo cấp của ẢNH ĐỒ TRONG TÚI / RƯƠNG (tách riêng với đồ mặc ngoài
+## thế giới: MuModel.GLOW_GAIN_*). Ảnh đồ vẽ với ánh sáng cố định 1.0 trên nền tối của ô.
+const ICON_GLOW_GAIN_7 := 1.4    # +7 .. +10
+const ICON_GLOW_GAIN_11 := 1.9   # +11, +12
+const ICON_GLOW_GAIN_13 := 2.5   # +13 .. +15
 ## số điểm ảnh trên 1 đơn vị MU nhân với "scale" trong dữ liệu (đo trên ô 20 px của màn hình 640x480 gốc)
 ## RenderObjectScreen (ZzzInventory.cpp): camera đồ FOV 1°, đồ đặt ở độ sâu 0.1 * RENDER_ITEMVIEW_FAR = 200
 ## => 1 đơn vị thế giới = 480 / (2 * 200 * tan 0.5°) = 137.5 điểm ảnh trên màn 640x480 (ô 20 px)
@@ -134,13 +149,17 @@ static func anchor_of(g: int, n: int) -> Vector2:
 	return Vector2(float(a[0]), float(a[1]))
 
 ## Tăng số này mỗi khi đổi cách vẽ ảnh đồ -> ảnh nướng cũ tự bị bỏ qua (vẽ trực tiếp) cho tới khi nướng lại
-const ICON_VERSION := 8
+const ICON_VERSION := 16
 static var _baked_state := -1
 
 static func _baked_ok() -> bool:
 	if _baked_state < 0:
 		var vp := ProjectSettings.globalize_path(ICON_DIR + "version.txt")
-		_baked_state = 1 if FileAccess.file_exists(vp) and FileAccess.get_file_as_string(vp).strip_edges() == str(ICON_VERSION) else 0
+		if FileAccess.file_exists(vp) and FileAccess.get_file_as_string(vp).strip_edges() == str(ICON_VERSION):
+			_baked_state = 1
+
+		else:
+			_baked_state = 0
 	return _baked_state == 1
 
 static func baked_path(g: int, n: int) -> String:
@@ -148,6 +167,8 @@ static func baked_path(g: int, n: int) -> String:
 
 ## Texture ảnh đồ (ViewportTexture, dùng chung theo loại + cấp)
 static func icon(tree: SceneTree, it: Dictionary) -> Texture2D:
+	if tree == null:
+		return null
 	var g := int(it.get("group", 0))
 	var n := int(it.get("number", 0))
 	var lv := int(it.get("level", 0))
@@ -163,6 +184,36 @@ static func icon(tree: SceneTree, it: Dictionary) -> Texture2D:
 			_cache[key] = bt
 			return bt
 	var t := _render(tree, it, g, n, lv)
+	_cache[key] = t
+	return t
+
+## Texture ảnh đồ dạng vuông đóng khung (cho danh mục / thẻ / GM picker / chợ)
+## Tự căn giữa và xoay chéo các vũ khí dài để hiển thị to rõ, phủ đều ô vuông
+static func catalog_icon(tree: SceneTree, it: Dictionary, px_size: int = 52) -> Texture2D:
+	if tree == null:
+		return null
+	var g := int(it.get("group", 0))
+	var n := int(it.get("number", 0))
+	var lv := int(it.get("level", 0))
+	var key := "cat:%d:%d:%d:%s:%s:%d" % [g, n, lv, str(bool(it.get("excellent", false))), str(bool(it.get("ancient", false))), px_size]
+	if _cache.has(key):
+		return _cache[key]
+	var t := _render(tree, it, g, n, lv, false, Vector2i(px_size, px_size), false)
+	_cache[key] = t
+	return t
+
+## Texture ảnh đồ xem trước chi tiết (cho ô Preview rộng)
+## Tự căn giữa và xoay chéo theo tỉ lệ khung hình rộng để vũ khí phủ 85-90% khung hình
+static func preview_icon(tree: SceneTree, it: Dictionary, sz: Vector2i = Vector2i(246, 100)) -> Texture2D:
+	if tree == null:
+		return null
+	var g := int(it.get("group", 0))
+	var n := int(it.get("number", 0))
+	var lv := int(it.get("level", 0))
+	var key := "prev:%d:%d:%d:%s:%s:%dx%d" % [g, n, lv, str(bool(it.get("excellent", false))), str(bool(it.get("ancient", false))), sz.x, sz.y]
+	if _cache.has(key):
+		return _cache[key]
+	var t := _render(tree, it, g, n, lv, false, sz, true)
 	_cache[key] = t
 	return t
 
@@ -201,22 +252,42 @@ static func stop_live() -> void:
 	_live_tex = null
 	_live_key = ""
 
-static func _render(tree: SceneTree, it: Dictionary, g: int, n: int, lv: int, live: bool = false) -> Texture2D:
+static func _render(tree: SceneTree, it: Dictionary, g: int, n: int, lv: int, live: bool = false, framed_size: Vector2i = Vector2i.ZERO, is_preview: bool = false) -> Texture2D:
 	var path: String = MuCatalogRes.item_glb(g, n)
+	# Giáp Rage Fighter vẽ trong túi bằng model riêng (ItemDisplay.cpp: ArmorInventoryModels / MonkSystem.cpp)
+	var inv_glb: String = RF_ARMOR_INVENTORY_GLB.get("%d:%d" % [g, n], "")
+	if inv_glb != "" and ResourceLoader.exists(inv_glb):
+		path = inv_glb
 	var inst := MuModelRes.instantiate(path) if path != "" else null
 	if inst == null:
 		return null
 	var sz: Vector2i = MuItemsRes.size_of(it)
 	var vp := SubViewport.new()
-	var pad := int(round(PX * PAD_CELLS))
-	vp.size = sz * PX + Vector2i(pad, pad) * 2
+	var is_framed := (framed_size != Vector2i.ZERO)
+	if is_framed:
+		vp.size = framed_size * 2
+	else:
+		var pad := int(round(PX * PAD_CELLS))
+		vp.size = sz * PX + Vector2i(pad, pad) * 2
 	vp.transparent_bg = true
 	vp.own_world_3d = true
 	vp.msaa_3d = Viewport.MSAA_4X
 	# vẽ một lần (model + texture đã nạp xong khi load) rồi giữ ảnh
 	var md0: Dictionary = MuCatalogRes.item_model(g, n)
-	var anim := live or _animated(it, str(md0.get("renderStyle", "")))
-	vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS if anim else SubViewport.UPDATE_ONCE
+	var anim := live or _animated(it, str(md0.get("renderStyle", "")) + str(md0.get("itemEffect", "")))
+	vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	if not anim:
+		# Render đủ 3 khung hình để texture, xương và shader nạp trọn vẹn rồi dừng render (tiết kiệm GPU)
+		var h := [3]
+		var cb_ref := [Callable()]
+		cb_ref[0] = func():
+			h[0] -= 1
+			if h[0] <= 0:
+				if is_instance_valid(vp):
+					vp.render_target_update_mode = SubViewport.UPDATE_DISABLED
+				if tree and tree.process_frame.is_connected(cb_ref[0]):
+					tree.process_frame.disconnect(cb_ref[0])
+		tree.process_frame.connect(cb_ref[0])
 	var holder := Node3D.new()
 	vp.add_child(holder)
 	if live:
@@ -226,39 +297,50 @@ static func _render(tree: SceneTree, it: Dictionary, g: int, n: int, lv: int, li
 	var model: Dictionary = MuCatalogRes.item_model(g, n)
 	var inv: Dictionary = model.get("inventory", {}) if model.get("inventory") is Dictionary else {}
 	var rot: Array = inv.get("rotation", DEFAULT_ROT) if inv.get("rotation") is Array else DEFAULT_ROT
+	if is_framed and (0 <= g and g <= 5):
+		rot = rot.duplicate()
+		rot[2] = 65.0 if is_preview else 40.0
 	holder.basis = _basis(rot)
 	if live:
 		_live_rot = rot.duplicate()
-	var fixed := true
+	var fixed := not is_framed
 	if fixed:
 		# thân đồ vẽ trên bộ xương nhân vật: dịch xuống theo bodyHeight (đơn vị MU, trục Z)
 		inst.position = Vector3(0, float(inv.get("bodyHeight", 0.0)) / 100.0, 0)
 	# vật liệu + khung bao
 	var style := str(model.get("renderStyle", ""))
+	# itemEffect (ItemEffects.cpp): kiểu vẽ theo cấp / thời gian thay renderStyle
+	var fxr: Dictionary = ItemStylesRes.resolve(style, str(model.get("itemEffect", "")), lv)
+	style = str(fxr["style"])
 	# Glow::GetLevel: một số đồ có mức phát sáng cố định (cánh = 0, Devil's Eye +7.. = 13...)
 	lv = MuCatalogRes.glow_level(g, n, lv)
 	var gi := _glow_info(it, g, n)
 	gi["level"] = lv
 	var aabb := AABB()
 	var first := true
+	var inven_tex_path := MuModelRes.inven_texture_path(g, n)
+	var inven_override_tex: Texture2D = load(inven_tex_path) if inven_tex_path != "" and ResourceLoader.exists(inven_tex_path) else null
 	for mi in MuModelRes.find_all(inst, "MeshInstance3D", []):
 		var m := mi as MeshInstance3D
 		if m.mesh == null:
 			continue
 		m.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		for s in m.mesh.get_surface_count():
-			var smat: Material = _surface_material(m.mesh.surface_get_material(s), lv, style, s)
+			var smat: Material = _surface_material(m.mesh.surface_get_material(s), lv, style, s, fxr, inven_override_tex)
 			if _needs_glow(gi) and smat is ShaderMaterial and (smat as ShaderMaterial).shader != HIDDEN_SHADER \
 					and (smat as ShaderMaterial).shader != ADD_SHADER \
 					and (not gi.has("meshes") or s in gi["meshes"]) and s != int(gi.get("hidden", -1)):
 				# chép cả chuỗi next_pass (không sửa vật liệu dùng chung trong cache) rồi nối lớp phát sáng vào cuối
-				var head: ShaderMaterial = (smat as ShaderMaterial).duplicate()
+				var head: ShaderMaterial = _glow_base(smat as ShaderMaterial)
 				var last: ShaderMaterial = head
 				while last.next_pass != null:
 					last.next_pass = (last.next_pass as ShaderMaterial).duplicate()
 					last = last.next_pass as ShaderMaterial
-				var gm: ShaderMaterial = MuModelRes.glow_material(m.mesh.surface_get_material(s), gi)
+				var gm: ShaderMaterial = MuModelRes.glow_material(m.mesh.surface_get_material(s), gi, inven_override_tex if s == 0 else null)
 				gm.set_shader_parameter("fixed_light", 1.0)   # RenderObjectScreen: Light = (1,1,1)
+				gm.set_shader_parameter("glow_gain_7", ICON_GLOW_GAIN_7)
+				gm.set_shader_parameter("glow_gain_11", ICON_GLOW_GAIN_11)
+				gm.set_shader_parameter("glow_gain_13", ICON_GLOW_GAIN_13)
 				last.next_pass = gm
 				smat = head
 			m.set_surface_override_material(s, smat)
@@ -268,7 +350,12 @@ static func _render(tree: SceneTree, it: Dictionary, g: int, n: int, lv: int, li
 		first = false
 	var ap := MuModelRes.find_first(inst, "AnimationPlayer") as AnimationPlayer
 	if ap:
+		if ap.has_animation("a000"):
+			ap.play("a000")
+			ap.advance(0.0)
 		ap.stop()
+	for skel in MuModelRes.find_all(inst, "Skeleton3D", []):
+		(skel as Skeleton3D).force_update_all_bone_transforms()
 	var cam := Camera3D.new()
 	cam.projection = Camera3D.PROJECTION_ORTHOGONAL
 	cam.keep_aspect = Camera3D.KEEP_HEIGHT
@@ -282,6 +369,9 @@ static func _render(tree: SceneTree, it: Dictionary, g: int, n: int, lv: int, li
 		# anchor / offset tính theo ô thật (không tính lề); lề đối xứng nên tâm ảnh vẫn là tâm ô
 		var w := float(sz.x * PX)
 		var h := float(sz.y * PX)
+		# Tự động co tỉ lệ vừa vặn khung ô, tránh việc các món đồ mặc (giáp, quần, nón...) bị quá to tràn lấn sang ô khác
+		# Giống client gốc (RenderItem3D): vẽ đúng tỉ lệ "scale" trong dữ liệu, KHÔNG co cho vừa ô —
+		# đồ lớn (giáp, cánh, vũ khí...) được phép tràn ra ngoài ô.
 		# offset cộng vào vị trí THẾ GIỚI (x phải, y lên) ở độ sâu 200
 		var px: float = float(anchor[0]) * w + float(off[0]) * ppu_world
 		var py: float = float(anchor[1]) * h - float(off[1]) * ppu_world
@@ -289,8 +379,8 @@ static func _render(tree: SceneTree, it: Dictionary, g: int, n: int, lv: int, li
 		cam.position = Vector3((w * 0.5 - px) / ppu, (py - h * 0.5) / ppu, 50.0)
 		cam.far = 200.0
 	else:
-		var aspect := float(sz.x) / float(sz.y)
-		var need_h := maxf(aabb.size.y, aabb.size.x / aspect) * 1.08 * float(vp.size.y) / float(sz.y * PX)
+		var aspect := float(vp.size.x) / float(vp.size.y)
+		var need_h := maxf(aabb.size.y, aabb.size.x / aspect) * 1.15
 		cam.size = maxf(need_h, 0.01)
 		var c := aabb.get_center()
 		cam.position = Vector3(c.x, c.y, aabb.end.z + 10.0)
@@ -298,6 +388,21 @@ static func _render(tree: SceneTree, it: Dictionary, g: int, n: int, lv: int, li
 	vp.add_child(cam)
 	_get_host(tree).add_child.call_deferred(vp)
 	return vp.get_texture()
+
+## Vật liệu nền khi có lớp ánh kim chồng lên. Vật liệu alpha (blend_mix, ghi ALPHA) nằm ở hàng vẽ trong suốt nên
+## vẽ SAU / đè mất lớp ánh kim (next_pass) -> đổi sang bản mờ-cắt (alpha test) cùng texture: áo Summoner (texture PNG có alpha,
+## texture che da InvenArmorMale4x), áo choàng, cánh... mới giữ được ánh kim như đồ thường.
+static func _glow_base(m: ShaderMaterial) -> ShaderMaterial:
+	if m.shader != ICON_ALPHA_SHADER:
+		return m.duplicate()
+	var o := ShaderMaterial.new()
+	o.shader = ICON_SHADER
+	o.set_shader_parameter("albedo_tex", m.get_shader_parameter("albedo_tex"))
+	o.set_shader_parameter("alpha_cut", 0.45)
+	o.set_shader_parameter("tint", m.get_shader_parameter("tint"))
+	o.set_shader_parameter("tint_pulse", m.get_shader_parameter("tint_pulse"))
+	o.next_pass = m.next_pass
+	return o
 
 ## Vật liệu 1 surface trong ảnh đồ (có kiểu vẽ riêng nếu đồ có renderStyle)
 static func HIDDEN_SHADER_MAT() -> ShaderMaterial:
@@ -312,10 +417,39 @@ static func icon_tint(level: int) -> Color:
 	var mx := maxf(maxf(t.r, t.g), maxf(t.b, 0.001))
 	return Color(1.0, 1.0, 1.0).lerp(Color(t.r / mx, t.g / mx, t.b / mx), 0.5)
 
-static func _surface_material(src: Material, level: int, style: String, mesh: int) -> Material:
+static func _surface_material(src: Material, level: int, style: String, mesh: int, fxr: Dictionary = {}, inven_tex: Texture2D = null) -> Material:
+	var stem := MuModelRes.tex_stem(src)
+	if MuModelRes.is_skin_or_hair(stem):
+		return HIDDEN_SHADER_MAT()
+	if inven_tex != null and mesh == 0:
+		var tint: Color = MuModelRes.level_tint(level)
+		var key := "inven|%d|%d|%.3f,%.3f,%.3f,%.2f" % [inven_tex.get_instance_id(), level, tint.r, tint.g, tint.b, tint.a]
+		if _mats.has(key):
+			return _mats[key]
+		var m := ShaderMaterial.new()
+		m.shader = ICON_ALPHA_SHADER
+		m.set_shader_parameter("albedo_tex", inven_tex)
+		m.set_shader_parameter("tint", Vector3(tint.r, tint.g, tint.b))
+		m.set_shader_parameter("tint_pulse", 1.0 if tint.a < 0.99 else 0.0)
+		_mats[key] = m
+		return m
+	var bright := MuModelRes.mesh_script(stem) == "bright"
+	var bp: Vector3 = fxr.get("blend_pulse", Vector3.ZERO)
+	if bp != Vector3.ZERO and style == "" and bright:
+		# itemEffect redSpirit / wingsOfSoul...: mesh sáng nhấp nháy
+		var pm := (_material(src, level) as ShaderMaterial).duplicate() as ShaderMaterial
+		if pm.shader == MuModelRes.CHAR_ADD_SHADER:
+			pm.set_shader_parameter("sin_pulse", bp)
+		return pm
 	if style != "":
 		var jm = ItemStylesRes.json_materials(style, mesh, src, icon_tint(level), 1.0,
-			MuModelRes.mesh_script(MuModelRes.tex_stem(src)) == "bright", MuModelRes.terrain_light())
+			bright, MuModelRes.terrain_light())
+		if jm != null and bool(fxr.get("fx_base", false)) and not (jm as Array).is_empty():
+			# itemEffect "Applied": lớp hiệu ứng rồi vẽ món đồ như thường / theo renderStyle
+			var bs := str(fxr.get("base_style", ""))
+			var bj = ItemStylesRes.json_materials(bs, mesh, src, icon_tint(level), 1.0, bright,
+				MuModelRes.terrain_light()) if bs != "" else null
+			jm = (jm as Array) + (bj if bj != null else [(_material(src, level) as ShaderMaterial).duplicate()])
 		if jm != null:
 			if (jm as Array).is_empty():
 				return HIDDEN_SHADER_MAT()

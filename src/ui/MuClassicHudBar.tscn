@@ -1,24 +1,43 @@
-[gd_scene load_steps=14 format=3 uid="uid://da0gvpr887bue"]
+[gd_scene load_steps=22 format=3 uid="uid://da0gvpr887bue"]
 
 [ext_resource type="Script" path="res://src/ui/MuClassicHudBar.gd" id="1_hudbar"]
-[ext_resource type="Texture2D" path="res://assets/textures/ui/mu_actual_hud_bar.png" id="2_hud_bg"]
-[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_menu_red.png" id="3_orb_red"]
-[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_menu_blue.png" id="4_orb_blue"]
-[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_menu_SD.png" id="5_col_sd"]
-[ext_resource type="Texture2D" path="res://assets/textures/ui/newui_menu_AG.png" id="6_col_ag"]
-[ext_resource type="Texture2D" path="res://assets/textures/ui/hud_btn_inv.png" id="7_btn_inv"]
-[ext_resource type="Texture2D" path="res://assets/textures/ui/hud_btn_char.png" id="8_btn_char"]
-[ext_resource type="Texture2D" path="res://assets/textures/ui/hud_btn_party.png" id="9_btn_party"]
-[ext_resource type="Texture2D" path="res://assets/textures/ui/hud_btn_options.png" id="10_btn_options"]
-[ext_resource type="Texture2D" path="res://assets/textures/ui/hud_btn_exit.png" id="11_btn_exit"]
-[ext_resource type="Texture2D" path="res://assets/textures/ui/skill_active_box.png" id="12_skill_box"]
-[ext_resource type="Texture2D" path="res://assets/textures/ui/btn_skill_twisting.png" id="13_skill_twisting"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/hud_bar_frame.png" id="2_frame"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/orb_bg.png" id="3_orb_bg"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/orb_life.png" id="4_orb_life"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/orb_mana.png" id="5_orb_mana"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/orb_glass_shine.png" id="6_orb_shine"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/bar_ag_progress.png" id="7_bar_ag"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/bar_sd_progress.png" id="8_bar_sd"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/bar_slot_bg.png" id="9_bar_slot_bg"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/btn_char_normal.png" id="10_btn_char_n"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/btn_char_hover.png" id="11_btn_char_h"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/btn_char_pressed.png" id="12_btn_char_p"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/btn_inv_normal.png" id="13_btn_inv_n"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/btn_inv_hover.png" id="14_btn_inv_h"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/btn_inv_pressed.png" id="15_btn_inv_p"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/btn_map_normal.png" id="16_btn_map_n"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/btn_map_hover.png" id="17_btn_map_h"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/btn_map_pressed.png" id="18_btn_map_p"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/btn_quest_normal.png" id="19_btn_quest_n"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/btn_quest_hover.png" id="20_btn_quest_h"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/btn_quest_pressed.png" id="21_btn_quest_p"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/btn_options_normal.png" id="22_btn_opt_n"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/btn_options_hover.png" id="23_btn_opt_h"]
+[ext_resource type="Texture2D" path="res://assets/textures/ui/fantasy_hud/btn_options_pressed.png" id="24_btn_opt_p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exp_bg"]
-bg_color = Color(0.08, 0.08, 0.08, 0.6)
+bg_color = Color(0.06, 0.05, 0.04, 0.75)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exp_fill"]
-bg_color = Color(0.95, 0.82, 0.28, 1)
+bg_color = Color(0.96, 0.78, 0.22, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="MuClassicHudBar" type="Control"]
 layout_mode = 3
@@ -27,11 +46,13 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -490.0
-offset_top = -51.0
-offset_right = 490.0
+offset_left = -392.0
+offset_top = -156.0
+offset_right = 392.0
 grow_horizontal = 2
 grow_vertical = 0
+pivot_offset = Vector2(392, 156)
+scale = Vector2(0.6, 0.6)
 mouse_filter = 1
 script = ExtResource("1_hudbar")
 
@@ -43,26 +64,46 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="TextureRect" parent="BarContainer"]
+[node name="SlotBackgrounds" type="Control" parent="BarContainer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_hud_bg")
+mouse_filter = 2
+
+[node name="AgSlotBg" type="TextureRect" parent="BarContainer/SlotBackgrounds"]
+layout_mode = 0
+offset_left = 153.0
+offset_top = 44.0
+offset_right = 178.0
+offset_bottom = 134.0
+mouse_filter = 2
+texture = ExtResource("9_bar_slot_bg")
+expand_mode = 1
+
+[node name="SdSlotBg" type="TextureRect" parent="BarContainer/SlotBackgrounds"]
+layout_mode = 0
+offset_left = 606.0
+offset_top = 44.0
+offset_right = 631.0
+offset_bottom = 134.0
+mouse_filter = 2
+texture = ExtResource("9_bar_slot_bg")
 expand_mode = 1
 
 [node name="LifeOrb" type="TextureProgressBar" parent="BarContainer"]
 layout_mode = 0
-offset_left = 236.0
-offset_top = 5.0
-offset_right = 282.0
-offset_bottom = 47.0
+offset_left = 19.0
+offset_top = 28.0
+offset_right = 141.0
+offset_bottom = 150.0
+tooltip_text = "Máu (HP) - Nhấn chuột hoặc phím Q để uống Bình Máu"
 value = 100.0
 fill_mode = 3
-nine_patch_stretch = true
-texture_progress = ExtResource("3_orb_red")
+texture_under = ExtResource("3_orb_bg")
+texture_progress = ExtResource("4_orb_life")
 
 [node name="HpLabel" type="Label" parent="BarContainer/LifeOrb"]
 layout_mode = 1
@@ -71,52 +112,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -8.0
-offset_right = 20.0
-offset_bottom = 8.0
+offset_left = -45.0
+offset_top = -11.0
+offset_right = 45.0
+offset_bottom = 11.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 11
-text = "150"
+theme_override_font_sizes/font_size = 13
+text = "150 / 150"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AgBar" type="TextureProgressBar" parent="BarContainer"]
-layout_mode = 0
-offset_left = 332.0
-offset_top = 8.0
-offset_right = 344.0
-offset_bottom = 44.0
-value = 100.0
-fill_mode = 3
-nine_patch_stretch = true
-texture_progress = ExtResource("6_col_ag")
-
-[node name="SdBar" type="TextureProgressBar" parent="BarContainer"]
-layout_mode = 0
-offset_left = 676.0
-offset_top = 8.0
-offset_right = 688.0
-offset_bottom = 44.0
-value = 100.0
-fill_mode = 3
-nine_patch_stretch = true
-texture_progress = ExtResource("5_col_sd")
-
 [node name="ManaOrb" type="TextureProgressBar" parent="BarContainer"]
 layout_mode = 0
-offset_left = 708.0
-offset_top = 5.0
-offset_right = 754.0
-offset_bottom = 47.0
+offset_left = 642.0
+offset_top = 28.0
+offset_right = 764.0
+offset_bottom = 150.0
+tooltip_text = "Mana (MP) - Nhấn chuột hoặc phím W để uống Bình Mana"
 value = 100.0
 fill_mode = 3
-nine_patch_stretch = true
-texture_progress = ExtResource("4_orb_blue")
+texture_under = ExtResource("3_orb_bg")
+texture_progress = ExtResource("5_orb_mana")
 
 [node name="MpLabel" type="Label" parent="BarContainer/ManaOrb"]
 layout_mode = 1
@@ -125,56 +145,80 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -8.0
-offset_right = 20.0
-offset_bottom = 8.0
+offset_left = -45.0
+offset_top = -11.0
+offset_right = 45.0
+offset_bottom = 11.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 11
-text = "100"
+theme_override_font_sizes/font_size = 13
+text = "100 / 100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ExpProgressBar" type="ProgressBar" parent="BarContainer"]
+[node name="AgBar" type="TextureProgressBar" parent="BarContainer"]
 layout_mode = 0
-offset_left = 360.0
-offset_top = 4.0
-offset_right = 610.0
-offset_bottom = 8.0
-theme_override_styles/background = SubResource("StyleBoxFlat_exp_bg")
-theme_override_styles/fill = SubResource("StyleBoxFlat_exp_fill")
-value = 25.0
-show_percentage = false
+offset_left = 153.0
+offset_top = 44.0
+offset_right = 178.0
+offset_bottom = 134.0
+tooltip_text = "Thể lực (AG) - Tiêu hao khi xuất Kỹ Năng"
+value = 100.0
+fill_mode = 3
+texture_progress = ExtResource("7_bar_ag")
 
-[node name="ActiveSkillBox" type="TextureRect" parent="BarContainer"]
+[node name="SdBar" type="TextureProgressBar" parent="BarContainer"]
 layout_mode = 0
-offset_left = 620.0
-offset_top = 5.0
-offset_right = 658.0
-offset_bottom = 47.0
-mouse_filter = 0
-texture = ExtResource("12_skill_box")
-expand_mode = 1
+offset_left = 606.0
+offset_top = 44.0
+offset_right = 631.0
+offset_bottom = 134.0
+tooltip_text = "Giáp Chống Đỡ (SD) - Bảo vệ Sinh Mệnh"
+value = 100.0
+fill_mode = 3
+texture_progress = ExtResource("8_bar_sd")
 
-[node name="SkillIcon" type="TextureRect" parent="BarContainer/ActiveSkillBox"]
+[node name="Frame" type="TextureRect" parent="BarContainer"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -14.0
-offset_top = -14.0
-offset_right = 14.0
-offset_bottom = 14.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("13_skill_twisting")
+texture = ExtResource("2_frame")
+expand_mode = 1
+
+[node name="OrbShines" type="Control" parent="BarContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LifeOrbShine" type="TextureRect" parent="BarContainer/OrbShines"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 28.0
+offset_right = 141.0
+offset_bottom = 150.0
+mouse_filter = 2
+texture = ExtResource("6_orb_shine")
+expand_mode = 1
+
+[node name="ManaOrbShine" type="TextureRect" parent="BarContainer/OrbShines"]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 28.0
+offset_right = 764.0
+offset_bottom = 150.0
+mouse_filter = 2
+texture = ExtResource("6_orb_shine")
 expand_mode = 1
 
 [node name="MenuButtons" type="Control" parent="BarContainer"]
@@ -184,73 +228,108 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-
-[node name="InvBtn" type="TextureButton" parent="BarContainer/MenuButtons"]
-layout_mode = 0
-offset_left = 788.0
-offset_top = 7.0
-offset_right = 822.0
-offset_bottom = 45.0
-tooltip_text = "Hành trang Túi đồ (I / V)"
-texture_normal = ExtResource("7_btn_inv")
-ignore_texture_size = true
-stretch_mode = 4
+mouse_filter = 1
 
 [node name="CharBtn" type="TextureButton" parent="BarContainer/MenuButtons"]
 layout_mode = 0
-offset_left = 826.0
-offset_top = 7.0
-offset_right = 860.0
-offset_bottom = 45.0
-tooltip_text = "Bảng Thông tin Nhân vật (C)"
-texture_normal = ExtResource("8_btn_char")
+offset_left = 188.0
+offset_top = 42.0
+offset_right = 272.0
+offset_bottom = 138.0
+tooltip_text = "Thông tin Nhân vật (C)"
+texture_normal = ExtResource("10_btn_char_n")
+texture_pressed = ExtResource("12_btn_char_p")
+texture_hover = ExtResource("11_btn_char_h")
 ignore_texture_size = true
-stretch_mode = 4
+stretch_mode = 0
 
-[node name="PartyBtn" type="TextureButton" parent="BarContainer/MenuButtons"]
+[node name="InvBtn" type="TextureButton" parent="BarContainer/MenuButtons"]
 layout_mode = 0
-offset_left = 864.0
-offset_top = 7.0
-offset_right = 898.0
-offset_bottom = 45.0
-tooltip_text = "Tổ đội Nhóm (P)"
-texture_normal = ExtResource("9_btn_party")
+offset_left = 272.0
+offset_top = 42.0
+offset_right = 356.0
+offset_bottom = 138.0
+tooltip_text = "Hành trang Túi đồ (I / V)"
+texture_normal = ExtResource("13_btn_inv_n")
+texture_pressed = ExtResource("15_btn_inv_p")
+texture_hover = ExtResource("14_btn_inv_h")
 ignore_texture_size = true
-stretch_mode = 4
+stretch_mode = 0
+
+[node name="MapBtn" type="TextureButton" parent="BarContainer/MenuButtons"]
+layout_mode = 0
+offset_left = 356.0
+offset_top = 42.0
+offset_right = 440.0
+offset_bottom = 138.0
+tooltip_text = "Bản đồ Thế giới & Dịch chuyển (M)"
+texture_normal = ExtResource("16_btn_map_n")
+texture_pressed = ExtResource("18_btn_map_p")
+texture_hover = ExtResource("17_btn_map_h")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="QuestBtn" type="TextureButton" parent="BarContainer/MenuButtons"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 42.0
+offset_right = 524.0
+offset_bottom = 138.0
+tooltip_text = "Bảng Kỹ năng & Nhiệm vụ (K)"
+texture_normal = ExtResource("19_btn_quest_n")
+texture_pressed = ExtResource("21_btn_quest_p")
+texture_hover = ExtResource("20_btn_quest_h")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="OptionsBtn" type="TextureButton" parent="BarContainer/MenuButtons"]
 layout_mode = 0
-offset_left = 902.0
-offset_top = 7.0
-offset_right = 936.0
-offset_bottom = 45.0
-tooltip_text = "Cài đặt Tùy chọn (O)"
-texture_normal = ExtResource("10_btn_options")
+offset_left = 524.0
+offset_top = 42.0
+offset_right = 608.0
+offset_bottom = 138.0
+tooltip_text = "Kho Đồ GM & Cài đặt (O / B)"
+texture_normal = ExtResource("22_btn_opt_n")
+texture_pressed = ExtResource("24_btn_opt_p")
+texture_hover = ExtResource("23_btn_opt_h")
 ignore_texture_size = true
-stretch_mode = 4
+stretch_mode = 0
 
-[node name="ExitBtn" type="TextureButton" parent="BarContainer/MenuButtons"]
+[node name="CharInfoLabel" type="Label" parent="BarContainer"]
 layout_mode = 0
-offset_left = 940.0
-offset_top = 7.0
-offset_right = 974.0
-offset_bottom = 45.0
-tooltip_text = "Thoát Game (Esc)"
-texture_normal = ExtResource("11_btn_exit")
-ignore_texture_size = true
-stretch_mode = 4
+offset_left = 238.0
+offset_top = 8.0
+offset_right = 440.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(1, 0.9, 0.65, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "Dark Knight  •  Cấp 400"
+vertical_alignment = 1
 
 [node name="ZenLabel" type="Label" parent="BarContainer"]
 layout_mode = 0
-offset_left = 900.0
-offset_top = 37.0
-offset_right = 974.0
-offset_bottom = 49.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
+offset_left = 440.0
+offset_top = 8.0
+offset_right = 546.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(1, 0.85, 0.25, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 9
-text = "0"
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 11
+text = "🪙 10,000"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="ExpProgressBar" type="ProgressBar" parent="BarContainer"]
+layout_mode = 0
+offset_left = 244.0
+offset_top = 28.0
+offset_right = 540.0
+offset_bottom = 34.0
+tooltip_text = "Kinh nghiệm (EXP)"
+theme_override_styles/background = SubResource("StyleBoxFlat_exp_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_exp_fill")
+value = 25.0
+show_percentage = false

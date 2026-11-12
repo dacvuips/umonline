@@ -14,7 +14,7 @@ const MuAudioManagerRes = preload("res://src/audio/MuAudioManager.gd")
 
 const W := 770.0
 const H := 570.0
-const ITEMS_PER_PAGE := 24
+const ITEMS_PER_PAGE := 48
 
 var player = null
 
@@ -23,6 +23,7 @@ var _all_items: Array = []
 var _filtered_items: Array = []
 var _current_page: int = 0
 var _selected_info: Dictionary = {}
+var _card_buttons: Dictionary = {}
 
 # Node giao diện
 var _panel_root: Control
@@ -39,6 +40,7 @@ var _harmony_check: CheckBox
 var _luck_check: CheckBox
 var _skill_check: CheckBox
 var _opt_option: OptionButton
+var _fenrir_option: OptionButton   # loại Sói Tinh (chỉ hiện khi chọn Horn of Fenrir)
 
 var _count_label: Label
 var _page_label: Label
@@ -53,6 +55,8 @@ var _preview_stats: RichTextLabel
 var _btn_take: Button
 var _btn_equip: Button
 var _btn_full_set: Button
+var _btn_event_bundle: Button
+var _btn_all_events: Button
 var _btn_zen: Button
 var _btn_point: Button
 var _btn_god_mode: Button
@@ -62,6 +66,16 @@ var _btn_skill_all: Button
 # Danh mục phân loại
 const CATEGORIES := [
 	{"name": "— Tất Cả Thể Loại —", "group": -1},
+	{"name": "🎟️ TẤT CẢ VẬT PHẨM SỰ KIỆN (All Events)", "group": -555},
+	{"name": "🩸 Blood Castle (Lâu Đài Máu: Vé +1..8 & NL)", "group": -551},
+	{"name": "😈 Devil Square (Quảng Trường Quỷ: Vé +1..7 & NL)", "group": -552},
+	{"name": "🏰 Chaos Castle (Hỗn Nguyên Lâu: Vé +1..7)", "group": -553},
+	{"name": "🏛️ Đền Kalima (Bản Đồ Kalima +1..7, Huy Hiệu)", "group": -554},
+	{"name": "🔮 Illusion Temple (Đền Ảo Ảnh: Vé +1..6 & NL)", "group": -556},
+	{"name": "🛡️ Crywolf, Kanturu & CTC (Công Thành, Life Stone)", "group": -557},
+	{"name": "👑 Imperial Guardian & Doppelganger (Gaion, Gương)", "group": -558},
+	{"name": "📜 Nhiệm Vụ Cấp 2 & 3 (Sách Đế Vương, Gươm, Condor)", "group": -559},
+	{"name": "🎁 Hộp Kundun +1..5 & Quà Lễ Hội (May Mắn, Heart)", "group": -560},
 	{"name": "💎 CÁC LOẠI NGỌC QUÝ (Jewels)", "group": -999},
 	{"name": "🦄 THÚ CƯỠI & THẦN THÚ (Mounts & Pets)", "group": -998},
 	{"name": "💍 NHẪN & DÂY CHUYỀN (Rings & Pendants)", "group": -997},
@@ -210,6 +224,19 @@ func _build_ui() -> void:
 	title_lbl.position = Vector2(16, 10)
 	_panel_root.add_child(title_lbl)
 
+	var btn_gm_panel := Button.new()
+	btn_gm_panel.text = "👑 BẢNG GM (Buff Cấp & Reset)"
+	btn_gm_panel.position = Vector2(W - 275, 6)
+	btn_gm_panel.size = Vector2(230, 26)
+	btn_gm_panel.add_theme_font_size_override("font_size", 11)
+	btn_gm_panel.add_theme_color_override("font_color", Color(1.0, 0.9, 0.3))
+	btn_gm_panel.pressed.connect(func():
+		var hud = get_tree().get_first_node_in_group("HUD")
+		if hud and hud.has_method("toggle_gm_panel"):
+			hud.toggle_gm_panel()
+	)
+	_panel_root.add_child(btn_gm_panel)
+
 	# Nút đóng [X]
 	var btn_close := Button.new()
 	btn_close.text = "✖"
@@ -294,6 +321,18 @@ func _build_ui() -> void:
 	_opt_option.selected = 7 # Mặc định +28
 	_opt_option.item_selected.connect(func(_idx): _update_preview())
 	row2a.add_child(_opt_option)
+
+	# Loại Sói Tinh: cờ Excellent 0 = đỏ, 1 = Destroy (đen), 2 = Protect (xanh), 4 = Illusion (vàng)
+	_fenrir_option = OptionButton.new()
+	_fenrir_option.custom_minimum_size = Vector2(150, 22)
+	_fenrir_option.add_item("Fenrir Đỏ", 0)
+	_fenrir_option.add_item("Fenrir Đen (+Destroy)", 1)
+	_fenrir_option.add_item("Fenrir Xanh (+Protect)", 2)
+	_fenrir_option.add_item("Fenrir Vàng (+Illusion)", 4)
+	_fenrir_option.selected = 3
+	_fenrir_option.visible = false
+	_fenrir_option.item_selected.connect(func(_idx): _update_preview())
+	row2a.add_child(_fenrir_option)
 
 	# Nút bấm 1-click kích hoạt Full Tất Cả Option Siêu Phẩm
 	var btn_max := Button.new()
@@ -400,7 +439,7 @@ func _build_ui() -> void:
 	left_box.add_child(scroll)
 
 	_item_grid = GridContainer.new()
-	_item_grid.columns = 3 # 3 cột thẻ món đồ
+	_item_grid.columns = 8 # 8 cột ô vật phẩm chuẩn túi đồ
 	_item_grid.add_theme_constant_override("h_separation", 6)
 	_item_grid.add_theme_constant_override("v_separation", 6)
 	_item_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -482,6 +521,25 @@ func _build_ui() -> void:
 	_btn_full_set.pressed.connect(_on_take_full_set)
 	right_box.add_child(_btn_full_set)
 
+	# Nút nhận nhanh combo sự kiện
+	_btn_event_bundle = Button.new()
+	_btn_event_bundle.text = "🎟️ LẤY VÉ SỰ KIỆN NÀY"
+	_btn_event_bundle.position = Vector2(10, 310)
+	_btn_event_bundle.size = Vector2(246, 20)
+	_btn_event_bundle.add_theme_color_override("font_color", Color(1.0, 0.85, 0.2))
+	_btn_event_bundle.visible = false
+	_btn_event_bundle.pressed.connect(_on_take_event_bundle)
+	right_box.add_child(_btn_event_bundle)
+
+	_btn_all_events = Button.new()
+	_btn_all_events.text = "⭐ NHẬN TRỌN BỘ VÉ TẤT CẢ SỰ KIỆN"
+	_btn_all_events.position = Vector2(10, 310)
+	_btn_all_events.size = Vector2(246, 20)
+	_btn_all_events.add_theme_color_override("font_color", Color(1.0, 0.9, 0.2))
+	_btn_all_events.visible = false
+	_btn_all_events.pressed.connect(_on_take_all_events)
+	right_box.add_child(_btn_all_events)
+
 	_btn_zen = Button.new()
 	_btn_zen.text = "💰 +10M Zen"
 	_btn_zen.position = Vector2(10, 332)
@@ -554,7 +612,15 @@ func _filter_items() -> void:
 		var n := int(it.get("number", 0))
 
 		# Lọc theo thể loại
-		if cat_grp == -999:
+		if cat_grp == -555:
+			# Tất Cả Vật Phẩm Sự Kiện
+			if not MuItemsRes.is_event_item(it):
+				continue
+		elif cat_grp in [-551, -552, -553, -554, -556, -557, -558, -559, -560]:
+			# Từng nhóm sự kiện cụ thể
+			if MuItemsRes.event_category_id(it) != cat_grp:
+				continue
+		elif cat_grp == -999:
 			# Các Loại Ngọc Quý (Bless, Soul, Chaos, Life, Creation, Guardian, Harmony, Gemstones, Bundles)
 			if not MuItemsRes.is_jewel(it):
 				continue
@@ -614,6 +680,7 @@ func _filter_items() -> void:
 	_render_page()
 
 func _render_page() -> void:
+	_card_buttons.clear()
 	for c in _item_grid.get_children():
 		c.queue_free()
 
@@ -632,6 +699,8 @@ func _render_page() -> void:
 	for i in range(start, end):
 		var it: Dictionary = _filtered_items[i]
 		var btn := _create_item_card(it)
+		var key := "%s:%s" % [str(it.get("group", -1)), str(it.get("number", -1))]
+		_card_buttons[key] = btn
 		_item_grid.add_child(btn)
 
 func _create_item_card(it: Dictionary) -> Control:
@@ -642,53 +711,95 @@ func _create_item_card(it: Dictionary) -> Control:
 		item_name = "Item %d-%d" % [g, n]
 
 	var b := Button.new()
-	b.custom_minimum_size = Vector2(148, 44)
-	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	b.clip_text = true
+	b.custom_minimum_size = Vector2(52, 52)
+	b.focus_mode = Control.FOCUS_NONE
+	b.tooltip_text = "%s %s" % [item_name, _group_badge(it)]
 
-	var hbox := HBoxContainer.new()
-	hbox.set_anchors_preset(Control.PRESET_FULL_RECT)
-	hbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	hbox.position = Vector2(4, 2)
-	hbox.size = Vector2(140, 40)
-	hbox.add_theme_constant_override("separation", 6)
-	b.add_child(hbox)
+	var is_sel: bool = (int(_selected_info.get("group", -1)) == g and int(_selected_info.get("number", -1)) == n)
+	_apply_slot_style(b, is_sel)
 
-	# Icon nhỏ 3D
+	# Ảnh đồ vật phẩm (hiển thị vừa khít trong ô)
 	var icon_rect := TextureRect.new()
-	icon_rect.custom_minimum_size = Vector2(36, 36)
+	icon_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	icon_rect.offset_left = 3
+	icon_rect.offset_top = 3
+	icon_rect.offset_right = -3
+	icon_rect.offset_bottom = -3
 	icon_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	icon_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	icon_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 	var sample := MuItemsRes.make(g, n, 0)
-	var t: Texture2D = MuItemIconRes.icon(get_tree(), sample)
+	var t: Texture2D = MuItemIconRes.catalog_icon(get_tree(), sample, 52)
 	if t:
 		icon_rect.texture = t
-	hbox.add_child(icon_rect)
+	else:
+		var fallback_lbl := Label.new()
+		fallback_lbl.text = "%d:%d" % [g, n]
+		fallback_lbl.set_anchors_preset(Control.PRESET_FULL_RECT)
+		fallback_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		fallback_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		fallback_lbl.add_theme_font_size_override("font_size", 9)
+		fallback_lbl.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6))
+		b.add_child(fallback_lbl)
 
-	# Tên & Nhóm
-	var vbox := VBoxContainer.new()
-	vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	hbox.add_child(vbox)
-
-	var lbl_name := Label.new()
-	lbl_name.text = item_name
-	lbl_name.add_theme_font_size_override("font_size", 11)
-	lbl_name.clip_text = true
-	vbox.add_child(lbl_name)
-
-	var lbl_grp := Label.new()
-	lbl_grp.text = _group_badge(it)
-	lbl_grp.add_theme_font_size_override("font_size", 10)
-	lbl_grp.add_theme_color_override("font_color", Color(0.7, 0.7, 0.5))
-	vbox.add_child(lbl_grp)
-
+	b.add_child(icon_rect)
 	b.pressed.connect(func(): _select_item(it))
 	return b
 
+func _apply_slot_style(btn: Button, is_sel: bool) -> void:
+	var normal_sb := StyleBoxFlat.new()
+	var hover_sb := StyleBoxFlat.new()
+	var pressed_sb := StyleBoxFlat.new()
+
+	if is_sel:
+		normal_sb.bg_color = Color(0.24, 0.20, 0.10, 0.95)
+		normal_sb.border_color = Color(1.0, 0.85, 0.2, 1.0)
+		normal_sb.set_border_width_all(2)
+
+		hover_sb.bg_color = Color(0.30, 0.25, 0.13, 0.98)
+		hover_sb.border_color = Color(1.0, 0.95, 0.4, 1.0)
+		hover_sb.set_border_width_all(2)
+
+		pressed_sb.bg_color = Color(0.35, 0.28, 0.15, 1.0)
+		pressed_sb.border_color = Color(1.0, 0.9, 0.3, 1.0)
+		pressed_sb.set_border_width_all(2)
+	else:
+		normal_sb.bg_color = Color(0.10, 0.11, 0.13, 0.9)
+		normal_sb.border_color = Color(0.32, 0.32, 0.38, 0.75)
+		normal_sb.set_border_width_all(1)
+
+		hover_sb.bg_color = Color(0.18, 0.20, 0.26, 0.95)
+		hover_sb.border_color = Color(0.7, 0.75, 0.88, 1.0)
+		hover_sb.set_border_width_all(1)
+
+		pressed_sb.bg_color = Color(0.24, 0.22, 0.16, 0.95)
+		pressed_sb.border_color = Color(0.9, 0.8, 0.3, 1.0)
+		pressed_sb.set_border_width_all(1)
+
+	normal_sb.set_corner_radius_all(2)
+	hover_sb.set_corner_radius_all(2)
+	pressed_sb.set_corner_radius_all(2)
+
+	btn.add_theme_stylebox_override("normal", normal_sb)
+	btn.add_theme_stylebox_override("hover", hover_sb)
+	btn.add_theme_stylebox_override("pressed", pressed_sb)
+
 func _group_badge(it: Dictionary) -> String:
 	var g := int(it.get("group", 0))
+	if MuItemsRes.is_event_item(it):
+		var ev_id := MuItemsRes.event_category_id(it)
+		match ev_id:
+			-551: return "[Blood Castle]"
+			-552: return "[Devil Square]"
+			-553: return "[Chaos Castle]"
+			-554: return "[Kalima]"
+			-556: return "[Illusion]"
+			-557: return "[Crywolf/CTC]"
+			-558: return "[Gaion/Doppel]"
+			-559: return "[Nhiệm Vụ]"
+			-560: return "[Hộp Quà]"
+		return "[Sự Kiện]"
 	if MuItemsRes.is_jewel(it):
 		return "[Ngọc Quý]"
 	if MuItemsRes.is_mount(it):
@@ -719,12 +830,21 @@ func _group_badge(it: Dictionary) -> String:
 	return "[Item]"
 
 func _select_item(it: Dictionary) -> void:
+	var old_key := "%s:%s" % [str(_selected_info.get("group", -1)), str(_selected_info.get("number", -1))]
 	_selected_info = it
+	var new_key := "%s:%s" % [str(it.get("group", -1)), str(it.get("number", -1))]
+	if _card_buttons.has(old_key) and is_instance_valid(_card_buttons[old_key]):
+		_apply_slot_style(_card_buttons[old_key], false)
+	if _card_buttons.has(new_key) and is_instance_valid(_card_buttons[new_key]):
+		_apply_slot_style(_card_buttons[new_key], true)
+
 	var req = it.get("requirements", {})
 	var req_lv: int = int(req.get("level", 0)) if req is Dictionary else 0
 	var it_lv: int = int(it.get("level", 0))
 	if (it_lv >= 380 or req_lv >= 380) and _purple_check:
 		_purple_check.button_pressed = true
+	if _fenrir_option:
+		_fenrir_option.visible = int(it.get("group", 0)) == 13 and int(it.get("number", 0)) == 37
 	_update_preview()
 
 func _on_prev_page() -> void:
@@ -782,7 +902,8 @@ func _get_current_configured_item() -> Dictionary:
 		"harmony": harmony,
 		"luck": luck,
 		"skill": skill,
-		"opt": opt
+		"opt": opt,
+		"excellent_flags": _fenrir_option.get_item_id(_fenrir_option.selected) if (_fenrir_option and _fenrir_option.visible) else 0
 	})
 
 func _update_preview() -> void:
@@ -802,7 +923,7 @@ func _update_preview() -> void:
 	var harmony := bool(configured.get("harmony", false))
 
 	# Cập nhật ảnh render 3D
-	var t: Texture2D = MuItemIconRes.icon(get_tree(), configured)
+	var t: Texture2D = MuItemIconRes.preview_icon(get_tree(), configured, Vector2i(246, 100))
 	_preview_rect.texture = t
 
 	# Cập nhật tên hiển thị & màu sắc
@@ -920,7 +1041,30 @@ func _update_preview() -> void:
 	_preview_stats.text = bb
 
 	# Kiểm tra nút full set: chỉ hiện nếu là đồ bộ (Group 7..11)
-	_btn_full_set.visible = (g >= 7 and g <= 11)
+	var is_set := (g >= 7 and g <= 11)
+	_btn_full_set.visible = is_set
+
+	# Kiểm tra nút combo sự kiện
+	var is_ev := MuItemsRes.is_event_item(configured)
+	var ev_id := MuItemsRes.event_category_id(configured)
+	var cat_idx: int = _cat_option.selected if _cat_option else 0
+	var cat_grp: int = CATEGORIES[cat_idx]["group"]
+
+	_btn_all_events.visible = (cat_grp == -555) and not is_set
+	_btn_event_bundle.visible = is_ev and not is_set and not _btn_all_events.visible
+
+	if is_ev and not is_set:
+		match ev_id:
+			-551: _btn_event_bundle.text = "🩸 Nhận Full Vé Blood Castle"
+			-552: _btn_event_bundle.text = "😈 Nhận Full Vé Devil Square"
+			-553: _btn_event_bundle.text = "🏰 Nhận Full Vé Chaos Castle"
+			-554: _btn_event_bundle.text = "🏛️ Nhận Full Vé Kalima"
+			-556: _btn_event_bundle.text = "🔮 Nhận Full Vé Illusion Temple"
+			-557: _btn_event_bundle.text = "🛡️ Nhận Vé Crywolf, Kanturu & CTC"
+			-558: _btn_event_bundle.text = "👑 Nhận Vé Gaion & Doppelganger"
+			-559: _btn_event_bundle.text = "📜 Nhận Đồ Nhiệm Vụ Cấp 2 & 3"
+			-560: _btn_event_bundle.text = "🎁 Nhận Bộ Hộp Kundun (+1..5)"
+			_: _btn_event_bundle.text = "🎟️ LẤY VÉ SỰ KIỆN NÀY"
 
 func _slot_vn_name(inf: Dictionary, g: int) -> String:
 	if MuItemsRes.is_jewel(inf):
@@ -1065,6 +1209,46 @@ func _on_take_full_set() -> void:
 			hud.inventory_window.update_display()
 	else:
 		_notify("Túi đồ đã đầy, không thể thêm trọn bộ!", Color.RED)
+
+func _on_take_event_bundle() -> void:
+	if player == null or _selected_info.is_empty():
+		return
+	var it := _get_current_configured_item()
+	var ev_id := MuItemsRes.event_category_id(it)
+	if ev_id == 0:
+		return
+	var items := MuItemsRes.get_event_bundle_items(ev_id)
+	var count := 0
+	for item in items:
+		if player.inv_add(item):
+			count += 1
+	if count > 0:
+		MuAudioManagerRes.play_jewel_drop()
+		_notify("Đã nhận %d vật phẩm sự kiện vào túi đồ!" % count, Color(0.2, 1.0, 0.5))
+		var hud = _hud()
+		if hud and hud.inventory_window:
+			hud.inventory_window.visible = true
+			hud.inventory_window.update_display()
+	else:
+		_notify("Túi đồ đã đầy, không thể thêm vật phẩm sự kiện!", Color.RED)
+
+func _on_take_all_events() -> void:
+	if player == null:
+		return
+	var items := MuItemsRes.get_all_event_tickets()
+	var count := 0
+	for item in items:
+		if player.inv_add(item):
+			count += 1
+	if count > 0:
+		MuAudioManagerRes.play_jewel_drop()
+		_notify("⭐ ĐÃ NHẬN TRỌN BỘ %d VÉ SỰ KIỆN TOÀN GAME VÀO TÚI ĐỒ!" % count, Color(1.0, 0.85, 0.2))
+		var hud = _hud()
+		if hud and hud.inventory_window:
+			hud.inventory_window.visible = true
+			hud.inventory_window.update_display()
+	else:
+		_notify("Túi đồ đã đầy, không thể thêm vé sự kiện!", Color.RED)
 
 func _on_get_point() -> void:
 	if player == null:
