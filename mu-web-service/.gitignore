@@ -1,0 +1,6 @@
+dist/
+deploy.env
+.last_tag
+.site_tag
+*.log
+__pycache__/

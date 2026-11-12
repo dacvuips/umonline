@@ -1,0 +1,68 @@
+{
+  "_doc": "Cách chia gói. 'core' = thứ nằm trong web index.pck / APK (màn hình đăng nhập chạy được ngay). Phần còn lại chia thành gói tải ngầm theo thứ tự. tier 1 = phải xong trước khi vào màn chọn nhân vật; tier 2 = phải xong trước khi vào thế giới game.",
+
+  "core_roots": [
+    "project.godot",
+    "mu_content.json",
+    "src/boot/**",
+    "src/scenes/LoginScene.tscn",
+    "src/scenes/ServerSelectScene.tscn",
+    "src/scenes/CharacterSelectScene.tscn",
+    "src/scenes/CharacterCreateScene.tscn",
+    "src/scenes/CharMakeModal.tscn",
+    "src/**/*.gd",
+    "*.gdshader",
+    "*.gd",
+    "addons/**"
+  ],
+
+  "_stop_at": "Không đi theo tham chiếu vào các file này khi quét (chúng thuộc gói game, nạp sau cổng tải).",
+  "stop_at": [
+    "src/scenes/Main.tscn"
+  ],
+
+  "_heavy_zones": "Thư mục nặng: quét tham chiếu KHÔNG tự kéo vào core (tránh vô tình kéo cả 900 MB). Muốn giữ trong core thì ghi vào core_extra.",
+  "heavy_zones": [
+    "assets/mu/**",
+    "assets/lorencia/**",
+    "assets/models/**"
+  ],
+
+  "_core_extra": "Tài nguyên heavy mà màn đăng nhập/chọn server cần (nạp động bằng đường dẫn ghép chuỗi nên quét không thấy). Thế giới nền đăng nhập = World95.",
+  "core_extra": [
+    "assets/mu/Logo/**",
+    "assets/textures/ui/login_classic/btn_*",
+    "assets/mu/Music/login_theme.*",
+    "assets/mu/Sound/iButton*",
+    "assets/mu/Sound/iCreateWindow*",
+    "assets/mu/maps/World95/**",
+    "assets/mu/Object95/**",
+    "assets/video/**"
+  ],
+
+  "never_ship": [
+    ".godot/**", ".git/**", ".import/**", "**/*.import", "**/*.uid", "**/*.md", "**/*.bak", "**/*.stackdump",
+    "**/*.txt", "**/*.tmp", "**/*.ps1", "**/*.bat", "**/*.py", "**/*.log",
+    "_backup*/**", "tools/**", "gateway/**", "export_presets.cfg", "build/**", "android/**", "mu-web-service/**", "website/**"
+  ],
+
+  "max_pack_mb": 120,
+
+  "packs": [
+    {
+      "name": "charsel",
+      "tier": 1,
+      "_doc": "Cần để dựng màn chọn nhân vật: model nhân vật, trang bị, nền World74/75/94.",
+      "globs": [
+        "assets/mu/Player/**", "assets/mu/Item/**",
+        "assets/mu/maps/World74/**", "assets/mu/maps/World75/**", "assets/mu/maps/World94/**",
+        "assets/mu/Object74/**", "assets/mu/Object75/**", "assets/mu/Object94/**"
+      ]
+    },
+    { "name": "monsters", "tier": 2, "globs": ["assets/mu/Monster/**", "assets/mu/NPC/**", "assets/models/**", "assets/textures/monsters/**"] },
+    { "name": "sound",    "tier": 2, "globs": ["assets/mu/Sound/**", "assets/mu/Music/**"] },
+    { "name": "fx",       "tier": 2, "globs": ["assets/mu/Skill/**", "assets/mu/Effect/**", "assets/mu/fx/**", "assets/mu/icons/**", "assets/mu/ui/**"] },
+    { "name": "maps",     "tier": 2, "globs": ["assets/mu/maps/**", "assets/mu/Object*/**", "assets/lorencia/**", "assets/textures/world1/**", "assets/textures/water/**"] },
+    { "name": "game",     "tier": 2, "_doc": "Gói bắt đầu cuối: gom mọi thứ còn lại (Main.tscn, mã thế giới, UI game).", "globs": ["**"] }
+  ]
+}

@@ -1,0 +1,5 @@
+dist/content
+dist/apk
+.git
+deploy.env
+tools

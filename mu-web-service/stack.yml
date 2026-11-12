@@ -1,0 +1,105 @@
+# DOCKER SWARM STACK "mu" — web game + gói nội dung + gateway + OpenMU.
+# Không chạy tay: dùng deploy.sh (xuất các biến ${...} từ /opt/mu/stack.env rồi `docker stack deploy`).
+#   HUB / TAG   image <HUB>/mu-web:<TAG>, <HUB>/mu-gateway:<TAG>
+#   MU_DIR      thư mục trên VPS (mặc định /opt/mu): content/ (manifest + packs), download/ (APK)
+#   HTTP_PORT   cổng nginx mở ra ngoài (mặc định 8090). Đặt Caddy / Nginx Proxy Manager / Cloudflare phía trước lo HTTPS.
+#   DB_PASSWORD mật khẩu Postgres của OpenMU
+#
+# Mọi service ở node có nhãn mu.main=true (deploy.sh tự gắn cho manager) vì bind-mount thư mục cục bộ + volume DB.
+version: "3.8"
+
+x-main-node: &main-node
+  constraints: [node.labels.mu.main == true]
+
+services:
+  mu-web:
+    image: ${HUB}/mu-web:${TAG}
+    volumes:
+      - { type: bind, source: "${MU_DIR}/content",  target: /srv/content,  read_only: true }
+      - { type: bind, source: "${MU_DIR}/download", target: /srv/download, read_only: true }
+    ports:
+      - { target: 80, published: "${HTTP_PORT:-8090}", protocol: tcp, mode: host }   # mode host: thấy IP thật người chơi
+    networks: [mu]
+    deploy:
+      replicas: 1
+      placement: *main-node
+      restart_policy: { condition: any, delay: 3s }
+      update_config: { order: stop-first, failure_action: rollback }
+
+  # Trang thông tin (đăng ký/đăng nhập, sự kiện, tải game) — muonline.viettheo.site. Tài khoản lưu ở ${MU_DIR}/site-data.
+  mu-site:
+    image: ${HUB}/mu-site:${SITE_TAG:-none}
+    environment:            # dùng chung tài khoản với game: ghi/đọc thẳng CSDL OpenMU
+      DB_HOST: mu-db
+      DB_USER: postgres
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: openmu
+    volumes:
+      - { type: bind, source: "${MU_DIR}/site-data", target: /app/data }
+    ports:
+      - { target: 8000, published: "${SITE_PORT:-8091}", protocol: tcp, mode: host }
+    networks: [mu]
+    deploy:
+      replicas: 1
+      placement: *main-node
+      restart_policy: { condition: any, delay: 3s }
+      update_config: { order: stop-first, failure_action: rollback }
+
+  mu-gateway:
+    image: ${HUB}/mu-gateway:${TAG}
+    environment:
+      OPENMU_HOST: openmu
+      OPENMU_PORT: "45901"
+      MOCK_WHEN_OFFLINE: "0"
+    networks: [mu]
+    deploy:
+      replicas: 1
+      placement: *main-node
+      restart_policy: { condition: any, delay: 3s }
+      update_config: { order: start-first, failure_action: rollback }
+
+  # Game server MU (OpenMU). Bỏ service này + mu-db nếu OpenMU chạy ở máy khác (đặt OPENMU_HOST cho mu-gateway).
+  openmu:
+    image: munique/openmu:latest
+    environment:
+      DB_HOST: mu-db
+      DB_ADMIN_USER: postgres
+      DB_ADMIN_PW: ${DB_PASSWORD}
+      ASPNETCORE_URLS: http://+:8080
+      OPENMU_ADMIN_USER: ${OPENMU_ADMIN_USER:-}
+      OPENMU_ADMIN_PASSWORD: ${OPENMU_ADMIN_PASSWORD:-}
+    volumes:
+      - adminpanel-keys:/app/data-protection-keys
+    working_dir: /app/
+    networks: [mu]
+    deploy:
+      replicas: 1
+      placement: *main-node
+      restart_policy: { condition: any, delay: 5s }
+
+  mu-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: openmu
+    volumes: [dbdata:/var/lib/postgresql/data]
+    networks: [mu]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 30
+    stop_grace_period: 60s
+    deploy:
+      replicas: 1
+      placement: *main-node
+      restart_policy: { condition: any, delay: 5s }
+
+networks:
+  mu:
+    driver: overlay
+    attachable: true   # proxy có sẵn (Caddy/NPM/Traefik) nối vào mạng này để tới mu-web:80
+
+volumes:
+  dbdata:
+  adminpanel-keys:

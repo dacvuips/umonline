@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MU Online</title>
+<meta name="description" content="MU Online: bảy lớp nhân vật, trang bị +15, cánh và thú cưỡi. Đăng ký, tải game trên PC, Android, iOS hoặc chơi ngay trên trình duyệt.">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Noto+Serif:wght@600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+	<div class="wrap top-in">
+		<a class="brand" href="#home" aria-label="MU Online - trang chủ">
+			<img src="assets/mu_logo.png" alt="" width="120" height="46">
+			<span class="brand-name">MU Online</span>
+		</a>
+		<nav class="nav" id="nav" aria-label="Điều hướng chính">
+			<a href="#home">Trang chủ</a>
+			<a href="#lop-nhan-vat">Lớp nhân vật</a>
+			<a href="#tai-game">Tải game</a>
+			<a href="#bat-dau">Bắt đầu</a>
+			<div class="nav-auth" id="navAuth"></div>
+		</nav>
+		<div class="auth-area" id="authArea"></div>
+		<button class="burger" id="burger" aria-label="Mở menu" aria-expanded="false"><span></span><span></span><span></span></button>
+	</div>
+</header>
+
+<main>
+	<!-- ===== HERO ===== -->
+	<section class="hero" id="home">
+		<div class="hero-bg" aria-hidden="true"></div>
+		<div class="wrap hero-in">
+			<p class="eyebrow">Huyền thoại một thời — trở lại</p>
+			<img class="hero-logo" src="assets/mu_logo.png" alt="MU Online" width="440" height="168">
+			<p class="lead">Bảy lớp nhân vật, ép đồ +15, cánh cấp ba và thú cưỡi Fenrir. Tạo nhân vật, luyện cấp và cùng bạn bè chinh phục Lorencia, Devias, Atlans, Kanturu.</p>
+			<div class="cta">
+				<a class="btn gold big" href="#tai-game">Tải game</a>
+				<a class="btn ghost big" href="https://mu.viettheo.site/">Chơi trên web</a>
+				<button class="btn ghost big" data-open="register" id="heroRegister">Đăng ký</button>
+			</div>
+		</div>
+	</section>
+
+	<!-- ===== LỐI TẮT ===== -->
+	<section class="wrap quick" aria-label="Lối tắt">
+		<div class="tiles">
+			<button class="tile" data-open="register" id="tileRegister"><i aria-hidden="true">＋</i><b>Đăng ký tài khoản</b></button>
+			<button class="tile" data-open="login" id="tileLogin"><i aria-hidden="true">➜</i><b>Đăng nhập</b></button>
+			<a class="tile" href="#tai-game"><i aria-hidden="true">⇩</i><b>Tải game</b></a>
+			<a class="tile" href="https://mu.viettheo.site/"><i aria-hidden="true">▶</i><b>Chơi trên web</b></a>
+		</div>
+	</section>
+
+	<!-- ===== LỚP NHÂN VẬT ===== -->
+	<section class="section" id="lop-nhan-vat">
+		<div class="wrap">
+			<header class="head">
+				<p class="eyebrow">Lớp nhân vật</p>
+				<h2>Bảy Lớp Nhân Vật</h2>
+				<p class="sub">Mỗi lớp có lối chơi riêng. Ảnh dưới đây là nhân vật mặc trọn bộ giáp, vũ khí, cánh và thú cưỡi, toàn bộ cấp <b>+15 Excellent</b>.</p>
+			</header>
+			<div class="chips" id="chips" role="tablist" aria-label="Lọc lớp nhân vật">
+				<button class="chip on" data-f="all" role="tab" aria-selected="true">Tất cả</button>
+				<button class="chip" data-f="melee" role="tab" aria-selected="false">Cận chiến</button>
+				<button class="chip" data-f="magic" role="tab" aria-selected="false">Phép thuật</button>
+				<button class="chip" data-f="ranged" role="tab" aria-selected="false">Tầm xa &amp; hỗ trợ</button>
+			</div>
+			<div class="classes" id="classes"></div>
+		</div>
+	</section>
+
+	<!-- ===== TẢI GAME ===== -->
+	<section class="section alt" id="tai-game">
+		<div class="wrap">
+			<header class="head">
+				<p class="eyebrow">Tải game</p>
+				<h2>Hướng Dẫn Tải Game</h2>
+				<p class="sub">MU Online có mặt trên PC, Android, iOS và trình duyệt. Dùng chung một tài khoản trên mọi nền tảng.</p>
+			</header>
+			<div class="platforms">
+				<article class="plat">
+					<h3>PC (Windows)</h3>
+					<p class="req-t">Cấu hình đề nghị</p>
+					<ul>
+						<li>Windows 10/11 64-bit</li>
+						<li>CPU 2 nhân, RAM 4 GB</li>
+						<li>Card đồ họa hỗ trợ OpenGL 3.3</li>
+						<li>Dung lượng trống 2 GB</li>
+					</ul>
+					<a class="btn gold dl" data-dl="pc" href="#">Tải cho Windows</a>
+				</article>
+				<article class="plat">
+					<h3>Android</h3>
+					<p class="req-t">Cấu hình đề nghị</p>
+					<ul>
+						<li>Android 8.0 trở lên</li>
+						<li>RAM 3 GB trở lên</li>
+						<li>Dung lượng trống 1,5 GB</li>
+						<li>Kết nối Wi‑Fi hoặc 4G</li>
+					</ul>
+					<a class="btn gold dl" data-dl="android" href="#">Tải cho Android</a>
+				</article>
+				<article class="plat">
+					<h3>iOS (iPhone / iPad)</h3>
+					<p class="req-t">Cấu hình đề nghị</p>
+					<ul>
+						<li>iOS 13.0 trở lên</li>
+						<li>RAM 3 GB trở lên</li>
+						<li>Dung lượng trống 1,5 GB</li>
+						<li>Kết nối Wi‑Fi hoặc 4G</li>
+					</ul>
+					<a class="btn gold dl" data-dl="ios" href="#">Tải cho iOS</a>
+				</article>
+				<article class="plat">
+					<h3>Chơi trên web</h3>
+					<p class="req-t">Cấu hình đề nghị</p>
+					<ul>
+						<li>Chrome, Edge, Safari bản mới</li>
+						<li>Hỗ trợ WebGL 2</li>
+						<li>RAM 4 GB trở lên</li>
+						<li>Không cần cài đặt</li>
+					</ul>
+					<a class="btn gold" href="https://mu.viettheo.site/">Chơi ngay</a>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<!-- ===== BẮT ĐẦU ===== -->
+	<section class="section" id="bat-dau">
+		<div class="wrap">
+			<header class="head">
+				<p class="eyebrow">Bắt đầu</p>
+				<h2>Các Bước Bắt Đầu</h2>
+			</header>
+			<ol class="steps">
+				<li><b>Đăng ký tài khoản</b><span>Tạo tài khoản miễn phí ngay trên trang này.</span></li>
+				<li><b>Tải bản cài đặt</b><span>Chọn bản phù hợp với thiết bị hoặc chơi thẳng trên trình duyệt.</span></li>
+				<li><b>Vào game</b><span>Đăng nhập bằng tài khoản vừa tạo, chọn máy chủ và tạo nhân vật.</span></li>
+				<li><b>Phiêu lưu</b><span>Click đất để di chuyển, chuột phải để dùng kỹ năng đang chọn.</span></li>
+			</ol>
+		</div>
+	</section>
+</main>
+
+<footer class="foot">
+	<div class="wrap foot-in">
+		<img src="assets/mu_logo.png" alt="MU Online" class="foot-logo" width="96" height="37">
+		<p>MU Online là thương hiệu của Webzen Inc. Đây là dự án cộng đồng phi lợi nhuận.</p>
+	</div>
+</footer>
+
+<!-- Hộp thoại đăng nhập / đăng ký -->
+<div class="modal" id="modal" hidden>
+	<div class="backdrop" data-close></div>
+	<div class="panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+		<button class="x" data-close aria-label="Đóng">×</button>
+		<img class="panel-logo" src="assets/mu_logo.png" alt="" width="120" height="46">
+		<h2 id="modalTitle">Đăng nhập</h2>
+		<div class="tabs" role="tablist">
+			<button role="tab" data-tab="login" id="tabLogin" aria-selected="true">Đăng nhập</button>
+			<button role="tab" data-tab="register" id="tabRegister" aria-selected="false">Đăng ký</button>
+		</div>
+
+		<form id="loginForm" autocomplete="on" novalidate>
+			<label>Tên tài khoản
+				<input name="username" autocomplete="username" maxlength="10" required>
+			</label>
+			<label>Mật khẩu
+				<input name="password" type="password" autocomplete="current-password" maxlength="20" required>
+			</label>
+			<p class="msg" role="alert"></p>
+			<button class="btn gold block" type="submit">Đăng nhập</button>
+		</form>
+
+		<form id="registerForm" autocomplete="on" novalidate hidden>
+			<label>Tên tài khoản <small>4–10 ký tự chữ và số</small>
+				<input name="username" autocomplete="username" maxlength="10" required>
+			</label>
+			<label>Mật khẩu <small>6–20 ký tự</small>
+				<input name="password" type="password" autocomplete="new-password" maxlength="20" required>
+			</label>
+			<label>Nhập lại mật khẩu
+				<input name="password2" type="password" autocomplete="new-password" maxlength="20" required>
+			</label>
+			<p class="msg" role="alert"></p>
+			<button class="btn gold block" type="submit">Tạo tài khoản</button>
+		</form>
+	</div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
