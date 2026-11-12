@@ -12,6 +12,7 @@ import signal
 
 import websockets
 
+import auth
 import presence
 
 logging.basicConfig(level=os.environ.get("LOG_LEVEL", "INFO"), format="%(asctime)s [%(levelname)s] %(message)s")
@@ -24,18 +25,53 @@ OPENMU_PORT = int(os.environ.get("OPENMU_PORT", "45901"))
 MOCK = os.environ.get("MOCK_WHEN_OFFLINE", "0") == "1"
 # Client hiện gửi gói đăng nhập tự chế (F1 01, tài khoản/mật khẩu thô) mà OpenMU không hiểu. Gateway gốc của dự án
 # (E:\MuMain\gateway\ws_proxy.py) tự trả lời "đăng nhập thành công"; giữ nguyên hành vi đó. Đặt LOGIN_ACK=0 khi client đã
-# nói đúng giao thức MU để OpenMU tự xác thực.
+# nói đúng giao thức MU để OpenMU tự xác thực. Gói đó được kiểm tra bằng CSDL OpenMU (auth.py) khi có DB_HOST.
 LOGIN_ACK = os.environ.get("LOGIN_ACK", "1") == "1"
 CONNECT_TIMEOUT = float(os.environ.get("CONNECT_TIMEOUT", "5"))
 MAX_MSG = 10 * 1024 * 1024
+
+
+def client_ip(ws) -> str:
+    """IP thật của người chơi: sau reverse proxy lấy phần tử CUỐI của X-Forwarded-For."""
+    try:
+        xff = ws.request.headers.get("X-Forwarded-For", "")
+    except Exception:
+        xff = ""
+    return xff.split(",")[-1].strip() or str((ws.remote_address or ("?",))[0])
+
+
+def _cstr(b: bytes) -> str:
+    return b.split(b"\0")[0].decode("latin1", "ignore")
+
+
+async def local_login(ws, msg: bytes) -> None:
+    """Gói đăng nhập tự chế của client: F1 01 + 10 byte tên + 10 byte mật khẩu. Trả F1 01 <1=đúng | 0=sai mật khẩu>."""
+    name, password = _cstr(msg[4:14]), _cstr(msg[14:24])
+    ip = client_ip(ws)
+    ok = False
+    if not auth.ENABLED:
+        ok = True   # chạy thử không có CSDL: giữ hành vi cũ
+    elif auth.locked_out(ip, name):
+        log.warning("login '%s' từ %s: bị khoá tạm do sai quá nhiều", name, ip)
+    else:
+        try:
+            ok = await asyncio.to_thread(auth.check_password, name, password)
+        except Exception as e:   # lỗi CSDL -> từ chối
+            log.error("login '%s': lỗi xác thực (%r)", name, e)
+        if not ok:
+            auth.note_failure(ip, name)
+    log.info("login '%s' từ %s -> %s", name, ip, "OK" if ok else "TỪ CHỐI")
+    await ws.send(bytes([0xC1, 0x05, 0xF1, 0x01, 0x01 if ok else 0x00]))
 
 
 async def ws_to_tcp(ws, writer):
     async for msg in ws:
         if isinstance(msg, bytes):
             if LOGIN_ACK and len(msg) >= 4 and msg[2] == 0xF1 and msg[3] == 0x01:
-                log.info("login '%s' -> ack cục bộ", msg[4:14].split(b"\0")[0].decode("latin1", "ignore"))
-                await ws.send(bytes([0xC1, 0x05, 0xF1, 0x01, 0x01]))
+                if len(msg) >= 24:
+                    await local_login(ws, msg)
+                else:
+                    await ws.send(bytes([0xC1, 0x05, 0xF1, 0x01, 0x00]))
                 continue
             writer.write(msg)
             await writer.drain()

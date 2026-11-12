@@ -150,9 +150,13 @@ class OpenMuAccounts:
             rows = conn.run('SELECT "LoginName","PasswordHash","State" FROM data."Account" WHERE "LoginName" = :n', n=username)
             if rows:
                 name, hashed, state = rows[0]
-                if self._bcrypt_ok(password, hashed) and state not in (4, 5):  # 4/5 = bị cấm
+                ok = self._bcrypt_ok(password, hashed)
+                if ok and state not in (4, 5):  # 4/5 = bị cấm
                     return name
+                print(f"[web] login '{username}': có trong OpenMU, mật khẩu {'đúng' if ok else 'SAI'}, "
+                      f"state={state}, hash={hashed[:4]}..len={len(hashed)}")
                 return None
+            print(f"[web] login '{username}': KHÔNG có trong data.Account (DB {self.params['database']})")
             # Chưa có trong OpenMU: thử tài khoản web cũ rồi chuyển sang OpenMU.
             legacy_name = self.legacy.verify(username, password)
             if legacy_name and not conn.run('SELECT 1 FROM data."Account" WHERE lower("LoginName") = lower(:n)', n=legacy_name):
@@ -265,8 +269,8 @@ class Handler(SimpleHTTPRequestHandler):
             pw = str(data.get("password", ""))
             if not USER_RE.match(name):
                 return self._json(400, {"error": "Tên tài khoản gồm 4–10 chữ cái hoặc số, không dấu."})
-            if not 6 <= len(pw) <= 20:
-                return self._json(400, {"error": "Mật khẩu cần từ 6 đến 20 ký tự."})
+            if not 6 <= len(pw) <= 10:
+                return self._json(400, {"error": "Mật khẩu cần từ 6 đến 10 ký tự (game chỉ nhận tối đa 10)."})
             try:
                 created = accounts.register(name, pw)
             except Exception as e:  # CSDL game không truy cập được

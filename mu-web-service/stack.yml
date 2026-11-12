@@ -46,8 +46,12 @@ services:
       update_config: { order: stop-first, failure_action: rollback }
 
   mu-gateway:
-    image: ${HUB}/mu-gateway:${TAG}
+    image: ${HUB}/mu-gateway:${GATEWAY_TAG}
     environment:
+      DB_HOST: mu-db                 # kiểm tra mật khẩu đăng nhập game bằng CSDL OpenMU
+      DB_USER: postgres
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: openmu
       OPENMU_HOST: openmu
       OPENMU_PORT: "45901"
       MOCK_WHEN_OFFLINE: "0"

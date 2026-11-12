@@ -90,12 +90,23 @@ cmd_site() {
   echo "Image mu-site: $tag"
 }
 
+# Build image mu-gateway ngay trên VPS (không cần dist/web). Dùng cùng `up` để áp dụng.
+cmd_gateway() {
+  local tag; tag="gw$(date +%Y%m%d%H%M)"
+  "${SSH[@]}" "rm -rf '$MU_DIR/build-gw' && mkdir -p '$MU_DIR/build-gw'"
+  tar -cf - gateway | "${SSH[@]}" "tar -xf - -C '$MU_DIR/build-gw'"
+  "${SCP[@]}" gateway/Dockerfile "$VPS:$MU_DIR/build-gw/gateway/Dockerfile"
+  "${SSH[@]}" "cd '$MU_DIR/build-gw' && docker build -f gateway/Dockerfile -t '$HUB/mu-gateway:$tag' . && rm -rf '$MU_DIR/build-gw'"
+  echo "$tag" > .gateway_tag
+  echo "Image mu-gateway: $tag"
+}
+
 cmd_up() {
   local tag="${1:-$(cat .last_tag 2>/dev/null || true)}"
   [ -n "$tag" ] || { echo "Cần TAG (deploy.sh up <tag>) hoặc chạy images trước"; exit 1; }
   "${SCP[@]}" stack.yml "$VPS:$MU_DIR/stack.yml"
   "${SSH[@]}" "set -e; cd '$MU_DIR'; set -a; . ./stack.env; set +a; \
-    export HUB='$HUB' TAG='$tag' MU_DIR='$MU_DIR' HTTP_PORT='$HTTP_PORT' SITE_PORT='${SITE_PORT:-8091}' SITE_TAG='$(cat .site_tag 2>/dev/null || echo none)'; \
+    export HUB='$HUB' TAG='$tag' MU_DIR='$MU_DIR' HTTP_PORT='$HTTP_PORT' SITE_PORT='${SITE_PORT:-8091}' SITE_TAG='$(cat .site_tag 2>/dev/null || echo none)' GATEWAY_TAG='$(cat .gateway_tag 2>/dev/null || echo "$tag")'; \
     docker stack deploy --with-registry-auth --resolve-image never --prune -c stack.yml $STACK"
   echo "Đã deploy tag $tag. Kiểm tra: bash deploy.sh status"
 }
@@ -106,6 +117,7 @@ case "${1:-}" in
   images-remote) shift; cmd_images_remote "$@" ;;
   content) cmd_content ;;
   site)    cmd_site ;;
+  gateway) cmd_gateway ;;
   up)      shift; cmd_up "$@" ;;
   all)     shift; cmd_images "$@"; cmd_content; cmd_up "${1:-}" ;;
   status)  "${SSH[@]}" "docker stack services $STACK; echo; curl -s -o /dev/null -w 'web /healthz -> %{http_code}\n' http://127.0.0.1:$HTTP_PORT/healthz" ;;

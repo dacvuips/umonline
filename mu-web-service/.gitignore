@@ -4,3 +4,4 @@ deploy.env
 .site_tag
 *.log
 __pycache__/
+.gateway_tag
