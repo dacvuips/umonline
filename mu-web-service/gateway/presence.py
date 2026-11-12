@@ -10,11 +10,20 @@ Khung nhị phân (gói MU) không đi qua module này.
 """
 import json
 import logging
+import time
+
+import auth
 
 log = logging.getLogger("presence")
 
 # ws -> thông tin người chơi
 PEERS: dict = {}
+
+# Tên nhân vật -> tài khoản đã chiếm tên đó (trong bộ nhớ; mất khi gateway khởi động lại). Chặn người khác dùng cùng tên
+# để giả danh / đá người đang online.
+OWNERS: dict = {}
+_MAX_TEXT = 8192            # byte tối đa của một khung văn bản
+_RATE, _BURST = 30.0, 60.0  # tin/giây trung bình, đỉnh tối đa mỗi kết nối
 
 _PUBLIC = ("name", "cls", "lvl", "tier", "guild", "eq", "map", "x", "y", "hp", "mhp")
 _MAX_CHAT = 120
@@ -24,7 +33,7 @@ def _clip(v, n):
     return str(v)[:n]
 
 
-def _public(info: dict) -> dict:
+def _public(info: dict) -> dict:  # chỉ các trường công khai (bỏ _bucket...)
     return {k: info.get(k) for k in _PUBLIC}
 
 
@@ -55,7 +64,34 @@ async def _leave_map(ws, info: dict):
     await _broadcast_map(ws, info["map"], {"t": "despawn", "n": info["name"]})
 
 
-async def handle_text(ws, text: str):
+def _allow(info: dict) -> bool:
+    """Token bucket theo kết nối: chống spam / flood."""
+    now = time.monotonic()
+    tokens, last = info.get("_bucket", (_BURST, now))
+    tokens = min(_BURST, tokens + (now - last) * _RATE)
+    if tokens < 1:
+        info["_bucket"] = (tokens, now)
+        return False
+    info["_bucket"] = (tokens - 1, now)
+    return True
+
+
+_ANON: dict = {}   # ws -> bucket cho kết nối chưa join
+
+
+async def handle_text(ws, text: str, ip: str = ""):
+    try:
+        await _handle_text(ws, text, ip)
+    except Exception as e:   # gói rác (vd int("abc")) không được làm sập kết nối của người khác
+        log.warning("khung lỗi từ %s: %r", ip, e)
+
+
+async def _handle_text(ws, text: str, ip: str):
+    if len(text) > _MAX_TEXT:
+        return
+    holder = PEERS.get(ws) or _ANON.setdefault(ws, {})
+    if not _allow(holder):
+        return
     try:
         msg = json.loads(text)
     except Exception:
@@ -69,6 +105,22 @@ async def handle_text(ws, text: str):
         name = _clip(msg.get("name", ""), 10).strip()
         if not name:
             return
+        account = None
+        if auth.ENABLED:
+            tok = msg.get("token")
+            account = auth.account_for_token(tok)
+            if account is None and (tok or auth.REQUIRE_JOIN_TOKEN):
+                log.warning("join '%s' từ %s bị từ chối: token thiếu/sai", name, ip)
+                await _send(ws, {"t": "sys", "msg": "Chưa đăng nhập."})
+                return
+            if account is None:
+                log.warning("join '%s' từ %s không có token (client cũ) - tạm chấp nhận", name, ip)
+        if account is not None:
+            owner = OWNERS.setdefault(name, account)
+            if owner != account:
+                log.warning("join '%s' bị từ chối: tên thuộc tài khoản khác (%s != %s)", name, account, owner)
+                await _send(ws, {"t": "sys", "msg": "Tên nhân vật đã có người dùng."})
+                return
         # Cùng tên đang online ở kết nối khác -> đá kết nối cũ (đăng nhập lại / F5)
         for other, oi in list(PEERS.items()):
             if other is not ws and oi["name"] == name:
@@ -93,7 +145,9 @@ async def handle_text(ws, text: str):
             "hp": int(msg.get("hp", 100)),
             "mhp": int(msg.get("mhp", 100)),
         }
+        info["_bucket"] = holder.get("_bucket", (_BURST, time.monotonic()))
         PEERS[ws] = info
+        _ANON.pop(ws, None)
         log.info("join '%s' map=%s (%d online)", name, info["map"], len(PEERS))
         await _enter_map(ws, info)
         return
@@ -138,6 +192,7 @@ async def handle_text(ws, text: str):
 
 
 async def disconnect(ws):
+    _ANON.pop(ws, None)
     me = PEERS.pop(ws, None)
     if me:
         log.info("leave '%s' (%d online)", me["name"], len(PEERS))

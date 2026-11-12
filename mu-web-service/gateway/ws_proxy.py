@@ -32,12 +32,20 @@ MAX_MSG = 10 * 1024 * 1024
 
 
 def client_ip(ws) -> str:
-    """IP thật của người chơi: sau reverse proxy lấy phần tử CUỐI của X-Forwarded-For."""
+    """IP thật của người chơi.
+
+    Chuỗi proxy: người chơi -> Caddy (ghi IP khách, thay mọi X-Forwarded-For do khách gửi) -> nginx mu-web (nối IP của Caddy
+    vào CUỐI) -> gateway. Vì vậy IP khách là phần tử ÁP CHÓT; phần tử cuối chỉ là Caddy (172.18.0.1) - dùng nó sẽ gộp mọi
+    người chơi thành một IP.
+    """
     try:
         xff = ws.request.headers.get("X-Forwarded-For", "")
     except Exception:
         xff = ""
-    return xff.split(",")[-1].strip() or str((ws.remote_address or ("?",))[0])
+    parts = [p.strip() for p in xff.split(",") if p.strip()]
+    if len(parts) >= 2:
+        return parts[-2]
+    return str((ws.remote_address or ("?",))[0])
 
 
 def _cstr(b: bytes) -> str:
@@ -61,7 +69,11 @@ async def local_login(ws, msg: bytes) -> None:
         if not ok:
             auth.note_failure(ip, name)
     log.info("login '%s' từ %s -> %s", name, ip, "OK" if ok else "TỪ CHỐI")
-    await ws.send(bytes([0xC1, 0x05, 0xF1, 0x01, 0x01 if ok else 0x00]))
+    if ok and auth.ENABLED:
+        tok = auth.issue_token(name).encode("ascii")   # client cũ chỉ đọc byte kết quả, bỏ qua phần token phía sau
+        await ws.send(bytes([0xC1, 5 + len(tok), 0xF1, 0x01, 0x01]) + tok)
+    else:
+        await ws.send(bytes([0xC1, 0x05, 0xF1, 0x01, 0x01 if ok else 0x00]))
 
 
 async def ws_to_tcp(ws, writer):
@@ -76,7 +88,7 @@ async def ws_to_tcp(ws, writer):
             writer.write(msg)
             await writer.drain()
         else:
-            await presence.handle_text(ws, msg)
+            await presence.handle_text(ws, msg, client_ip(ws))
 
 
 async def tcp_to_ws(reader, ws):
@@ -95,10 +107,21 @@ async def mock_session(ws):
         if isinstance(msg, bytes) and len(msg) >= 4 and (msg[2], msg[3]) in replies:
             await ws.send(replies[(msg[2], msg[3])])
         elif isinstance(msg, str):
-            await presence.handle_text(ws, msg)
+            await presence.handle_text(ws, msg, client_ip(ws))
 
 
 async def handle(ws):
+    ip = client_ip(ws)
+    if not auth.conn_open(ip):
+        await ws.close(code=1008, reason="too many connections")
+        return
+    try:
+        await _handle(ws)
+    finally:
+        auth.conn_close(ip)
+
+
+async def _handle(ws):
     peer = ws.remote_address
     try:
         reader, writer = await asyncio.wait_for(asyncio.open_connection(OPENMU_HOST, OPENMU_PORT), CONNECT_TIMEOUT)

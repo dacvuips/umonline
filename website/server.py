@@ -38,6 +38,9 @@ MAX_BODY = 4096
 
 # Chặn dò mật khẩu: tối đa 8 lần sai trong 5 phút cho mỗi (địa chỉ IP, tài khoản)
 FAIL_LIMIT, FAIL_WINDOW = 8, 300
+# Chặn tạo tài khoản hàng loạt: tối đa 5 lần đăng ký mỗi giờ cho mỗi IP
+REG_LIMIT, REG_WINDOW = 5, 3600
+registrations = {}  # ip -> [thời điểm đăng ký]
 
 
 class Accounts:
@@ -183,6 +186,22 @@ def too_many_failures(ip: str, name: str) -> bool:
         return len(hits) >= FAIL_LIMIT
 
 
+def register_blocked(ip: str) -> bool:
+    now = time.time()
+    with state_lock:
+        hits = [t for t in registrations.get(ip, []) if now - t < REG_WINDOW]
+        registrations[ip] = hits
+        if len(registrations) > 5000:
+            for k in [k for k, v in registrations.items() if not any(now - t < REG_WINDOW for t in v)]:
+                registrations.pop(k, None)
+        return len(hits) >= REG_LIMIT
+
+
+def note_registration(ip: str) -> None:
+    with state_lock:
+        registrations.setdefault(ip, []).append(time.time())
+
+
 def note_failure(ip: str, name: str) -> None:
     with state_lock:
         failures.setdefault((ip, name.lower()), []).append(time.time())
@@ -271,6 +290,8 @@ class Handler(SimpleHTTPRequestHandler):
                 return self._json(400, {"error": "Tên tài khoản gồm 4–10 chữ cái hoặc số, không dấu."})
             if not 6 <= len(pw) <= 10:
                 return self._json(400, {"error": "Mật khẩu cần từ 6 đến 10 ký tự (game chỉ nhận tối đa 10)."})
+            if register_blocked(ip):
+                return self._json(429, {"error": "Đăng ký quá nhiều lần. Hãy thử lại sau."})
             try:
                 created = accounts.register(name, pw)
             except Exception as e:  # CSDL game không truy cập được
@@ -278,6 +299,7 @@ class Handler(SimpleHTTPRequestHandler):
                 return self._json(503, {"error": "Máy chủ tài khoản đang bận, hãy thử lại sau."})
             if not created:
                 return self._json(409, {"error": "Tên tài khoản đã có người dùng."})
+            note_registration(ip)
             return self._json(200, {"username": name}, self._start_session(name))
 
         if path == "/api/login":
